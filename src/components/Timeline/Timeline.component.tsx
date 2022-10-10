@@ -1,5 +1,11 @@
+import PostCard from "../PostCard/PostCard.component";
+
 const TimelineComponent = () => {
-  return <div></div>;
+  return (
+    <>
+      <PostCard />
+    </>
+  );
 };
 
 export default TimelineComponent;
