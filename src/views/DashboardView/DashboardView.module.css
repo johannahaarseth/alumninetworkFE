@@ -1,7 +1,6 @@
 .dashboard {
   display: flex;
   flex-direction: row;
-  gap: 1.2rem;
   width: 80%;
 }
 
@@ -15,4 +14,19 @@
 
 .profileAndFilterColumn {
   flex: 30%;
+}
+
+.newPostCustomCardContentWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.newPost {
+  font-size: 24px;
+}
+
+.newPostPlus {
+  font-size: 44px;
 }

@@ -3,6 +3,7 @@
   border: none;
   cursor: pointer;
   padding: 0.4rem;
+  border-radius: 2px;
 }
 
 .btn:hover {
