@@ -11,10 +11,10 @@ import SearchIcon from '@mui/icons-material/Search';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import { Link } from 'react-router-dom';
+import Grid from '@mui/material/Grid'; 
 
 const NavBar = () => {
     const logoalumni = require("../../assets/Pictures/LogoAlumni.png");
-    const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -35,10 +35,7 @@ const NavBar = () => {
         },
         marginLeft:0 ,
         width: '100%',
-        [theme.breakpoints.up('sm')]: {
-            marginLeft: theme.spacing(1),
-            width: 'auto',
-        },
+            
     }));
 
     const SearchIconWrapper = styled('div')(({ theme }) => ({
@@ -56,6 +53,7 @@ const NavBar = () => {
     const StyledInputBase = styled(InputBase)(({ theme }) => ({
         fontFamily: 'Inter',
         fontSize: 20,
+        top: "60%",
         color: "#000000",
         '& .MuiInputBase-input': {
             padding: theme.spacing(1, 1, 1, 0),
@@ -63,79 +61,83 @@ const NavBar = () => {
             paddingLeft: `calc(1em + ${theme.spacing(4)})`,
             transition: theme.transitions.create('width'),
             width: '100%',
-            [theme.breakpoints.up('sm')]: {
-                width: '40ch',
-                '&:focus': {
-                    width: '50ch',
-                },
-            },
+            
         },
     }));
     return (
       
         <AppBar position="static" style={{ background: '#82C0CC' }}>
-            <Toolbar sx={{ display: "flex", justifyContent: "space-between", height:90, }}>
-                <IconButton
-                    size="large"
-                    edge="start"
-                    color="inherit"
+            <Toolbar >
+
+                <Grid container sx={{ display: "flex", justifyContent: "space-between", height: "80%", }}>
+
+                <Grid item  xs={12} md={2}>
+                    <IconButton
+                        size="large"
+                        edge="start"
+                        color="inherit"
                         aria-label="menu"
-                        
-                    sx={{ mr: 2, width: 180}}
-                    >
-                        <Box
-                            component="img"
-                            src={logoalumni}
-                            sx={{ width: "100%" }}
-                            >
-                        </Box>
-                </IconButton>
-                
-                    <Search >
+                        sx={{ mr: 2, width: 180}}
+                        >
+                            <Box
+                                component="img"
+                                src={logoalumni}
+                                sx={{ width: "100%" }}
+                                >
+                            </Box>
+                    </IconButton>
+                </Grid>
+
+                    <Grid item xs={8} md={6}>
+                        <Search sx={{ top:"22%" }}>
                         <SearchIconWrapper>
                             <SearchIcon />
                         </SearchIconWrapper>
-
+                            
                         <StyledInputBase
                         placeholder="Search"
-                         
                         inputProps={{ 'aria-label': 'search' }}
                         sx={{ color: "#000000"}}
-                            
                         />
                     </Search>
-               <Box>
-                    <IconButton
-                        onClick={handleOpenUserMenu}
-                        size="large"
-                        sx={{ p: 0, float: "right", }}
-                    >
-                        <Avatar sx={{ width: 60, height: 60, } }/>
+                </Grid>
+
+
+                <Grid item xs={2} md={2}>
+                    <Box>
+                        <IconButton
+                            onClick={handleOpenUserMenu}
+                            size="large"
+                        >
+                            <Avatar sx={{ width: 60, height: 60, } }/>
                         </IconButton>
-                <Menu
-                        sx={{ mt: '55px' }}
-                        id="menu-appbar"
-                        anchorEl={anchorElUser}
-                        anchorOrigin={{
-                            vertical: 'top',
-                            horizontal: 'right',
-                        }}
-                        keepMounted
-                        transformOrigin={{
-                            vertical: 'top',
-                            horizontal: 'right',
-                        }}
-                        open={Boolean(anchorElUser)}
-                        onClose={handleCloseUserMenu}
-                >
-                        <MenuItem onClick={handleCloseUserMenu}>
-                            <Typography textAlign="center" >Log Out</Typography>
-                            </MenuItem>
-                        
-                    </Menu>
+
+                        <Menu
+                            sx={{ mt: '55px' }}
+                            id="menu-appbar"
+                            anchorEl={anchorElUser}
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            keepMounted
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            open={Boolean(anchorElUser)}
+                            onClose={handleCloseUserMenu}
+
+                            >
+                                <MenuItem onClick={handleCloseUserMenu}>
+                                <Typography textAlign="center" >Log Out</Typography>
+                                </MenuItem>
+                        </Menu>
 
 
-                </Box>
+                    </Box>
+                </Grid>
+                </Grid>
                     </Toolbar>
            
 
