@@ -1,5 +1,147 @@
+import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import Avatar from "@mui/material/Avatar";
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
+import SearchIcon from '@mui/icons-material/Search';
+import { styled, alpha } from '@mui/material/styles';
+import InputBase from '@mui/material/InputBase';
+import { Link } from 'react-router-dom';
+
 const NavBar = () => {
-  return <div></div>;
+    const logoalumni = require("../../assets/Pictures/LogoAlumni.png");
+    const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+    const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+
+    const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorElUser(event.currentTarget);
+    };
+
+    const handleCloseUserMenu = () => {
+        setAnchorElUser(null);
+    };
+    
+    const Search = styled('div')(({ theme }) => ({
+        position: 'relative',
+        borderRadius: theme.shape.borderRadius,
+        backgroundColor: "#FFFFFF",
+        color: "#000000",
+        '&:hover': {
+            backgroundColor: alpha(theme.palette.common.white, 0.75),
+        },
+        marginLeft:0 ,
+        width: '100%',
+        [theme.breakpoints.up('sm')]: {
+            marginLeft: theme.spacing(1),
+            width: 'auto',
+        },
+    }));
+
+    const SearchIconWrapper = styled('div')(({ theme }) => ({
+        padding: theme.spacing(0, 2),
+        height: '100%',
+        position: 'absolute',
+        pointerEvents: 'none',
+        display: 'flex',
+        alignItems: 'center',
+        color: "#000000",
+        justifyContent: 'center',
+    }));
+
+
+    const StyledInputBase = styled(InputBase)(({ theme }) => ({
+        fontFamily: 'Inter',
+        fontSize: 20,
+        color: "#000000",
+        '& .MuiInputBase-input': {
+            padding: theme.spacing(1, 1, 1, 0),
+            // vertical padding + font size from searchIcon
+            paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+            transition: theme.transitions.create('width'),
+            width: '100%',
+            [theme.breakpoints.up('sm')]: {
+                width: '40ch',
+                '&:focus': {
+                    width: '50ch',
+                },
+            },
+        },
+    }));
+    return (
+      
+        <AppBar position="static" style={{ background: '#82C0CC' }}>
+            <Toolbar sx={{ display: "flex", justifyContent: "space-between", height:90, }}>
+                <IconButton
+                    size="large"
+                    edge="start"
+                    color="inherit"
+                        aria-label="menu"
+                        
+                    sx={{ mr: 2, width: 180}}
+                    >
+                        <Box
+                            component="img"
+                            src={logoalumni}
+                            sx={{ width: "100%" }}
+                            >
+                        </Box>
+                </IconButton>
+                
+                    <Search >
+                        <SearchIconWrapper>
+                            <SearchIcon />
+                        </SearchIconWrapper>
+
+                        <StyledInputBase
+                        placeholder="Search"
+                         
+                        inputProps={{ 'aria-label': 'search' }}
+                        sx={{ color: "#000000"}}
+                            
+                        />
+                    </Search>
+               <Box>
+                    <IconButton
+                        onClick={handleOpenUserMenu}
+                        size="large"
+                        sx={{ p: 0, float: "right", }}
+                    >
+                        <Avatar sx={{ width: 60, height: 60, } }/>
+                        </IconButton>
+                <Menu
+                        sx={{ mt: '55px' }}
+                        id="menu-appbar"
+                        anchorEl={anchorElUser}
+                        anchorOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
+                        }}
+                        keepMounted
+                        transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
+                        }}
+                        open={Boolean(anchorElUser)}
+                        onClose={handleCloseUserMenu}
+                >
+                        <MenuItem onClick={handleCloseUserMenu}>
+                            <Typography textAlign="center" >Log Out</Typography>
+                            </MenuItem>
+                        
+                    </Menu>
+
+
+                </Box>
+                    </Toolbar>
+           
+
+            </AppBar>
+        
+    )
 };
 
 export default NavBar;

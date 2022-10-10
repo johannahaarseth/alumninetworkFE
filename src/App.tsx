@@ -1,7 +1,9 @@
 import "./App.css";
-
+import DashboardView from "./views/DashboardView/DashboardView";
 function App() {
-  return <div className="App"></div>;
+    return (
+        <DashboardView/>
+        )
 }
 
 export default App;
