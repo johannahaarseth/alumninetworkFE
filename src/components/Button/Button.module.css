@@ -1,0 +1,11 @@
+.btn {
+  background-color: inherit;
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem;
+}
+
+.btn:hover {
+  background-color: white;
+  color: black;
+}

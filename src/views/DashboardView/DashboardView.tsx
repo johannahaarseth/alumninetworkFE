@@ -5,12 +5,18 @@ import FiltersCard from "../../components/FiltersCard/FiltersCard.component";
 import styles from "./DashboardView.module.css";
 
 const DashboardView = () => {
+  const listBoxTitles = {
+    groups: "Groups",
+    topics: "Topics",
+    events: "Events",
+  };
+
   return (
     <div className={styles.dashboard}>
       <div className={styles.groupsTopicsEventsListsColumn}>
-        <ListBox />
-        <ListBox />
-        <ListBox />
+        <ListBox title={listBoxTitles.groups} />
+        <ListBox title={listBoxTitles.topics} />
+        <ListBox title={listBoxTitles.events} />
       </div>
       <div className={styles.timelineColumn}>
         <TimelineComponent />

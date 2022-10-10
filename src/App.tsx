@@ -1,10 +1,13 @@
-import "./App.css";
+import "./Global.css";
 import DashboardView from "./views/DashboardView/DashboardView";
+import styles from "./App.module.css";
 
 function App() {
   return (
     <div className="App">
-      <DashboardView />
+      <div className={styles.dashboard}>
+        <DashboardView />
+      </div>
     </div>
   );
 }

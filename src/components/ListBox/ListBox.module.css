@@ -1,0 +1,25 @@
+@import "../../css-constants.css";
+
+.titleAndAddBtn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contentList {
+  display: flex;
+  flex-direction: column;
+}
+
+.seeMoreBtn {
+  display: flex;
+  justify-content: center;
+}
+
+.itemBox {
+  background-color: var(--alumni-light-beige);
+  height: 45px;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}

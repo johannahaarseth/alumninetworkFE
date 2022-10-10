@@ -1,0 +1,16 @@
+@import "../../css-constants.css";
+
+.card {
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 10px;
+  display: flex;
+  background-color: white;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.card:hover {
+  background-color: var(--alumni-primary-light-azure);
+  cursor: pointer;
+}

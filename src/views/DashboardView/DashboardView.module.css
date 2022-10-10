@@ -2,19 +2,17 @@
   display: flex;
   flex-direction: row;
   gap: 1.2rem;
+  width: 80%;
 }
 
 .groupsTopicsEventsListsColumn {
-  flex: 33.33%;
-  justify-content: flex-end;
+  flex: 30%;
 }
 
 .timelineColumn {
-  flex: 33.33%;
-  justify-content: center;
+  flex: 40%;
 }
 
 .profileAndFilterColumn {
-  flex: 33.33%;
-  justify-content: flex-start;
+  flex: 30%;
 }
