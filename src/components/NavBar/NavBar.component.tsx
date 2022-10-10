@@ -14,6 +14,7 @@ import { Link } from 'react-router-dom';
 import Grid from '@mui/material/Grid'; 
 
 const NavBar = () => {
+    const settings = ['Profile', 'Logout'];
     const logoalumni = require("../../assets/Pictures/LogoAlumni.png");
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
@@ -89,7 +90,7 @@ const NavBar = () => {
                 </Grid>
 
                     <Grid item xs={8} md={6}>
-                        <Search sx={{ top:"22%" }}>
+                        <Search sx={{ top:"22%",marginRight:"10%" }}>
                         <SearchIconWrapper>
                             <SearchIcon />
                         </SearchIconWrapper>
@@ -106,14 +107,14 @@ const NavBar = () => {
                 <Grid item xs={2} md={2}>
                     <Box>
                         <IconButton
-                            onClick={handleOpenUserMenu}
-                            size="large"
+                                onClick={handleOpenUserMenu}
+                                size="large"
                         >
                             <Avatar sx={{ width: 60, height: 60, } }/>
                         </IconButton>
 
                         <Menu
-                            sx={{ mt: '55px' }}
+                            sx={{ mt: '68px' }}
                             id="menu-appbar"
                             anchorEl={anchorElUser}
                             anchorOrigin={{
@@ -129,9 +130,11 @@ const NavBar = () => {
                             onClose={handleCloseUserMenu}
 
                             >
-                                <MenuItem onClick={handleCloseUserMenu}>
-                                <Typography textAlign="center" >Log Out</Typography>
-                                </MenuItem>
+                                {settings.map((setting) => (
+                                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                                        <Typography textAlign="center">{setting}</Typography>
+                                    </MenuItem>
+                                ))}
                         </Menu>
 
 
