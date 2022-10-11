@@ -1,6 +1,7 @@
+import LoginCard from "../../components/LoginCard/LoginCard.component";
+
 const LoginView = () => {
-  return <div></div>;
+  return <LoginCard />;
 };
 
 export default LoginView;
-    
