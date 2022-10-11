@@ -75,8 +75,8 @@ const NavBar = () => {
         <>
             <CssBaseline />
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static" style={{ background: '#82C0CC', width: '100%' }}>
-                <Toolbar>
+            <AppBar position="static" style={{ background: '#82C0CC', width: '100%'}}>
+                    <Toolbar >
 
                <Grid container style={{ display: 'flex', justifyContent: "space-between", width: '100%' }}>
 
@@ -95,7 +95,7 @@ const NavBar = () => {
                 </Grid>
 
                             <Grid  item xs={ 8 } md={ 6 }>
-                                <Search sx={ { top: "22%" } }>
+                                <Search sx={ { top: "16%" } }>
                         <SearchIconWrapper>
                             <SearchIcon />
                                     </SearchIconWrapper>
