@@ -12,9 +12,11 @@ import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import { Link } from 'react-router-dom';
 import Grid from '@mui/material/Grid'; 
+import CssBaseline from '@mui/material/CssBaseline';
+
+
 
 const NavBar = () => {
-    const settings = ['Profile', 'Logout'];
     const logoalumni = require("../../assets/Pictures/LogoAlumni.png");
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
@@ -34,9 +36,12 @@ const NavBar = () => {
         '&:hover': {
             backgroundColor: alpha(theme.palette.common.white, 0.75),
         },
-        marginLeft:0 ,
+        marginLeft: 0,
         width: '100%',
-            
+        [ theme.breakpoints.up( 'sm' ) ]: {
+            marginLeft: theme.spacing( 1 ),
+            width: 'auto',
+        },
     }));
 
     const SearchIconWrapper = styled('div')(({ theme }) => ({
@@ -54,31 +59,31 @@ const NavBar = () => {
     const StyledInputBase = styled(InputBase)(({ theme }) => ({
         fontFamily: 'Inter',
         fontSize: 20,
-        top: "60%",
+        
         color: "#000000",
-        '& .MuiInputBase-input': {
-            padding: theme.spacing(1, 1, 1, 0),
-            // vertical padding + font size from searchIcon
-            paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-            transition: theme.transitions.create('width'),
-            width: '100%',
+        padding: theme.spacing( 1, 1, 1, 0 ),
+        // vertical padding + font size from searchIcon
+        paddingLeft: `calc(1em + ${ theme.spacing( 4 ) })`,
+        transition: theme.transitions.create( 'width' ),
+        width: '100%',
+        [ theme.breakpoints.up( 'sm' ) ]: {
+            width: '74ch',
             
         },
     }));
     return (
-      
-        <AppBar position="static" style={{ background: '#82C0CC' }}>
-            <Toolbar >
+        <>
+            <CssBaseline />
+        <Box sx={{ flexGrow: 1 }}>
+            <AppBar position="static" style={{ background: '#82C0CC', width: '100%' }}>
+                <Toolbar>
 
-                <Grid container sx={{ display: "flex", justifyContent: "space-between", height: "80%", }}>
+               <Grid container style={{ display: 'flex', justifyContent: "space-between", width: '100%' }}>
 
-                <Grid item  xs={12} md={2}>
+                            <Grid container item  xs={12} md={1}>
                     <IconButton
                         size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="menu"
-                        sx={{ mr: 2, width: 180}}
+                        sx={{  width: 180}}
                         >
                             <Box
                                 component="img"
@@ -89,28 +94,29 @@ const NavBar = () => {
                     </IconButton>
                 </Grid>
 
-                    <Grid item xs={8} md={6}>
-                        <Search sx={{ top:"22%",marginRight:"10%" }}>
+                            <Grid  item xs={ 8 } md={ 6 }>
+                                <Search sx={ { top: "22%" } }>
                         <SearchIconWrapper>
                             <SearchIcon />
-                        </SearchIconWrapper>
-                            
+                                    </SearchIconWrapper>
+
+
                         <StyledInputBase
                         placeholder="Search"
                         inputProps={{ 'aria-label': 'search' }}
                         sx={{ color: "#000000"}}
                         />
-                    </Search>
-                </Grid>
+                                </Search>
 
+                            </Grid>
 
-                <Grid item xs={2} md={2}>
-                    <Box>
+                            <Grid container item xs={ 2 } md={ 1 } >
                         <IconButton
-                                onClick={handleOpenUserMenu}
-                                size="large"
+                                    onClick={handleOpenUserMenu}    
+                                   
+                                    sx={ { flex: 1 }}
                         >
-                            <Avatar sx={{ width: 60, height: 60, } }/>
+                            <Avatar sx={{ width: 60, height: 60} }/>
                         </IconButton>
 
                         <Menu
@@ -119,33 +125,26 @@ const NavBar = () => {
                             anchorEl={anchorElUser}
                             anchorOrigin={{
                                 vertical: 'top',
-                                horizontal: 'right',
+                                horizontal: 'center',
                             }}
                             keepMounted
                             transformOrigin={{
                                 vertical: 'top',
-                                horizontal: 'right',
+                                horizontal: 'center',
                             }}
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
 
-                            >
-                                {settings.map((setting) => (
-                                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                        <Typography textAlign="center">{setting}</Typography>
-                                    </MenuItem>
-                                ))}
+                                >
+                                    <MenuItem onClick={handleCloseUserMenu}>Profile</MenuItem>
+                                    <MenuItem onClick={handleCloseUserMenu}>My account</MenuItem>
                         </Menu>
-
-
-                    </Box>
                 </Grid>
                 </Grid>
                     </Toolbar>
-           
-
             </AppBar>
-        
+            </Box>
+        </>
     )
 };
 
