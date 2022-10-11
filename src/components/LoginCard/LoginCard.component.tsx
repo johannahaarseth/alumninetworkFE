@@ -8,8 +8,10 @@ const LoginCard = () => {
     <>
       <div className={styles.card}>
         <img className={styles.illustration} src={illustration} />
+
+        <h1 className={styles.title}>Welcome back!</h1>
+        <h2 className={styles.undertitle}>Sign in to gain access.</h2>
         <img className={styles.logo} src={logo} />
-        <h2 className={styles.h2}>Sign in</h2>
         <LoginButton />
       </div>
     </>
