@@ -109,7 +109,7 @@ const NavBar = () => {
               </Grid>
 
               <Grid container item xs={2} md={1}>
-                <IconButton onClick={handleOpenUserMenu} sx={{ flex: 1 }}>
+                <IconButton onClick={handleOpenUserMenu}>
                   <Avatar sx={{ width: 60, height: 60 }} />
                 </IconButton>
 

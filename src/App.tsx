@@ -6,6 +6,7 @@ function App() {
   return (
     <div className="App">
       <div className={styles.dashboard}></div>
+
       <LoginView />
     </div>
   );
