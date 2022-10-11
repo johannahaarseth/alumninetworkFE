@@ -14,12 +14,12 @@
 
 input {
   height: 70%;
-  width: 30%;
+  width: 29%;
   border-radius: 10px;
   border: none;
   padding: 1rem;
   font-size: 24px;
-  margin-left: -7rem;
+  margin-left: -7.5rem;
 }
 
 input:hover {
