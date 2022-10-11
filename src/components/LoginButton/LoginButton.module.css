@@ -40,3 +40,9 @@
 .button:hover {
   box-shadow: rgba(0, 0, 0, 0.5) 0 3px 8px;
 }
+@media screen and (max-width: 415px) {
+  .button {
+    top: 85%;
+    left: 53%;
+  }
+}

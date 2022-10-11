@@ -108,30 +108,35 @@
     );
   }
 }
-@media screen and (max-width: 410px) {
+
+@media screen and (max-width: 1800px) {
   .card {
     height: 50%;
-    width: 80%;
-    background: white;
-  }
-  .logo {
-    height: 7%;
-    width: auto;
+    width: 90%;
+    background: linear-gradient(
+      to right,
+      rgb(0, 96, 120) 0%,
+      rgb(38, 151, 179) 50%,
+      rgb(40, 178, 205) 66%,
+      white 35%,
+      white 100%
+    );
   }
 }
-
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1536px) {
   .card {
     height: 50%;
-    width: 80%;
-    background: white;
-  }
-  .logo {
-    height: 10%;
-    width: auto;
+    width: 90%;
+    background: linear-gradient(
+      to right,
+      rgb(0, 96, 120) 0%,
+      rgb(38, 151, 179) 50%,
+      rgb(40, 178, 205) 66%,
+      white 35%,
+      white 100%
+    );
   }
 }
-
 @media screen and (max-width: 900px) {
   .card {
     height: 50%;
@@ -146,11 +151,11 @@
     );
   }
 }
-
-@media screen and (max-width: 1536px) {
+@media screen and (max-width: 730px) {
   .card {
     height: 50%;
-    width: 90%;
+    width: 80%;
+    background: white;
     background: linear-gradient(
       to right,
       rgb(0, 96, 120) 0%,
@@ -159,5 +164,81 @@
       white 35%,
       white 100%
     );
+  }
+  .logo {
+    height: 8%;
+    width: auto;
+  }
+}
+@media screen and (max-width: 573px) {
+  .title {
+    top: 40%;
+    width: 50%;
+  }
+  .undertitle {
+    padding-top: 15%;
+    width: 50%;
+  }
+}
+@media screen and (max-width: 415px) {
+  .card {
+    height: 50%;
+    width: 80%;
+    background: white;
+    background: linear-gradient(
+      to bottom,
+      rgb(0, 96, 120) 0%,
+      rgb(38, 151, 179) 50%,
+      rgb(40, 178, 205) 60%,
+      white 40%,
+      white 100%
+    );
+  }
+  .title {
+    top: 30%;
+    width: 100%;
+    left: 65%;
+  }
+  .undertitle {
+    top: 35%;
+    width: 100%;
+    left: 65%;
+  }
+  .logo {
+    height: 12%;
+    width: auto;
+    top: 70%;
+    left: 52%;
+  }
+}
+@media screen and (max-width: 285px) {
+  .card {
+    height: 50%;
+    width: 80%;
+    background: white;
+    background: linear-gradient(
+      to bottom,
+      rgb(0, 96, 120) 0%,
+      rgb(38, 151, 179) 50%,
+      rgb(40, 178, 205) 60%,
+      white 40%,
+      white 100%
+    );
+  }
+  .title {
+    top: 30%;
+    font-size: 25px;
+    left: 65%;
+  }
+  .undertitle {
+    top: 35%;
+    font-size: 15px;
+    left: 65%;
+  }
+  .logo {
+    height: 12%;
+    width: auto;
+    top: 70%;
+    left: 52%;
   }
 }
