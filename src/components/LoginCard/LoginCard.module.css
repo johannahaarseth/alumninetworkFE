@@ -54,6 +54,9 @@
     height: 50%;
     width: auto;
   }
+  .undertitle {
+    padding-top: 2%;
+  }
 }
 
 @media screen and (max-height: 910px) {
@@ -115,6 +118,7 @@
   transform: translate(-50%, -50%);
   color: rgb(255, 255, 255);
   font-family: "Inter";
+  font-size: 200%;
 }
 
 .undertitle {
@@ -128,6 +132,7 @@
   transform: translate(-50%, -50%);
   color: rgb(255, 255, 255);
   font-family: "Inter";
+  font-size: 120%;
 }
 .illustration {
   position: fixed;

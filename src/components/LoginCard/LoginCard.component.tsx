@@ -9,8 +9,8 @@ const LoginCard = () => {
     <>
       <div className={styles.card}>
         <img alt="" className={styles.illustration} src={illustration} />
-        <h1 className={styles.title}>Welcome back!</h1>
-        <h2 className={styles.undertitle}>Sign in to gain access.</h2>
+        <div className={styles.title}>Welcome back!</div>
+        <div className={styles.undertitle}>Sign in to gain access.</div>
         <img alt="" className={styles.logo} src={logo} />
         <LoginButton />
       </div>
