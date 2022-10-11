@@ -85,7 +85,7 @@
   }
   .h2 {
     position: fixed;
-    top: 30%;
+    top: 20%;
     left: 82%;
     margin-right: -18%;
     transform: translate(-50%, -50%);
@@ -95,7 +95,7 @@
 .h2 {
   position: fixed;
   font-family: "Inter";
-  top: 40%;
+  top: 35%;
   left: 82%;
   margin-right: -18%;
   transform: translate(-50%, -50%);
