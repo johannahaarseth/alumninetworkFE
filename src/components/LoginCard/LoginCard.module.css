@@ -18,3 +18,45 @@
     white 100%
   );
 }
+@media screen and (max-height: 710px) {
+  .card {
+    height: 30%;
+    width: 100%;
+    background: var(--alumni-primary-dark-azure);
+  }
+}
+@media screen and (max-height: 910px) {
+  .card {
+    height: 40%;
+    width: 100%;
+    background: var(--alumni-primary-dark-azure);
+  }
+}
+
+@media screen and (max-width: 1500px) {
+  .card {
+    height: 50%;
+    width: 90%;
+    background: linear-gradient(
+      to right,
+      var(--alumni-primary-dark-azure) 0%,
+      var(--alumni-primary-dark-azure) 65%,
+      white 35%,
+      white 100%
+    );
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .card {
+    height: 40%;
+    width: 100%;
+    background: linear-gradient(
+      to right,
+      var(--alumni-primary-dark-azure) 0%,
+      var(--alumni-primary-dark-azure) 65%,
+      white 35%,
+      white 100%
+    );
+  }
+}
