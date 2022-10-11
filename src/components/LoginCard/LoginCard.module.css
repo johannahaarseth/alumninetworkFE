@@ -7,7 +7,7 @@
   margin-right: -50%;
   transform: translate(-50%, -50%);
   height: 50%;
-  width: 50%;
+  width: 80%;
   border-radius: 30px;
   background: linear-gradient(
     to right,
@@ -105,6 +105,21 @@
   }
 }
 
+@media screen and (max-width: 900px) {
+  .card {
+    height: 50%;
+    width: 80%;
+    background: linear-gradient(
+      to right,
+      rgb(0, 96, 120) 0%,
+      rgb(38, 151, 179) 50%,
+      rgb(40, 178, 205) 66%,
+      white 35%,
+      white 100%
+    );
+  }
+}
+
 @media screen and (max-width: 1536px) {
   .card {
     height: 50%;
@@ -121,20 +136,5 @@
   .logo {
     height: 10%;
     width: auto;
-  }
-}
-
-@media screen and (max-width: 900px) {
-  .card {
-    height: 40%;
-    width: 100%;
-    background: linear-gradient(
-      to right,
-      rgb(0, 96, 120) 0%,
-      rgb(38, 151, 179) 50%,
-      rgb(40, 178, 205) 66%,
-      white 35%,
-      white 100%
-    );
   }
 }
