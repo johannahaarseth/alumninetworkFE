@@ -13,26 +13,6 @@
   z-index: 10;
 }
 
-input {
-  height: 70%;
-  width: 29%;
-  border-radius: 10px;
-  border: none;
-  padding: 1rem;
-  font-size: 24px;
-  margin-left: -7.5rem;
-}
-
-input:hover {
-  background-color: var(--alumni-light-beige);
-  outline: 2px solid var(--alumni-primary-dark-azure);
-}
-
-input:focus {
-  background-color: white;
-  outline: 2px solid var(--alumni-primary-dark-azure);
-}
-
 .logo {
   margin-left: 1rem;
 }

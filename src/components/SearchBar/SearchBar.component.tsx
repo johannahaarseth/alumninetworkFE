@@ -1,5 +1,7 @@
+import styles from "./SearchBar.module.css";
+
 const SearchBar = () => {
-  return <div></div>;
+  return <input className={styles.input} type="text" placeholder="Search" />;
 };
 
 export default SearchBar;

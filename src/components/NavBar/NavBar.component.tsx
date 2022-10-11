@@ -1,6 +1,7 @@
 import styles from "./NavBar.module.css";
 import ProfilePic from "../ProfilePic/ProfilePic.component";
 import Logo from "../Logo/Logo.component";
+import SearchBar from "../SearchBar/SearchBar.component";
 
 const NavBar = () => {
   return (
@@ -8,7 +9,7 @@ const NavBar = () => {
       <div className={styles.logo}>
         <Logo />
       </div>
-      <input type="text" placeholder="Search" />
+      <SearchBar />
       <div className={styles.profile}>
         <ProfilePic />
       </div>
