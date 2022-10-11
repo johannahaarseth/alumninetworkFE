@@ -26,6 +26,17 @@
   box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 20px,
     rgba(0, 0, 0, 0.22) 0px 12px 12px;
 }
+
+.logo {
+  position: fixed;
+  height: 15%;
+  width: auto;
+  top: 43%;
+  left: 83%;
+  margin-right: -18%;
+  transform: translate(-50%, -50%);
+}
+
 @media screen and (max-height: 710px) {
   .card {
     height: 30%;
@@ -38,6 +49,10 @@
       white 35%,
       white 100%
     );
+  }
+  .logo {
+    height: 50%;
+    width: auto;
   }
 }
 
@@ -69,6 +84,10 @@
       white 100%
     );
   }
+  .logo {
+    height: 10%;
+    width: auto;
+  }
 }
 
 @media screen and (max-width: 1000px) {
@@ -91,15 +110,6 @@
     margin-right: -18%;
     transform: translate(-50%, -50%);
   }
-}
-.logo {
-  position: fixed;
-  height: 15%;
-  width: auto;
-  top: 43%;
-  left: 83%;
-  margin-right: -18%;
-  transform: translate(-50%, -50%);
 }
 
 .h2 {
