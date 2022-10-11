@@ -88,6 +88,10 @@
       white 100%
     );
   }
+  .logo {
+    height: 7%;
+    width: auto;
+  }
 }
 
 @media screen and (max-height: 900px) {
@@ -102,6 +106,29 @@
       white 35%,
       white 100%
     );
+  }
+}
+@media screen and (max-width: 410px) {
+  .card {
+    height: 50%;
+    width: 80%;
+    background: white;
+  }
+  .logo {
+    height: 7%;
+    width: auto;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .card {
+    height: 50%;
+    width: 80%;
+    background: white;
+  }
+  .logo {
+    height: 10%;
+    width: auto;
   }
 }
 
@@ -132,9 +159,5 @@
       white 35%,
       white 100%
     );
-  }
-  .logo {
-    height: 10%;
-    width: auto;
   }
 }
