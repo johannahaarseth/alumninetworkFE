@@ -12,8 +12,8 @@ const ProfileCard = () => {
       <div className={styles.infoBox}>
         <p className={styles.text}>Username</p>
         <p className={styles.text}>Status message</p>
-        <div className={styles.textBox}></div>
-        <div className={styles.textBox}></div>
+        <div className={`${styles.textBox} ${styles.shortBioBox}`}></div>
+        <div className={`${styles.textBox} ${styles.funFactBox}`}></div>
       </div>
     </Card>
   );

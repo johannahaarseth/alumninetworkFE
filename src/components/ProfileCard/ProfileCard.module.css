@@ -33,3 +33,15 @@
   height: 70px;
   width: 100%;
 }
+
+@media screen and (max-height: 710px) {
+  .funFactBox {
+    display: none;
+  }
+}
+
+@media screen and (max-height: 610px) {
+  .shortBioBox {
+    display: none;
+  }
+}
