@@ -23,3 +23,21 @@
   width: 100%;
   margin-bottom: 0.5rem;
 }
+
+@media screen and (max-height: 960px) {
+  .itemBoxThree {
+    display: none;
+  }
+}
+
+@media screen and (max-height: 820px) {
+  .itemBoxTwo {
+    display: none;
+  }
+}
+
+@media screen and (max-height: 660px) {
+  .contentList {
+    display: none;
+  }
+}

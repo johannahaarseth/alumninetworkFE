@@ -17,8 +17,8 @@ const ListBox = ({ title }: ListBoxProps) => {
       </div>
       <div className={styles.contentList}>
         <div className={styles.itemBox}></div>
-        <div className={styles.itemBox}></div>
-        <div className={styles.itemBox}></div>
+        <div className={`${styles.itemBox} ${styles.itemBoxTwo}`}></div>
+        <div className={`${styles.itemBox} ${styles.itemBoxThree}`}></div>
       </div>
       <div className={styles.seeMoreBtn}>
         <Button>
