@@ -8,7 +8,7 @@ type ListBoxProps = {
 
 const ListBox = ({ title }: ListBoxProps) => {
   return (
-    <Card isSticky={true}>
+    <Card>
       <div className={styles.titleAndAddBtn}>
         <p>{title}</p>
         <Button>

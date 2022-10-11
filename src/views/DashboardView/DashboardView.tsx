@@ -20,7 +20,7 @@ const DashboardView = () => {
         <ListBox title={listBoxTitles.events} />
       </div>
       <div className={styles.timelineColumn}>
-        <Card isSticky={false}>
+        <Card>
           <div className={styles.newPostCustomCardContentWrapper}>
             <p className={styles.newPost}>Create new post</p>
             <p className={styles.newPostPlus}>+</p>

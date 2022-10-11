@@ -10,21 +10,6 @@
   gap: 1.2rem;
 }
 
-/*.stickyCard {*/
-/*  position: fixed;*/
-/*}*/
-
-/*.cardPositionOne {*/
-/*  top: 80px;*/
-/*}*/
-
-/*.cardPositionTwo {*/
-/*  top: ;*/
-/*}*/
-
-/*.cardPositionThree {*/
-/*}*/
-
 .card:hover {
   background-color: var(--alumni-primary-light-azure);
   cursor: pointer;
