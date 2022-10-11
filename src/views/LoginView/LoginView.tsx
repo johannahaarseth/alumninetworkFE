@@ -1,7 +1,11 @@
 import LoginCard from "../../components/LoginCard/LoginCard.component";
 
 const LoginView = () => {
-  return <LoginCard />;
+  return (
+    <>
+      <LoginCard />
+    </>
+  );
 };
 
 export default LoginView;
