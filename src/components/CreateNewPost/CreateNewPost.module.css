@@ -1,0 +1,45 @@
+@import "../../css-constants.css";
+
+.createNewPostButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: -1rem;
+  padding: 0.8rem;
+  border: none;
+  background-color: white;
+}
+
+.createNewPostButton:hover {
+  background-color: var(--alumni-primary-light-azure);
+  cursor: pointer;
+}
+
+.newPost {
+  font-size: 24px;
+}
+
+.newPostPlus {
+  font-size: 44px;
+}
+
+.modalHeader {
+  font-size: 24px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.radioButtons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+}

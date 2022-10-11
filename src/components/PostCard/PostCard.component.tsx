@@ -3,7 +3,7 @@ import Card from "../Card/Card.component";
 
 const PostCard = () => {
   return (
-    <Card>
+    <Card cardHoverEffect={true}>
       <p className={styles.postedInfo}>Posted in *Group* by *User*</p>
       <p className={styles.title}>Title</p>
       <div className={styles.postBody}></div>

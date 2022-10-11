@@ -10,8 +10,7 @@
 }
 
 .profile {
-  position: absolute;
-  top: 45px;
+  margin-top: -4rem;
   height: 5rem;
   width: 5rem;
 }
@@ -20,8 +19,8 @@
   display: flex;
   gap: 1rem;
   flex-direction: column;
-  margin-top: 2.5rem;
-  margin-bottom: 30px;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .text {

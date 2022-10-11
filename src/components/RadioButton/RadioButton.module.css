@@ -1,69 +1,47 @@
 @import "../../css-constants.css";
 
-/* Customize the label (the container) */
-.container {
-  display: block;
-  position: relative;
-  padding-left: 35px;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
 p {
   font-size: 16px;
 }
 
-/* Hide the browser's default radio button */
-.container input {
-  position: absolute;
-  opacity: 0;
+.formControl {
+  font-family: system-ui, sans-serif;
+  font-weight: bold;
+  display: flex;
+  gap: 0.5em;
+}
+
+.formControl:focus-within {
+  color: black;
+}
+
+input[type="radio"] {
+  /* Remove all native input styles */
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: white;
+  margin: 0 0 0.5rem;
+  font: inherit;
+  color: var(--alumni-primary-dark-azure);
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.15em solid currentColor;
+  border-radius: 50%;
+  display: grid;
+  place-content: center;
   cursor: pointer;
-  height: 0;
-  width: 0;
 }
 
-/* Create a custom radio button */
-.checkmark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 25px;
-  width: 25px;
-  background-color: var(--alumni-light-beige);
-  border-radius: 50%;
-}
-
-/* On mouse-over, add a grey background color */
-.container:hover input ~ .checkmark {
-  background-color: #ccc;
-}
-
-/* When the radio button is checked, add a blue background */
-.container input:checked ~ .checkmark {
-  background-color: var(--alumni-orange);
-}
-
-/* Create the indicator (the dot/circle - hidden when not checked) */
-.checkmark:after {
+input[type="radio"]::before {
   content: "";
-  position: absolute;
-  display: none;
-}
-
-/* Show the indicator (dot/circle) when checked */
-.container input:checked ~ .checkmark:after {
-  display: block;
-}
-
-/* Style the indicator (dot/circle) */
-.container .checkmark:after {
-  top: 9px;
-  left: 9px;
-  width: 8px;
-  height: 8px;
+  width: 0.65em;
+  height: 0.65em;
   border-radius: 50%;
-  background: white;
+  display: none;
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--alumni-orange);
+}
+
+input[type="radio"]:checked::before {
+  display: block;
 }

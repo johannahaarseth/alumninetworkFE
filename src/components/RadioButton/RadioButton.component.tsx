@@ -7,10 +7,9 @@ type RadioButtonProps = {
 const RadioButton = ({ valueProp }: RadioButtonProps) => {
   return (
     <>
-      <label className={styles.container}>
+      <label className={styles.formControl}>
+        <input type="radio" name="radio" value={valueProp} />
         <p>{valueProp}</p>
-        <input type="checkbox" value={valueProp} />
-        <span className={styles.checkmark}></span>
       </label>
     </>
   );

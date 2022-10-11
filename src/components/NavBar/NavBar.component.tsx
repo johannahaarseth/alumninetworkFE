@@ -9,7 +9,7 @@ const NavBar = () => {
       <div className={styles.logo}>
         <Logo />
       </div>
-      <SearchBar />
+      <SearchBar placeholderText={"Search"} />
       <div className={styles.profile}>
         <ProfilePic />
       </div>

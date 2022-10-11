@@ -1,11 +1,26 @@
 import styles from "./Button.module.css";
+import {
+  AriaAttributes,
+  ButtonHTMLAttributes,
+  DetailedHTMLProps,
+  FC,
+} from "react";
 
-type ButtonProps = {
-  children: JSX.Element | JSX.Element[];
-};
+interface ButtonProps
+  extends DetailedHTMLProps<
+      ButtonHTMLAttributes<HTMLButtonElement>,
+      HTMLButtonElement
+    >,
+    AriaAttributes {}
 
-const Button = ({ children }: ButtonProps) => {
-  return <button className={styles.btn}>{children}</button>;
+const Button: FC<ButtonProps> = (props) => {
+  const { children, ...rest } = props;
+
+  return (
+    <button className={styles.btn} {...rest}>
+      {children}
+    </button>
+  );
 };
 
 export default Button;

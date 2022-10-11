@@ -3,7 +3,7 @@ import ListBox from "../../components/ListBox/ListBox.component";
 import ProfileCard from "../../components/ProfileCard/ProfileCard.component";
 import FiltersCard from "../../components/FiltersCard/FiltersCard.component";
 import styles from "./DashboardView.module.css";
-import Card from "../../components/Card/Card.component";
+import CreateNewPost from "../../components/CreateNewPost/CreateNewPost.component";
 
 const DashboardView = () => {
   const listBoxTitles = {
@@ -20,12 +20,7 @@ const DashboardView = () => {
         <ListBox title={listBoxTitles.events} />
       </div>
       <div className={styles.timelineColumn}>
-        <Card>
-          <div className={styles.newPostCustomCardContentWrapper}>
-            <p className={styles.newPost}>Create new post</p>
-            <p className={styles.newPostPlus}>+</p>
-          </div>
-        </Card>
+        <CreateNewPost />
         <TimelineComponent />
       </div>
       <div className={styles.profileAndFilterColumn}>

@@ -4,7 +4,7 @@ import ProfilePic from "../ProfilePic/ProfilePic.component";
 
 const ProfileCard = () => {
   return (
-    <Card>
+    <Card cardHoverEffect={true}>
       <div className={styles.headerBox}></div>
       <div className={styles.profile}>
         <ProfilePic />

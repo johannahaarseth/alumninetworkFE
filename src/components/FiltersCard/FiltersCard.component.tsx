@@ -3,12 +3,14 @@ import RadioButton from "../RadioButton/RadioButton.component";
 
 const FiltersCard = () => {
   return (
-    <Card>
+    <Card cardHoverEffect={false}>
       <p>Filter the timeline content to show only:</p>
-      <RadioButton valueProp={"Groups"} />
-      <RadioButton valueProp={"Topics"} />
-      <RadioButton valueProp={"Events"} />
-      <RadioButton valueProp={"Your activity"} />
+      <form>
+        <RadioButton valueProp={"Groups"} />
+        <RadioButton valueProp={"Topics"} />
+        <RadioButton valueProp={"Events"} />
+        <RadioButton valueProp={"Your activity"} />
+      </form>
     </Card>
   );
 };

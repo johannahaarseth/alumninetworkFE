@@ -1,5 +1,5 @@
-const SelectComponent = () => {
+const Select = () => {
   return <div></div>;
 };
 
-export default SelectComponent;
+export default Select;
