@@ -137,7 +137,7 @@ const NavBar = () => {
 
                                 >
                                     <MenuItem onClick={handleCloseUserMenu}>Profile</MenuItem>
-                                    <MenuItem onClick={handleCloseUserMenu}>My account</MenuItem>
+                                    <MenuItem onClick={handleCloseUserMenu}>Log Out</MenuItem>
                         </Menu>
                 </Grid>
                 </Grid>
