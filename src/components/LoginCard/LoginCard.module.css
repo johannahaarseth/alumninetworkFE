@@ -25,6 +25,7 @@
     background: var(--alumni-primary-dark-azure);
   }
 }
+
 @media screen and (max-height: 910px) {
   .card {
     height: 40%;
@@ -59,4 +60,12 @@
       white 100%
     );
   }
+}
+
+.h2 {
+  position: fixed;
+  top: 40%;
+  left: 82%;
+  margin-right: -18%;
+  transform: translate(-50%, -50%);
 }
