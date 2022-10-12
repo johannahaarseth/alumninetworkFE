@@ -17,15 +17,15 @@
 }
 
 .newPost {
-  font-size: var(--font-size-big);
+  font-size: var(--font-size-medium);
 }
 
 .newPostPlus {
-  font-size: var(--font-size-very-big);
+  font-size: 40px;
 }
 
 .modalHeader {
-  font-size: var(--font-size-big);
+  font-size: var(--font-size-medium);
 }
 
 .form {
@@ -36,7 +36,9 @@
 
 .radioButtons {
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
+  gap: 2rem;
+  margin-left: 1px;
 }
 
 .buttonContainer {
