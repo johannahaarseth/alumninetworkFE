@@ -1,0 +1,22 @@
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.invisibleBackdrop {
+  background-color: rgba(0, 0, 0, 0);
+  width: 200vw;
+  height: 200vh;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+}
+
+.position {
+  position: fixed;
+  top: 45px;
+  right: 1rem;
+}

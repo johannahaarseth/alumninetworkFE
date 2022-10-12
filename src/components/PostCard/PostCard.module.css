@@ -1,0 +1,20 @@
+@import "../../css-constants.css";
+
+.postedInfo {
+  font-size: var(--font-size-medium);
+}
+
+.title {
+  font-size: var(--font-size-big);
+}
+
+.postBody {
+  background-color: var(--alumni-light-beige);
+  min-height: 100px;
+  max-height: 500px;
+  width: 100%;
+}
+
+.comments {
+  font-size: var(--font-size-medium);
+}
