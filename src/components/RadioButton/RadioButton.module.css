@@ -1,12 +1,11 @@
 @import "../../css-constants.css";
 
 p {
-  font-size: 16px;
+  font-size: var(--font-size-medium);
 }
 
 .formControl {
-  font-family: system-ui, sans-serif;
-  font-weight: bold;
+  font-family: inherit;
   display: flex;
   gap: 0.5em;
 }

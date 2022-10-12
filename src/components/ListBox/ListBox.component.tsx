@@ -9,9 +9,10 @@ import Input from "../Input/Input.component";
 
 type ListBoxProps = {
   title: string;
+  children: JSX.Element | JSX.Element[];
 };
 
-const ListBox = ({ title }: ListBoxProps) => {
+const ListBox = ({ title, children }: ListBoxProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const titleToLowerAndMinusPlural = title.toLowerCase().slice(0, -1);
 
@@ -24,11 +25,7 @@ const ListBox = ({ title }: ListBoxProps) => {
             <p>+ Add new</p>
           </Button>
         </div>
-        <div className={styles.contentList}>
-          <div className={styles.itemBox}></div>
-          <div className={`${styles.itemBox} ${styles.itemBoxTwo}`}></div>
-          <div className={`${styles.itemBox} ${styles.itemBoxThree}`}></div>
-        </div>
+        <div className={styles.contentList}>{children}</div>
         <div className={styles.seeMoreBtn}>
           <Button>
             <p>See more &gt;</p>

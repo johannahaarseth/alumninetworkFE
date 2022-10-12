@@ -9,7 +9,7 @@
   margin-right: 1rem;
   border-radius: 50%;
   background-color: var(--alumni-primary-dark-azure);
-  font-size: 24px;
+  font-size: var(--font-size-big);
   color: white;
   cursor: pointer;
 }

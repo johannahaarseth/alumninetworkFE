@@ -17,15 +17,8 @@
   justify-content: center;
 }
 
-.itemBox {
-  background-color: var(--alumni-light-beige);
-  height: 45px;
-  width: 100%;
-  margin-bottom: 0.5rem;
-}
-
 .modalHeader {
-  font-size: 24px;
+  font-size: var(--font-size-big);
 }
 
 .form {
@@ -42,22 +35,4 @@
 .buttonContainer {
   display: flex;
   justify-content: flex-end;
-}
-
-@media screen and (max-height: 960px) {
-  .itemBoxThree {
-    display: none;
-  }
-}
-
-@media screen and (max-height: 820px) {
-  .itemBoxTwo {
-    display: none;
-  }
-}
-
-@media screen and (max-height: 660px) {
-  .contentList {
-    display: none;
-  }
 }

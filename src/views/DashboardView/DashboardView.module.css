@@ -20,13 +20,20 @@
   flex: 30%;
 }
 
+.itemBox {
+  background-color: var(--alumni-light-beige);
+  height: 45px;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
 @media screen and (max-width: 950px) {
   .dashboard {
     width: 95%;
   }
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 800px) {
   .dashboard {
     width: 95%;
   }
@@ -36,6 +43,24 @@
   }
 
   .profileAndFilterColumn {
+    display: none;
+  }
+}
+
+@media screen and (max-height: 960px) {
+  .itemBoxThree {
+    display: none;
+  }
+}
+
+@media screen and (max-height: 820px) {
+  .itemBoxTwo {
+    display: none;
+  }
+}
+
+@media screen and (max-height: 660px) {
+  .contentList {
     display: none;
   }
 }

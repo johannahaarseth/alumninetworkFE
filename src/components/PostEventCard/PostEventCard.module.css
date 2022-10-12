@@ -16,15 +16,15 @@
 }
 
 .postedInfo {
-  font-size: 16px;
+  font-size: var(--font-size-medium);
 }
 
 .title {
-  font-size: 24px;
+  font-size: var(--font-size-big);
 }
 
 .date {
-  font-size: 12px;
+  font-size: var(--font-size-small);
 }
 
 .postBody {
@@ -35,7 +35,7 @@
 }
 
 .comments {
-  font-size: 16px;
+  font-size: var(--font-size-medium);
 }
 
 .eventCard {

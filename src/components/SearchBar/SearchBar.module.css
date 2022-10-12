@@ -6,7 +6,7 @@
   border-radius: 10px;
   border: none;
   padding: 1rem;
-  font-size: 24px;
+  font-size: var(--font-size-big);
   margin-left: -7.5rem;
 }
 

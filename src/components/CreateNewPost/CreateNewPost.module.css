@@ -17,15 +17,15 @@
 }
 
 .newPost {
-  font-size: 24px;
+  font-size: var(--font-size-big);
 }
 
 .newPostPlus {
-  font-size: 44px;
+  font-size: var(--font-size-very-big);
 }
 
 .modalHeader {
-  font-size: 24px;
+  font-size: var(--font-size-big);
 }
 
 .form {

@@ -15,9 +15,21 @@ const DashboardView = () => {
   return (
     <div className={styles.dashboard}>
       <div className={styles.groupsTopicsEventsListsColumn}>
-        <ListBox title={listBoxTitles.groups} />
-        <ListBox title={listBoxTitles.topics} />
-        <ListBox title={listBoxTitles.events} />
+        <ListBox title={listBoxTitles.groups}>
+          <div className={styles.itemBox}></div>
+          <div className={`${styles.itemBox} ${styles.itemBoxTwo}`}></div>
+          <div className={`${styles.itemBox} ${styles.itemBoxThree}`}></div>
+        </ListBox>
+        <ListBox title={listBoxTitles.topics}>
+          <div className={styles.itemBox}></div>
+          <div className={`${styles.itemBox} ${styles.itemBoxTwo}`}></div>
+          <div className={`${styles.itemBox} ${styles.itemBoxThree}`}></div>
+        </ListBox>
+        <ListBox title={listBoxTitles.events}>
+          <div className={styles.itemBox}></div>
+          <div className={`${styles.itemBox} ${styles.itemBoxTwo}`}></div>
+          <div className={`${styles.itemBox} ${styles.itemBoxThree}`}></div>
+        </ListBox>
       </div>
       <div className={styles.timelineColumn}>
         <CreateNewPost />
