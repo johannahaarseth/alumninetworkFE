@@ -30,6 +30,11 @@ const NavBarProfileOnClickCard = ({
               </Button>
             )}
             {isAuthenticated && (
+              <Button onClick={() => navigate("/dashboard")}>
+                <p>Dashboard</p>
+              </Button>
+            )}
+            {isAuthenticated && (
               <Button
                 onClick={() =>
                   logout({ returnTo: window.location.origin + "/" })
