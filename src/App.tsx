@@ -2,7 +2,7 @@ import "./Global.css";
 import styles from "./App.module.css";
 import LoginView from "./views/LoginView/LoginView";
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import DashboardView from "./views/DashboardView/DashboardView";
 import ProfileView from "./views/ProfileView/ProfileView";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -11,7 +11,7 @@ import NavBar from "./components/NavBar/NavBar.component";
 function App() {
   let { isAuthenticated, isLoading } = useAuth0();
 
-  return (
+  return !isLoading ? (
     <div className="App">
       <div className={styles.dashboard}></div>
       <BrowserRouter>
@@ -30,6 +30,10 @@ function App() {
         </div>
       </BrowserRouter>
     </div>
+  ) : (
+    <>
+      <h1>Loading...</h1>
+    </>
   );
 }
 
