@@ -13,6 +13,7 @@ const ProfileCard = () => {
       <div className={styles.profile}>{<ProfilePic />}</div>
       <div className={styles.infoBox}>
         <p className={styles.text}>{user?.name} </p>
+        <p className={styles.text}>{user?.email} </p>
         <p className={styles.text}>Status message</p>
         <div className={`${styles.textBox} ${styles.shortBioBox}`}></div>
         <div className={`${styles.textBox} ${styles.funFactBox}`}></div>
