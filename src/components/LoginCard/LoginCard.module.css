@@ -45,7 +45,7 @@
   margin-right: -65%;
   transform: translate(-50%, -50%);
   color: rgb(255, 255, 255);
-  font-family: "Inter";
+  font-family: inherit;
   font-size: 200%;
 }
 
