@@ -1,5 +1,27 @@
+import styles from "./NavBar.module.css";
+import ProfilePic from "../ProfilePic/ProfilePic.component";
+import Logo from "../Logo/Logo.component";
+import SearchBar from "../SearchBar/SearchBar.component";
+import { useState } from "react";
+import NavBarProfileOnClickCard from "../NavBarProfileOnClickCard/NavBarProfileOnClickCard.component";
+
 const NavBar = () => {
-  return <></>;
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <>
+      <div className={styles.navbar}>
+        <div className={styles.logo}>
+          <Logo />
+        </div>
+        <SearchBar placeholderText={"Search"} />
+        <div className={styles.profile} onClick={() => setIsOpen(true)}>
+          <ProfilePic />
+        </div>
+      </div>
+      {isOpen && <NavBarProfileOnClickCard setIsOpen={setIsOpen} />}
+    </>
+  );
 };
 
 export default NavBar;

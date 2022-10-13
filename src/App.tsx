@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import DashboardView from "./views/DashboardView/DashboardView";
 import ProfileView from "./views/ProfileView/ProfileView";
 import { useAuth0 } from "@auth0/auth0-react";
+import NavBar from "./components/NavBar/NavBar.component";
 
 function App() {
   let { isAuthenticated } = useAuth0();

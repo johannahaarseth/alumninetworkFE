@@ -1,0 +1,15 @@
+@import "../../css-constants.css";
+
+.btn {
+  background-color: inherit;
+  cursor: pointer;
+  padding: 0.4rem;
+  border-radius: 5px;
+  border: 1px solid var(--alumni-primary-light-azure);
+}
+
+.btn:hover {
+  border: 1px solid var(--alumni-primary-dark-azure);
+  background-color: var(--alumni-primary-light-azure);
+  color: black;
+}
