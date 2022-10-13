@@ -11,7 +11,7 @@ import Button from "../Button/Button.component";
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const { isAuthenticated, logout } = useAuth0();
+  const { isAuthenticated } = useAuth0();
   const navigate = useNavigate();
 
   return (

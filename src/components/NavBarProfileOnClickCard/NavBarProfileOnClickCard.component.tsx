@@ -3,7 +3,7 @@ import Button from "../Button/Button.component";
 import styles from "./NavBarProfileOnClickCard.module.css";
 import { Dispatch, SetStateAction } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 type NavBarProfileOnClickCardProps = {
   setIsOpen: Dispatch<SetStateAction<boolean>>;

@@ -4,13 +4,11 @@
 .button {
   background-color: initial;
   background-image: linear-gradient(-180deg, var(--alumni-orange), #f7721f);
-  border-radius: 6px;
   box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
   color: #ffffff;
   cursor: pointer;
   display: inline-block;
-  font-family: Inter, -apple-system, system-ui, Roboto, "Helvetica Neue", Arial,
-    sans-serif;
+  font-family: inherit, sans-serif;
   height: 40px;
   line-height: 40px;
   outline: 0;
@@ -24,7 +22,6 @@
   -webkit-user-select: none;
   vertical-align: top;
   white-space: nowrap;
-
   z-index: 9;
   border: 0;
   transition: box-shadow 0.2s;
