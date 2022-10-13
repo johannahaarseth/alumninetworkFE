@@ -2,7 +2,7 @@ import "./Global.css";
 import styles from "./App.module.css";
 import LoginView from "./views/LoginView/LoginView";
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import DashboardView from "./views/DashboardView/DashboardView";
 import ProfileView from "./views/ProfileView/ProfileView";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -16,8 +16,18 @@ function App() {
       <BrowserRouter>
         <div className="App">
           <Routes>
-            <Route path="/login" element={<LoginView />} />
-            <Route path="*" element={<LoginView />} />
+            <Route
+              path="/login"
+              element={
+                isAuthenticated ? <Navigate to="/dashboard" /> : <LoginView />
+              }
+            />
+            <Route
+              path="*"
+              element={
+                isAuthenticated ? <Navigate to="/dashboard" /> : <LoginView />
+              }
+            />
 
             {isAuthenticated && (
               <Route path="/dashboard" element={<DashboardView />} />
