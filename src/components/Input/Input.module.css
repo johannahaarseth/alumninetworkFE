@@ -1,0 +1,20 @@
+@import "../../css-constants.css";
+
+.input {
+  padding: 0.5rem;
+  height: 2.4rem;
+  font-size: var(--font-size-medium);
+  border-radius: 5px;
+  border: 2px solid var(--alumni-primary-dark-azure);
+  width: 100%;
+}
+
+.input:hover {
+  background-color: var(--alumni-light-beige);
+  outline: 2px solid var(--alumni-primary-dark-azure);
+}
+
+.input:focus {
+  background-color: white;
+  outline: 2px solid var(--alumni-primary-dark-azure);
+}
