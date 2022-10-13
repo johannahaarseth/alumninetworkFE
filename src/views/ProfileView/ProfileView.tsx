@@ -1,5 +1,7 @@
+import NavBar from "../../components/NavBar/NavBar.component";
+
 const ProfileView = () => {
-  return <div></div>;
+  return <NavBar />;
 };
 
 export default ProfileView;

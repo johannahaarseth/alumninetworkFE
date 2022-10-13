@@ -9,7 +9,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import NavBar from "./components/NavBar/NavBar.component";
 
 function App() {
-  let { isAuthenticated } = useAuth0();
+  let { isAuthenticated, isLoading } = useAuth0();
 
   return (
     <div className="App">
@@ -19,6 +19,7 @@ function App() {
           <Routes>
             <Route path="/login" element={<LoginView />} />
             <Route path="*" element={<LoginView />} />
+
             {isAuthenticated && (
               <Route path="/dashboard" element={<DashboardView />} />
             )}

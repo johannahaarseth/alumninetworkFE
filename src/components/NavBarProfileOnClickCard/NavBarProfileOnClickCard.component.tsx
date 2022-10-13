@@ -3,6 +3,7 @@ import Button from "../Button/Button.component";
 import styles from "./NavBarProfileOnClickCard.module.css";
 import { Dispatch, SetStateAction } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 type NavBarProfileOnClickCardProps = {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
@@ -12,6 +13,8 @@ const NavBarProfileOnClickCard = ({
   setIsOpen,
 }: NavBarProfileOnClickCardProps) => {
   const { isAuthenticated, logout } = useAuth0();
+  const navigate = useNavigate();
+
   return (
     <>
       <div
@@ -21,9 +24,11 @@ const NavBarProfileOnClickCard = ({
       <div className={styles.position}>
         <Card cardHoverEffect={false}>
           <div className={styles.buttonContainer}>
-            <Button>
-              <p>My profile</p>
-            </Button>
+            {isAuthenticated && (
+              <Button onClick={() => navigate("/profile")}>
+                <p>My profile</p>
+              </Button>
+            )}
             {isAuthenticated && (
               <Button
                 onClick={() =>
