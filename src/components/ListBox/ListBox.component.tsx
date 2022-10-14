@@ -11,6 +11,7 @@ import TextField from "@mui/material/TextField";
 import dayjs, { Dayjs } from "dayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { useNavigate } from "react-router-dom";
 
 type ListBoxProps = {
   title: string;
@@ -20,7 +21,7 @@ type ListBoxProps = {
 const ListBox = ({ title, children }: ListBoxProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const titleToLowerAndMinusPlural = title.toLowerCase().slice(0, -1);
-
+  const navigate = useNavigate();
   const [value, setValue] = useState<Dayjs | null>(dayjs());
   const [valuePlus, setValuePlus] = useState<Dayjs | null>(dayjs());
 
@@ -87,9 +88,21 @@ const ListBox = ({ title, children }: ListBoxProps) => {
               />
             </div>
             <div className={styles.buttonContainer}>
-              <Button>
-                <p>Create {titleToLowerAndMinusPlural} &gt;</p>
-              </Button>
+              {title.toString() === "Events" && (
+                <Button onClick={() => navigate("/event")}>
+                  <p>Create {titleToLowerAndMinusPlural} &gt;</p>
+                </Button>
+              )}
+              {title.toString() === "Groups" && (
+                <Button onClick={() => navigate("/group")}>
+                  <p>Create {titleToLowerAndMinusPlural} &gt;</p>
+                </Button>
+              )}
+              {title.toString() === "Topics" && (
+                <Button onClick={() => navigate("/topic")}>
+                  <p>Create {titleToLowerAndMinusPlural} &gt;</p>
+                </Button>
+              )}
             </div>
           </form>
         </Modal>
