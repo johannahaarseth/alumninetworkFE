@@ -3,9 +3,14 @@ import Button from "../Button/Button.component";
 import Card from "../Card/Card.component";
 import { useState } from "react";
 import Modal from "../Modal/Modal.component";
-import TextField from "../TextField/TextField.component";
+import TextField1 from "../TextField/TextField.component";
 import RadioButton from "../RadioButton/RadioButton.component";
 import Input from "../Input/Input.component";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import TextField from "@mui/material/TextField";
+import dayjs, { Dayjs } from "dayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useNavigate } from "react-router-dom";
 
 type ListBoxProps = {
@@ -16,6 +21,11 @@ type ListBoxProps = {
 const ListBox = ({ title, children }: ListBoxProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const titleToLowerAndMinusPlural = title.toLowerCase().slice(0, -1);
+  const [value, setValue] = useState<Dayjs | null>(dayjs());
+
+  const handleChange = (newValue: Dayjs | null) => {
+    setValue(newValue);
+  };
   const navigate = useNavigate();
 
   return (
@@ -49,8 +59,19 @@ const ListBox = ({ title, children }: ListBoxProps) => {
               <RadioButton valueProp={"Public"} />
               <RadioButton valueProp={"Private"} />
             </div>
+            {title.toString() === "Events" && (
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DateTimePicker
+                  label="Date&Time picker"
+                  value={value}
+                  onChange={handleChange}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              </LocalizationProvider>
+            )}
+
             <div>
-              <TextField
+              <TextField1
                 placeholderText={`Add ${titleToLowerAndMinusPlural} description`}
               />
             </div>
