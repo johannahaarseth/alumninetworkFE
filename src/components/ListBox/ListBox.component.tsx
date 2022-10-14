@@ -60,7 +60,7 @@ const ListBox = ({ title, children }: ListBoxProps) => {
             {title.toString() === "Events" && (
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DesktopDatePicker
-                  label="Date desktop"
+                  label="Choose a date"
                   inputFormat="MM/DD/YYYY"
                   value={value}
                   onChange={handleChange}
