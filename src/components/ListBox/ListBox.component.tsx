@@ -6,7 +6,7 @@ import Modal from "../Modal/Modal.component";
 import TextField1 from "../TextField/TextField.component";
 import RadioButton from "../RadioButton/RadioButton.component";
 import Input from "../Input/Input.component";
-import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import TextField from "@mui/material/TextField";
 import dayjs, { Dayjs } from "dayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers";
@@ -59,9 +59,8 @@ const ListBox = ({ title, children }: ListBoxProps) => {
             </div>
             {title.toString() === "Events" && (
               <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DesktopDatePicker
-                  label="Choose a date"
-                  inputFormat="MM/DD/YYYY"
+                <DateTimePicker
+                  label="Date&Time picker"
                   value={value}
                   onChange={handleChange}
                   renderInput={(params) => <TextField {...params} />}
