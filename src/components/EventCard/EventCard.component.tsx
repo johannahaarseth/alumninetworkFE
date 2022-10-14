@@ -18,11 +18,10 @@ const EventCard = () => {
   };
 
   return (
-    <Card cardHoverEffect={true}>
+    <Card cardHoverEffect={false}>
       <div className={styles.headerBox}></div>
       <div className={styles.infoBox}>
         <p className={styles.text}>Event info</p>
-
         <div className={`${styles.textBox}`}></div>
       </div>
       <Button
@@ -33,7 +32,7 @@ const EventCard = () => {
         <p className={styles.newPost}>Accept</p>
       </Button>
       <Button
-        className={styles.button}
+        className={styles.button2}
         onClick={onClickDeclineBtn}
         disabled={isDeclined}
       >
