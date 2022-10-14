@@ -1,5 +1,6 @@
 import styles from "./PostEventCard.module.css";
 
+
 const PostEventCard = () => {
   return (
     <div className={styles.eventCard}>

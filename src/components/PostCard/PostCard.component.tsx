@@ -1,13 +1,18 @@
 import styles from "./PostCard.module.css";
 import Card from "../Card/Card.component";
+import { IPostSummary } from "../../interfaces/IPostSummary";
 
-const PostCard = () => {
+type PostCardProps = {
+  post : IPostSummary
+};
+
+const PostCard = ({post} : PostCardProps) => {
   return (
     <Card cardHoverEffect={true}>
-      <p className={styles.postedInfo}>Posted in *Group* by *User*</p>
-      <p className={styles.title}>Title</p>
-      <div className={styles.postBody}></div>
-      <p className={styles.comments}>42 comments</p>
+      <p className={styles.postedInfo}>{post.sender.name} to {post.target.name}</p>
+      <p className={styles.title}>{post.postTitle}</p>
+      <div className={styles.postBody}>{post.postBody}</div>
+      <p className={styles.comments}>{post.commentCount} comments</p>
     </Card>
   );
 };
