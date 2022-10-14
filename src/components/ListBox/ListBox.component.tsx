@@ -20,12 +20,16 @@ type ListBoxProps = {
 const ListBox = ({ title, children }: ListBoxProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const titleToLowerAndMinusPlural = title.toLowerCase().slice(0, -1);
+
   const [value, setValue] = useState<Dayjs | null>(dayjs());
+  const [valuePlus, setValuePlus] = useState<Dayjs | null>(dayjs());
 
   const handleChange = (newValue: Dayjs | null) => {
     setValue(newValue);
   };
-
+  const handleChangePlus = (newValue: Dayjs | null) => {
+    setValuePlus(newValue);
+  };
   return (
     <>
       <Card cardHoverEffect={false}>
@@ -53,16 +57,25 @@ const ListBox = ({ title, children }: ListBoxProps) => {
                 placeholderText={`Add ${titleToLowerAndMinusPlural} title`}
               />
             </div>
-            <div className={styles.radioButtons}>
-              <RadioButton valueProp={"Public"} />
-              <RadioButton valueProp={"Private"} />
-            </div>
+            {title.toString() === "Groups" && (
+              <div className={styles.radioButtons}>
+                <RadioButton valueProp={"Public"} />
+                <RadioButton valueProp={"Private"} />
+              </div>
+            )}
+
             {title.toString() === "Events" && (
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DateTimePicker
-                  label="Date&Time picker"
+                  label="Start date"
                   value={value}
                   onChange={handleChange}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+                <DateTimePicker
+                  label="End date"
+                  value={valuePlus?.add(1, "hours")}
+                  onChange={handleChangePlus}
                   renderInput={(params) => <TextField {...params} />}
                 />
               </LocalizationProvider>
