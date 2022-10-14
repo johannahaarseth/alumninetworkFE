@@ -15,7 +15,6 @@
   overflow: hidden;
   padding: 0 20px;
   pointer-events: auto;
-  position: relative;
   text-align: center;
   touch-action: manipulation;
   user-select: none;
@@ -31,7 +30,7 @@
   margin-right: -18%;
   transform: translate(-50%, -50%);
   border-radius: 5px;
-  font-family: "Inter";
+  font-family: inherit;
 }
 
 .button:hover {

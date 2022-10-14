@@ -6,7 +6,6 @@ import { useState } from "react";
 import NavBarProfileOnClickCard from "../NavBarProfileOnClickCard/NavBarProfileOnClickCard.component";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
-import Button from "../Button/Button.component";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,9 +18,11 @@ const NavBar = () => {
       <div className={styles.navbar}>
         <div className={styles.logo}>
           {isAuthenticated && (
-            <Button onClick={() => navigate("/dashboard")}>
-              <Logo />
-            </Button>
+            <div className={styles.logo}>
+              {isAuthenticated && (
+                <Logo onLogoClick={() => navigate("/dashboard")} />
+              )}
+            </div>
           )}
         </div>
         <SearchBar placeholderText={"Search"} />
