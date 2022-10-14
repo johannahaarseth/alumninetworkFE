@@ -1,5 +1,4 @@
 import "./Global.css";
-import styles from "./App.module.css";
 import LoginView from "./views/LoginView/LoginView";
 
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
@@ -12,7 +11,6 @@ function App() {
 
   return !isLoading ? (
     <div className="App">
-      <div className={styles.dashboard}></div>
       <BrowserRouter>
         <div className="App">
           <Routes>
