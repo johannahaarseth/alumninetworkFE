@@ -6,6 +6,11 @@ import Modal from "../Modal/Modal.component";
 import TextField1 from "../TextField/TextField.component";
 import RadioButton from "../RadioButton/RadioButton.component";
 import Input from "../Input/Input.component";
+import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
+import TextField from "@mui/material/TextField";
+import dayjs, { Dayjs } from "dayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 type ListBoxProps = {
   title: string;
@@ -15,6 +20,11 @@ type ListBoxProps = {
 const ListBox = ({ title, children }: ListBoxProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const titleToLowerAndMinusPlural = title.toLowerCase().slice(0, -1);
+  const [value, setValue] = useState<Dayjs | null>(dayjs());
+
+  const handleChange = (newValue: Dayjs | null) => {
+    setValue(newValue);
+  };
 
   return (
     <>
@@ -47,6 +57,18 @@ const ListBox = ({ title, children }: ListBoxProps) => {
               <RadioButton valueProp={"Public"} />
               <RadioButton valueProp={"Private"} />
             </div>
+            {title.toString() === "Events" && (
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DesktopDatePicker
+                  label="Date desktop"
+                  inputFormat="MM/DD/YYYY"
+                  value={value}
+                  onChange={handleChange}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              </LocalizationProvider>
+            )}
+
             <div>
               <TextField1
                 placeholderText={`Add ${titleToLowerAndMinusPlural} description`}
