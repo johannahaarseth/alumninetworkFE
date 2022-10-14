@@ -3,7 +3,7 @@ import Button from "../Button/Button.component";
 import Card from "../Card/Card.component";
 import { useState } from "react";
 import Modal from "../Modal/Modal.component";
-import TextField from "../TextField/TextField.component";
+import TextField1 from "../TextField/TextField.component";
 import RadioButton from "../RadioButton/RadioButton.component";
 import Input from "../Input/Input.component";
 
@@ -48,7 +48,7 @@ const ListBox = ({ title, children }: ListBoxProps) => {
               <RadioButton valueProp={"Private"} />
             </div>
             <div>
-              <TextField
+              <TextField1
                 placeholderText={`Add ${titleToLowerAndMinusPlural} description`}
               />
             </div>

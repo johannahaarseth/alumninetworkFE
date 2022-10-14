@@ -6,6 +6,7 @@ import styles from "./DashboardView.module.css";
 import CreateNewPost from "../../components/CreateNewPost/CreateNewPost.component";
 import { useAuth0 } from "@auth0/auth0-react";
 import NavBar from "../../components/NavBar/NavBar.component";
+import { useState } from "react";
 const DashboardView = () => {
   const { isAuthenticated } = useAuth0();
 
@@ -36,6 +37,7 @@ const DashboardView = () => {
                   className={`${styles.itemBox} ${styles.itemBoxThree}`}
                 ></div>
               </ListBox>
+
               <ListBox title={listBoxTitles.events}>
                 <div className={styles.itemBox}></div>
                 <div className={`${styles.itemBox} ${styles.itemBoxTwo}`}></div>
