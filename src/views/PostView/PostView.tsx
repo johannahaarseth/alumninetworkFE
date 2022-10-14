@@ -1,3 +1,4 @@
+import Button from "../../components/Button/Button.component";
 import CreateNewPost from "../../components/CreateNewPost/CreateNewPost.component";
 import GroupCard from "../../components/GroupCard/GroupCard.component";
 import NavBar from "../../components/NavBar/NavBar.component";
@@ -19,6 +20,10 @@ const PostView = () => {
           </div>
           <div className={styles.profileAndFilterColumn}>
             <GroupCard />
+            <Button className={styles.button}>
+              <p className={styles.newPost}>Invite</p>
+              <p className={styles.newPostPlus}>+</p>
+            </Button>
           </div>
         </div>
       </div>
