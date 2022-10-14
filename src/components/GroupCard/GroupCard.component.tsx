@@ -7,7 +7,12 @@ const GroupCard = () => {
     <Card cardHoverEffect={true}>
       <div className={styles.headerBox}></div>
       <div className={styles.infoBox}>
-        <p className={styles.text}>Group info</p>
+        {window.location.pathname === "/group" ? (
+          <p className={styles.text}>Group info</p>
+        ) : (
+          <p className={styles.text}>Topic info</p>
+        )}
+
         <div className={`${styles.textBox}`}></div>
       </div>
     </Card>

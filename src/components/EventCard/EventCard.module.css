@@ -9,12 +9,6 @@
   margin-bottom: 0.5rem;
 }
 
-.profile {
-  margin-top: -4rem;
-  height: 5rem;
-  width: 5rem;
-}
-
 .infoBox {
   display: flex;
   gap: 1rem;
@@ -32,6 +26,7 @@
   height: 250px;
   width: 100%;
 }
+
 .button {
   display: flex;
   flex-direction: row;
