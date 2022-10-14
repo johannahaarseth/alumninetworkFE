@@ -26,7 +26,6 @@ const PostView = () => {
               ) : (
                 <p className={styles.newPost}>Invite</p>
               )}
-
               <p className={styles.newPostPlus}>+</p>
             </Button>
           </div>
