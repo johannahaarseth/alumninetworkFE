@@ -1,5 +1,6 @@
 import Button from "../../components/Button/Button.component";
 import CreateNewPost from "../../components/CreateNewPost/CreateNewPost.component";
+import EventCard from "../../components/EventCard/EventCard.component";
 import GroupCard from "../../components/GroupCard/GroupCard.component";
 import NavBar from "../../components/NavBar/NavBar.component";
 import TimelineComponent from "../../components/Timeline/Timeline.component";
@@ -19,7 +20,11 @@ const PostView = () => {
             <TimelineComponent />
           </div>
           <div className={styles.profileAndFilterColumn}>
-            <GroupCard />
+            {window.location.pathname === "/event" ? (
+              <EventCard />
+            ) : (
+              <GroupCard />
+            )}
             <Button className={styles.button}>
               {window.location.pathname === "/topic" ? (
                 <p className={styles.newPost}>Join</p>
