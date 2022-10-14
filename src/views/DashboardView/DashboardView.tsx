@@ -6,7 +6,6 @@ import styles from "./DashboardView.module.css";
 import CreateNewPost from "../../components/CreateNewPost/CreateNewPost.component";
 import { useAuth0 } from "@auth0/auth0-react";
 import NavBar from "../../components/NavBar/NavBar.component";
-import { useState } from "react";
 const DashboardView = () => {
   const { isAuthenticated } = useAuth0();
 
