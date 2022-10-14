@@ -1,7 +1,7 @@
 import styles from "./ListBox.module.css";
 import Button from "../Button/Button.component";
 import Card from "../Card/Card.component";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Modal from "../Modal/Modal.component";
 import TextField1 from "../TextField/TextField.component";
 import RadioButton from "../RadioButton/RadioButton.component";
@@ -12,6 +12,7 @@ import dayjs, { Dayjs } from "dayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useNavigate } from "react-router-dom";
+import { ListContext } from "../../App";
 
 type ListBoxProps = {
   title: string;
@@ -21,15 +22,17 @@ type ListBoxProps = {
 
 const ListBox = ({ title, children, visibleSeeMoreBtn }: ListBoxProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const titleToLowerAndMinusPlural = title.toLowerCase().slice(0, -1);
+  const titleToLowerAndMinusPlural = title?.toLowerCase().slice(0, -1);
   const [value, setValue] = useState<Dayjs | null>(dayjs());
   const navigate = useNavigate();
+  const { update } = useContext(ListContext);
 
   const handleChange = (newValue: Dayjs | null) => {
     setValue(newValue);
   };
 
-  const handleSeeMoreClick = () => {
+  const handleSeeMoreOnClick = () => {
+    update(title);
     navigate("/list");
   };
 
@@ -47,12 +50,13 @@ const ListBox = ({ title, children, visibleSeeMoreBtn }: ListBoxProps) => {
           <span
             className={!visibleSeeMoreBtn ? styles.invisibleSeeMoreBtn : ""}
           >
-            <Button onClick={() => navigate("/list")}>
+            <Button onClick={handleSeeMoreOnClick}>
               <p>See more &gt;</p>
             </Button>
           </span>
         </div>
       </Card>
+
       {isOpen && (
         <Modal setIsOpen={setIsOpen}>
           <p className={styles.modalHeader}>
@@ -68,7 +72,7 @@ const ListBox = ({ title, children, visibleSeeMoreBtn }: ListBoxProps) => {
               <RadioButton valueProp={"Public"} />
               <RadioButton valueProp={"Private"} />
             </div>
-            {title.toString() === "Events" && (
+            {title?.toString() === "Events" && (
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DateTimePicker
                   label="Date&Time picker"

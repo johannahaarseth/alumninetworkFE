@@ -3,9 +3,12 @@ import { Navigate } from "react-router-dom";
 import NavBar from "../../components/NavBar/NavBar.component";
 import ListBox from "../../components/ListBox/ListBox.component";
 import styles from "./ListView.module.css";
+import { useContext } from "react";
+import { ListContext } from "../../App";
 
 const ListView = () => {
   const { isAuthenticated, user } = useAuth0();
+  const { state } = useContext(ListContext);
 
   const dummyArray = [null, null, null, null, null, null];
   const listViewDataRendered = dummyArray.map((e, i) => {
@@ -25,7 +28,7 @@ const ListView = () => {
           <>
             <NavBar />
             <div className={styles.container}>
-              <ListBox title={"test"} visibleSeeMoreBtn={false}>
+              <ListBox title={state} visibleSeeMoreBtn={false}>
                 {listViewDataRendered}
               </ListBox>
             </div>

@@ -6,14 +6,12 @@ import styles from "./DashboardView.module.css";
 import CreateNewPost from "../../components/CreateNewPost/CreateNewPost.component";
 import { useAuth0 } from "@auth0/auth0-react";
 import NavBar from "../../components/NavBar/NavBar.component";
+import { useContext } from "react";
+import { AppContext } from "../../context/AppContext";
+
 const DashboardView = () => {
   const { isAuthenticated } = useAuth0();
-
-  const listBoxTitles = {
-    groups: "Groups",
-    topics: "Topics",
-    events: "Events",
-  };
+  const appContext = useContext(AppContext);
 
   return (
     <>
@@ -22,14 +20,28 @@ const DashboardView = () => {
         {isAuthenticated && (
           <div className={styles.dashboard}>
             <div className={styles.groupsTopicsEventsListsColumn}>
-              <ListBox title={listBoxTitles.groups} visibleSeeMoreBtn={true}>
+              <ListBox
+                title={
+                  appContext?.titles.groups === undefined
+                    ? ""
+                    : appContext?.titles.groups
+                }
+                visibleSeeMoreBtn={true}
+              >
                 <div className={styles.itemBox}></div>
                 <div className={`${styles.itemBox} ${styles.itemBoxTwo}`}></div>
                 <div
                   className={`${styles.itemBox} ${styles.itemBoxThree}`}
                 ></div>
               </ListBox>
-              <ListBox title={listBoxTitles.topics} visibleSeeMoreBtn={true}>
+              <ListBox
+                title={
+                  appContext?.titles.topics === undefined
+                    ? ""
+                    : appContext?.titles.topics
+                }
+                visibleSeeMoreBtn={true}
+              >
                 <div className={styles.itemBox}></div>
                 <div className={`${styles.itemBox} ${styles.itemBoxTwo}`}></div>
                 <div
@@ -37,7 +49,14 @@ const DashboardView = () => {
                 ></div>
               </ListBox>
 
-              <ListBox title={listBoxTitles.events} visibleSeeMoreBtn={true}>
+              <ListBox
+                title={
+                  appContext?.titles.events === undefined
+                    ? ""
+                    : appContext?.titles.events
+                }
+                visibleSeeMoreBtn={true}
+              >
                 <div className={styles.itemBox}></div>
                 <div className={`${styles.itemBox} ${styles.itemBoxTwo}`}></div>
                 <div
