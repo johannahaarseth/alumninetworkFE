@@ -6,6 +6,7 @@ import Modal from "../Modal/Modal.component";
 import TextField from "../TextField/TextField.component";
 import RadioButton from "../RadioButton/RadioButton.component";
 import Input from "../Input/Input.component";
+import { useNavigate } from "react-router-dom";
 
 type ListBoxProps = {
   title: string;
@@ -15,6 +16,7 @@ type ListBoxProps = {
 const ListBox = ({ title, children }: ListBoxProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const titleToLowerAndMinusPlural = title.toLowerCase().slice(0, -1);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -27,7 +29,7 @@ const ListBox = ({ title, children }: ListBoxProps) => {
         </div>
         <div className={styles.contentList}>{children}</div>
         <div className={styles.seeMoreBtn}>
-          <Button>
+          <Button onClick={() => navigate("/list")}>
             <p>See more &gt;</p>
           </Button>
         </div>
