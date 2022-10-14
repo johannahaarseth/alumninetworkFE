@@ -35,6 +35,8 @@ function App() {
             )}
             {/* change afterwards to => path="/group/:id/" */}
             {isAuthenticated && <Route path="/group" element={<PostView />} />}
+            {/* change afterwards to => path="/topic/:id/" */}
+            {isAuthenticated && <Route path="/topic" element={<PostView />} />}
           </Routes>
         </div>
       </BrowserRouter>

@@ -21,7 +21,12 @@ const PostView = () => {
           <div className={styles.profileAndFilterColumn}>
             <GroupCard />
             <Button className={styles.button}>
-              <p className={styles.newPost}>Invite</p>
+              {window.location.pathname === "/topic" ? (
+                <p className={styles.newPost}>Join</p>
+              ) : (
+                <p className={styles.newPost}>Invite</p>
+              )}
+
               <p className={styles.newPostPlus}>+</p>
             </Button>
           </div>
