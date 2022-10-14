@@ -16,17 +16,22 @@ import { useNavigate } from "react-router-dom";
 type ListBoxProps = {
   title: string;
   children: JSX.Element | JSX.Element[];
+  visibleSeeMoreBtn: boolean;
 };
 
-const ListBox = ({ title, children }: ListBoxProps) => {
+const ListBox = ({ title, children, visibleSeeMoreBtn }: ListBoxProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const titleToLowerAndMinusPlural = title.toLowerCase().slice(0, -1);
   const [value, setValue] = useState<Dayjs | null>(dayjs());
+  const navigate = useNavigate();
 
   const handleChange = (newValue: Dayjs | null) => {
     setValue(newValue);
   };
-  const navigate = useNavigate();
+
+  const handleSeeMoreClick = () => {
+    navigate("/list");
+  };
 
   return (
     <>
@@ -39,9 +44,13 @@ const ListBox = ({ title, children }: ListBoxProps) => {
         </div>
         <div className={styles.contentList}>{children}</div>
         <div className={styles.seeMoreBtn}>
-          <Button onClick={() => navigate("/list")}>
-            <p>See more &gt;</p>
-          </Button>
+          <span
+            className={!visibleSeeMoreBtn ? styles.invisibleSeeMoreBtn : ""}
+          >
+            <Button onClick={() => navigate("/list")}>
+              <p>See more &gt;</p>
+            </Button>
+          </span>
         </div>
       </Card>
       {isOpen && (
