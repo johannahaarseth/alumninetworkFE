@@ -12,8 +12,8 @@ const ProfileCard = () => {
       <div className={styles.headerBox}></div>
       <div className={styles.profile}>{<ProfilePic />}</div>
       <div className={styles.infoBox}>
-        <p className={styles.text}>{user?.name} </p>
-        <p className={styles.text}>{user?.email} </p>
+        <p className={styles.text}>Name: {user?.name} </p>
+        <p className={styles.text}>Email: {user?.email} </p>
         <p className={styles.text}>Status message</p>
         <div className={`${styles.textBox} ${styles.shortBioBox}`}></div>
         <div className={`${styles.textBox} ${styles.funFactBox}`}></div>
