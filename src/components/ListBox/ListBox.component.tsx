@@ -1,7 +1,7 @@
 import styles from "./ListBox.module.css";
 import Button from "../Button/Button.component";
 import Card from "../Card/Card.component";
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import Modal from "../Modal/Modal.component";
 import TextField1 from "../TextField/TextField.component";
 import RadioButton from "../RadioButton/RadioButton.component";
@@ -11,6 +11,9 @@ import TextField from "@mui/material/TextField";
 import dayjs, { Dayjs } from "dayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { TimePicker } from "@mui/x-date-pickers/TimePicker";
+import { ToggleButtonGroup, ToggleButton } from "@mui/material";
 
 type ListBoxProps = {
   title: string;
@@ -20,9 +23,10 @@ type ListBoxProps = {
 const ListBox = ({ title, children }: ListBoxProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const titleToLowerAndMinusPlural = title.toLowerCase().slice(0, -1);
-
   const [value, setValue] = useState<Dayjs | null>(dayjs());
   const [valuePlus, setValuePlus] = useState<Dayjs | null>(dayjs());
+  const [locale] = useState("fr");
+  const today = new Date();
 
   const handleChange = (newValue: Dayjs | null) => {
     setValue(newValue);
@@ -30,6 +34,7 @@ const ListBox = ({ title, children }: ListBoxProps) => {
   const handleChangePlus = (newValue: Dayjs | null) => {
     setValuePlus(newValue);
   };
+
   return (
     <>
       <Card cardHoverEffect={false}>
@@ -63,19 +68,25 @@ const ListBox = ({ title, children }: ListBoxProps) => {
                 <RadioButton valueProp={"Private"} />
               </div>
             )}
-
             {title.toString() === "Events" && (
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <LocalizationProvider
+                dateAdapter={AdapterDayjs}
+                adapterLocale={locale}
+              >
                 <DateTimePicker
                   label="Start date"
                   value={value}
                   onChange={handleChange}
+                  disablePast
+                  inputFormat="DD-MM-YYYY hh:mm"
                   renderInput={(params) => <TextField {...params} />}
                 />
                 <DateTimePicker
                   label="End date"
                   value={valuePlus?.add(1, "hours")}
                   onChange={handleChangePlus}
+                  disablePast
+                  inputFormat="DD-MM-YYYY hh:mm"
                   renderInput={(params) => <TextField {...params} />}
                 />
               </LocalizationProvider>
