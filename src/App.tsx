@@ -5,17 +5,14 @@ import DashboardView from "./views/DashboardView/DashboardView";
 import ProfileView from "./views/ProfileView/ProfileView";
 import { useAuth0 } from "@auth0/auth0-react";
 import ListView from "./views/ListView/ListView";
-import { createCtx } from "./context/AppContext";
-
-const [ctx, ListProvider] = createCtx("");
-export const ListContext = ctx;
+import AppProvider from "./context/AppProvider";
 
 function App() {
   let { isAuthenticated, isLoading } = useAuth0();
 
   return !isLoading ? (
     <div className="App">
-      <ListProvider>
+      <AppProvider>
         <BrowserRouter>
           <div className="App">
             <Routes>
@@ -41,7 +38,7 @@ function App() {
             </Routes>
           </div>
         </BrowserRouter>
-      </ListProvider>
+      </AppProvider>
     </div>
   ) : (
     <>

@@ -21,12 +21,9 @@ const DashboardView = () => {
           <div className={styles.dashboard}>
             <div className={styles.groupsTopicsEventsListsColumn}>
               <ListBox
-                title={
-                  appContext?.titles.groups === undefined
-                    ? ""
-                    : appContext?.titles.groups
-                }
+                title={appContext?.titles.titles.groups!}
                 visibleSeeMoreBtn={true}
+                data={appContext?.groups!}
               >
                 <div className={styles.itemBox}></div>
                 <div className={`${styles.itemBox} ${styles.itemBoxTwo}`}></div>
@@ -35,12 +32,9 @@ const DashboardView = () => {
                 ></div>
               </ListBox>
               <ListBox
-                title={
-                  appContext?.titles.topics === undefined
-                    ? ""
-                    : appContext?.titles.topics
-                }
+                title={appContext?.titles.titles.topics!}
                 visibleSeeMoreBtn={true}
+                data={appContext?.topics!}
               >
                 <div className={styles.itemBox}></div>
                 <div className={`${styles.itemBox} ${styles.itemBoxTwo}`}></div>
@@ -50,12 +44,9 @@ const DashboardView = () => {
               </ListBox>
 
               <ListBox
-                title={
-                  appContext?.titles.events === undefined
-                    ? ""
-                    : appContext?.titles.events
-                }
+                title={appContext?.titles.titles.events!}
                 visibleSeeMoreBtn={true}
+                data={appContext?.events!}
               >
                 <div className={styles.itemBox}></div>
                 <div className={`${styles.itemBox} ${styles.itemBoxTwo}`}></div>

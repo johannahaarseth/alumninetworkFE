@@ -1,4 +1,4 @@
-type TopicResults = {
+export type TopicResults = {
   topic_id: string;
   topic_name: string;
   subscriber: boolean;

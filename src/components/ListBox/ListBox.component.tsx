@@ -12,27 +12,38 @@ import dayjs, { Dayjs } from "dayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useNavigate } from "react-router-dom";
-import { ListContext } from "../../App";
+import { dataContext, titleContext } from "../../context/AppProvider";
+import { IGroupDataModel } from "../../models/groupModel";
+import { ITopicDataModel } from "../../models/topicModel";
+import { IEventDataModel } from "../../models/eventModel";
 
 type ListBoxProps = {
   title: string;
   children: JSX.Element | JSX.Element[];
   visibleSeeMoreBtn: boolean;
+  data: IGroupDataModel | ITopicDataModel | IEventDataModel;
 };
 
-const ListBox = ({ title, children, visibleSeeMoreBtn }: ListBoxProps) => {
+const ListBox = ({
+  title,
+  children,
+  visibleSeeMoreBtn,
+  data,
+}: ListBoxProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const titleToLowerAndMinusPlural = title?.toLowerCase().slice(0, -1);
   const [value, setValue] = useState<Dayjs | null>(dayjs());
   const navigate = useNavigate();
-  const { update } = useContext(ListContext);
+  const { setTitle } = useContext(titleContext);
+  const { setData } = useContext(dataContext);
 
   const handleChange = (newValue: Dayjs | null) => {
     setValue(newValue);
   };
 
   const handleSeeMoreOnClick = () => {
-    update(title);
+    setTitle(title);
+    setData(data);
     navigate("/list");
   };
 

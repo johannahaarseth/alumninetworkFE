@@ -1,4 +1,4 @@
-type EventResults = {
+export type EventResults = {
   event_id: string;
   event_name: string;
   description: string;

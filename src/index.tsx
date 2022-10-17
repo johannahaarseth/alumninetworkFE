@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import { Auth0Provider } from "@auth0/auth0-react";
 import { AppContext } from "./context/AppContext";
-import { titleContext } from "./models/titleModel";
+import { appContext } from "./models/appModel";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -16,7 +16,7 @@ root.render(
       clientId="75ueSFCfMSTeq92b8pwu6BBF5Nl2rOA9"
       redirectUri={window.location.origin + "/dashboard"}
     >
-      <AppContext.Provider value={titleContext}>
+      <AppContext.Provider value={appContext}>
         <App />
       </AppContext.Provider>
     </Auth0Provider>

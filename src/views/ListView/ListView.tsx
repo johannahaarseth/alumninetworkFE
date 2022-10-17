@@ -4,20 +4,26 @@ import NavBar from "../../components/NavBar/NavBar.component";
 import ListBox from "../../components/ListBox/ListBox.component";
 import styles from "./ListView.module.css";
 import { useContext } from "react";
-import { ListContext } from "../../App";
+import { dataContext, titleContext } from "../../context/AppProvider";
+import { GroupResults } from "../../models/groupModel";
+import { TopicResults } from "../../models/topicModel";
+import { EventResults } from "../../models/eventModel";
 
 const ListView = () => {
   const { isAuthenticated, user } = useAuth0();
-  const { state } = useContext(ListContext);
+  const { title } = useContext(titleContext);
+  const { data } = useContext(dataContext);
 
-  const dummyArray = [null, null, null, null, null, null];
-  const listViewDataRendered = dummyArray.map((e, i) => {
-    return (
-      <div className={styles.itemBox} key={i}>
-        <p>{e}</p>
-      </div>
-    );
-  });
+  const listViewDataRendered = data.results.map(
+    (e: GroupResults | TopicResults | EventResults, i: number) => {
+      console.log(e);
+      return (
+        <div className={styles.itemBox} key={i}>
+          {/*<p>{e}</p>*/}
+        </div>
+      );
+    }
+  );
 
   if (!user) {
     return <Navigate to="/" replace />;
@@ -28,7 +34,11 @@ const ListView = () => {
           <>
             <NavBar />
             <div className={styles.container}>
-              <ListBox title={state} visibleSeeMoreBtn={false}>
+              <ListBox
+                title={`${title} (${data.count})`}
+                visibleSeeMoreBtn={false}
+                data={data!}
+              >
                 {listViewDataRendered}
               </ListBox>
             </div>
