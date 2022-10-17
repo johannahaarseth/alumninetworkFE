@@ -27,9 +27,10 @@
 
 .itemBox {
   background-color: var(--alumni-light-beige);
-  height: 45px;
+  height: auto;
   width: 100%;
   margin-bottom: 0.5rem;
+  padding: 10px;
 }
 
 @media screen and (max-width: 950px) {
@@ -48,24 +49,6 @@
   }
 
   .profileAndFilterColumn {
-    display: none;
-  }
-}
-
-@media screen and (max-height: 960px) {
-  .itemBoxThree {
-    display: none;
-  }
-}
-
-@media screen and (max-height: 820px) {
-  .itemBoxTwo {
-    display: none;
-  }
-}
-
-@media screen and (max-height: 660px) {
-  .contentList {
     display: none;
   }
 }

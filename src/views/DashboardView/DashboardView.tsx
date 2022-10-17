@@ -6,12 +6,58 @@ import styles from "./DashboardView.module.css";
 import CreateNewPost from "../../components/CreateNewPost/CreateNewPost.component";
 import { useAuth0 } from "@auth0/auth0-react";
 import NavBar from "../../components/NavBar/NavBar.component";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../context/AppContext";
+import { GroupResults } from "../../models/groupModel";
+import { TopicResults } from "../../models/topicModel";
+import { EventResults } from "../../models/eventModel";
+import { getWindowSize } from "../../services/getWindowSize";
 
 const DashboardView = () => {
   const { isAuthenticated } = useAuth0();
   const appContext = useContext(AppContext);
+  const [windowSize, setWindowSize] = useState(getWindowSize());
+
+  const maxNumOfContent = () => {
+    const h = windowSize.innerHeight;
+    if (h > 1000) return 4;
+    if (h < 1000 && h > 900) return 3;
+    if (h < 900 && h > 800) return 2;
+    if (h < 800 && h > 700) return 1;
+    if (h < 700) return 0;
+  };
+
+  const firstFewGroups = appContext?.groups.results.slice(0, maxNumOfContent());
+  const firstFewTopics = appContext?.topics.results.slice(0, maxNumOfContent());
+  const firstFewEvents = appContext?.events.results.slice(0, maxNumOfContent());
+
+  const listBoxContent = (
+    contentArray: GroupResults[] | TopicResults[] | EventResults[]
+  ): JSX.Element | JSX.Element[] => {
+    return contentArray.map(
+      (e: GroupResults | TopicResults | EventResults, i: number) => {
+        return (
+          <div className={styles.itemBox} key={i}>
+            <p>{e.name}</p>
+          </div>
+        );
+      }
+    );
+  };
+
+  const firstFewGroupsJsx = listBoxContent(firstFewGroups!);
+  const firstFewTopicsJsx = listBoxContent(firstFewTopics!);
+  const firstFewEventsJsx = listBoxContent(firstFewEvents!);
+
+  useEffect(() => {
+    function handleWindowResize() {
+      setWindowSize(getWindowSize());
+    }
+    window.addEventListener("resize", handleWindowResize);
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
 
   return (
     <>
@@ -25,37 +71,23 @@ const DashboardView = () => {
                 visibleSeeMoreBtn={true}
                 data={appContext?.groups!}
               >
-                <div className={styles.itemBox}></div>
-                <div className={`${styles.itemBox} ${styles.itemBoxTwo}`}></div>
-                <div
-                  className={`${styles.itemBox} ${styles.itemBoxThree}`}
-                ></div>
+                {firstFewGroupsJsx!}
               </ListBox>
               <ListBox
                 title={appContext?.titles.titles.topics!}
                 visibleSeeMoreBtn={true}
                 data={appContext?.topics!}
               >
-                <div className={styles.itemBox}></div>
-                <div className={`${styles.itemBox} ${styles.itemBoxTwo}`}></div>
-                <div
-                  className={`${styles.itemBox} ${styles.itemBoxThree}`}
-                ></div>
+                {firstFewTopicsJsx!}
               </ListBox>
-
               <ListBox
                 title={appContext?.titles.titles.events!}
                 visibleSeeMoreBtn={true}
                 data={appContext?.events!}
               >
-                <div className={styles.itemBox}></div>
-                <div className={`${styles.itemBox} ${styles.itemBoxTwo}`}></div>
-                <div
-                  className={`${styles.itemBox} ${styles.itemBoxThree}`}
-                ></div>
+                {firstFewEventsJsx!}
               </ListBox>
             </div>
-
             <div className={styles.timelineColumn}>
               <CreateNewPost />
               <TimelineComponent />
