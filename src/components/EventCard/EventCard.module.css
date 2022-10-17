@@ -26,7 +26,12 @@
   height: 250px;
   width: 100%;
 }
-
+.btnContainer {
+  display: flex;
+  flex-direction: row;
+  margin-top: 4%;
+  margin-bottom: 5%;
+}
 .button {
   display: flex;
   flex-direction: row;
@@ -40,6 +45,8 @@
   font-family: inherit;
   color: rgb(255, 255, 255);
   box-shadow: 0 7px 8px -5px rgba(0, 0, 0, 0.4);
+  margin-right: 10px;
+  margin-left: 25%;
 }
 .button:hover {
   background-color: #dd8912;
@@ -69,6 +76,7 @@
   font-family: inherit;
   color: rgb(255, 255, 255);
   box-shadow: 0 7px 8px -5px rgba(0, 0, 0, 0.4);
+  margin-left: 10px;
 }
 .button2:hover {
   background-color: #104955;

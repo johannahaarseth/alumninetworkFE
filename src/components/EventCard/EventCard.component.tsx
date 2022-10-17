@@ -24,20 +24,22 @@ const EventCard = () => {
         <p className={styles.text}>Event info</p>
         <div className={`${styles.textBox}`}></div>
       </div>
-      <Button
-        className={styles.button}
-        onClick={onClickAcceptBtn}
-        disabled={isAccept}
-      >
-        <p className={styles.newPost}>Accept</p>
-      </Button>
-      <Button
-        className={styles.button2}
-        onClick={onClickDeclineBtn}
-        disabled={isDeclined}
-      >
-        <p className={styles.newPost}>Decline</p>
-      </Button>
+      <div className={styles.btnContainer}>
+        <Button
+          className={styles.button}
+          onClick={onClickAcceptBtn}
+          disabled={isAccept}
+        >
+          <p className={styles.newPost}>Accept</p>
+        </Button>
+        <Button
+          className={styles.button2}
+          onClick={onClickDeclineBtn}
+          disabled={isDeclined}
+        >
+          <p className={styles.newPost}>Decline</p>
+        </Button>
+      </div>
     </Card>
   );
 };
