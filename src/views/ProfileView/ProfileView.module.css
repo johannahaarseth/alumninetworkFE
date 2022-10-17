@@ -21,6 +21,7 @@
   flex: 30%;
 }
 
+/* 
 @media screen and (max-width: 950px) {
   .postsColumn {
     flex: 100%;
@@ -143,5 +144,22 @@
   }
   .filterColumn {
     display: none;
+  }
+} */
+@media screen and (max-width: 750px) {
+  .profileView {
+    width: 100%;
+    flex-direction: column-reverse;
+  }
+  .timelineColumn {
+    width: 100%;
+  }
+
+  .postsColumn {
+    flex: 1%;
+  }
+
+  .profile {
+    width: 100%;
   }
 }
