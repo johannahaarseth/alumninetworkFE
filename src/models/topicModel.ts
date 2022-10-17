@@ -1,6 +1,6 @@
 export type TopicResults = {
-  topic_id: string;
-  topic_name: string;
+  id: string;
+  name: string;
   subscriber: boolean;
   subscriber_count: number;
 };
@@ -17,8 +17,8 @@ export const topicDataContext: ITopicDataModel = {
   next: "",
   results: [
     {
-      topic_id: "",
-      topic_name: "Topic name 1",
+      id: "",
+      name: "Topic name 1",
       subscriber: true,
       subscriber_count: 2,
     },

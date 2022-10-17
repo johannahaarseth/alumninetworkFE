@@ -16,10 +16,9 @@ const ListView = () => {
 
   const listViewDataRendered = data.results.map(
     (e: GroupResults | TopicResults | EventResults, i: number) => {
-      console.log(e);
       return (
         <div className={styles.itemBox} key={i}>
-          {/*<p>{e}</p>*/}
+          <p>{e.name}</p>
         </div>
       );
     }

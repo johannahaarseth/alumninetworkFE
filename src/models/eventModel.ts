@@ -1,6 +1,6 @@
 export type EventResults = {
-  event_id: string;
-  event_name: string;
+  id: string;
+  name: string;
   description: string;
   invited_count: number;
   attendees_count: number;
@@ -21,8 +21,8 @@ export const eventDataContext: IEventDataModel = {
   next: "",
   results: [
     {
-      event_id: "",
-      event_name: "Name 1",
+      id: "",
+      name: "Name 1",
       description: "Description 1",
       invited_count: 5,
       attendees_count: 4,
@@ -31,8 +31,8 @@ export const eventDataContext: IEventDataModel = {
       attending: true,
     },
     {
-      event_id: "",
-      event_name: "Name 2",
+      id: "",
+      name: "Name 2",
       description: "Description 2",
       invited_count: 1,
       attendees_count: 1,
