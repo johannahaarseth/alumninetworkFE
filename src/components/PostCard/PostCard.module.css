@@ -9,7 +9,6 @@
 }
 
 .postBody {
-  background-color: var(--alumni-light-beige);
   min-height: 100px;
   max-height: 500px;
   width: 100%;
