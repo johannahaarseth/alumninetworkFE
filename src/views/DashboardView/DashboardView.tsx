@@ -20,7 +20,6 @@ const DashboardView = () => {
 
 
   useEffect(() => {
-    console.log(process.env.API_URL)
     getPostsApi.request();
   }, []);
 
