@@ -8,8 +8,8 @@ const config = {
   }
 };
 
-const getPosts = () => {console.log(apiClient.toString()); apiClient.get<IPostResponse>("/post", config)};
-const getPostById = (postId: number) => apiClient.get("/post/" + postId);
+const getPosts = () => apiClient.get<IPostResponse>("/post", config);
+const getPostById = (postId: number) => apiClient.get<IPostResponse>("/post/" + postId);
 
 
 export {
