@@ -12,19 +12,20 @@ const PostView = () => {
       <NavBar />
 
       <div className={styles.container}>
-        <div className={styles.profileView}>
-          <div className={styles.emptyColumn}></div>
+        <div className={styles.timeline}>
           <div className={styles.postsColumn}></div>
           <div className={styles.timelineColumn}>
             <CreateNewPost />
             <TimelineComponent />
           </div>
-          <div className={styles.profileAndFilterColumn}>
+
+          <div className={styles.profile}>
             {window.location.pathname === "/event" ? (
               <EventCard />
             ) : (
               <GroupCard />
             )}
+
             <Button className={styles.button}>
               {window.location.pathname === "/topic" ? (
                 <p className={styles.newPost}>Join</p>

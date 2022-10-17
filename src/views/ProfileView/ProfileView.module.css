@@ -25,9 +25,6 @@
   .postsColumn {
     flex: 100%;
   }
-  .profile {
-    flex: 100%;
-  }
   .profileView {
     display: flex;
     flex-direction: column;
