@@ -26,13 +26,18 @@ const ListBox = ({ title, children }: ListBoxProps) => {
   const [value, setValue] = useState<Dayjs | null>(dayjs());
   const [valuePlus, setValuePlus] = useState<Dayjs | null>(dayjs());
   const [locale] = useState("fr");
-  const today = new Date();
 
   const handleChange = (newValue: Dayjs | null) => {
     setValue(newValue);
+    if (value?.isAfter(valuePlus)) {
+      setValuePlus(value);
+    }
   };
   const handleChangePlus = (newValue: Dayjs | null) => {
     setValuePlus(newValue);
+    if (valuePlus?.isBefore(value)) {
+      setValue(valuePlus);
+    }
   };
 
   return (
