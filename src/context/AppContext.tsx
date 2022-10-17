@@ -5,9 +5,9 @@ import {
   SetStateAction,
   useState,
 } from "react";
-import { AppContextInterface } from "../models/IAppContext";
+import { ITitles } from "../models/titleModel";
 
-export const AppContext = createContext<AppContextInterface | null>(null);
+export const AppContext = createContext<ITitles | null>(null);
 
 export function createCtx<A>(defaultValue: A) {
   type UpdateType = Dispatch<SetStateAction<typeof defaultValue>>;
