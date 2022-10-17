@@ -3,10 +3,10 @@ import { IUserSummary } from "./IUserSummary";
 
 
 export interface IPostSummary{
-    postId : string,
+    postId : number,
     postTitle : string,
     postBody : string, 
     target : ITarget,
-    sender : IUserSummary,
+    createdBy : IUserSummary,
     commentCount : number
 }
