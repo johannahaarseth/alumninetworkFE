@@ -75,7 +75,7 @@
 @media screen and (max-width: 750px) {
   .timeline {
     width: 100%;
-    display: block;
+    flex-direction: column-reverse;
   }
   .timelineColumn {
     width: 100%;
