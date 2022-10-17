@@ -9,7 +9,7 @@ type PostCardProps = {
 const PostCard = ({post} : PostCardProps) => {
   return (
     <Card cardHoverEffect={true}>
-      <p className={styles.postedInfo}>{post.sender.name} to {post.target.name}</p>
+      <p className={styles.postedInfo}>{post.createdBy.name} to {post.target.name}</p>
       <p className={styles.title}>{post.postTitle}</p>
       <div className={styles.postBody}>{post.postBody}</div>
       <p className={styles.comments}>{post.commentCount} comments</p>
