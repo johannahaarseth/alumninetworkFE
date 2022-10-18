@@ -12,9 +12,6 @@
 
 .groupsTopicsEventsListsColumn {
   flex: 30%;
-  position: sticky;
-  top: 70px;
-  align-self: flex-start;
 }
 
 .timelineColumn {
@@ -23,6 +20,9 @@
 
 .profileAndFilterColumn {
   flex: 30%;
+  /*position: sticky;*/
+  /*top: 70px;*/
+  /*align-self: flex-start;*/
 }
 
 .itemBox {
