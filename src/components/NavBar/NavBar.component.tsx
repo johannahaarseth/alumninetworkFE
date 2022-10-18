@@ -71,6 +71,15 @@ const NavBar = () => {
               onClose={handleCloseUserMenu}
               className={styles.menu}
             >
+              <div
+                className={styles.closeButton}
+                //  sx={{ justifyContent: "flex-end" }}
+              >
+                <Button onClick={handleCloseUserMenu}>
+                  <p>Close X</p>
+                </Button>
+              </div>
+
               <Stack
                 direction="row"
                 divider={<Divider orientation="vertical" flexItem />}
