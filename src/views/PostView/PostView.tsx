@@ -15,6 +15,8 @@ import { useNavigate } from "react-router-dom";
 import Input from "../../components/Input/Input.component";
 
 import TextField1 from "../../components/TextField/TextField.component";
+import SearchBar from "../../components/SearchBar/SearchBar.component";
+import InviteModal from "../../InviteModal/InviteModal.component";
 const PostView = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
@@ -49,16 +51,7 @@ const PostView = () => {
       </div>
       {isOpen && (
         <Modal setIsOpen={setIsOpen}>
-          <p className={styles.modalHeader}>Group title</p>
-          <form className={styles.form}>
-            <div>
-              <Input placeholderText={`Search: name`} />
-            </div>
-
-            <div>
-              <TextField1 placeholderText={`Add description`} />
-            </div>
-          </form>
+          <InviteModal />
         </Modal>
       )}
     </>
