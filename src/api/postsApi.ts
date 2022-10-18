@@ -1,4 +1,4 @@
-import { IPostResponse } from "./../interfaces/IPostResponse";
+import { IPostResponse } from "../interfaces/IPostResponse";
 import { apiClient } from "./apiClient";
 
 const config = {

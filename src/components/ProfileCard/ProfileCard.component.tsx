@@ -3,26 +3,31 @@ import styles from "./ProfileCard.module.css";
 import Card from "../Card/Card.component";
 import ProfilePic from "../ProfilePic/ProfilePic.component";
 import { useAuth0 } from "@auth0/auth0-react";
+import { UseUser } from "../../context/useUser";
 
 const ProfileCard = () => {
-  const { user } = useAuth0();
+  const { picture, auth0Id, name, email, bio, funfact, status} = UseUser();
+
+  const [bioState, setBioState] = bio;
+  const [funfactState, setFunfactState] = funfact;
+  const [statusState, setStatusState] = status;
 
   return (
     <Card cardHoverEffect={false}>
       <div className={styles.headerBox}></div>
       <div className={styles.profile}>{<ProfilePic />}</div>
       <div className={styles.infoBox}>
-        {user?.name === user?.email ? (
-          <p className={styles.text}>Email: {user?.email} </p>
+        {name === email ? (
+          <p className={styles.text}>Email: {email} </p>
         ) : (
           <p className={styles.text}>
-            Name: {user?.name} <br></br>
-            <br></br>Email: {user?.email}
+            Name: {name} <br></br>
+            <br></br>Email: {email}
           </p>
         )}
-        <p className={styles.text}>Status message</p>
-        <div className={`${styles.textBox} ${styles.shortBioBox}`}></div>
-        <div className={`${styles.textBox} ${styles.funFactBox}`}></div>
+        <p className={styles.text}>statusState</p>
+        <div className={`${styles.textBox} ${styles.shortBioBox}`}>bioState</div>
+        <div className={`${styles.textBox} ${styles.funFactBox}`}>funfactState</div>
       </div>
     </Card>
   );
