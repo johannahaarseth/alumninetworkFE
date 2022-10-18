@@ -6,9 +6,11 @@ import Input from "../Input/Input.component";
 import RadioButton from "../RadioButton/RadioButton.component";
 import TextField from "../TextField/TextField.component";
 import Button from "../Button/Button.component";
+import { useNavigate } from "react-router-dom";
 
 const CreateNewPost = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -37,7 +39,7 @@ const CreateNewPost = () => {
               <TextField placeholderText={"Add post content"} />
             </div>
             <div className={styles.buttonContainer}>
-              <Button>
+              <Button onClick={() => navigate("/group")}>
                 <p>Create post &gt;</p>
               </Button>
             </div>
