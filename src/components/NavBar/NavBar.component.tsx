@@ -80,7 +80,7 @@ const NavBar = () => {
                   divider={<Divider orientation="vertical" flexItem />}
                   spacing={"15%"}
                 >
-                  <Stack spacing={{ xs: 3, sm: 2, md: 4 }}>
+                  <Stack spacing={{ xs: 2, sm: 2, md: 4 }}>
                     <Button onClick={() => navigate("/group")}>
                       <Typography textAlign="center">Groups</Typography>
                     </Button>
