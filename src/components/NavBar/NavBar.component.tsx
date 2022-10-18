@@ -8,6 +8,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
 import {
   Box,
   Button,
@@ -26,9 +27,11 @@ const NavBar = () => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setIsOpen(true);
     setAnchorElUser(event.currentTarget);
   };
   const handleCloseUserMenu = () => {
+    setIsOpen(false);
     setAnchorElUser(null);
   };
 
@@ -51,7 +54,11 @@ const NavBar = () => {
                 onClick={handleOpenUserMenu}
                 sx={{ p: 1, ml: "50px" }}
               >
-                <MenuIcon fontSize="large" />
+                {isOpen ? (
+                  <CloseIcon fontSize="large" />
+                ) : (
+                  <MenuIcon fontSize="large" />
+                )}
               </IconButton>
             </Tooltip>
             <Menu
@@ -71,15 +78,6 @@ const NavBar = () => {
               onClose={handleCloseUserMenu}
               className={styles.menu}
             >
-              <div
-                className={styles.closeButton}
-                //  sx={{ justifyContent: "flex-end" }}
-              >
-                <Button onClick={handleCloseUserMenu}>
-                  <p>Close X</p>
-                </Button>
-              </div>
-
               <Stack
                 direction="row"
                 divider={<Divider orientation="vertical" flexItem />}
