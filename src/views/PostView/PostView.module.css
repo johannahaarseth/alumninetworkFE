@@ -16,9 +16,11 @@
   background-color: var(--alumni-primary-light-azure);
   cursor: pointer;
 }
-/* .profile {
-  flex: 10%;
-} */
+.profilepic {
+  height: 80px;
+  width: 80px;
+  margin-left: 15%;
+}
 .container {
   display: flex;
   justify-content: center;

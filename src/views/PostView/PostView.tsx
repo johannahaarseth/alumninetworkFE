@@ -10,6 +10,8 @@ import Modal from "../../components/Modal/Modal.component";
 import { useNavigate } from "react-router-dom";
 import Input from "../../components/Input/Input.component";
 import TextField from "../../components/TextField/TextField.component";
+import { Avatar, Stack } from "@mui/material";
+import ProfilePic from "../../components/ProfilePic/ProfilePic.component";
 const PostView = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
@@ -68,8 +70,20 @@ const PostView = () => {
               <Input placeholderText={`Search`} />
             </div>
 
-            <div>
-              <div className={styles.textBox}>idk</div>
+            <div className={styles.textBox}>
+              <Stack direction="row" spacing={"45%"}>
+                <Stack direction="row">
+                  <div className={styles.profilepic}>
+                    <ProfilePic />
+                  </div>
+                  <p>username</p>
+                </Stack>
+                <div>
+                  <Button>
+                    <p>Invite +</p>
+                  </Button>
+                </div>
+              </Stack>
             </div>
           </form>
         </Modal>
