@@ -5,7 +5,7 @@ import FiltersCard from "../../components/FiltersCard/FiltersCard.component";
 import styles from "./DashboardView.module.css";
 import CreateNewPost from "../../components/CreateNewPost/CreateNewPost.component";
 import { useApi } from "../../api/useApi";
-import {getPosts} from "../../api/postsApi"
+import { getPosts } from "../../api/postsApi";
 import { useEffect } from "react";
 import { IPostResponse } from "../../interfaces/IPostResponse";
 
@@ -45,10 +45,9 @@ const DashboardView = () => {
 
   const getPostsApi = useApi<IPostResponse>(getPosts);
 
-
   useEffect(() => {
-    getPostsApi.request();
-  }, []);
+    getPostsApi.request().then(() => {});
+  }, [getPostsApi]);
 
   return (
     <>
@@ -81,7 +80,7 @@ const DashboardView = () => {
             </div>
             <div className={styles.timelineColumn}>
               <CreateNewPost />
-              <TimelineComponent posts={getPostsApi.data?.results}/>
+              <TimelineComponent posts={getPostsApi.data?.results} />
             </div>
             <div className={styles.profileAndFilterColumn}>
               <ProfileCard />

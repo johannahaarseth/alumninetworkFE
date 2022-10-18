@@ -20,9 +20,6 @@
 
 .profileAndFilterColumn {
   flex: 30%;
-  /*position: sticky;*/
-  /*top: 70px;*/
-  /*align-self: flex-start;*/
 }
 
 .itemBox {
