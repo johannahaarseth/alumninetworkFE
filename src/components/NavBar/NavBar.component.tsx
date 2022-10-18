@@ -71,14 +71,14 @@ const NavBar = () => {
               onClose={handleCloseUserMenu}
               className={styles.menu}
             >
-              <MenuItem
-                onClick={handleCloseUserMenu}
-                className={styles.popover}
+              <Stack
+                direction="row"
+                divider={<Divider orientation="vertical" flexItem />}
+                spacing={"15%"}
               >
-                <Stack
-                  direction="row"
-                  divider={<Divider orientation="vertical" flexItem />}
-                  spacing={"15%"}
+                <MenuItem
+                  onClick={handleCloseUserMenu}
+                  className={styles.popover}
                 >
                   <Stack spacing={{ xs: 2, sm: 2 }}>
                     <Button onClick={() => navigate("/group")}>
@@ -91,6 +91,11 @@ const NavBar = () => {
                       <Typography textAlign="center">Events</Typography>
                     </Button>
                   </Stack>
+                </MenuItem>
+                <MenuItem
+                  onClick={handleCloseUserMenu}
+                  className={styles.popover}
+                >
                   <Stack spacing={{ xs: 8, sm: 8 }}>
                     <Button onClick={() => navigate("/profile")}>
                       <Typography textAlign="center">Profile</Typography>
@@ -105,8 +110,8 @@ const NavBar = () => {
                       </Button>
                     )}
                   </Stack>
-                </Stack>
-              </MenuItem>
+                </MenuItem>
+              </Stack>
             </Menu>
           </Box>
         </div>
