@@ -105,6 +105,7 @@ const NavBar = () => {
                         setData(appContext?.groups!);
                         navigate("/list");
                       }}
+                      color="inherit"
                     >
                       <Typography textAlign="center">
                         {appContext?.titles.titles.groups!}
@@ -116,6 +117,7 @@ const NavBar = () => {
                         setData(appContext?.topics!);
                         navigate("/list");
                       }}
+                      color="inherit"
                     >
                       <Typography textAlign="center">
                         {appContext?.titles.titles.topics!}
@@ -127,6 +129,7 @@ const NavBar = () => {
                         setData(appContext?.events!);
                         navigate("/list");
                       }}
+                      color="inherit"
                     >
                       <Typography textAlign="center">
                         {appContext?.titles.titles.events!}
@@ -139,7 +142,10 @@ const NavBar = () => {
                   className={styles.popover}
                 >
                   <Stack spacing={{ xs: 8, sm: 8 }}>
-                    <Button onClick={() => navigate("/profile")}>
+                    <Button
+                      onClick={() => navigate("/profile")}
+                      color="inherit"
+                    >
                       <Typography textAlign="center">Profile</Typography>
                     </Button>
                     {isAuthenticated && (
@@ -147,6 +153,7 @@ const NavBar = () => {
                         onClick={() =>
                           logout({ returnTo: window.location.origin + "/" })
                         }
+                        color="inherit"
                       >
                         <p>Logout</p>
                       </Button>
