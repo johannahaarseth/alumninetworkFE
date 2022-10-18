@@ -24,6 +24,7 @@
   gap: 0.33rem;
 }
 
+.comments:hover,
 .postedInfo:hover {
   color: var(--alumni-primary-azure);
 }
