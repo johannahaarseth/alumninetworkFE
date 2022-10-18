@@ -33,9 +33,8 @@ const DashboardView = () => {
 
   useEffect(() => {
     getPostsApi.request();
-    /* eslint-disable */
+    // eslint-disable-next-line
   }, []);
-  /* eslint-enable */
 
   return (
     <>
