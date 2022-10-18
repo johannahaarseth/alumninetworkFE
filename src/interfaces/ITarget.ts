@@ -1,5 +1,5 @@
-export interface ITarget{
-    targetType : string,
-    id : number,
-    name : string
+export interface ITarget {
+  targetType: string;
+  id: number;
+  name: string;
 }
