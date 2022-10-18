@@ -69,7 +69,7 @@ const PostView = () => {
             </div>
 
             <div>
-              <TextField placeholderText={`Add description`} />
+              <div className={styles.textBox}>idk</div>
             </div>
           </form>
         </Modal>
