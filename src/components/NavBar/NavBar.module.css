@@ -37,6 +37,7 @@
   .logo {
     margin-left: 1rem;
     margin-right: -15rem;
+    padding-right: 5%;
     display: flex;
   }
   .profile {
@@ -51,6 +52,7 @@
   }
   .hamburger {
     display: flex;
+    padding-right: 5%;
   }
   .menu {
     display: flex;
