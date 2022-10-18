@@ -43,13 +43,6 @@
   flex: 100%;
 }
 
-.itemBox {
-  background-color: var(--alumni-light-beige);
-  height: 45px;
-  width: 100%;
-  margin-bottom: 0.5rem;
-}
-
 @media screen and (max-width: 1100px) {
   .timeline {
     width: 100%;
