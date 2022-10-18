@@ -16,7 +16,7 @@ import Input from "../../components/Input/Input.component";
 
 import TextField1 from "../../components/TextField/TextField.component";
 import SearchBar from "../../components/SearchBar/SearchBar.component";
-import InviteModal from "../../InviteModal/InviteModal.component";
+import TextField from "../../components/TextField/TextField.component";
 const PostView = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ const PostView = () => {
           <div className={styles.postsColumn}></div>
           <div className={styles.timelineColumn}>
             <CreateNewPost />
-            <TimelineComponent posts={[]}/>
+            <TimelineComponent posts={[]} />
           </div>
           <div className={styles.profile}>
             {window.location.pathname === "/event" ? (
@@ -51,7 +51,39 @@ const PostView = () => {
       </div>
       {isOpen && (
         <Modal setIsOpen={setIsOpen}>
-          <InviteModal />
+          <div style={{ display: "flex" }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                paddingRight: "75%",
+              }}
+            >
+              <p className={styles.modalHeader}>"Title"</p>
+            </div>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <Button
+                className={styles.modalHeader}
+                onClick={() => {
+                  setIsOpen(false);
+                }}
+              >
+                Close X
+              </Button>
+            </div>
+          </div>
+
+          <form className={styles.form}>
+            <div>
+              <div className={styles.searchbar}>
+                <SearchBar placeholderText={"Search"} />
+              </div>
+            </div>
+
+            <div>
+              <TextField placeholderText={`Add description`} />
+            </div>
+          </form>
         </Modal>
       )}
     </>
