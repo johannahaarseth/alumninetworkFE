@@ -4,18 +4,11 @@ import CreateNewPost from "../../components/CreateNewPost/CreateNewPost.componen
 import EventCard from "../../components/EventCard/EventCard.component";
 import GroupCard from "../../components/GroupCard/GroupCard.component";
 import NavBar from "../../components/NavBar/NavBar.component";
-import RadioButton from "../../components/RadioButton/RadioButton.component";
 import TimelineComponent from "../../components/Timeline/Timeline.component";
 import styles from "./PostView.module.css";
 import Modal from "../../components/Modal/Modal.component";
-import { LocalizationProvider, DateTimePicker } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { locale } from "dayjs";
 import { useNavigate } from "react-router-dom";
 import Input from "../../components/Input/Input.component";
-
-import TextField1 from "../../components/TextField/TextField.component";
-import SearchBar from "../../components/SearchBar/SearchBar.component";
 import TextField from "../../components/TextField/TextField.component";
 const PostView = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -59,25 +52,20 @@ const PostView = () => {
                 paddingRight: "75%",
               }}
             >
-              <p className={styles.modalHeader}>"Title"</p>
+              <p>"Title"</p>
             </div>
             <div style={{ display: "flex", flexDirection: "column" }}>
-              <Button
-                className={styles.modalHeader}
-                onClick={() => {
-                  setIsOpen(false);
-                }}
-              >
-                Close X
-              </Button>
+              <div className={styles.closeButton}>
+                <Button onClick={() => setIsOpen(false)}>
+                  <p>Close X</p>
+                </Button>
+              </div>
             </div>
           </div>
 
           <form className={styles.form}>
             <div>
-              <div className={styles.searchbar}>
-                <SearchBar placeholderText={"Search"} />
-              </div>
+              <Input placeholderText={`Search`} />
             </div>
 
             <div>
