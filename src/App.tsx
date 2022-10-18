@@ -26,7 +26,6 @@ function App() {
                 isAuthenticated ? <Navigate to="/dashboard" /> : <LoginView />
               }
             />
-
             {isAuthenticated && (
               <Route path="/dashboard" element={<DashboardView />} />
             )}
