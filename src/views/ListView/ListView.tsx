@@ -33,13 +33,19 @@ const ListView = () => {
           <>
             <NavBar />
             <div className={styles.container}>
-              <ListBox
-                title={`${title} (${data.count})`}
-                visibleSeeMoreBtn={false}
-                data={data!}
-              >
-                {listViewDataRendered}
-              </ListBox>
+              <div className={styles.list}>
+                <div className={styles.leftColumn}></div>
+                <div className={styles.middleColumn}>
+                  <ListBox
+                    title={`${title} (${data.count})`}
+                    visibleSeeMoreBtn={false}
+                    data={data!}
+                  >
+                    {listViewDataRendered}
+                  </ListBox>
+                </div>
+                <div className={styles.rightColumn}></div>
+              </div>
             </div>
           </>
         )}
