@@ -1,4 +1,3 @@
-import { IPostResponse } from "../../interfaces/IPostResponse";
 import { IPostSummary } from "../../interfaces/IPostSummary";
 import PostCard from "../PostCard/PostCard.component";
 import PostEventCard from "../PostEventCard/PostEventCard.component";
