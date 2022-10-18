@@ -8,7 +8,6 @@ import { useApi } from "../../api/useApi";
 import { getPosts } from "../../api/postsApi";
 import { useEffect } from "react";
 import { IPostResponse } from "../../interfaces/IPostResponse";
-
 import { useAuth0 } from "@auth0/auth0-react";
 import NavBar from "../../components/NavBar/NavBar.component";
 import { useContext } from "react";
@@ -46,8 +45,8 @@ const DashboardView = () => {
   const getPostsApi = useApi<IPostResponse>(getPosts);
 
   useEffect(() => {
-    getPostsApi.request().then(() => {});
-  }, [getPostsApi]);
+    getPostsApi.request();
+  }, []);
 
   return (
     <>
