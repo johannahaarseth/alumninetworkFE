@@ -14,7 +14,6 @@ const ProfileView = () => {
           <div className={styles.postsColumn}></div>
           <div className={styles.postAndFilterColumn}>
             <ProfileCard />
-            <FiltersCard />
           </div>
         </div>
       </div>
