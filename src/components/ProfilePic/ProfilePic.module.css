@@ -7,13 +7,16 @@
   aspect-ratio: 1 / 1;
   height: 100%;
   margin-right: 1rem;
-  border-radius: 50%;
-  background-color: var(--alumni-primary-dark-azure);
-  font-size: var(--font-size-big);
-  color: white;
   cursor: pointer;
 }
 
-.profilePic:hover {
+.profilePic img {
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+  height: 100%;
+}
+
+.profilePic img:hover {
+  cursor: pointer;
   outline: 2px solid var(--alumni-primary-light-azure);
 }
