@@ -1,13 +1,27 @@
 import styles from "./PostCard.module.css";
 import Card from "../Card/Card.component";
+import { IPostSummary } from "../../interfaces/IPostSummary";
+import { Link } from "react-router-dom";
 
-const PostCard = () => {
+
+type PostCardProps = {
+  post : IPostSummary
+};
+
+const PostCard = ({post} : PostCardProps) => {
   return (
-    <Card cardHoverEffect={true}>
-      <p className={styles.postedInfo}>Posted in *Group* by *User*</p>
-      <p className={styles.title}>Title</p>
-      <div className={styles.postBody}></div>
-      <p className={styles.comments}>42 comments</p>
+    <Card cardHoverEffect={false}>
+      <Link to={"user/" + post.createdBy.userId} className={styles.postedInfo}>{post.createdBy.name}</Link>
+      <p> to </p>
+      <Link
+        to={post.target.targetType + post.target.id}
+        className={styles.postedInfo}
+      >{post.target.name}</Link>
+      <p className={styles.title}>{post.postTitle}</p>
+      <div className={styles.postBody}>{post.postBody}</div>
+      <Link to={"post/" + post.postId} className={styles.comments}>
+        {post.commentCount} {post.commentCount === 1 ? "comment" : "comments"}
+      </Link>
     </Card>
   );
 };
