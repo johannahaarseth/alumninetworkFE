@@ -24,17 +24,24 @@ const NavBar = () => {
   const { isAuthenticated, logout } = useAuth0();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  // const { setTitle } = useContext(titleContext);
+  // const { setData } = useContext(dataContext);
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setIsOpen(true);
+    setIsMenuOpen(true);
     setAnchorElUser(event.currentTarget);
   };
   const handleCloseUserMenu = () => {
-    setIsOpen(false);
+    setIsMenuOpen(false);
     setAnchorElUser(null);
   };
-
+  const handleSeeMoreOnClick = () => {
+    // setTitle(title);
+    // setData(data);
+    navigate("/list");
+  };
   return (
     <>
       <div className={styles.navbar}>
@@ -54,7 +61,7 @@ const NavBar = () => {
                 onClick={handleOpenUserMenu}
                 sx={{ p: 1, ml: "50px" }}
               >
-                {isOpen ? (
+                {isMenuOpen ? (
                   <CloseIcon fontSize="large" />
                 ) : (
                   <MenuIcon fontSize="large" />
@@ -88,13 +95,13 @@ const NavBar = () => {
                   className={styles.popover}
                 >
                   <Stack spacing={{ xs: 2, sm: 2 }}>
-                    <Button onClick={() => navigate("/group")}>
+                    <Button onClick={() => navigate("/list")}>
                       <Typography textAlign="center">Groups</Typography>
                     </Button>
-                    <Button onClick={() => navigate("/topic")}>
+                    <Button onClick={() => navigate("/list")}>
                       <Typography textAlign="center">Topics</Typography>
                     </Button>
-                    <Button onClick={() => navigate("/event")}>
+                    <Button onClick={() => navigate("/list")}>
                       <Typography textAlign="center">Events</Typography>
                     </Button>
                   </Stack>
