@@ -64,7 +64,7 @@ const NavBar = () => {
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: "45px" }}
+              sx={{ mt: "45px", alignItems: "center" }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
@@ -100,7 +100,7 @@ const NavBar = () => {
                       <Typography textAlign="center">Events</Typography>
                     </Button>
                   </Stack>
-                  <Stack spacing={{ xs: 1, sm: 2, md: 4 }}>
+                  <Stack spacing={{ xs: 8, sm: 8, md: 4 }}>
                     <Button onClick={() => navigate("/profile")}>
                       <Typography textAlign="center">Profile</Typography>
                     </Button>
