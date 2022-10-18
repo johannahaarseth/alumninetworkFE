@@ -16,7 +16,7 @@ const PostView = () => {
           <div className={styles.postsColumn}></div>
           <div className={styles.timelineColumn}>
             <CreateNewPost />
-            <TimelineComponent />
+            <TimelineComponent posts={[]}/>
           </div>
 
           <div className={styles.profile}>
