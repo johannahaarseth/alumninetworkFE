@@ -21,16 +21,23 @@
   height: 50px;
 }
 
+.hamburger {
+  display: none;
+}
+
 @media screen and (max-width: 700px) {
   .logo,
   .profile {
     display: none;
   }
   input[type="text"] {
-    width: 95%;
+    width: 65%;
     margin-left: 0;
   }
   .navbar {
     justify-content: center;
+  }
+  .hamburger {
+    display: flex;
   }
 }
