@@ -3,9 +3,15 @@ import Button from "../Button/Button.component";
 import Card from "../Card/Card.component";
 import { useState } from "react";
 import Modal from "../Modal/Modal.component";
-import TextField from "../TextField/TextField.component";
+import TextField1 from "../TextField/TextField.component";
 import RadioButton from "../RadioButton/RadioButton.component";
 import Input from "../Input/Input.component";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import TextField from "@mui/material/TextField";
+import dayjs, { Dayjs } from "dayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { useNavigate } from "react-router-dom";
 
 type ListBoxProps = {
   title: string;
@@ -15,6 +21,22 @@ type ListBoxProps = {
 const ListBox = ({ title, children }: ListBoxProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const titleToLowerAndMinusPlural = title.toLowerCase().slice(0, -1);
+  const navigate = useNavigate();
+  const [value, setValue] = useState<Dayjs | null>(dayjs());
+  const [valuePlus, setValuePlus] = useState<Dayjs | null>(dayjs());
+
+  const handleChange = (newValue: Dayjs | null) => {
+    setValue(newValue);
+    if (value?.isAfter(valuePlus)) {
+      setValuePlus(value);
+    }
+  };
+  const handleChangePlus = (newValue: Dayjs | null) => {
+    setValuePlus(newValue);
+    if (valuePlus?.isBefore(value)) {
+      setValue(valuePlus);
+    }
+  };
 
   return (
     <>
@@ -43,19 +65,57 @@ const ListBox = ({ title, children }: ListBoxProps) => {
                 placeholderText={`Add ${titleToLowerAndMinusPlural} title`}
               />
             </div>
-            <div className={styles.radioButtons}>
-              <RadioButton valueProp={"Public"} />
-              <RadioButton valueProp={"Private"} />
-            </div>
+            {title.toString() === "Groups" && (
+              <div className={styles.radioButtons}>
+                <RadioButton valueProp={"Public"} />
+                <RadioButton valueProp={"Private"} />
+              </div>
+            )}
+            {title.toString() === "Events" && (
+              <LocalizationProvider
+                dateAdapter={AdapterDayjs}
+                adapterLocale={"nb"}
+              >
+                <DateTimePicker
+                  label="Start date"
+                  value={value}
+                  onChange={handleChange}
+                  disablePast
+                  inputFormat="DD-MM-YYYY hh:mm"
+                  renderInput={(params) => <TextField {...params} />}
+                />
+                <DateTimePicker
+                  label="End date"
+                  value={valuePlus?.add(1, "hours")}
+                  onChange={handleChangePlus}
+                  disablePast
+                  inputFormat="DD-MM-YYYY hh:mm"
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              </LocalizationProvider>
+            )}
+
             <div>
-              <TextField
+              <TextField1
                 placeholderText={`Add ${titleToLowerAndMinusPlural} description`}
               />
             </div>
             <div className={styles.buttonContainer}>
-              <Button>
-                <p>Create {titleToLowerAndMinusPlural} &gt;</p>
-              </Button>
+              {title.toString() === "Events" && (
+                <Button onClick={() => navigate("/event")}>
+                  <p>Create {titleToLowerAndMinusPlural} &gt;</p>
+                </Button>
+              )}
+              {title.toString() === "Groups" && (
+                <Button onClick={() => navigate("/group")}>
+                  <p>Create {titleToLowerAndMinusPlural} &gt;</p>
+                </Button>
+              )}
+              {title.toString() === "Topics" && (
+                <Button onClick={() => navigate("/topic")}>
+                  <p>Create {titleToLowerAndMinusPlural} &gt;</p>
+                </Button>
+              )}
             </div>
           </form>
         </Modal>

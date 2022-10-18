@@ -36,6 +36,7 @@ const DashboardView = () => {
                   className={`${styles.itemBox} ${styles.itemBoxThree}`}
                 ></div>
               </ListBox>
+
               <ListBox title={listBoxTitles.events}>
                 <div className={styles.itemBox}></div>
                 <div className={`${styles.itemBox} ${styles.itemBoxTwo}`}></div>
