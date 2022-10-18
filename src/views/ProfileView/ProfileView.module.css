@@ -21,36 +21,20 @@
   flex: 30%;
 }
 
-@media screen and (max-width: 950px) {
-  .postsColumn {
-    flex: 100%;
-  }
-  .profileView {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-  }
-}
-
-@media screen and (max-width: 850px) {
-  .postsColumn {
-    flex: 100%;
-  }
-
-  .profileView {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-  }
-}
-
 @media screen and (max-width: 750px) {
   .profileView {
     width: 100%;
     flex-direction: column-reverse;
   }
+  .timelineColumn {
+    width: 100%;
+  }
 
   .postsColumn {
     flex: 1%;
+  }
+
+  .profile {
+    width: 100%;
   }
 }

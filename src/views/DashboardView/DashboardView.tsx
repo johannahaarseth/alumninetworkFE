@@ -46,8 +46,8 @@ const DashboardView = () => {
   const getPostsApi = useApi<IPostResponse>(getPosts);
 
   useEffect(() => {
-    getPostsApi.request().then(() => {});
-  }, [getPostsApi]);
+    getPostsApi.request();
+  }, []);
 
   return (
     <>
