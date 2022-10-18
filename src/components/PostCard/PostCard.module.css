@@ -9,7 +9,6 @@
 }
 
 .postBody {
-  background-color: var(--alumni-light-beige);
   min-height: 100px;
   max-height: 500px;
   width: 100%;
@@ -17,4 +16,15 @@
 
 .comments {
   font-size: var(--font-size-medium);
+}
+
+.toFrom {
+  display: flex;
+  flex-direction: row;
+  gap: 0.33rem;
+}
+
+.comments:hover,
+.postedInfo:hover {
+  color: var(--alumni-primary-azure);
 }
