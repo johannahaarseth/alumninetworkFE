@@ -6,15 +6,12 @@ import { useState } from "react";
 import NavBarProfileOnClickCard from "../NavBarProfileOnClickCard/NavBarProfileOnClickCard.component";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
-
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import {
-  Avatar,
   Box,
   Button,
   Divider,
-  Grid,
   IconButton,
   MenuItem,
   Tooltip,
@@ -23,29 +20,23 @@ import {
 import { Stack } from "@mui/system";
 
 const NavBar = () => {
+  const { isAuthenticated, logout } = useAuth0();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
-  const { isAuthenticated, logout } = useAuth0();
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
-
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
   return (
     <>
       <div className={styles.navbar}>
         <div className={styles.logo}>
-          {isAuthenticated && (
-            <div className={styles.logo}>
-              {isAuthenticated && (
-                <Logo onLogoClick={() => navigate("/dashboard")} />
-              )}
-            </div>
-          )}
+          <Logo onLogoClick={() => navigate("/dashboard")} />
         </div>
         <SearchBar placeholderText={"Search"} />
         <div className={styles.profile} onClick={() => setIsOpen(true)}>
