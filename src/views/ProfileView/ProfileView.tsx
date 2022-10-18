@@ -10,14 +10,10 @@ const ProfileView = () => {
       <NavBar />
       <div className={styles.container}>
         <div className={styles.profileView}>
+          <div className={styles.emptyColumn}></div>
           <div className={styles.postsColumn}></div>
-          <div>
-            <div className={styles.profile}>
-              <ProfileCard />
-            </div>
-            <div className={styles.filterColumn}>
-              <FiltersCard />
-            </div>
+          <div className={styles.postAndFilterColumn}>
+            <ProfileCard />
           </div>
         </div>
       </div>

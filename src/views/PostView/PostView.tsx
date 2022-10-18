@@ -29,7 +29,7 @@ const PostView = () => {
           <div className={styles.postsColumn}></div>
           <div className={styles.timelineColumn}>
             <CreateNewPost />
-            <TimelineComponent />
+            <TimelineComponent posts={[]}/>
           </div>
           <div className={styles.profile}>
             {window.location.pathname === "/event" ? (
@@ -40,11 +40,11 @@ const PostView = () => {
 
             <Button className={styles.button} onClick={() => setIsOpen(true)}>
               {window.location.pathname === "/topic" ? (
-                <p className={styles.newPost}>Join</p>
+                <p>Join</p>
               ) : (
-                <p className={styles.newPost}>Invite</p>
+                <p>Invite</p>
               )}
-              <p className={styles.newPostPlus}>+</p>
+              <p>+</p>
             </Button>
           </div>
         </div>

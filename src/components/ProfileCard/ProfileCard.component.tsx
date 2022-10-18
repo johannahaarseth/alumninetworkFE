@@ -8,7 +8,7 @@ const ProfileCard = () => {
   const { user } = useAuth0();
 
   return (
-    <Card cardHoverEffect={true}>
+    <Card cardHoverEffect={false}>
       <div className={styles.headerBox}></div>
       <div className={styles.profile}>{<ProfilePic />}</div>
       <div className={styles.infoBox}>
