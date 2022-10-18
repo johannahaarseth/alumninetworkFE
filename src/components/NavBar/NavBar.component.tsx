@@ -13,28 +13,23 @@ import {
   Avatar,
   Box,
   Button,
+  Divider,
   Grid,
   IconButton,
   MenuItem,
   Tooltip,
   Typography,
 } from "@mui/material";
+import { Stack } from "@mui/system";
 
 const NavBar = () => {
-  const { isAuthenticated } = useAuth0();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
+
+  const { isAuthenticated, logout } = useAuth0();
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
   };
 
   const handleCloseUserMenu = () => {
@@ -60,12 +55,12 @@ const NavBar = () => {
 
         <div className={styles.hamburger}>
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title="Open menu">
               <IconButton
                 onClick={handleOpenUserMenu}
                 sx={{ p: 1, ml: "50px" }}
               >
-                <MenuIcon />
+                <MenuIcon fontSize="large" />
               </IconButton>
             </Tooltip>
             <Menu
@@ -89,8 +84,12 @@ const NavBar = () => {
                 onClick={handleCloseUserMenu}
                 className={styles.popover}
               >
-                <Grid container spacing={12}>
-                  <Grid container item xs={2} mx={4}>
+                <Stack
+                  direction="row"
+                  divider={<Divider orientation="vertical" flexItem />}
+                  spacing={"15%"}
+                >
+                  <Stack spacing={{ xs: 3, sm: 2, md: 4 }}>
                     <Button onClick={() => navigate("/group")}>
                       <Typography textAlign="center">Groups</Typography>
                     </Button>
@@ -100,20 +99,22 @@ const NavBar = () => {
                     <Button onClick={() => navigate("/event")}>
                       <Typography textAlign="center">Events</Typography>
                     </Button>
-                  </Grid>
-                </Grid>
-              </MenuItem>
-              <MenuItem
-                onClick={handleCloseUserMenu}
-                className={styles.popover}
-              >
-                <Grid container>
-                  <Grid container item xs={2} mx={4}>
+                  </Stack>
+                  <Stack spacing={{ xs: 1, sm: 2, md: 4 }}>
                     <Button onClick={() => navigate("/profile")}>
                       <Typography textAlign="center">Profile</Typography>
                     </Button>
-                  </Grid>
-                </Grid>
+                    {isAuthenticated && (
+                      <Button
+                        onClick={() =>
+                          logout({ returnTo: window.location.origin + "/" })
+                        }
+                      >
+                        <p>Logout</p>
+                      </Button>
+                    )}
+                  </Stack>
+                </Stack>
               </MenuItem>
             </Menu>
           </Box>
