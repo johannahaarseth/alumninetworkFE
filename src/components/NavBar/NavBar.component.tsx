@@ -99,7 +99,13 @@ const NavBar = () => {
                   className={styles.popover}
                 >
                   <Stack spacing={{ xs: 2, sm: 2 }}>
-                    <Button onClick={() => {}}>
+                    <Button
+                      onClick={() => {
+                        setTitle(appContext?.titles.titles.groups!);
+                        setData(appContext?.groups!);
+                        navigate("/list");
+                      }}
+                    >
                       <Typography textAlign="center">
                         {appContext?.titles.titles.groups!}
                       </Typography>
