@@ -28,11 +28,11 @@ const PostView = () => {
 
             <Button className={styles.button}>
               {window.location.pathname === "/topic" ? (
-                <p className={styles.newPost}>Join</p>
+                <p>Join</p>
               ) : (
-                <p className={styles.newPost}>Invite</p>
+                <p>Invite</p>
               )}
-              <p className={styles.newPostPlus}>+</p>
+              <p>+</p>
             </Button>
           </div>
         </div>
