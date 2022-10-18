@@ -17,3 +17,14 @@
 .comments {
   font-size: var(--font-size-medium);
 }
+
+.toFrom {
+  display: flex;
+  flex-direction: row;
+  gap: 0.33rem;
+}
+
+.comments:hover,
+.postedInfo:hover {
+  color: var(--alumni-primary-azure);
+}
