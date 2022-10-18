@@ -5,6 +5,8 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import { AppContext } from "./context/AppContext";
 import { appContext } from "./models/appModel";
 
+
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );

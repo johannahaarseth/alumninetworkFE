@@ -32,9 +32,9 @@ const ListBox = ({
 }: ListBoxProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const titleToLowerAndMinusPlural = title?.toLowerCase().slice(0, -1);
+  const navigate = useNavigate();
   const [value, setValue] = useState<Dayjs | null>(dayjs());
   const [valuePlus, setValuePlus] = useState<Dayjs | null>(dayjs());
-  const navigate = useNavigate();
   const { setTitle } = useContext(titleContext);
   const { setData } = useContext(dataContext);
 
@@ -125,9 +125,21 @@ const ListBox = ({
               />
             </div>
             <div className={styles.buttonContainer}>
-              <Button>
-                <p>Create {titleToLowerAndMinusPlural} &gt;</p>
-              </Button>
+              {title.toString() === "Events" && (
+                <Button onClick={() => navigate("/event")}>
+                  <p>Create {titleToLowerAndMinusPlural} &gt;</p>
+                </Button>
+              )}
+              {title.toString() === "Groups" && (
+                <Button onClick={() => navigate("/group")}>
+                  <p>Create {titleToLowerAndMinusPlural} &gt;</p>
+                </Button>
+              )}
+              {title.toString() === "Topics" && (
+                <Button onClick={() => navigate("/topic")}>
+                  <p>Create {titleToLowerAndMinusPlural} &gt;</p>
+                </Button>
+              )}
             </div>
           </form>
         </Modal>

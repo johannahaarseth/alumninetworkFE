@@ -4,6 +4,11 @@ import ProfileCard from "../../components/ProfileCard/ProfileCard.component";
 import FiltersCard from "../../components/FiltersCard/FiltersCard.component";
 import styles from "./DashboardView.module.css";
 import CreateNewPost from "../../components/CreateNewPost/CreateNewPost.component";
+import { useApi } from "../../api/useApi";
+import {getPosts} from "../../api/postsApi"
+import { useEffect } from "react";
+import { IPostResponse } from "../../interfaces/IPostResponse";
+
 import { useAuth0 } from "@auth0/auth0-react";
 import NavBar from "../../components/NavBar/NavBar.component";
 import { useContext } from "react";
@@ -38,6 +43,13 @@ const DashboardView = () => {
   const firstFewTopicsJsx = listBoxContent(firstFewTopics!);
   const firstFewEventsJsx = listBoxContent(firstFewEvents!);
 
+  const getPostsApi = useApi<IPostResponse>(getPosts);
+
+
+  useEffect(() => {
+    getPostsApi.request();
+  }, []);
+
   return (
     <>
       <NavBar />
@@ -69,7 +81,7 @@ const DashboardView = () => {
             </div>
             <div className={styles.timelineColumn}>
               <CreateNewPost />
-              <TimelineComponent />
+              <TimelineComponent posts={getPostsApi.data?.results}/>
             </div>
             <div className={styles.profileAndFilterColumn}>
               <ProfileCard />
