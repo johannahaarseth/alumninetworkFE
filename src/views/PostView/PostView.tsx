@@ -76,11 +76,15 @@ const PostView = () => {
                   <div className={styles.profilepic}>
                     <ProfilePic />
                   </div>
-                  <p>username</p>
+                  <p className={styles.profilename}>username</p>
                 </Stack>
                 <div>
-                  <Button>
+                  {/* <Button className={styles.invbutton}>
                     <p>Invite +</p>
+                  </Button> */}
+                  <Button className={styles.button2}>
+                    <p>Invite</p>
+                    <p>+</p>
                   </Button>
                 </div>
               </Stack>
