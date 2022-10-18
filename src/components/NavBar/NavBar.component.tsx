@@ -13,6 +13,7 @@ import {
   Avatar,
   Box,
   Button,
+  Grid,
   IconButton,
   MenuItem,
   Tooltip,
@@ -73,20 +74,46 @@ const NavBar = () => {
               anchorEl={anchorElUser}
               anchorOrigin={{
                 vertical: "top",
-                horizontal: "right",
+                horizontal: "center",
               }}
               keepMounted
               transformOrigin={{
                 vertical: "top",
-                horizontal: "right",
+                horizontal: "center",
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
+              className={styles.menu}
             >
-              <MenuItem onClick={handleCloseUserMenu} sx={{ width: "100%" }}>
-                <Button onClick={() => navigate("/profile")}>
-                  <Typography textAlign="center">Profile</Typography>
-                </Button>
+              <MenuItem
+                onClick={handleCloseUserMenu}
+                className={styles.popover}
+              >
+                <Grid container spacing={12}>
+                  <Grid container item xs={2} mx={4}>
+                    <Button onClick={() => navigate("/group")}>
+                      <Typography textAlign="center">Groups</Typography>
+                    </Button>
+                    <Button onClick={() => navigate("/topic")}>
+                      <Typography textAlign="center">Topics</Typography>
+                    </Button>
+                    <Button onClick={() => navigate("/event")}>
+                      <Typography textAlign="center">Events</Typography>
+                    </Button>
+                  </Grid>
+                </Grid>
+              </MenuItem>
+              <MenuItem
+                onClick={handleCloseUserMenu}
+                className={styles.popover}
+              >
+                <Grid container>
+                  <Grid container item xs={2} mx={4}>
+                    <Button onClick={() => navigate("/profile")}>
+                      <Typography textAlign="center">Profile</Typography>
+                    </Button>
+                  </Grid>
+                </Grid>
               </MenuItem>
             </Menu>
           </Box>
