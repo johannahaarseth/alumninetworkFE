@@ -22,7 +22,6 @@ const ListBox = ({ title, children }: ListBoxProps) => {
   const titleToLowerAndMinusPlural = title.toLowerCase().slice(0, -1);
   const [value, setValue] = useState<Dayjs | null>(dayjs());
   const [valuePlus, setValuePlus] = useState<Dayjs | null>(dayjs());
-  const [locale] = useState("fr");
 
   const handleChange = (newValue: Dayjs | null) => {
     setValue(newValue);
@@ -73,7 +72,7 @@ const ListBox = ({ title, children }: ListBoxProps) => {
             {title.toString() === "Events" && (
               <LocalizationProvider
                 dateAdapter={AdapterDayjs}
-                adapterLocale={locale}
+                adapterLocale={"nb"}
               >
                 <DateTimePicker
                   label="Start date"
