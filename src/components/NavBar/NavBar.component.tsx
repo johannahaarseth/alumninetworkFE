@@ -80,7 +80,7 @@ const NavBar = () => {
                   divider={<Divider orientation="vertical" flexItem />}
                   spacing={"15%"}
                 >
-                  <Stack spacing={{ xs: 2, sm: 2, md: 4 }}>
+                  <Stack spacing={{ xs: 2, sm: 2 }}>
                     <Button onClick={() => navigate("/group")}>
                       <Typography textAlign="center">Groups</Typography>
                     </Button>
@@ -91,7 +91,7 @@ const NavBar = () => {
                       <Typography textAlign="center">Events</Typography>
                     </Button>
                   </Stack>
-                  <Stack spacing={{ xs: 8, sm: 8, md: 4 }}>
+                  <Stack spacing={{ xs: 8, sm: 8 }}>
                     <Button onClick={() => navigate("/profile")}>
                       <Typography textAlign="center">Profile</Typography>
                     </Button>
