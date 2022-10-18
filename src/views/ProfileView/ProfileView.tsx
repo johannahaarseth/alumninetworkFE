@@ -12,9 +12,8 @@ const ProfileView = () => {
         <div className={styles.profileView}>
           <div className={styles.emptyColumn}></div>
           <div className={styles.postsColumn}></div>
-          <div className={styles.profileAndFilterColumn}>
+          <div className={styles.postAndFilterColumn}>
             <ProfileCard />
-            <FiltersCard />
           </div>
         </div>
       </div>
