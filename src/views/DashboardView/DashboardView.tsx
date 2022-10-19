@@ -6,13 +6,16 @@ import styles from "./DashboardView.module.css";
 import CreateNewPost from "../../components/CreateNewPost/CreateNewPost.component";
 import { useApi } from "../../api/useApi";
 import { getPosts } from "../../api/postsApi";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { IPostResponse } from "../../interfaces/IPostResponse";
 import { useAuth0 } from "@auth0/auth0-react";
 import NavBar from "../../components/NavBar/NavBar.component";
+import FilterAltIcon from "@mui/icons-material/FilterAlt";
+import { IconButton } from "@mui/material";
 
 const DashboardView = () => {
   const { isAuthenticated } = useAuth0();
+  const [isFilterHidden, setIsFilterHidden] = useState(false);
 
   // Html/tsx example for later (delete when dynamic data is implemented)
   // const listBoxContent = (
@@ -35,7 +38,12 @@ const DashboardView = () => {
     getPostsApi.request();
     // eslint-disable-next-line
   }, []);
-
+  const filterHidden = () => {
+    setIsFilterHidden(true);
+    if (isFilterHidden) {
+      setIsFilterHidden(false);
+    }
+  };
   return (
     <>
       <NavBar />
@@ -58,8 +66,26 @@ const DashboardView = () => {
               <TimelineComponent posts={getPostsApi.data?.results} />
             </div>
             <div className={styles.profileAndFilterColumn}>
-              <ProfileCard />
-              <FiltersCard />
+              <div className={styles.profile}>
+                <ProfileCard />
+              </div>
+              <div className={styles.filter}>
+                <FiltersCard />
+              </div>
+              <div className={styles.filterIconFilter}>
+                <IconButton
+                  className={styles.filterIcon}
+                  onClick={filterHidden}
+                >
+                  <FilterAltIcon />
+                </IconButton>
+
+                {isFilterHidden && (
+                  <div className={styles.filter2}>
+                    <FiltersCard />
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         )}

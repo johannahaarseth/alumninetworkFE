@@ -20,11 +20,17 @@
 
 .profileAndFilterColumn {
   flex: 30%;
-  /*position: sticky;*/
-  /*top: 70px;*/
-  /*align-self: flex-start;*/
 }
 
+.filter {
+  display: flex;
+}
+.filterIcon {
+  display: none;
+}
+.filterIconFilter {
+  display: none;
+}
 @media screen and (max-width: 950px) {
   .dashboard {
     width: 95%;
@@ -35,12 +41,23 @@
   .dashboard {
     width: 95%;
   }
-
   .groupsTopicsEventsListsColumn {
     display: none;
   }
 
-  .profileAndFilterColumn {
+  .profile {
     display: none;
+  }
+  .filterIcon {
+    display: none;
+  }
+  .filter {
+    display: none;
+  }
+  .filter2 {
+    display: block;
+  }
+  .filterIconFilter {
+    display: block;
   }
 }
