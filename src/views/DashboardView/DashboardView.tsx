@@ -12,6 +12,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import NavBar from "../../components/NavBar/NavBar.component";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import { IconButton } from "@mui/material";
+import Card from "../../components/Card/Card.component";
 
 const DashboardView = () => {
   const { isAuthenticated } = useAuth0();
@@ -77,7 +78,7 @@ const DashboardView = () => {
                   className={styles.filterIcon}
                   onClick={filterHidden}
                 >
-                  <FilterAltIcon />
+                  <FilterAltIcon sx={{ fontSize: 40 }} />
                 </IconButton>
 
                 {isFilterHidden && (

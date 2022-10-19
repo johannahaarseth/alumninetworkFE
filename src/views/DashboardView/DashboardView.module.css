@@ -25,9 +25,7 @@
 .filter {
   display: flex;
 }
-.filterIcon {
-  display: none;
-}
+
 .filterIconFilter {
   display: none;
 }
@@ -48,16 +46,20 @@
   .profile {
     display: none;
   }
-  .filterIcon {
-    display: none;
-  }
+
   .filter {
     display: none;
   }
   .filter2 {
     display: block;
   }
+  .filterIcon {
+    left: 50%;
+    margin-top: 25px;
+    position: flex;
+  }
   .filterIconFilter {
     display: block;
+    position: sticky;
   }
 }
