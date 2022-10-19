@@ -25,9 +25,9 @@ const ProfileCard = () => {
             <br></br>Email: {email}
           </p>
         )}
-        <p className={styles.text}>statusState</p>
-        <div className={`${styles.textBox} ${styles.shortBioBox}`}>bioState</div>
-        <div className={`${styles.textBox} ${styles.funFactBox}`}>funfactState</div>
+        <p className={styles.text}>{statusState}</p>
+        <div className={`${styles.textBox} ${styles.shortBioBox}`}>{bioState}</div>
+        <div className={`${styles.textBox} ${styles.funFactBox}`}>{funfactState}</div>
       </div>
     </Card>
   );

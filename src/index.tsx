@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { Auth0Provider } from "@auth0/auth0-react";
+import { AppContext } from "./context/AppContext";
+import { appContext } from "./models/appModel";
 import UserProvider from "./context/useUser";
 
 
@@ -18,7 +20,9 @@ root.render(
       redirectUri={window.location.origin + "/dashboard"}
     >
       <UserProvider>
+      <AppContext.Provider value={appContext}>
         <App />
+      </AppContext.Provider>
       </UserProvider>
     </Auth0Provider>
   </React.StrictMode>

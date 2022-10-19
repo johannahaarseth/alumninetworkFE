@@ -5,7 +5,7 @@ export const useApi = <T>(apiFunc: Function) => {
 	const [error, setError] = useState("");
 	const [loading, setLoading] = useState(false);
 
-	const request = async (...args: []) => {
+	const request = async (...args: string[]) => {
 		setLoading(true);
 		try {
 			const result = await apiFunc(...args);
