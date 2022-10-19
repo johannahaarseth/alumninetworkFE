@@ -37,13 +37,6 @@
   flex: 100%;
 }
 
-.itemBox {
-  background-color: var(--alumni-light-beige);
-  height: 45px;
-  width: 100%;
-  margin-bottom: 0.5rem;
-}
-
 .form {
   display: flex;
   flex-direction: column;
