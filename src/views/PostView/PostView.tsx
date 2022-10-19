@@ -41,7 +41,7 @@ const PostView = () => {
           </div>
         </div>
       </div>
-      {isOpen && (
+      {window.location.pathname !== "/topic" && isOpen && (
         <Modal setIsOpen={setIsOpen}>
           <InviteModal setIsOpen={setIsOpen} />
         </Modal>
