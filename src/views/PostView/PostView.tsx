@@ -7,7 +7,6 @@ import NavBar from "../../components/NavBar/NavBar.component";
 import TimelineComponent from "../../components/Timeline/Timeline.component";
 import styles from "./PostView.module.css";
 import Modal from "../../components/Modal/Modal.component";
-import InviteModalContent from "../../components/InviteModalContent/InviteModalContent.component";
 import InviteModal from "../../components/InviteModalContent/InviteModal.component";
 
 const PostView = () => {

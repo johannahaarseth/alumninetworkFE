@@ -1,20 +1,10 @@
 .profilepic {
   height: 80px;
   width: 80px;
-  margin-left: 15%;
-  margin-right: 15%;
-  margin-top: 5%;
-  margin-bottom: 5%;
+  margin: 5% 15%;
 }
 .profilename {
   margin-top: 25%;
-}
-
-.itemBox {
-  background-color: var(--alumni-light-beige);
-  height: 45px;
-  width: 100%;
-  margin-bottom: 0.5rem;
 }
 
 .form {
