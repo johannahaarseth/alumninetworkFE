@@ -12,6 +12,8 @@ import InviteModal from "../../components/InviteModalContent/InviteModal.compone
 
 const PostView = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const [isJoined, setIsJoined] = useState(false);
   return (
     <>
       <NavBar />
@@ -29,15 +31,28 @@ const PostView = () => {
             ) : (
               <GroupCard />
             )}
-
-            <Button className={styles.button} onClick={() => setIsOpen(true)}>
-              {window.location.pathname === "/topic" ? (
-                <p>Join</p>
-              ) : (
+            {window.location.pathname === "/topic" ? (
+              <Button
+                className={styles.button}
+                onClick={() => {
+                  setIsJoined(true);
+                }}
+              >
+                {!isJoined ? (
+                  <>
+                    <p>Join</p>
+                    <p>+</p>
+                  </>
+                ) : (
+                  <p>Joined</p>
+                )}
+              </Button>
+            ) : (
+              <Button className={styles.button} onClick={() => setIsOpen(true)}>
                 <p>Invite</p>
-              )}
-              <p>+</p>
-            </Button>
+                <p>+</p>
+              </Button>
+            )}
           </div>
         </div>
       </div>
