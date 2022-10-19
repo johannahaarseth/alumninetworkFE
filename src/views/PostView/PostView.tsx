@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Button from "../../components/Button/Button.component";
 import CreateNewPost from "../../components/CreateNewPost/CreateNewPost.component";
 import EventCard from "../../components/EventCard/EventCard.component";
 import GroupCard from "../../components/GroupCard/GroupCard.component";
@@ -8,11 +7,10 @@ import TimelineComponent from "../../components/Timeline/Timeline.component";
 import styles from "./PostView.module.css";
 import Modal from "../../components/Modal/Modal.component";
 import InviteModal from "../../components/InviteModalContent/InviteModal.component";
+import ButtonCustom from "../../components/ButtonCustom/ButtonCustom";
 
 const PostView = () => {
   const [isOpen, setIsOpen] = useState(false);
-
-  const [isJoined, setIsJoined] = useState(false);
   return (
     <>
       <NavBar />
@@ -30,28 +28,8 @@ const PostView = () => {
             ) : (
               <GroupCard />
             )}
-            {window.location.pathname === "/topic" ? (
-              <Button
-                className={styles.button}
-                onClick={() => {
-                  setIsJoined(true);
-                }}
-              >
-                {!isJoined ? (
-                  <>
-                    <p>Join</p>
-                    <p>+</p>
-                  </>
-                ) : (
-                  <p>Joined</p>
-                )}
-              </Button>
-            ) : (
-              <Button className={styles.button} onClick={() => setIsOpen(true)}>
-                <p>Invite</p>
-                <p>+</p>
-              </Button>
-            )}
+
+            <ButtonCustom setIsOpen={setIsOpen} />
           </div>
         </div>
       </div>

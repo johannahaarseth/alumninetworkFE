@@ -25,16 +25,12 @@
 .postsColumn {
   flex: 50%;
 }
+
 .timeline {
   display: flex;
   flex-direction: row;
   width: 100%;
   gap: 1.2rem;
-}
-
-.container {
-  display: flex;
-  justify-content: center;
 }
 
 .timelineColumn {
@@ -70,12 +66,6 @@
   .profile {
     width: 250px;
   }
-  .button {
-    margin-top: 1rem;
-    margin-left: 3rem;
-    margin-right: 3rem;
-    width: 10rem;
-  }
 }
 
 @media screen and (max-width: 750px) {
@@ -93,9 +83,5 @@
 
   .profile {
     width: 100%;
-  }
-  .button {
-    width: 40%;
-    margin-bottom: 5%;
   }
 }
