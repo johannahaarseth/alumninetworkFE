@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.calendarContainer {
+  display: flex;
+  width: 80%;
+  margin-top: 1.2rem;
+  z-index: 0;
+}
+
+.leftColumn {
+  flex: 10%;
+}
+
+.middleColumn {
+  flex: 80%;
+}
+
+.rightColumn {
+  flex: 10%;
+}
+
+@media screen and (max-width: 1400px) {
+  .calendarContainer {
+    width: 95%;
+  }
+
+  .leftColumn {
+    flex: 0;
+  }
+
+  .middleColumn {
+    flex: 100%;
+  }
+
+  .rightColumn {
+    flex: 0;
+  }
+}
