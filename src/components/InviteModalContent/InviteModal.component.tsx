@@ -30,7 +30,7 @@ const InviteModal = ({ setIsOpen }: InviteModalProps) => {
           </div>
         </div>
       </div>
-      <div className={styles.emptySpace2}>
+      <div className={styles.emptySpace}>
         <Input placeholderText={`Search`} />
       </div>
       <div style={{ overflowY: "scroll", height: "300px" }}>
@@ -46,7 +46,7 @@ const InviteModal = ({ setIsOpen }: InviteModalProps) => {
           <InviteModalContent setIsOpen={setIsOpen} />
         </div>
       </div>
-      <div className={styles.emptySpace3}></div>
+      <div className={styles.emptySpace2}></div>
     </>
   );
 };

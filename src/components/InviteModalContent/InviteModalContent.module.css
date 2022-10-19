@@ -56,7 +56,7 @@
   margin-right: 25px;
 }
 
-.emptySpace2 {
+.emptySpace {
   margin-left: 20px;
   width: 91%;
   position: sticky;
@@ -65,6 +65,6 @@
   margin-top: 10px;
 }
 
-.emptySpace3 {
+.emptySpace2 {
   padding-bottom: 30px;
 }
