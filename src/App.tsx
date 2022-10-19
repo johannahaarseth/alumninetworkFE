@@ -6,6 +6,7 @@ import ProfileView from "./views/ProfileView/ProfileView";
 import { useAuth0 } from "@auth0/auth0-react";
 import ListView from "./views/ListView/ListView";
 import PostView from "./views/PostView/PostView";
+import PostDetailView from "./views/PostDetailView/PostDetailView";
 
 function App() {
   let { isAuthenticated, isLoading } = useAuth0();
@@ -48,6 +49,18 @@ function App() {
             )}
             {isAuthenticated && (
               <Route path="/events" element={<ListView title="Events" />} />
+            )}
+            {/* change afterwards to => path="/group/:id/post/:id or something like that" */}
+            {isAuthenticated && (
+              <Route path="/group/post" element={<PostDetailView />} />
+            )}
+            {/* change afterwards to => path="/topic/:id/post/:id or something like that" */}
+            {isAuthenticated && (
+              <Route path="/topic/post" element={<PostDetailView />} />
+            )}
+            {/* change afterwards to => path="/event/:id/post/:id or something like that" */}
+            {isAuthenticated && (
+              <Route path="/event/post" element={<PostDetailView />} />
             )}
           </Routes>
         </div>
