@@ -36,13 +36,9 @@ const InviteModal = ({ setIsOpen }: InviteModalProps) => {
       <div style={{ overflowY: "scroll", height: "300px" }}>
         <div className={styles.form}>
           <InviteModalContent />
-
           <InviteModalContent />
-
           <InviteModalContent />
-
           <InviteModalContent />
-
           <InviteModalContent />
         </div>
       </div>
