@@ -11,9 +11,16 @@ import { IPostResponse } from "../../interfaces/IPostResponse";
 import { useAuth0 } from "@auth0/auth0-react";
 import NavBar from "../../components/NavBar/NavBar.component";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
-import { IconButton } from "@mui/material";
-import Card from "../../components/Card/Card.component";
+import { Fab, IconButton, ThemeProvider } from "@mui/material";
+import { createTheme } from "@mui/material/styles";
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#FFFFFF",
+    },
+  },
+});
 const DashboardView = () => {
   const { isAuthenticated } = useAuth0();
   const [isFilterHidden, setIsFilterHidden] = useState(false);
@@ -74,13 +81,16 @@ const DashboardView = () => {
                 <FiltersCard />
               </div>
               <div className={styles.filterIconFilter}>
-                <IconButton
-                  className={styles.filterIcon}
-                  onClick={filterHidden}
-                >
-                  <FilterAltIcon sx={{ fontSize: 40 }} />
-                </IconButton>
-
+                <ThemeProvider theme={theme}>
+                  <IconButton
+                    className={styles.filterIcon}
+                    onClick={filterHidden}
+                  >
+                    <Fab variant="extended" color="primary">
+                      <FilterAltIcon sx={{ fontSize: 40 }} />
+                    </Fab>
+                  </IconButton>
+                </ThemeProvider>
                 {isFilterHidden && (
                   <div className={styles.filter2}>
                     <FiltersCard />

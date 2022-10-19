@@ -54,12 +54,12 @@
     display: block;
   }
   .filterIcon {
-    left: 50%;
-    margin-top: 25px;
+    left: 45%;
     position: flex;
   }
   .filterIconFilter {
     display: block;
     position: sticky;
+    margin-top: 23px;
   }
 }
