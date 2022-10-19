@@ -25,14 +25,6 @@
   /*align-self: flex-start;*/
 }
 
-.itemBox {
-  background-color: var(--alumni-light-beige);
-  height: auto;
-  width: 100%;
-  margin-bottom: 0.5rem;
-  padding: 10px;
-}
-
 @media screen and (max-width: 950px) {
   .dashboard {
     width: 95%;

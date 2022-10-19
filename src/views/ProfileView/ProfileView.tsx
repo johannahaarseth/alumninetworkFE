@@ -1,4 +1,3 @@
-import FiltersCard from "../../components/FiltersCard/FiltersCard.component";
 import NavBar from "../../components/NavBar/NavBar.component";
 import ProfileCard from "../../components/ProfileCard/ProfileCard.component";
 import React from "react";
