@@ -30,13 +30,11 @@ const InviteModal = ({ setIsOpen }: InviteModalProps) => {
           </div>
         </div>
       </div>
-
-      <div className={styles.form}>
-        <div>
-          <Input placeholderText={`Search`} />
-        </div>
-
-        <div style={{ overflowY: "scroll" }}>
+      <div className={styles.emptySpace2}>
+        <Input placeholderText={`Search`} />
+      </div>
+      <div style={{ overflowY: "scroll", height: "300px" }}>
+        <div className={styles.form}>
           <InviteModalContent setIsOpen={setIsOpen} />
 
           <InviteModalContent setIsOpen={setIsOpen} />
@@ -48,6 +46,7 @@ const InviteModal = ({ setIsOpen }: InviteModalProps) => {
           <InviteModalContent setIsOpen={setIsOpen} />
         </div>
       </div>
+      <div className={styles.emptySpace3}></div>
     </>
   );
 };

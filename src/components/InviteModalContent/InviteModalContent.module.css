@@ -4,6 +4,7 @@
   margin-left: 15%;
   margin-right: 15%;
   margin-top: 5%;
+  margin-bottom: 5%;
 }
 .profilename {
   margin-top: 25%;
@@ -50,5 +51,20 @@
   background-color: var(--alumni-light-beige);
   height: 100px;
   width: 30rem;
-  margin-bottom: 5%;
+  margin-bottom: 1%;
+  margin-left: 20px;
+  margin-right: 25px;
+}
+
+.emptySpace2 {
+  margin-left: 20px;
+  width: 91%;
+  position: sticky;
+  margin-right: 10px;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+.emptySpace3 {
+  padding-bottom: 30px;
 }
