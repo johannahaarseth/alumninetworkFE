@@ -7,16 +7,10 @@ import NavBar from "../../components/NavBar/NavBar.component";
 import TimelineComponent from "../../components/Timeline/Timeline.component";
 import styles from "./PostView.module.css";
 import Modal from "../../components/Modal/Modal.component";
-import { useNavigate } from "react-router-dom";
-import Input from "../../components/Input/Input.component";
-import TextField from "../../components/TextField/TextField.component";
-import { Avatar, Stack } from "@mui/material";
-import ProfilePic from "../../components/ProfilePic/ProfilePic.component";
 import InviteModal from "../../components/InviteModal/InviteModal.component";
 
 const PostView = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate();
   return (
     <>
       <NavBar />

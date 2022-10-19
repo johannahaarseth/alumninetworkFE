@@ -9,7 +9,7 @@ type InviteModalProps = {
 };
 const InviteModal = ({ setIsOpen }: InviteModalProps) => {
   const [isOpen] = useState(false);
-
+  const [isInvited, setIsInvited] = useState(false);
   return (
     <>
       <div style={{ display: "flex" }}>
@@ -47,9 +47,18 @@ const InviteModal = ({ setIsOpen }: InviteModalProps) => {
               <p className={styles.profilename}>username</p>
             </Stack>
             <div>
-              <Button className={styles.invbutton}>
-                <p>Invite</p>
-                <p>+</p>
+              <Button
+                className={styles.invbutton}
+                onClick={() => setIsInvited(true)}
+              >
+                {!isInvited ? (
+                  <>
+                    <p>Invite</p>
+                    <p>+</p>
+                  </>
+                ) : (
+                  <p>Invited</p>
+                )}
               </Button>
             </div>
           </Stack>
