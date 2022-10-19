@@ -1,17 +1,47 @@
+import InfiniteScroll from "react-infinite-scroll-component";
+import { IPostResponse } from "../../interfaces/IPostResponse";
 import { IPostSummary } from "../../interfaces/IPostSummary";
 import PostCard from "../PostCard/PostCard.component";
-import PostEventCard from "../PostEventCard/PostEventCard.component";
 
 type TimelineProps = {
-  posts : IPostSummary[] | undefined;
+	posts: IPostSummary[];
+	count: number;
+	handleGetNext: () => void;
 };
 
-const Timeline = ({posts} : TimelineProps) => {
-  const timelineContent = posts?.map((post, i) => {
-    return <PostCard  post={post} key={i}/>;
-  });
+const Timeline = ({ posts, handleGetNext, count }: TimelineProps) => {
+	console.log(count);
+	console.log(posts);
 
-  return <div>{timelineContent}</div>;
+	return (
+		<InfiniteScroll
+			dataLength={count} //This is important field to render the next data
+			next={handleGetNext}
+			hasMore={true}
+			loader={<h4>Loading...</h4>}
+			endMessage={
+				<p style={{ textAlign: "center" }}>
+					<b>You have read all posts!</b>
+				</p>
+			}
+			/*
+  // below props only if you need pull down functionality
+  refreshFunction={handleGet}
+  pullDownToRefresh
+  pullDownToRefreshThreshold={50}
+  pullDownToRefreshContent={
+    <h3 style={{ textAlign: 'center' }}>&#8595; Pull down to refresh</h3>
+  }
+  releaseToRefreshContent={
+    <h3 style={{ textAlign: 'center' }}>&#8593; Release to refresh</h3>
+  }
+  */
+		>
+			{posts.map((post, i) => {
+				return <PostCard post={post} key={i} />;
+			})}
+		</InfiniteScroll>
+	);
 };
 
 export default Timeline;
