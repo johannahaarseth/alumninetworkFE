@@ -46,7 +46,7 @@ const PostDetailView = () => {
           </div>
         </div>
       </div>
-      {window.location.pathname !== "/topic" && isOpen && (
+      {window.location.pathname !== "/topic/post" && isOpen && (
         <div className={styles.modalSize}>
           <Modal setIsOpen={setIsOpen}>
             <InviteModal setIsOpen={setIsOpen} />

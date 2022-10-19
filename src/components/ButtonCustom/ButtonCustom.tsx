@@ -5,12 +5,12 @@ type ButtonCustomProps = {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 };
 const ButtonCustom = ({ setIsOpen }: ButtonCustomProps) => {
-  const [isOpen] = useState(false);
   const [isJoined, setIsJoined] = useState(false);
 
   return (
     <>
-      {window.location.pathname === "/topic" ? (
+      {window.location.pathname === "/topic/post" ||
+      window.location.pathname === "/topic" ? (
         <Button
           className={styles.button}
           onClick={() => {
