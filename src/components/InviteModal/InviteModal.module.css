@@ -1,0 +1,53 @@
+.profilepic {
+  height: 80px;
+  width: 80px;
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-top: 5%;
+}
+.profilename {
+  margin-top: 25%;
+}
+
+.itemBox {
+  background-color: var(--alumni-light-beige);
+  height: 45px;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  height: 15rem;
+}
+
+.closeButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.invbutton {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 35%;
+  padding: 0.8rem;
+  border: none;
+  background-color: white;
+  width: 5rem;
+  border-radius: 10px;
+}
+.invbutton:hover {
+  background-color: var(--alumni-primary-light-azure);
+  cursor: pointer;
+}
+.textBox {
+  background-color: var(--alumni-light-beige);
+  height: 100px;
+  width: 30rem;
+}

@@ -12,6 +12,8 @@ import Input from "../../components/Input/Input.component";
 import TextField from "../../components/TextField/TextField.component";
 import { Avatar, Stack } from "@mui/material";
 import ProfilePic from "../../components/ProfilePic/ProfilePic.component";
+import InviteModal from "../../components/InviteModal/InviteModal.component";
+
 const PostView = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
@@ -46,50 +48,7 @@ const PostView = () => {
       </div>
       {isOpen && (
         <Modal setIsOpen={setIsOpen}>
-          <div style={{ display: "flex" }}>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                paddingRight: "75%",
-              }}
-            >
-              <p>"Title"</p>
-            </div>
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              <div className={styles.closeButton}>
-                <Button onClick={() => setIsOpen(false)}>
-                  <p>Close X</p>
-                </Button>
-              </div>
-            </div>
-          </div>
-
-          <form className={styles.form}>
-            <div>
-              <Input placeholderText={`Search`} />
-            </div>
-
-            <div className={styles.textBox}>
-              <Stack direction="row" spacing={"45%"}>
-                <Stack direction="row">
-                  <div className={styles.profilepic}>
-                    <ProfilePic />
-                  </div>
-                  <p className={styles.profilename}>username</p>
-                </Stack>
-                <div>
-                  {/* <Button className={styles.invbutton}>
-                    <p>Invite +</p>
-                  </Button> */}
-                  <Button className={styles.button2}>
-                    <p>Invite</p>
-                    <p>+</p>
-                  </Button>
-                </div>
-              </Stack>
-            </div>
-          </form>
+          <InviteModal setIsOpen={setIsOpen} />
         </Modal>
       )}
     </>
