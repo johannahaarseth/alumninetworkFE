@@ -3,10 +3,8 @@ import Button from "../Button/Button.component";
 import styles from "./InviteModalContent.module.css";
 import { Stack } from "@mui/material";
 import ProfilePic from "../ProfilePic/ProfilePic.component";
-type InviteModalProps = {
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
-};
-const InviteModalContent = ({ setIsOpen }: InviteModalProps) => {
+
+const InviteModalContent = () => {
   const [isInvited, setIsInvited] = useState(false);
   return (
     <>

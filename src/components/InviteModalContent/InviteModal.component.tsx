@@ -35,15 +35,15 @@ const InviteModal = ({ setIsOpen }: InviteModalProps) => {
       </div>
       <div style={{ overflowY: "scroll", height: "300px" }}>
         <div className={styles.form}>
-          <InviteModalContent setIsOpen={setIsOpen} />
+          <InviteModalContent />
 
-          <InviteModalContent setIsOpen={setIsOpen} />
+          <InviteModalContent />
 
-          <InviteModalContent setIsOpen={setIsOpen} />
+          <InviteModalContent />
 
-          <InviteModalContent setIsOpen={setIsOpen} />
+          <InviteModalContent />
 
-          <InviteModalContent setIsOpen={setIsOpen} />
+          <InviteModalContent />
         </div>
       </div>
       <div className={styles.emptySpace2}></div>
