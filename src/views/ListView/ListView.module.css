@@ -21,14 +21,6 @@
   flex: 30%;
 }
 
-.itemBox {
-  background-color: var(--alumni-light-beige);
-  height: auto;
-  width: 100%;
-  margin-bottom: 0.5rem;
-  padding: 10px;
-}
-
 @media screen and (max-width: 1000px) {
   .list {
     width: 100%;
