@@ -33,7 +33,7 @@ const InviteModal = ({ setIsOpen }: InviteModalProps) => {
         </div>
       </div>
 
-      <form className={styles.form}>
+      <div className={styles.form}>
         <div>
           <Input placeholderText={`Search`} />
         </div>
@@ -49,7 +49,9 @@ const InviteModal = ({ setIsOpen }: InviteModalProps) => {
             <div>
               <Button
                 className={styles.invbutton}
-                onClick={() => setIsInvited(true)}
+                onClick={() => {
+                  setIsInvited(true);
+                }}
               >
                 {!isInvited ? (
                   <>
@@ -63,7 +65,7 @@ const InviteModal = ({ setIsOpen }: InviteModalProps) => {
             </div>
           </Stack>
         </div>
-      </form>
+      </div>
     </>
   );
 };
