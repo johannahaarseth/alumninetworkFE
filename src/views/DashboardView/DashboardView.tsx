@@ -10,6 +10,8 @@ import { useEffect } from "react";
 import { IPostResponse } from "../../interfaces/IPostResponse";
 import { useAuth0 } from "@auth0/auth0-react";
 import NavBar from "../../components/NavBar/NavBar.component";
+import { IUserResponse } from "../../interfaces/IUserResponse";
+import { getCurrentUser } from "../../api/userApi";
 
 const DashboardView = () => {
 	const { isAuthenticated } = useAuth0();
@@ -30,9 +32,18 @@ const DashboardView = () => {
 	// };
 
 	const getPostsApi = useApi<IPostResponse>(getPosts, {} as IPostResponse);
+	const getUserApi = useApi<IUserResponse>(
+		getCurrentUser,
+		{} as IUserResponse
+	);
 
 	useEffect(() => {
 		getPostsApi.request();
+		// eslint-disable-next-line
+	}, []);
+
+	useEffect(() => {
+		getUserApi.request();
 		// eslint-disable-next-line
 	}, []);
 
@@ -60,7 +71,11 @@ const DashboardView = () => {
 							/>
 						</div>
 						<div className={styles.profileAndFilterColumn}>
-							<ProfileCard />
+							<ProfileCard
+								status={getUserApi.data.status}
+								bio={getUserApi.data.bio}
+								funfact={getUserApi.data.funfact}
+							/>
 							<FiltersCard />
 						</div>
 					</div>

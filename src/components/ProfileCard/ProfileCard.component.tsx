@@ -3,32 +3,29 @@ import styles from "./ProfileCard.module.css";
 import Card from "../Card/Card.component";
 import ProfilePic from "../ProfilePic/ProfilePic.component";
 import { useAuth0 } from "@auth0/auth0-react";
-import { UseUser } from "../../context/useUser";
 
-const ProfileCard = () => {
-	const { picture, auth0Id, name, email, bio, setBio, funfact, status } =
-		UseUser();
+type ProfilCardProps = { bio: string; funfact: string; status: string };
 
-	const handleBioChange = (event: React.FormEvent<HTMLInputElement>) => {
-		setBio(event.currentTarget.value);
-	};
+const ProfileCard = (props: ProfilCardProps) => {
+	const { user } = useAuth0();
+	const { bio, funfact, status } = props;
 
 	return (
 		<Card cardHoverEffect={false}>
 			<div className={styles.headerBox}></div>
 			<div className={styles.profile}>{<ProfilePic />}</div>
 			<div className={styles.infoBox}>
-				{name === email ? (
-					<p className={styles.text}>Email: {email} </p>
+				{user?.name === user?.email ? (
+					<p className={styles.text}>Email: {user?.email} </p>
 				) : (
 					<p className={styles.text}>
-						Name: {name} <br></br>
-						<br></br>Email: {email}
+						Name: {user?.name} <br></br>
+						<br></br>Email: {user?.email}
 					</p>
 				)}
 				<p className={styles.text}>{status}</p>
 				<div className={`${styles.textBox} ${styles.shortBioBox}`}>
-					<input type="text" value={bio} onChange={handleBioChange} />
+					<p className={styles.text}>{bio}</p>
 				</div>
 				<div className={`${styles.textBox} ${styles.funFactBox}`}>
 					{funfact}

@@ -1,6 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useState } from "react";
-import { UseUser } from "../context/useUser";
 
 export const useApi = <T>(apiFunc: Function, currentState: T) => {
 	const [data, setData] = useState<T>(currentState);
