@@ -82,18 +82,15 @@ const DashboardView = () => {
               </div>
               <div className={styles.filterIconFilter}>
                 <ThemeProvider theme={theme}>
-                  <IconButton
-                    className={styles.filterIcon}
+                  <Fab
+                    variant="extended"
+                    color="primary"
                     onClick={filterHidden}
+                    className={styles.filterIcon}
+                    style={{ borderRadius: 15, boxShadow: "0 0 0 0" }}
                   >
-                    <Fab
-                      variant="extended"
-                      color="primary"
-                      style={{ borderRadius: 15, boxShadow: "0" }}
-                    >
-                      <FilterAltIcon sx={{ fontSize: 40 }} />
-                    </Fab>
-                  </IconButton>
+                    <FilterAltIcon sx={{ fontSize: 40 }} />
+                  </Fab>
                 </ThemeProvider>
                 {isFilterHidden && (
                   <div className={styles.filter2}>
