@@ -1,0 +1,57 @@
+.profilepic {
+  height: 80px;
+  width: 80px;
+  margin: 5% 15%;
+}
+.profilename {
+  margin-top: 25%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  height: 15rem;
+}
+
+.closeButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.invbutton {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 35%;
+  padding: 0.8rem;
+  border: none;
+  background-color: white;
+  width: 5rem;
+  border-radius: 10px;
+}
+.invbutton:hover {
+  background-color: var(--alumni-primary-light-azure);
+  cursor: pointer;
+}
+.textBox {
+  background-color: var(--alumni-light-beige);
+  height: 100px;
+  width: 30rem;
+  margin-bottom: 1%;
+  margin-left: 20px;
+  margin-right: 25px;
+}
+
+.emptySpace {
+  width: 91%;
+  position: sticky;
+  margin: 10px 10px 20px 20px;
+}
+
+.emptySpace2 {
+  padding-bottom: 30px;
+}
