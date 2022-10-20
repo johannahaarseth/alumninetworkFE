@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { Auth0Provider } from "@auth0/auth0-react";
+import { StyledEngineProvider } from "@mui/material/styles";
 
 const root = ReactDOM.createRoot(
 	document.getElementById("root") as HTMLElement
@@ -16,7 +17,9 @@ root.render(
 			audience="https://bealumninetwork.azurewebsites.net/"
 			scope="read:users"
 		>
-			<App />
+			<StyledEngineProvider injectFirst>
+				<App />
+			</StyledEngineProvider>
 		</Auth0Provider>
 	</React.StrictMode>
 );

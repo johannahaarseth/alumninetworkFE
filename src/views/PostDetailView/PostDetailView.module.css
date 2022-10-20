@@ -10,6 +10,7 @@
   flex-direction: row;
   width: 80%;
   gap: 1.2rem;
+  margin-top: 1rem;
 }
 
 .emptyColumn {
@@ -25,12 +26,25 @@
   flex: 30%;
 }
 
-.commentsContainer {
-  margin-left: 3.5rem;
+.btnContainer {
+  display: flex;
+  justify-content: center;
 }
 
-.comment {
-  margin-left: 2rem;
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modal {
+  position: relative;
+  border-radius: 10px;
+}
+
+.commentsContainer {
+  margin-left: 3.5rem;
 }
 
 .postColumn hr {
