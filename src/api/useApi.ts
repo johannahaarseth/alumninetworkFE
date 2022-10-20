@@ -9,18 +9,23 @@ export const useApi = <T>(apiFunc: Function) => {
 
 	const { getAccessTokenSilently } = useAuth0();
 
-	const request = async (...args: string[]) => {
+	type AxiosInput = {
+		headers: {};
+		params: {};
+	};
+
+	const request = async (configInput?: AxiosInput) => {
 		const token = await getAccessTokenSilently({
 			audience: "https://bealumninetwork.azurewebsites.net/",
 			scope: "read:users",
 		});
 
-		console.log(token);
-
 		const config = {
 			headers: {
 				Authorization: `Bearer ${token}`,
+				...configInput?.headers,
 			},
+			...configInput?.params,
 		};
 
 		setLoading(true);
