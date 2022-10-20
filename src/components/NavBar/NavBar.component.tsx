@@ -10,15 +10,19 @@ import MenuIcon from "@mui/icons-material/Menu";
 import React, { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import {
+  AppBar,
   Box,
   Button,
   Divider,
+  Fab,
   IconButton,
   MenuItem,
+  Toolbar,
   Tooltip,
   Typography,
 } from "@mui/material";
 import { Stack } from "@mui/system";
+import ScrollTop from "../ScrollTop/ScrollTop";
 
 const NavBar = () => {
   const { isAuthenticated, logout } = useAuth0();
@@ -38,96 +42,115 @@ const NavBar = () => {
 
   return (
     <>
-      <div className={styles.navbar}>
-        <div className={styles.logo}>
-          <Logo onLogoClick={() => navigate("/dashboard")} />
-        </div>
-        <SearchBar placeholderText="Search" />
-        <div className={styles.profile} onClick={() => setIsOpen(true)}>
-          <ProfilePic />
-        </div>
-        {isOpen && <NavBarProfileOnClickCard setIsOpen={setIsOpen} />}
+      <AppBar>
+        <Toolbar className={styles.navbar}>
+          <div className={styles.logo}>
+            <Logo onLogoClick={() => navigate("/dashboard")} />
+          </div>
+          <div className={styles.searchBar}>
+            <SearchBar placeholderText="Search" />
+          </div>
+          <div className={styles.profile} onClick={() => setIsOpen(true)}>
+            <ProfilePic />
+          </div>
+          {isOpen && <NavBarProfileOnClickCard setIsOpen={setIsOpen} />}
 
-        <div className={styles.hamburger}>
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open menu">
-              <IconButton
-                onClick={handleOpenUserMenu}
-                sx={{ p: 1, ml: "50px" }}
-              >
-                {isMenuOpen ? (
-                  <CloseIcon fontSize="large" />
-                ) : (
-                  <MenuIcon fontSize="large" />
-                )}
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px", alignItems: "center" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "center",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "center",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-              className={styles.menu}
-            >
-              <Stack
-                direction="row"
-                divider={<Divider orientation="vertical" flexItem />}
-                spacing={"15%"}
-              >
-                <MenuItem
-                  onClick={handleCloseUserMenu}
-                  className={styles.popover}
+          <div className={styles.hamburger}>
+            <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title="Open menu">
+                <IconButton
+                  onClick={handleOpenUserMenu}
+                  sx={{ p: 1, ml: "50px" }}
                 >
-                  <Stack spacing={{ xs: 2, sm: 2 }}>
-                    <Button onClick={() => navigate("/groups")} color="inherit">
-                      <Typography textAlign="center">Groups</Typography>
-                    </Button>
-                    <Button onClick={() => navigate("/topics")} color="inherit">
-                      <Typography textAlign="center">Topics</Typography>
-                    </Button>
-                    <Button onClick={() => navigate("/events")} color="inherit">
-                      <Typography textAlign="center">Events</Typography>
-                    </Button>
-                  </Stack>
-                </MenuItem>
-                <MenuItem
-                  onClick={handleCloseUserMenu}
-                  className={styles.popover}
+                  {isMenuOpen ? (
+                    <CloseIcon fontSize="large" />
+                  ) : (
+                    <MenuIcon fontSize="large" />
+                  )}
+                </IconButton>
+              </Tooltip>
+              <Menu
+                sx={{ mt: "45px", alignItems: "center" }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "center",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "center",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+                className={styles.menu}
+              >
+                <Stack
+                  direction="row"
+                  divider={<Divider orientation="vertical" flexItem />}
+                  spacing={"15%"}
                 >
-                  <Stack spacing={{ xs: 8, sm: 8 }}>
-                    <Button
-                      onClick={() => navigate("/profile")}
-                      color="inherit"
-                    >
-                      <Typography textAlign="center">Profile</Typography>
-                    </Button>
-                    {isAuthenticated && (
+                  <MenuItem
+                    onClick={handleCloseUserMenu}
+                    className={styles.popover}
+                  >
+                    <Stack spacing={{ xs: 2, sm: 2 }}>
                       <Button
-                        onClick={() =>
-                          logout({ returnTo: window.location.origin + "/" })
-                        }
+                        onClick={() => navigate("/groups")}
                         color="inherit"
                       >
-                        <p>Logout</p>
+                        <Typography textAlign="center">Groups</Typography>
                       </Button>
-                    )}
-                  </Stack>
-                </MenuItem>
-              </Stack>
-            </Menu>
-          </Box>
-        </div>
-      </div>
+                      <Button
+                        onClick={() => navigate("/topics")}
+                        color="inherit"
+                      >
+                        <Typography textAlign="center">Topics</Typography>
+                      </Button>
+                      <Button
+                        onClick={() => navigate("/events")}
+                        color="inherit"
+                      >
+                        <Typography textAlign="center">Events</Typography>
+                      </Button>
+                    </Stack>
+                  </MenuItem>
+                  <MenuItem
+                    onClick={handleCloseUserMenu}
+                    className={styles.popover}
+                  >
+                    <Stack spacing={{ xs: 8, sm: 8 }}>
+                      <Button
+                        onClick={() => navigate("/profile")}
+                        color="inherit"
+                      >
+                        <Typography textAlign="center">Profile</Typography>
+                      </Button>
+                      {isAuthenticated && (
+                        <Button
+                          onClick={() =>
+                            logout({ returnTo: window.location.origin + "/" })
+                          }
+                          color="inherit"
+                        >
+                          <p>Logout</p>
+                        </Button>
+                      )}
+                    </Stack>
+                  </MenuItem>
+                </Stack>
+              </Menu>
+            </Box>
+          </div>
+        </Toolbar>
+      </AppBar>
+      <Toolbar id="back-to-top-anchor" />
+      <ScrollTop>
+        <Fab size="small" aria-label="scroll back to top">
+          ^
+        </Fab>
+      </ScrollTop>
     </>
   );
 };

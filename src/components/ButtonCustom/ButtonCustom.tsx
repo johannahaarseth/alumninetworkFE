@@ -1,10 +1,12 @@
 import styles from "./ButtonCustom.module.css";
 import Button from "../Button/Button.component";
-import { Dispatch, SetStateAction, useState } from "react";
+import React, { useState } from "react";
+
 type ButtonCustomProps = {
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  onClick?: React.MouseEventHandler;
 };
-const ButtonCustom = ({ setIsOpen }: ButtonCustomProps) => {
+
+const ButtonCustom = ({ onClick }: ButtonCustomProps) => {
   const [isJoined, setIsJoined] = useState(false);
 
   return (
@@ -27,7 +29,7 @@ const ButtonCustom = ({ setIsOpen }: ButtonCustomProps) => {
           )}
         </Button>
       ) : (
-        <Button className={styles.button} onClick={() => setIsOpen(true)}>
+        <Button className={styles.button} onClick={onClick}>
           <p>Invite</p>
           <p>+</p>
         </Button>
