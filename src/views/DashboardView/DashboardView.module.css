@@ -8,6 +8,7 @@
   flex-direction: row;
   width: 80%;
   gap: 1.2rem;
+  margin-top: 1rem;
 }
 
 .groupsTopicsEventsListsColumn {
@@ -20,6 +21,9 @@
 
 .profileAndFilterColumn {
   flex: 30%;
+  position: sticky;
+  top: 70px;
+  align-self: flex-start;
 }
 
 .filter {
@@ -29,16 +33,14 @@
 .filterIconFilter {
   display: none;
 }
-@media screen and (max-width: 950px) {
+
+@media screen and (max-width: 1500px) {
   .dashboard {
-    width: 95%;
+    width: 100%;
   }
 }
 
-@media screen and (max-width: 800px) {
-  .dashboard {
-    width: 95%;
-  }
+@media screen and (max-width: 1000px) {
   .groupsTopicsEventsListsColumn {
     display: none;
   }

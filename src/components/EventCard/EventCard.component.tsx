@@ -22,7 +22,7 @@ const EventCard = () => {
       <div className={styles.headerBox}></div>
       <div className={styles.infoBox}>
         <p className={styles.text}>Event info</p>
-        <div className={`${styles.textBox}`}></div>
+        <div className={styles.textBox}></div>
       </div>
       <div className={styles.btnContainer}>
         <Button
@@ -30,14 +30,14 @@ const EventCard = () => {
           onClick={onClickAcceptBtn}
           disabled={isAccept}
         >
-          <p className={styles.newPost}>Accept</p>
+          <p>Accept</p>
         </Button>
         <Button
           className={styles.button2}
           onClick={onClickDeclineBtn}
           disabled={isDeclined}
         >
-          <p className={styles.newPost}>Decline</p>
+          <p>Decline</p>
         </Button>
       </div>
     </Card>

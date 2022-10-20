@@ -3,13 +3,12 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-top: 3rem;
-  margin-left: 6rem;
-  margin-right: 6rem;
+  margin-top: 1rem;
+  margin-left: 1rem;
   padding: 0.8rem;
   border: none;
   background-color: white;
-  width: 15rem;
+  width: 60%;
   border-radius: 10px;
 }
 
