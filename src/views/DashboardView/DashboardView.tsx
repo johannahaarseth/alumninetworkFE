@@ -89,7 +89,7 @@ const DashboardView = () => {
                     className={styles.filterIcon}
                     style={{ borderRadius: 15, boxShadow: "0 0 0 0" }}
                   >
-                    <FilterAltIcon sx={{ fontSize: 40 }} />
+                    <FilterAltIcon sx={{ fontSize: 30 }} />
                   </Fab>
                 </ThemeProvider>
                 {isFilterHidden && (

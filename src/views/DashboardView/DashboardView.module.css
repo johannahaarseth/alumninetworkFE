@@ -52,6 +52,7 @@
   }
   .filter2 {
     display: block;
+    position: sticky;
     width: 160px;
   }
   .filterIcon {
@@ -60,7 +61,6 @@
   }
   .filterIconFilter {
     display: block;
-    position: sticky;
     margin-top: 27px;
   }
 }
