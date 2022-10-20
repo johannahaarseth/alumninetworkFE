@@ -12,7 +12,10 @@ const config = {
 const getUserById = (userId: number) =>
 	apiClient.get<IUserResponse>("/user/" + userId);
 
-const getCurrentUser = (userId: number) =>
-	apiClient.get<IUserResponse>("/user/current");
+const getCurrentUser = (args: {}) =>
+	apiClient.get<IUserResponse>("/user/current", args);
 
-export { getUserById, getCurrentUser };
+const patchUser = (args: {}) =>
+	apiClient.patch<IUserResponse>("/user/current", args);
+
+export { getUserById, getCurrentUser, patchUser };

@@ -2,8 +2,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useState } from "react";
 import { UseUser } from "../context/useUser";
 
-export const useApi = <T>(apiFunc: Function) => {
-	const [data, setData] = useState<T>();
+export const useApi = <T>(apiFunc: Function, currentState: T) => {
+	const [data, setData] = useState<T>(currentState);
 	const [error, setError] = useState("");
 	const [loading, setLoading] = useState(false);
 
@@ -27,6 +27,8 @@ export const useApi = <T>(apiFunc: Function) => {
 			},
 			...configInput?.params,
 		};
+
+		console.log(token, apiFunc);
 
 		setLoading(true);
 		try {

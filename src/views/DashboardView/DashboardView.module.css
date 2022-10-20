@@ -20,14 +20,9 @@
 
 .profileAndFilterColumn {
   flex: 30%;
-}
-
-.itemBox {
-  background-color: var(--alumni-light-beige);
-  height: auto;
-  width: 100%;
-  margin-bottom: 0.5rem;
-  padding: 10px;
+  /*position: sticky;*/
+  /*top: 70px;*/
+  /*align-self: flex-start;*/
 }
 
 @media screen and (max-width: 950px) {

@@ -8,45 +8,32 @@ import { useApi } from "../../api/useApi";
 import { getPosts } from "../../api/postsApi";
 import { useEffect } from "react";
 import { IPostResponse } from "../../interfaces/IPostResponse";
-
 import { useAuth0 } from "@auth0/auth0-react";
 import NavBar from "../../components/NavBar/NavBar.component";
-import { useContext } from "react";
-import { AppContext } from "../../context/AppContext";
-import { GroupResults } from "../../models/groupModel";
-import { TopicResults } from "../../models/topicModel";
-import { EventResults } from "../../models/eventModel";
 
 const DashboardView = () => {
-	const { isAuthenticated, getAccessTokenSilently } = useAuth0();
-	const appContext = useContext(AppContext);
+	const { isAuthenticated } = useAuth0();
 
-	const firstFewGroups = appContext?.groups.results.slice(0, 4);
-	const firstFewTopics = appContext?.topics.results.slice(0, 4);
-	const firstFewEvents = appContext?.events.results.slice(0, 4);
+	// Html/tsx example for later (delete when dynamic data is implemented)
+	// const listBoxContent = (
+	//   contentArray: GroupResults[] | TopicResults[] | EventResults[]
+	// ): JSX.Element | JSX.Element[] => {
+	//   return contentArray.map(
+	//     (e: GroupResults | TopicResults | EventResults, i: number) => {
+	//       return (
+	//         <div className={styles.itemBox} key={i}>
+	//           <p>{e.name}</p>
+	//         </div>
+	//       );
+	//     }
+	//   );
+	// };
 
-	const listBoxContent = (
-		contentArray: GroupResults[] | TopicResults[] | EventResults[]
-	): JSX.Element | JSX.Element[] => {
-		return contentArray.map(
-			(e: GroupResults | TopicResults | EventResults, i: number) => {
-				return (
-					<div className={styles.itemBox} key={i}>
-						<p>{e.name}</p>
-					</div>
-				);
-			}
-		);
-	};
-
-	const firstFewGroupsJsx = listBoxContent(firstFewGroups!);
-	const firstFewTopicsJsx = listBoxContent(firstFewTopics!);
-	const firstFewEventsJsx = listBoxContent(firstFewEvents!);
-
-	const getPostsApi = useApi<IPostResponse>(getPosts);
+	const getPostsApi = useApi<IPostResponse>(getPosts, {} as IPostResponse);
 
 	useEffect(() => {
 		getPostsApi.request();
+		// eslint-disable-next-line
 	}, []);
 
 	return (
@@ -56,26 +43,14 @@ const DashboardView = () => {
 				{isAuthenticated && (
 					<div className={styles.dashboard}>
 						<div className={styles.groupsTopicsEventsListsColumn}>
-							<ListBox
-								title={appContext?.titles.titles.groups!}
-								visibleSeeMoreBtn={true}
-								data={appContext?.groups!}
-							>
-								{firstFewGroupsJsx!}
+							<ListBox title="Groups" visibleSeeMoreBtn={true}>
+								{/*{firstFewGroupsJsx!}*/}
 							</ListBox>
-							<ListBox
-								title={appContext?.titles.titles.topics!}
-								visibleSeeMoreBtn={true}
-								data={appContext?.topics!}
-							>
-								{firstFewTopicsJsx!}
+							<ListBox title="Topics" visibleSeeMoreBtn={true}>
+								{/*{firstFewTopicsJsx!}*/}
 							</ListBox>
-							<ListBox
-								title={appContext?.titles.titles.events!}
-								visibleSeeMoreBtn={true}
-								data={appContext?.events!}
-							>
-								{firstFewEventsJsx!}
+							<ListBox title="Events" visibleSeeMoreBtn={true}>
+								{/*{firstFewEventsJsx!}*/}
 							</ListBox>
 						</div>
 						<div className={styles.timelineColumn}>

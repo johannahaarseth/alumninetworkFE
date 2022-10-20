@@ -1,4 +1,4 @@
-export interface IUserSummary {
-  userId: number;
-  name: string;
+export interface IUserSummary{
+    userId : number,
+    name : string
 }
