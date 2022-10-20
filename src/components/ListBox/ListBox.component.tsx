@@ -2,7 +2,7 @@ import styles from "./ListBox.module.css";
 import Button from "../Button/Button.component";
 import Card from "../Card/Card.component";
 import { useState } from "react";
-import Modal from "../Modal/Modal.component";
+import Modal from "@mui/material/Modal";
 import TextField1 from "../TextField/TextField.component";
 import RadioButton from "../RadioButton/RadioButton.component";
 import Input from "../Input/Input.component";
@@ -20,7 +20,9 @@ type ListBoxProps = {
 };
 
 const ListBox = ({ title, children, visibleSeeMoreBtn }: ListBoxProps) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const navigate = useNavigate();
   const [value, setValue] = useState<Dayjs | null>(dayjs());
   const [valuePlus, setValuePlus] = useState<Dayjs | null>(dayjs());
@@ -46,7 +48,7 @@ const ListBox = ({ title, children, visibleSeeMoreBtn }: ListBoxProps) => {
       <Card cardHoverEffect={false}>
         <div className={styles.titleAndAddBtn}>
           <p>{title}</p>
-          <Button onClick={() => setIsOpen(true)}>
+          <Button onClick={handleOpen}>
             <p>+ Add new</p>
           </Button>
         </div>
@@ -62,70 +64,76 @@ const ListBox = ({ title, children, visibleSeeMoreBtn }: ListBoxProps) => {
         </div>
       </Card>
 
-      {isOpen && (
-        <Modal setIsOpen={setIsOpen}>
-          <p className={styles.modalHeader}>
-            Create new {titleToLowerAndMinusPlural}
-          </p>
-          <form className={styles.form}>
-            <div>
-              <Input
-                placeholderText={`Add ${titleToLowerAndMinusPlural} title`}
-              />
-            </div>
-            {title.toString() === "Groups" && (
-              <div className={styles.radioButtons}>
-                <RadioButton valueProp={"Public"} />
-                <RadioButton valueProp={"Private"} />
-              </div>
-            )}
-            {title.toString() === "Events" && (
-              <LocalizationProvider
-                dateAdapter={AdapterDayjs}
-                adapterLocale={"nb"}
-              >
-                <DateTimePicker
-                  label="Start date"
-                  value={value}
-                  onChange={handleChange}
-                  disablePast
-                  inputFormat="DD-MM-YYYY hh:mm"
-                  renderInput={(params) => <TextField {...params} />}
-                />
-                <DateTimePicker
-                  label="End date"
-                  value={valuePlus?.add(1, "hours")}
-                  onChange={handleChangePlus}
-                  disablePast
-                  inputFormat="DD-MM-YYYY hh:mm"
-                  renderInput={(params) => <TextField {...params} />}
-                />
-              </LocalizationProvider>
-            )}
+      {open && (
+        <Modal open={open} onClose={handleClose}>
+          <div className={styles.centered}>
+            <div className={styles.modal}>
+              <Card cardHoverEffect={false}>
+                <p className={styles.modalHeader}>
+                  Create new {titleToLowerAndMinusPlural}
+                </p>
+                <form className={styles.form}>
+                  <div>
+                    <Input
+                      placeholderText={`Add ${titleToLowerAndMinusPlural} title`}
+                    />
+                  </div>
+                  {title.toString() === "Groups" && (
+                    <div className={styles.radioButtons}>
+                      <RadioButton valueProp={"Public"} />
+                      <RadioButton valueProp={"Private"} />
+                    </div>
+                  )}
+                  {title.toString() === "Events" && (
+                    <LocalizationProvider
+                      dateAdapter={AdapterDayjs}
+                      adapterLocale={"nb"}
+                    >
+                      <DateTimePicker
+                        label="Start date"
+                        value={value}
+                        onChange={handleChange}
+                        disablePast
+                        inputFormat="DD-MM-YYYY hh:mm"
+                        renderInput={(params) => <TextField {...params} />}
+                      />
+                      <DateTimePicker
+                        label="End date"
+                        value={valuePlus?.add(1, "hours")}
+                        onChange={handleChangePlus}
+                        disablePast
+                        inputFormat="DD-MM-YYYY hh:mm"
+                        renderInput={(params) => <TextField {...params} />}
+                      />
+                    </LocalizationProvider>
+                  )}
 
-            <div>
-              <TextField1
-                placeholderText={`Add ${titleToLowerAndMinusPlural} description`}
-              />
+                  <div>
+                    <TextField1
+                      placeholderText={`Add ${titleToLowerAndMinusPlural} description`}
+                    />
+                  </div>
+                  <div className={styles.buttonContainer}>
+                    {title.toString() === "Events" && (
+                      <Button onClick={() => navigate("/event")}>
+                        <p>Create {titleToLowerAndMinusPlural} &gt;</p>
+                      </Button>
+                    )}
+                    {title.toString() === "Groups" && (
+                      <Button onClick={() => navigate("/group")}>
+                        <p>Create {titleToLowerAndMinusPlural} &gt;</p>
+                      </Button>
+                    )}
+                    {title.toString() === "Topics" && (
+                      <Button onClick={() => navigate("/topic")}>
+                        <p>Create {titleToLowerAndMinusPlural} &gt;</p>
+                      </Button>
+                    )}
+                  </div>
+                </form>
+              </Card>
             </div>
-            <div className={styles.buttonContainer}>
-              {title.toString() === "Events" && (
-                <Button onClick={() => navigate("/event")}>
-                  <p>Create {titleToLowerAndMinusPlural} &gt;</p>
-                </Button>
-              )}
-              {title.toString() === "Groups" && (
-                <Button onClick={() => navigate("/group")}>
-                  <p>Create {titleToLowerAndMinusPlural} &gt;</p>
-                </Button>
-              )}
-              {title.toString() === "Topics" && (
-                <Button onClick={() => navigate("/topic")}>
-                  <p>Create {titleToLowerAndMinusPlural} &gt;</p>
-                </Button>
-              )}
-            </div>
-          </form>
+          </div>
         </Modal>
       )}
     </>

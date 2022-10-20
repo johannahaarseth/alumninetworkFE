@@ -28,6 +28,18 @@
   font-size: var(--font-size-medium);
 }
 
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modal {
+  position: relative;
+  border-radius: 10px;
+}
+
 .form {
   display: flex;
   flex-direction: column;
