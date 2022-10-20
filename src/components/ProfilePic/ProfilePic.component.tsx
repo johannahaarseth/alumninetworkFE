@@ -6,7 +6,7 @@ const ProfilePic = () => {
 
 	return (
 		<div className={styles.profilePic}>
-			<img src={user?.picture} alt={user?.picture} />
+			<img src={user?.picture} alt={user?.name} />
 		</div>
 	);
 };
