@@ -1,5 +1,4 @@
 import InfiniteScroll from "react-infinite-scroll-component";
-import { IPostResponse } from "../../interfaces/IPostResponse";
 import { IPostSummary } from "../../interfaces/IPostSummary";
 import PostCard from "../PostCard/PostCard.component";
 

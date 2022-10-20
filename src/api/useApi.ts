@@ -1,4 +1,3 @@
-import { dataContext } from "./../context/AppProvider";
 import { useState } from "react";
 
 export const useApi = <T>(apiFunc: Function, previousState: T) => {

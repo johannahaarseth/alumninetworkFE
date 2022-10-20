@@ -8,7 +8,8 @@ const config = {
 	},
 };
 
-const getPosts = () => apiClient.get<IPostResponse>("/post", config);
+const getPosts = () =>
+	apiClient.get<IPostResponse>("/post?offset=0&limit=20", config);
 const getPostsGeneric = () => apiClient.get<IPostResponse>("", config);
 const getPostById = (postId: number) =>
 	apiClient.get<IPostResponse>("/post/" + postId);

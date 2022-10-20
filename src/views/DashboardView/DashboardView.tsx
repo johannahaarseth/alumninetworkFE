@@ -43,7 +43,8 @@ const DashboardView = () => {
 
 	const handleGetNext = () => {
 		if (posts.next !== "") {
-			getPostsGenericApi.request(posts.next).then(() => {
+			console.log(posts.next);
+			getPostsGenericApi.request({ url: posts.next }).then(() => {
 				setPosts({
 					count: getPostsGenericApi.data.count ?? 0,
 					next: getPostsGenericApi.data.next ?? "",
