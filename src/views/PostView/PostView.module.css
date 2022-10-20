@@ -28,6 +28,17 @@
   justify-content: center;
 }
 
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  height: 15rem;
+}
+
+.modalSize {
+  width: 500px;
+}
+
 @media screen and (max-width: 1500px) {
   .postView {
     width: 100%;

@@ -62,7 +62,7 @@ const CalendarView = () => {
               editable={true}
               initialEvents={INITIAL_EVENTS}
               locales={allLocales}
-              locale="nb"
+              locale="en"
               eventsSet={handleEvents}
               select={handleDateSelect}
               eventClick={handleEventClick}
