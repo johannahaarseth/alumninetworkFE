@@ -8,46 +8,37 @@
   flex-direction: row;
   width: 80%;
   gap: 1.2rem;
-  margin-top: 1rem;
 }
 
 .groupsTopicsEventsListsColumn {
   flex: 30%;
 }
-
+.profileAndFilterColumn {
+  flex: 30%;
+}
 .timelineColumn {
   flex: 40%;
 }
 
-.profileAndFilterColumn {
-  position: sticky;
-  top: 70px;
-  align-self: flex-start;
-}
-
 .filter {
-  display: flex;
+  flex: 35%;
 }
 
 .filterIconFilter {
   display: none;
 }
-
-@media screen and (max-width: 1500px) {
+@media screen and (max-width: 950px) {
   .dashboard {
-    width: 100%;
+    width: 95%;
   }
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 800px) {
+  .dashboard {
+    width: 95%;
+  }
   .groupsTopicsEventsListsColumn {
     display: none;
-  }
-  .profileAndFilterColumn {
-    flex: 1%;
-    position: sticky;
-    top: 70px;
-    align-self: flex-start;
   }
 
   .profile {
@@ -57,16 +48,16 @@
   .filter {
     display: none;
   }
-  .filter2 {
-    display: block;
-    position: sticky;
-    width: 160px;
-  }
+
   .filterIcon {
-    left: 35%;
+    left: 45%;
   }
   .filterIconFilter {
     display: block;
-    margin-top: 27px;
+    position: sticky;
+    margin-top: 23px;
+  }
+  .profileAndFilterColumn {
+    flex: 1%;
   }
 }
