@@ -11,8 +11,10 @@ import { IPostResponse } from "../../interfaces/IPostResponse";
 import { useAuth0 } from "@auth0/auth0-react";
 import NavBar from "../../components/NavBar/NavBar.component";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
-import { Fab, IconButton, ThemeProvider } from "@mui/material";
+import { Fab, ThemeProvider } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
+import { IUserResponse } from "../../interfaces/IUserResponse";
+import { getCurrentUser } from "../../api/userApi";
 
 const theme = createTheme({
   palette: {
@@ -40,7 +42,8 @@ const DashboardView = () => {
   //   );
   // };
 
-  const getPostsApi = useApi<IPostResponse>(getPosts);
+  const getPostsApi = useApi<IPostResponse>(getPosts, {} as IPostResponse);
+  const getUserApi = useApi<IUserResponse>(getCurrentUser, {} as IUserResponse);
 
   useEffect(() => {
     getPostsApi.request();
@@ -75,7 +78,11 @@ const DashboardView = () => {
             </div>
             <div className={styles.profileAndFilterColumn}>
               <div className={styles.profile}>
-                <ProfileCard />
+                <ProfileCard
+                  status={getUserApi.data.status}
+                  bio={getUserApi.data.bio}
+                  funfact={getUserApi.data.funfact}
+                />
               </div>
               <div className={styles.filter}>
                 <FiltersCard />
