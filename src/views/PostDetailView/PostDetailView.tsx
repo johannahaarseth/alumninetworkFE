@@ -7,8 +7,13 @@ import PostEventCard from "../../components/PostEventCard/PostEventCard.componen
 import Card from "../../components/Card/Card.component";
 import ButtonCustom from "../../components/ButtonCustom/ButtonCustom";
 import Input from "../../components/Input/Input.component";
+import { useState } from "react";
+import InviteModal from "../../components/InviteModalContent/InviteModal.component";
+import Modal from "../../components/Modal/Modal.component";
 
 const PostDetailView = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <>
       <NavBar />
@@ -37,10 +42,17 @@ const PostDetailView = () => {
             ) : (
               <GroupCard />
             )}
-            <ButtonCustom />
+            <ButtonCustom setIsOpen={setIsOpen} />
           </div>
         </div>
       </div>
+      {window.location.pathname !== "/topic/post" && isOpen && (
+        <div className={styles.modalSize}>
+          <Modal setIsOpen={setIsOpen}>
+            <InviteModal setIsOpen={setIsOpen} />
+          </Modal>
+        </div>
+      )}
     </>
   );
 };

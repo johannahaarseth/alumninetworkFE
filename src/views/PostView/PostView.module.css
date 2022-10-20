@@ -18,6 +18,15 @@
   flex: 100%;
 }
 
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  height: 15rem;
+}
+.modalSize {
+  width: 500px;
+}
 @media screen and (max-width: 1100px) {
   .timeline {
     width: 100%;
@@ -25,11 +34,9 @@
   .timelineColumn {
     width: 100%;
   }
-
   .postsColumn {
     flex: 1%;
   }
-
   .profile {
     width: 250px;
   }
