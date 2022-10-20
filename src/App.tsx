@@ -7,6 +7,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import ListView from "./views/ListView/ListView";
 import PostView from "./views/PostView/PostView";
 import PostDetailView from "./views/PostDetailView/PostDetailView";
+import CalendarView from "./views/CalendarView/CalendarView";
 
 function App() {
   let { isAuthenticated, isLoading } = useAuth0();
@@ -61,6 +62,9 @@ function App() {
             {/* change afterwards to => path="/event/:id/post/:id or something like that" */}
             {isAuthenticated && (
               <Route path="/event/post" element={<PostDetailView />} />
+            )}
+            {isAuthenticated && (
+              <Route path="/calendar" element={<CalendarView />} />
             )}
           </Routes>
         </div>
