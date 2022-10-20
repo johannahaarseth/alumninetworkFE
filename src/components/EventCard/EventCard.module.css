@@ -26,12 +26,14 @@
   height: 250px;
   width: 100%;
 }
+
 .btnContainer {
   display: flex;
   flex-direction: row;
   margin-top: 4%;
   margin-bottom: 5%;
 }
+
 .button {
   display: flex;
   flex-direction: row;
@@ -48,15 +50,18 @@
   margin-right: 10px;
   margin-left: 25%;
 }
+
 .button:hover {
   background-color: #dd8912;
   opacity: 90%;
   cursor: pointer;
 }
+
 .button:active {
   background-color: #dd8912;
   cursor: pointer;
 }
+
 .button:disabled {
   background-color: #dd8912;
   color: rgb(196, 196, 196);
@@ -78,14 +83,17 @@
   box-shadow: 0 7px 8px -5px rgba(0, 0, 0, 0.4);
   margin-left: 10px;
 }
+
 .button2:hover {
   background-color: #104955;
   cursor: pointer;
 }
+
 .button2:active {
   background-color: #104955;
   cursor: pointer;
 }
+
 .button2:disabled {
   background-color: #104955;
   font-family: inherit;

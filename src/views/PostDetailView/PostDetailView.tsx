@@ -37,7 +37,9 @@ const PostDetailView = () => {
             ) : (
               <GroupCard />
             )}
-            <ButtonCustom />
+            <div className={styles.btnContainer}>
+              <ButtonCustom />
+            </div>
           </div>
         </div>
       </div>

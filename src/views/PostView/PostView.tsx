@@ -12,21 +12,21 @@ const PostView = () => {
       <NavBar />
 
       <div className={styles.container}>
-        <div className={styles.timeline}>
-          <div className={styles.postsColumn}></div>
-          <div className={styles.timelineColumn}>
+        <div className={styles.postView}>
+          <div className={styles.emptyColumn}></div>
+          <div className={styles.postColumn}>
             <CreateNewPost />
             <TimelineComponent posts={[]} />
           </div>
-
-          <div className={styles.profile}>
+          <div className={styles.infoColumn}>
             {window.location.pathname === "/event" ? (
               <EventCard />
             ) : (
               <GroupCard />
             )}
-
-            <ButtonCustom />
+            <div className={styles.btnContainer}>
+              <ButtonCustom />
+            </div>
           </div>
         </div>
       </div>

@@ -1,13 +1,12 @@
 @import "../../css-constants.css";
 
 .input {
-  height: 70%;
-  width: 29%;
+  width: 100%;
   border-radius: 10px;
   border: none;
+  margin: 0.5rem;
   padding: 1rem;
   font-size: var(--font-size-medium);
-  margin-left: -7.5rem;
 }
 
 .input:hover {
