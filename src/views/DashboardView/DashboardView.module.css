@@ -20,7 +20,6 @@
 }
 
 .profileAndFilterColumn {
-  flex: 30%;
   position: sticky;
   top: 70px;
   align-self: flex-start;
@@ -44,6 +43,12 @@
   .groupsTopicsEventsListsColumn {
     display: none;
   }
+  .profileAndFilterColumn {
+    flex: 1%;
+    position: sticky;
+    top: 70px;
+    align-self: flex-start;
+  }
 
   .profile {
     display: none;
@@ -59,7 +64,6 @@
   }
   .filterIcon {
     left: 35%;
-    position: flex;
   }
   .filterIconFilter {
     display: block;
