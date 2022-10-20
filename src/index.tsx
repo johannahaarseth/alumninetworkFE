@@ -13,6 +13,8 @@ root.render(
 			domain="dev-nrq5rdkw.us.auth0.com"
 			clientId="75ueSFCfMSTeq92b8pwu6BBF5Nl2rOA9"
 			redirectUri={window.location.origin + "/dashboard"}
+			audience="https://bealumninetwork.azurewebsites.net/"
+			scope="read:users"
 		>
 			<App />
 		</Auth0Provider>
