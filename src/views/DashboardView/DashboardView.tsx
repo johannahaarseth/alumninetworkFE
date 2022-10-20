@@ -86,7 +86,11 @@ const DashboardView = () => {
                     className={styles.filterIcon}
                     onClick={filterHidden}
                   >
-                    <Fab variant="extended" color="primary">
+                    <Fab
+                      variant="extended"
+                      color="primary"
+                      style={{ borderRadius: 15, boxShadow: "0" }}
+                    >
                       <FilterAltIcon sx={{ fontSize: 40 }} />
                     </Fab>
                   </IconButton>
