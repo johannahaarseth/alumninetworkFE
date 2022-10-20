@@ -6,7 +6,7 @@
 .calendarContainer {
   display: flex;
   width: 80%;
-  margin-top: 95px;
+  margin-top: 1.5rem;
 }
 
 .leftColumn {
