@@ -1,17 +1,28 @@
-.profilepic {
+.textBox {
+  background-color: var(--alumni-light-beige);
+  height: 100px;
+  width: 30rem;
+  margin-bottom: 1%;
+  margin-left: 20px;
+  margin-right: 25px;
+}
+
+.profilePic {
   height: 80px;
   width: 80px;
   margin: 5% 15%;
 }
-.profilename {
+
+.profileName {
   margin-top: 25%;
 }
 
-.form {
+.list {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  height: 15rem;
+  overflow-y: scroll;
+  height: 300px;
 }
 
 .closeButton {
@@ -21,7 +32,18 @@
   align-items: center;
 }
 
-.invbutton {
+.topContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 1rem;
+}
+
+.searchContainer {
+  margin: 0 1rem;
+}
+
+.invButton {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -33,25 +55,8 @@
   width: 5rem;
   border-radius: 10px;
 }
-.invbutton:hover {
+
+.invButton:hover {
   background-color: var(--alumni-primary-light-azure);
   cursor: pointer;
-}
-.textBox {
-  background-color: var(--alumni-light-beige);
-  height: 100px;
-  width: 30rem;
-  margin-bottom: 1%;
-  margin-left: 20px;
-  margin-right: 25px;
-}
-
-.emptySpace {
-  width: 91%;
-  position: sticky;
-  margin: 10px 10px 20px 20px;
-}
-
-.emptySpace2 {
-  padding-bottom: 30px;
 }

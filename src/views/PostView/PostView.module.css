@@ -35,8 +35,16 @@
   height: 15rem;
 }
 
-.modalSize {
-  width: 500px;
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modal {
+  position: relative;
+  border-radius: 10px;
 }
 
 @media screen and (max-width: 1500px) {

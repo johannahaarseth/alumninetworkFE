@@ -9,10 +9,12 @@ import ButtonCustom from "../../components/ButtonCustom/ButtonCustom";
 import Input from "../../components/Input/Input.component";
 import { useState } from "react";
 import InviteModal from "../../components/InviteModalContent/InviteModal.component";
-import Modal from "../../components/Modal/Modal.component";
+import Modal from "@mui/material/Modal";
 
 const PostDetailView = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <>
@@ -43,17 +45,21 @@ const PostDetailView = () => {
               <GroupCard />
             )}
             <div className={styles.btnContainer}>
-              <ButtonCustom setIsOpen={setIsOpen} />
+              <ButtonCustom onClick={handleOpen} />
             </div>
           </div>
         </div>
       </div>
-      {window.location.pathname !== "/topic/post" && isOpen && (
-        <div className={styles.modalSize}>
-          <Modal setIsOpen={setIsOpen}>
-            <InviteModal setIsOpen={setIsOpen} />
-          </Modal>
-        </div>
+      {window.location.pathname !== "/topic/post" && open && (
+        <Modal open={open} onClose={handleClose}>
+          <div className={styles.centered}>
+            <div className={styles.modal}>
+              <Card cardHoverEffect={false}>
+                <InviteModal setOpen={setOpen} />
+              </Card>
+            </div>
+          </div>
+        </Modal>
       )}
     </>
   );
