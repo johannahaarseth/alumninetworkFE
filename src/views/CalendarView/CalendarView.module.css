@@ -3,27 +3,28 @@
   justify-content: center;
 }
 
-.list {
+.calendarContainer {
   display: flex;
   width: 80%;
-  gap: 1.2rem;
+  margin-top: 1.2rem;
+  z-index: 0;
 }
 
 .leftColumn {
-  flex: 30%;
+  flex: 10%;
 }
 
 .middleColumn {
-  flex: 40%;
+  flex: 80%;
 }
 
 .rightColumn {
-  flex: 30%;
+  flex: 10%;
 }
 
-@media screen and (max-width: 1000px) {
-  .list {
-    width: 100%;
+@media screen and (max-width: 1400px) {
+  .calendarContainer {
+    width: 95%;
   }
 
   .leftColumn {

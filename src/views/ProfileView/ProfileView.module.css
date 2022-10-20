@@ -26,15 +26,8 @@
     width: 100%;
     flex-direction: column-reverse;
   }
-  .timelineColumn {
-    width: 100%;
-  }
 
   .postsColumn {
     flex: 1%;
-  }
-
-  .profile {
-    width: 100%;
   }
 }
