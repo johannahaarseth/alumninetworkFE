@@ -5,13 +5,12 @@ import FiltersCard from "../../components/FiltersCard/FiltersCard.component";
 import styles from "./DashboardView.module.css";
 import CreateNewPost from "../../components/CreateNewPost/CreateNewPost.component";
 import { useApi } from "../../api/useApi";
-import { getPosts, getPostsGeneric } from "../../api/postsApi";
 import { useEffect, useState } from "react";
 import { IPostResponse } from "../../interfaces/IPostResponse";
 import { useAuth0 } from "@auth0/auth0-react";
 import NavBar from "../../components/NavBar/NavBar.component";
 import { IUserResponse } from "../../interfaces/IUserResponse";
-import { getCurrentUser } from "../../api/userApi";
+import { apiClient } from "../../api/apiClient";
 
 const DashboardView = () => {
 	const { isAuthenticated } = useAuth0();
@@ -31,17 +30,29 @@ const DashboardView = () => {
 	//   );
 	// };
 
-	const getPostsApi = useApi<IPostResponse>(getPosts, {} as IPostResponse);
-	const getPostsGenericApi = useApi<IPostResponse>(getPostsGeneric, {
-		count: 0,
-		next: "",
-		results: [],
-	} as IPostResponse);
 	const [posts, setPosts] = useState<IPostResponse>({
 		count: 0,
 		next: "",
 		results: [],
 	} as IPostResponse);
+
+	const getPosts = (config: {}) =>
+		apiClient.get<IPostResponse>("/post?offset=0&limit=20", config);
+
+	const getPostsApi = useApi<IPostResponse>(getPosts, {} as IPostResponse);
+
+	const getPostsNext = (config: {}) =>
+		apiClient.get<IPostResponse>(posts.next, config);
+
+	const getPostsNextApi = useApi<IPostResponse>(getPostsNext, {
+		count: 0,
+		next: "",
+		results: [],
+	} as IPostResponse);
+
+	const getCurrentUser = (config: {}) =>
+		apiClient.get<IUserResponse>("/user/current", config);
+
 	const getUserApi = useApi<IUserResponse>(
 		getCurrentUser,
 		{} as IUserResponse
@@ -50,13 +61,13 @@ const DashboardView = () => {
 	const handleGetNext = () => {
 		if (posts.next !== "") {
 			console.log(posts.next);
-			getPostsGenericApi.request(posts.next).then(() => {
+			getPostsNextApi.request().then(() => {
 				setPosts({
-					count: getPostsGenericApi.data.count ?? 0,
-					next: getPostsGenericApi.data.next ?? "",
+					count: getPostsNextApi.data.count ?? 0,
+					next: getPostsNextApi.data.next ?? "",
 					results: [
 						...posts.results,
-						...getPostsGenericApi.data?.results,
+						...getPostsNextApi.data?.results,
 					],
 				} as IPostResponse);
 			});

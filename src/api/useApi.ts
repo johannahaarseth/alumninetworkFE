@@ -13,23 +13,26 @@ export const useApi = <T>(apiFunc: Function, currentState: T) => {
 		params?: {};
 	};
 
-	const request = async (url?: string, configInput?: AxiosInput) => {
+	const request = async (configInput?: AxiosInput) => {
 		const token = await getAccessTokenSilently({
 			audience: "https://bealumninetwork.azurewebsites.net/",
 			scope: "read:users",
 		});
 
+		console.log(token);
+
 		const config = {
 			headers: {
 				Authorization: `Bearer ${token}`,
-				...configInput?.headers,
 			},
 			...configInput?.params,
 		};
+
+		console.log(config);
+
 		setLoading(true);
-		console.log(url);
 		try {
-			const result = await apiFunc(url, config);
+			const result = await apiFunc(config);
 			setData(result.data);
 		} catch (err: any) {
 			setError(err.message || "Unexpected Error!");

@@ -19,10 +19,10 @@ const PostCard = ({ post }: PostCardProps) => {
 				</Link>
 				<p> to </p>
 				<Link
-					to={post.target.targetType + post.target.id}
+					to={post.target?.targetType + post.target?.id}
 					className={styles.postedInfo}
 				>
-					{post.target.name}
+					{post.target?.name}
 				</Link>
 			</div>
 
