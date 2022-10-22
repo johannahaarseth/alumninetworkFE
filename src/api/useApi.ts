@@ -9,11 +9,11 @@ export const useApi = <T>(apiFunc: Function, currentState: T) => {
 	const { getAccessTokenSilently } = useAuth0();
 
 	type AxiosInput = {
-		headers: {};
-		params: {};
+		headers?: {};
+		params?: {};
 	};
 
-	const request = async (configInput?: AxiosInput) => {
+	const request = async (url?: string, configInput?: AxiosInput) => {
 		const token = await getAccessTokenSilently({
 			audience: "https://bealumninetwork.azurewebsites.net/",
 			scope: "read:users",
@@ -27,8 +27,9 @@ export const useApi = <T>(apiFunc: Function, currentState: T) => {
 			...configInput?.params,
 		};
 		setLoading(true);
+		console.log(url);
 		try {
-			const result = await apiFunc(config);
+			const result = await apiFunc(url, config);
 			setData(result.data);
 		} catch (err: any) {
 			setError(err.message || "Unexpected Error!");
