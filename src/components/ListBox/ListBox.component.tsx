@@ -11,20 +11,24 @@ import TextField from "@mui/material/TextField";
 import dayjs, { Dayjs } from "dayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { useNavigate } from "react-router-dom";
-import { IGroupTopicEventSummary } from "../../interfaces/IGroupTopicEventSummary";
+import { Link, useNavigate } from "react-router-dom";
 import { GroupTopicEventSummaryList } from "../GroupTopicEventSummaryList/GroupTopicEventSummaryList.component";
+import { IEventSummary } from "../../interfaces/IEventResponse";
+import { ITopicSummary } from "../../interfaces/ITopicResponse";
+import { IGroupSummary } from "../../interfaces/IGroupResponse";
 
 type ListBoxProps = {
 	title: string;
 	visibleSeeMoreBtn: boolean;
-	grouptopicevent: IGroupTopicEventSummary[];
+	grouptopicevent: IGroupSummary[] | IEventSummary[] | ITopicSummary[];
+	linkItems: string;
 };
 
 const ListBox = ({
 	title,
 	visibleSeeMoreBtn,
 	grouptopicevent,
+	linkItems,
 }: ListBoxProps) => {
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
@@ -34,7 +38,6 @@ const ListBox = ({
 	const [valuePlus, setValuePlus] = useState<Dayjs | null>(dayjs());
 
 	const titleToLowerAndMinusPlural = title?.toLowerCase().slice(0, -1);
-	const path = "/" + title.charAt(0).toLowerCase() + title.slice(1);
 
 	const handleChange = (newValue: Dayjs | null) => {
 		setValue(newValue);
@@ -58,15 +61,18 @@ const ListBox = ({
 						<p>+ Add new</p>
 					</Button>
 				</div>
-				<GroupTopicEventSummaryList grouptopicevent={grouptopicevent} />
+				<GroupTopicEventSummaryList
+					grouptopicevent={grouptopicevent}
+					linkItems={linkItems}
+				/>
 				<div className={styles.seeMoreBtn}>
 					<span
 						className={
 							!visibleSeeMoreBtn ? styles.invisibleSeeMoreBtn : ""
 						}
 					>
-						<Button onClick={() => navigate(path)}>
-							<p>See more &gt;</p>
+						<Button>
+							<Link to={linkItems}>See more &gt;</Link>
 						</Button>
 					</span>
 				</div>

@@ -1,8 +1,11 @@
-import { IGroupTopicEventSummary } from "../../interfaces/IGroupTopicEventSummary";
-import { GroupTopicEventSummaryItem } from "../GroupTopicSummaryItem/GroupTopicSummaryItem.component";
+import { IEventSummary } from "../../interfaces/IEventResponse";
+import { IGroupSummary } from "../../interfaces/IGroupResponse";
+import { ITopicSummary } from "../../interfaces/ITopicResponse";
+import { GroupTopicEventSummaryItem } from "../GroupTopicSummaryItem/GroupTopicEventSummaryItem.component";
 
 type GroupTopicEventSummaryListProps = {
-	grouptopicevent: IGroupTopicEventSummary[];
+	grouptopicevent: IGroupSummary[] | IEventSummary[] | ITopicSummary[];
+	linkItems: string;
 };
 
 export const GroupTopicEventSummaryList = (
@@ -15,6 +18,7 @@ export const GroupTopicEventSummaryList = (
 					<GroupTopicEventSummaryItem
 						grouptopicevent={item}
 						key={i}
+						linkItems={props.linkItems}
 					/>
 				);
 			})}

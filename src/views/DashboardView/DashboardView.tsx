@@ -13,8 +13,9 @@ import NavBar from "../../components/NavBar/NavBar.component";
 import { IUserResponse } from "../../interfaces/IUserResponse";
 import { getCurrentUser } from "../../api/userApi";
 import { apiClient } from "../../api/apiClient";
-import { IGroupTopicEventSummary } from "../../interfaces/IGroupTopicEventSummary";
-import { IGroupTopicEventResponse } from "../../interfaces/IGroupTopicEventResponse";
+import { IGroupResponse } from "../../interfaces/IGroupResponse";
+import { ITopicResponse } from "../../interfaces/ITopicResponse";
+import { IEventResponse } from "../../interfaces/IEventResponse";
 
 const DashboardView = () => {
 	const { isAuthenticated } = useAuth0();
@@ -33,29 +34,20 @@ const DashboardView = () => {
 	//     }
 	//   );	// };
 
-	const getGroupApi = useApi<IGroupTopicEventResponse>(
+	const getGroupApi = useApi<IGroupResponse>(
 		(config: {}) =>
-			apiClient.get<IGroupTopicEventResponse>(
-				"/group?offset=0&limit=3",
-				config
-			),
-		{} as IGroupTopicEventResponse
+			apiClient.get<IGroupResponse>("/group?offset=0&limit=3", config),
+		{} as IGroupResponse
 	);
-	const getTopicApi = useApi<IGroupTopicEventResponse>(
+	const getTopicApi = useApi<ITopicResponse>(
 		(config: {}) =>
-			apiClient.get<IGroupTopicEventResponse>(
-				"/topic?offset=0&limit=3",
-				config
-			),
-		{} as IGroupTopicEventResponse
+			apiClient.get<ITopicResponse>("/topic?offset=0&limit=3", config),
+		{} as ITopicResponse
 	);
-	const getEventApi = useApi<IGroupTopicEventResponse>(
+	const getEventApi = useApi<IEventResponse>(
 		(config: {}) =>
-			apiClient.get<IGroupTopicEventResponse>(
-				"/event?offset=0&limit=3",
-				config
-			),
-		{} as IGroupTopicEventResponse
+			apiClient.get<IEventResponse>("/event?offset=0&limit=3", config),
+		{} as IEventResponse
 	);
 
 	useEffect(() => {
@@ -85,41 +77,40 @@ const DashboardView = () => {
 		<>
 			<NavBar />
 			<div className={styles.container}>
-				{isAuthenticated && (
-					<div className={styles.dashboard}>
-						<div className={styles.groupsTopicsEventsListsColumn}>
-							<ListBox
-								title="Groups"
-								visibleSeeMoreBtn={true}
-								grouptopicevent={getGroupApi.data?.results}
-							/>
-							<ListBox
-								title="Topics"
-								visibleSeeMoreBtn={true}
-								grouptopicevent={getTopicApi.data?.results}
-							/>
-							<ListBox
-								title="Events"
-								visibleSeeMoreBtn={true}
-								grouptopicevent={getEventApi.data?.results}
-							/>
-						</div>
-						<div className={styles.timelineColumn}>
-							<CreateNewPost />
-							<TimelineComponent
-								posts={getPostsApi.data?.results}
-							/>
-						</div>
-						<div className={styles.profileAndFilterColumn}>
-							<ProfileCard
-								status={getUserApi.data.status}
-								bio={getUserApi.data.bio}
-								funfact={getUserApi.data.funfact}
-							/>
-							<FiltersCard />
-						</div>
+				<div className={styles.dashboard}>
+					<div className={styles.groupsTopicsEventsListsColumn}>
+						<ListBox
+							title="All groups"
+							visibleSeeMoreBtn={true}
+							grouptopicevent={getGroupApi.data?.results}
+							linkItems={"/group"}
+						/>
+						<ListBox
+							title="All topics"
+							visibleSeeMoreBtn={true}
+							grouptopicevent={getTopicApi.data?.results}
+							linkItems={"/topic"}
+						/>
+						<ListBox
+							title="Your Events"
+							visibleSeeMoreBtn={true}
+							grouptopicevent={getEventApi.data?.results}
+							linkItems={"/event"}
+						/>
 					</div>
-				)}
+					<div className={styles.timelineColumn}>
+						<CreateNewPost />
+						<TimelineComponent posts={getPostsApi.data?.results} />
+					</div>
+					<div className={styles.profileAndFilterColumn}>
+						<ProfileCard
+							status={getUserApi.data.status}
+							bio={getUserApi.data.bio}
+							funfact={getUserApi.data.funfact}
+						/>
+						<FiltersCard />
+					</div>
+				</div>
 			</div>
 		</>
 	);
