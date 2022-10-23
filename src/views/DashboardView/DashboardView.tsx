@@ -12,6 +12,9 @@ import { useAuth0 } from "@auth0/auth0-react";
 import NavBar from "../../components/NavBar/NavBar.component";
 import { IUserResponse } from "../../interfaces/IUserResponse";
 import { getCurrentUser } from "../../api/userApi";
+import { apiClient } from "../../api/apiClient";
+import { IGroupTopicEventSummary } from "../../interfaces/IGroupTopicEventSummary";
+import { IGroupTopicEventResponse } from "../../interfaces/IGroupTopicEventResponse";
 
 const DashboardView = () => {
 	const { isAuthenticated } = useAuth0();
@@ -28,8 +31,39 @@ const DashboardView = () => {
 	//         </div>
 	//       );
 	//     }
-	//   );
-	// };
+	//   );	// };
+
+	const getGroupApi = useApi<IGroupTopicEventResponse>(
+		(config: {}) =>
+			apiClient.get<IGroupTopicEventResponse>(
+				"/group?offset=0&limit=3",
+				config
+			),
+		{} as IGroupTopicEventResponse
+	);
+	const getTopicApi = useApi<IGroupTopicEventResponse>(
+		(config: {}) =>
+			apiClient.get<IGroupTopicEventResponse>(
+				"/topic?offset=0&limit=3",
+				config
+			),
+		{} as IGroupTopicEventResponse
+	);
+	const getEventApi = useApi<IGroupTopicEventResponse>(
+		(config: {}) =>
+			apiClient.get<IGroupTopicEventResponse>(
+				"/event?offset=0&limit=3",
+				config
+			),
+		{} as IGroupTopicEventResponse
+	);
+
+	useEffect(() => {
+		getGroupApi.request();
+		getTopicApi.request();
+		getEventApi.request();
+		// eslint-disable-next-line
+	}, []);
 
 	const getPostsApi = useApi<IPostResponse>(getPosts, {} as IPostResponse);
 	const getUserApi = useApi<IUserResponse>(
@@ -54,15 +88,21 @@ const DashboardView = () => {
 				{isAuthenticated && (
 					<div className={styles.dashboard}>
 						<div className={styles.groupsTopicsEventsListsColumn}>
-							<ListBox title="Groups" visibleSeeMoreBtn={true}>
-								{/*{firstFewGroupsJsx!}*/}
-							</ListBox>
-							<ListBox title="Topics" visibleSeeMoreBtn={true}>
-								{/*{firstFewTopicsJsx!}*/}
-							</ListBox>
-							<ListBox title="Events" visibleSeeMoreBtn={true}>
-								{/*{firstFewEventsJsx!}*/}
-							</ListBox>
+							<ListBox
+								title="Groups"
+								visibleSeeMoreBtn={true}
+								grouptopicevent={getGroupApi.data?.results}
+							/>
+							<ListBox
+								title="Topics"
+								visibleSeeMoreBtn={true}
+								grouptopicevent={getTopicApi.data?.results}
+							/>
+							<ListBox
+								title="Events"
+								visibleSeeMoreBtn={true}
+								grouptopicevent={getEventApi.data?.results}
+							/>
 						</div>
 						<div className={styles.timelineColumn}>
 							<CreateNewPost />
