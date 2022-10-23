@@ -59,20 +59,20 @@ const DashboardView = () => {
 	);
 
 	const handleGetNext = () => {
+		console.log("Handle get next");
 		if (posts.next !== "") {
 			console.log(posts.next);
-			getPostsNextApi.request().then(() => {
-				setPosts({
-					count: getPostsNextApi.data.count ?? 0,
-					next: getPostsNextApi.data.next ?? "",
-					results: [
-						...posts.results,
-						...getPostsNextApi.data?.results,
-					],
-				} as IPostResponse);
-			});
+			getPostsNextApi.request();
 		}
 	};
+
+	useEffect(() => {
+		setPosts({
+			count: getPostsNextApi.data.count ?? 0,
+			next: getPostsNextApi.data.next ?? "",
+			results: [...posts.results, ...getPostsNextApi.data?.results],
+		} as IPostResponse);
+	}, [getPostsNextApi.data]);
 
 	useEffect(() => {
 		setPosts({
@@ -84,10 +84,6 @@ const DashboardView = () => {
 
 	useEffect(() => {
 		getPostsApi.request();
-		// eslint-disable-next-line
-	}, []);
-
-	useEffect(() => {
 		getUserApi.request();
 		// eslint-disable-next-line
 	}, []);
@@ -115,6 +111,7 @@ const DashboardView = () => {
 								posts={posts.results}
 								count={posts.count}
 								handleGetNext={handleGetNext}
+								hasMore={posts.next !== ""}
 							/>
 						</div>
 						<div className={styles.profileAndFilterColumn}>

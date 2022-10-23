@@ -28,6 +28,7 @@ const PostView = () => {
 							posts={[]}
 							count={0}
 							handleGetNext={() => {}}
+							hasMore={false}
 						/>
 					</div>
 					<div className={styles.infoColumn}>

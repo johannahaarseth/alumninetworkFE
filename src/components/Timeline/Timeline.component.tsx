@@ -5,18 +5,18 @@ import PostCard from "../PostCard/PostCard.component";
 type TimelineProps = {
 	posts: IPostSummary[];
 	count: number;
+	hasMore: boolean;
 	handleGetNext: () => void;
 };
 
-const Timeline = ({ posts, handleGetNext, count }: TimelineProps) => {
-	console.log(count);
-	console.log(posts);
+const Timeline = ({ posts, handleGetNext, count, hasMore }: TimelineProps) => {
+	console.log("Count:" + count);
 
 	return (
 		<InfiniteScroll
 			dataLength={count} //This is important field to render the next data
 			next={handleGetNext}
-			hasMore={true}
+			hasMore={hasMore}
 			loader={<h4>Loading...</h4>}
 			endMessage={
 				<p style={{ textAlign: "center" }}>
