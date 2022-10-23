@@ -62,6 +62,10 @@ const DashboardView = () => {
 		getPostsNextApi.request();
 	};
 
+	const handleGet = () => {
+		getPostsApi.request();
+	};
+
 	useEffect(() => {
 		setPosts({
 			count: getPostsNextApi.data.count ?? 0,
@@ -107,6 +111,7 @@ const DashboardView = () => {
 								posts={posts.results}
 								count={posts.count}
 								handleGetNext={handleGetNext}
+								handleGet={handleGet}
 								hasMore={
 									posts.next !== "" || getPostsApi.loading
 								}

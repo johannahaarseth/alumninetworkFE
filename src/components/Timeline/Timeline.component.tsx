@@ -7,9 +7,16 @@ type TimelineProps = {
 	count: number;
 	hasMore: boolean;
 	handleGetNext: () => void;
+	handleGet: () => void;
 };
 
-const Timeline = ({ posts, handleGetNext, count, hasMore }: TimelineProps) => {
+const Timeline = ({
+	posts,
+	handleGetNext,
+	count,
+	hasMore,
+	handleGet,
+}: TimelineProps) => {
 	return (
 		<InfiniteScroll
 			dataLength={count} //This is important field to render the next data
@@ -21,18 +28,10 @@ const Timeline = ({ posts, handleGetNext, count, hasMore }: TimelineProps) => {
 					<b>You have read all posts!</b>
 				</p>
 			}
-			/*
-  // below props only if you need pull down functionality
-  refreshFunction={handleGet}
-  pullDownToRefresh
-  pullDownToRefreshThreshold={50}
-  pullDownToRefreshContent={
-    <h3 style={{ textAlign: 'center' }}>&#8595; Pull down to refresh</h3>
-  }
-  releaseToRefreshContent={
-    <h3 style={{ textAlign: 'center' }}>&#8593; Release to refresh</h3>
-  }
-  */
+			// below props only if you need pull down functionality
+			refreshFunction={handleGet}
+			pullDownToRefresh
+			pullDownToRefreshThreshold={50}
 		>
 			{posts.map((post, i) => {
 				return <PostCard post={post} key={i} />;
