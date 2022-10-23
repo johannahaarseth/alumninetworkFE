@@ -111,7 +111,9 @@ const DashboardView = () => {
 								posts={posts.results}
 								count={posts.count}
 								handleGetNext={handleGetNext}
-								hasMore={posts.next !== ""}
+								hasMore={
+									posts.next !== "" || getPostsApi.loading
+								}
 							/>
 						</div>
 						<div className={styles.profileAndFilterColumn}>
