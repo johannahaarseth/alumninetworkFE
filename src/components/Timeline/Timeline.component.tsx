@@ -10,8 +10,6 @@ type TimelineProps = {
 };
 
 const Timeline = ({ posts, handleGetNext, count, hasMore }: TimelineProps) => {
-	console.log("Count:" + count);
-
 	return (
 		<InfiniteScroll
 			dataLength={count} //This is important field to render the next data

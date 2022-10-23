@@ -59,11 +59,7 @@ const DashboardView = () => {
 	);
 
 	const handleGetNext = () => {
-		console.log("Handle get next");
-		if (posts.next !== "") {
-			console.log(posts.next);
-			getPostsNextApi.request();
-		}
+		getPostsNextApi.request();
 	};
 
 	useEffect(() => {

@@ -19,8 +19,6 @@ export const useApi = <T>(apiFunc: Function, currentState: T) => {
 			scope: "read:users",
 		});
 
-		console.log(token);
-
 		const config = {
 			headers: {
 				Authorization: `Bearer ${token}`,
@@ -28,8 +26,6 @@ export const useApi = <T>(apiFunc: Function, currentState: T) => {
 			},
 			...configInput?.params,
 		};
-
-		console.log(config);
 
 		setLoading(true);
 		try {
