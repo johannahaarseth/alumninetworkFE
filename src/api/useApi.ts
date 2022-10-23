@@ -24,6 +24,7 @@ export const useApi = <T>(apiFunc: Function, currentState: T) => {
 		const config = {
 			headers: {
 				Authorization: `Bearer ${token}`,
+				...configInput?.headers,
 			},
 			...configInput?.params,
 		};
