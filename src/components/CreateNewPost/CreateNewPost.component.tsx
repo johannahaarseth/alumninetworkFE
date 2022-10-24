@@ -14,17 +14,12 @@ import {
   OutlinedInput,
   MenuItem,
   SelectChangeEvent,
-  useTheme,
   Grid,
 } from "@mui/material";
 import { useApi } from "../../api/useApi";
 import { apiClient } from "../../api/apiClient";
-import { IGroupSummary } from "../../interfaces/IGroupSummary";
-import { ITopicSummary } from "../../interfaces/ITopicSummary";
 import { IGroupResponse } from "../../interfaces/IGroupResponse";
 import { ITopicResponse } from "../../interfaces/ITopicResponse";
-import { MouseEventHandler } from "react";
-import { on } from "stream";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -42,10 +37,9 @@ const CreateNewPost = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const navigate = useNavigate();
-  const [groupsTitle, setGroupsTitle] = useState<string>();
-  const [topicsTitle, setTopicsTitle] = useState<string>();
+  const [groupsTitle, setGroupsTitle] = useState("");
+  const [topicsTitle, setTopicsTitle] = useState("");
 
-  const [toggle, setToggle] = useState(false);
   const [status, setStatus] = useState(0); // 0: no show, 1: show yes, 2: show no.
 
   const radioHandler = (status: number) => {
@@ -71,13 +65,15 @@ const CreateNewPost = () => {
     } = event;
     setGroupsTitle(value);
   };
-  const handleChangeTopics = (event: SelectChangeEvent<typeof groupsTitle>) => {
-    const {
-      target: { value },
-    } = event;
-    setTopicsTitle(value);
+  // const handleChangeTopics = (event: SelectChangeEvent<typeof groupsTitle>) => {
+  //   const {
+  //     target: { value },
+  //   } = event;
+  //   setTopicsTitle(value);
+  // };
+  const handleChangeTopics = (event: { target: { value: string } }) => {
+    setTopicsTitle(event.target.value);
   };
-
   return (
     <>
       <Card cardHoverEffect={true}>
@@ -124,6 +120,7 @@ const CreateNewPost = () => {
                           <FormControl sx={{ m: 1, width: 180 }}>
                             <InputLabel
                               id="demo-multiple-name-label"
+                              defaultValue={""}
                               sx={{
                                 color: "#000",
                                 "&.Mui-focused": {
@@ -137,7 +134,7 @@ const CreateNewPost = () => {
                               id="demo-multiple-name"
                               value={groupsTitle}
                               onChange={handleChangeGroups}
-                              required
+                              defaultValue={""}
                               input={<OutlinedInput label="Groups" />}
                               MenuProps={MenuProps}
                               sx={{
@@ -157,7 +154,7 @@ const CreateNewPost = () => {
                               {getGroupsApi.data.results.map((data) => (
                                 <MenuItem
                                   key={data.id + data.name}
-                                  value={data.name}
+                                  value={data.name ? data.name : " "}
                                 >
                                   {data.name}
                                 </MenuItem>
@@ -169,6 +166,7 @@ const CreateNewPost = () => {
                           <FormControl sx={{ m: 1, width: 180 }}>
                             <InputLabel
                               id="demo-multiple-name-label"
+                              defaultValue={" "}
                               sx={{
                                 color: "#000",
                                 "&.Mui-focused": {
@@ -182,6 +180,7 @@ const CreateNewPost = () => {
                               id="demo-multiple-name"
                               value={topicsTitle}
                               onChange={handleChangeTopics}
+                              defaultValue={" "}
                               input={<OutlinedInput label="Topics" />}
                               MenuProps={MenuProps}
                               sx={{
@@ -201,7 +200,7 @@ const CreateNewPost = () => {
                               {getTopicsApi.data.results.map((data) => (
                                 <MenuItem
                                   key={data.id + data.name}
-                                  value={data.name}
+                                  value={data.name ? data.name : " "}
                                 >
                                   {data.name}
                                 </MenuItem>
