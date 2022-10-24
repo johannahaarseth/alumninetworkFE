@@ -24,4 +24,5 @@
 .itemContainer:hover {
   background-color: var(--alumni-primary-azure);
   color: white;
+  transition: 0.4s;
 }
