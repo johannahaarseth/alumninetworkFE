@@ -21,6 +21,8 @@ import { useApi } from "../../api/useApi";
 import { apiClient } from "../../api/apiClient";
 import { IGroupSummary } from "../../interfaces/IGroupSummary";
 import { ITopicSummary } from "../../interfaces/ITopicSummary";
+import { IGroupResponse } from "../../interfaces/IGroupResponse";
+import { ITopicResponse } from "../../interfaces/ITopicResponse";
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -52,33 +54,35 @@ const CreateNewPost = () => {
     subscriber: false,
   } as ITopicSummary);
 
-  const getGroups = (config: {}) =>
-    apiClient.get<IGroupSummary>("/group?offset=0&limit=3", config);
-  const getGroupsApi = useApi<IGroupSummary>(getGroups, {} as IGroupSummary);
+  const getGroupApi = useApi<IGroupResponse>(
+    (config: {}) =>
+      apiClient.get<IGroupResponse>("/group?offset=0&limit=3", config),
+    {} as IGroupResponse
+  );
+  const getTopicApi = useApi<ITopicResponse>(
+    (config: {}) =>
+      apiClient.get<ITopicResponse>("/topic?offset=0&limit=3", config),
+    {} as ITopicResponse
+  );
+  // useEffect(() => {
+  //   setGroups({
+  //     id: getGroupsApi.data.id ?? 0,
+  //     name: getGroupsApi.data.name ?? "",
+  //     member: getGroupsApi.data.member ?? false,
+  //   } as IGroupSummary);
+  // }, [getGroupsApi.data]);
 
-  const getTopics = (config: {}) =>
-    apiClient.get<ITopicSummary>("/topic?offset=0&limit=3", config);
-  const getTopicsApi = useApi<ITopicSummary>(getTopics, {} as ITopicSummary);
+  // useEffect(() => {
+  //   setTopics({
+  //     id: getTopicsApi.data.id ?? 0,
+  //     name: getTopicsApi.data.name ?? "",
+  //     subscriber: getTopicsApi.data.subscriber ?? false,
+  //   } as ITopicSummary);
+  // }, [getTopicsApi.data]);
 
   useEffect(() => {
-    setGroups({
-      id: getGroupsApi.data.id ?? 0,
-      name: getGroupsApi.data.name ?? "",
-      member: getGroupsApi.data.member ?? false,
-    } as IGroupSummary);
-  }, [getGroupsApi.data]);
-
-  useEffect(() => {
-    setTopics({
-      id: getTopicsApi.data.id ?? 0,
-      name: getTopicsApi.data.name ?? "",
-      subscriber: getTopicsApi.data.subscriber ?? false,
-    } as ITopicSummary);
-  }, [getTopicsApi.data]);
-
-  useEffect(() => {
-    getGroupsApi.request();
-    getTopicsApi.request();
+    getGroupApi.request();
+    getTopicApi.request();
   }, []);
 
   const handleChangeGroups = (event: SelectChangeEvent<typeof groupsTitle>) => {
