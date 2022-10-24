@@ -5,7 +5,7 @@ export interface IGroupResponse {
 }
 
 export interface IGroupSummary {
-	id: number;
+	groupId: number;
 	name: string;
 	member: boolean;
 }

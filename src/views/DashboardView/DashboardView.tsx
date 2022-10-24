@@ -7,7 +7,6 @@ import CreateNewPost from "../../components/CreateNewPost/CreateNewPost.componen
 import { useApi } from "../../api/useApi";
 import { useEffect, useState } from "react";
 import { IPostResponse } from "../../interfaces/IPostResponse";
-import { useAuth0 } from "@auth0/auth0-react";
 import NavBar from "../../components/NavBar/NavBar.component";
 import { IUserResponse } from "../../interfaces/IUserResponse";
 import { apiClient } from "../../api/apiClient";
@@ -16,8 +15,6 @@ import { ITopicResponse } from "../../interfaces/ITopicResponse";
 import { IEventResponse } from "../../interfaces/IEventResponse";
 
 const DashboardView = () => {
-	const { isAuthenticated } = useAuth0();
-
 	// Html/tsx example for later (delete when dynamic data is implemented)
 	// const listBoxContent = (
 	//   contentArray: GroupResults[] | TopicResults[] | EventResults[]
@@ -112,6 +109,8 @@ const DashboardView = () => {
 		getUserApi.request();
 		// eslint-disable-next-line
 	}, []);
+
+	useEffect(() => {}, []);
 
 	return (
 		<>
