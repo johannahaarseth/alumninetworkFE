@@ -39,20 +39,9 @@ const CreateNewPost = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const navigate = useNavigate();
-  const [groupsTitle, setGroupsTitle] = useState<string[]>([]);
+  const [groupsTitle, setGroupsTitle] = useState<string>();
+  const [topicsTitle, setTopicsTitle] = useState<string>();
   const [showSelect, setShowSelect] = useState(false);
-
-  // const [groups, setGroups] = useState<IGroupSummary>({
-  //   id: 0,
-  //   name: "",
-  //   member: false,
-  // } as IGroupSummary);
-
-  // const [topics, setTopics] = useState<ITopicSummary>({
-  //   id: 0,
-  //   name: "",
-  //   subscriber: false,
-  // } as ITopicSummary);
 
   const getGroups = (config: {}) =>
     apiClient.get<IGroupResponse>("/group?offset=0&limit=3", config);
@@ -61,22 +50,6 @@ const CreateNewPost = () => {
   const getTopics = (config: {}) =>
     apiClient.get<ITopicResponse>("/topic?offset=0&limit=3", config);
   const getTopicsApi = useApi<ITopicResponse>(getTopics, {} as ITopicResponse);
-
-  // useEffect(() => {
-  //   setGroups({
-  //     id: getGroupsApi.data.id ?? 0,
-  //     name: getGroupsApi.data.name ?? "",
-  //     member: getGroupsApi.data.member ?? false,
-  //   } as IGroupSummary);
-  // }, [getGroupsApi.data]);
-
-  // useEffect(() => {
-  //   setTopics({
-  //     id: getTopicsApi.data.id ?? 0,
-  //     name: getTopicsApi.data.name ?? "",
-  //     subscriber: getTopicsApi.data.subscriber ?? false,
-  //   } as ITopicSummary);
-  // }, [getTopicsApi.data]);
 
   useEffect(() => {
     getGroupsApi.request();
@@ -87,12 +60,14 @@ const CreateNewPost = () => {
     const {
       target: { value },
     } = event;
-    setGroupsTitle(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
+    setGroupsTitle(value);
   };
-  console.log(getGroupsApi.data.results);
+  const handleChangeTopics = (event: SelectChangeEvent<typeof groupsTitle>) => {
+    const {
+      target: { value },
+    } = event;
+    setTopicsTitle(value);
+  };
 
   return (
     <>
@@ -177,7 +152,7 @@ const CreateNewPost = () => {
                         <Select
                           id="demo-multiple-name"
                           value={groupsTitle}
-                          //onChange={handleChangeGroups}
+                          onChange={handleChangeTopics}
                           input={<OutlinedInput label="Topics" />}
                           MenuProps={MenuProps}
                           sx={{
