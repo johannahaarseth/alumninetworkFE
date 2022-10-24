@@ -23,6 +23,7 @@ import { useApi } from "../../api/useApi";
 import { IPostResponse } from "../../interfaces/IPostResponse";
 import { apiClient } from "../../api/apiClient";
 import { IPostGroup } from "../../interfaces/IPostGroup";
+import { IPostTopic } from "../../interfaces/IPostTopic";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -63,27 +64,24 @@ const CreateNewPost = () => {
   const handleClose = () => setOpen(false);
   const navigate = useNavigate();
   const theme = useTheme();
-  const [personName, setPersonName] = useState<string[]>([]);
+  const [groupsTitle, setGroupsTitle] = useState<string[]>([]);
 
   const [groups, setGroups] = useState<IPostGroup>({
     id: 0,
     title: "",
   } as IPostGroup);
+  const [topics, setTopics] = useState<IPostTopic>({
+    id: 0,
+    title: "",
+  } as IPostTopic);
 
   const getGroups = (config: {}) =>
     apiClient.get<IPostGroup>("/post?offset=0&limit=20", config);
-
   const getGroupsApi = useApi<IPostGroup>(getGroups, {} as IPostGroup);
 
-  const handleChange = (event: SelectChangeEvent<typeof personName>) => {
-    const {
-      target: { value },
-    } = event;
-    setPersonName(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
-  };
+  const getTopics = (config: {}) =>
+    apiClient.get<IPostTopic>("/post?offset=0&limit=20", config);
+  const getTopicsApi = useApi<IPostTopic>(getTopics, {} as IPostTopic);
 
   useEffect(() => {
     setGroups({
@@ -91,9 +89,29 @@ const CreateNewPost = () => {
       title: getGroupsApi.data.title ?? "",
     } as IPostGroup);
   }, [getGroupsApi.data]);
+
+  useEffect(() => {
+    setTopics({
+      id: getTopicsApi.data.id ?? 0,
+      title: getTopicsApi.data.title ?? "",
+    } as IPostTopic);
+  }, [getTopicsApi.data]);
+
   useEffect(() => {
     getGroupsApi.request();
+    getTopicsApi.request();
   }, []);
+
+  const handleChangeGroups = (event: SelectChangeEvent<typeof groupsTitle>) => {
+    const {
+      target: { value },
+    } = event;
+    setGroupsTitle(
+      // On autofill we get a stringified value.
+      typeof value === "string" ? value.split(",") : value
+    );
+  };
+
   return (
     <>
       <Card cardHoverEffect={true}>
@@ -130,8 +148,8 @@ const CreateNewPost = () => {
                           labelId="demo-multiple-name-label"
                           id="demo-multiple-name"
                           multiple
-                          value={personName}
-                          onChange={handleChange}
+                          value={groupsTitle}
+                          //onChange={handleChangeGroups}
                           input={<OutlinedInput label="Groups" />}
                           MenuProps={MenuProps}
                         >
