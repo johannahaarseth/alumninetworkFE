@@ -1,9 +1,7 @@
 import NavBar from "../../components/NavBar/NavBar.component";
-import ProfileCard from "../../components/ProfileCard/ProfileCard.component";
 import React, { useEffect } from "react";
 import styles from "./GroupView.module.css";
 import { useApi } from "../../api/useApi";
-import { IUserResponse } from "../../interfaces/IUserResponse";
 import { IGroup } from "../../interfaces/IGroup";
 import { useParams } from "react-router-dom";
 import { apiClient } from "../../api/apiClient";
