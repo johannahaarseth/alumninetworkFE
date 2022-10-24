@@ -42,28 +42,26 @@ const CreateNewPost = () => {
   const [groupsTitle, setGroupsTitle] = useState<string[]>([]);
   const [showSelect, setShowSelect] = useState(false);
 
-  const [groups, setGroups] = useState<IGroupSummary>({
-    id: 0,
-    name: "",
-    member: false,
-  } as IGroupSummary);
+  // const [groups, setGroups] = useState<IGroupSummary>({
+  //   id: 0,
+  //   name: "",
+  //   member: false,
+  // } as IGroupSummary);
 
-  const [topics, setTopics] = useState<ITopicSummary>({
-    id: 0,
-    name: "",
-    subscriber: false,
-  } as ITopicSummary);
+  // const [topics, setTopics] = useState<ITopicSummary>({
+  //   id: 0,
+  //   name: "",
+  //   subscriber: false,
+  // } as ITopicSummary);
 
-  const getGroupApi = useApi<IGroupResponse>(
-    (config: {}) =>
-      apiClient.get<IGroupResponse>("/group?offset=0&limit=3", config),
-    {} as IGroupResponse
-  );
-  const getTopicApi = useApi<ITopicResponse>(
-    (config: {}) =>
-      apiClient.get<ITopicResponse>("/topic?offset=0&limit=3", config),
-    {} as ITopicResponse
-  );
+  const getGroups = (config: {}) =>
+    apiClient.get<IGroupResponse>("/group?offset=0&limit=3", config);
+  const getGroupsApi = useApi<IGroupResponse>(getGroups, {} as IGroupResponse);
+
+  const getTopics = (config: {}) =>
+    apiClient.get<ITopicResponse>("/topic?offset=0&limit=3", config);
+  const getTopicsApi = useApi<ITopicResponse>(getTopics, {} as ITopicResponse);
+
   // useEffect(() => {
   //   setGroups({
   //     id: getGroupsApi.data.id ?? 0,
@@ -81,8 +79,8 @@ const CreateNewPost = () => {
   // }, [getTopicsApi.data]);
 
   useEffect(() => {
-    getGroupApi.request();
-    getTopicApi.request();
+    getGroupsApi.request();
+    getTopicsApi.request();
   }, []);
 
   const handleChangeGroups = (event: SelectChangeEvent<typeof groupsTitle>) => {
@@ -94,6 +92,7 @@ const CreateNewPost = () => {
       typeof value === "string" ? value.split(",") : value
     );
   };
+  console.log(getGroupsApi.data.results);
 
   return (
     <>
@@ -154,41 +153,53 @@ const CreateNewPost = () => {
                             },
                           }}
                         >
-                          <MenuItem
-                            key={groups.id}
-                            value={groups.name}
-                            //  style={getStyles({groups.title}, personName, theme)}
-                          >
-                            {groups.name}
-                          </MenuItem>
+                          {getGroupsApi.data.results.map((data) => (
+                            <MenuItem key={data.id} value={data.name}>
+                              {data.name}
+                            </MenuItem>
+                          ))}
                         </Select>
                       </FormControl>
                     </Grid>
                     <Grid item>
-                      {/* <FormControl sx={{ m: 1, width: 180 }}>
-                        <InputLabel id="demo-multiple-name-label">
+                      <FormControl sx={{ m: 1, width: 180 }}>
+                        <InputLabel
+                          id="demo-multiple-name-label"
+                          sx={{
+                            color: "#000",
+                            "&.Mui-focused": {
+                              color: "#000",
+                            },
+                          }}
+                        >
                           Topics
                         </InputLabel>
                         <Select
-                          labelId="demo-multiple-name-label"
                           id="demo-multiple-name"
-                          multiple
-                          value={personName}
-                          onChange={handleChange}
+                          value={groupsTitle}
+                          //onChange={handleChangeGroups}
                           input={<OutlinedInput label="Topics" />}
                           MenuProps={MenuProps}
+                          sx={{
+                            "& fieldset": {
+                              borderColor: "#16697a",
+                            },
+                            "&:hover .MuiOutlinedInput-notchedOutline": {
+                              borderColor: "#16697a",
+                              background: "#ede7e3",
+                            },
+                            "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                              borderColor: "#16697a",
+                            },
+                          }}
                         >
-                          {names.map((name) => (
-                            <MenuItem
-                              key={name}
-                              value={name}
-                              style={getStyles(name, personName, theme)}
-                            >
-                              {name}
+                          {getTopicsApi.data.results.map((data) => (
+                            <MenuItem key={data.id} value={data.name}>
+                              {data.name}
                             </MenuItem>
                           ))}
                         </Select>
-                      </FormControl> */}
+                      </FormControl>
                     </Grid>
                   </Grid>
                   <div>
