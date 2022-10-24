@@ -23,23 +23,73 @@
   margin-bottom: 0.5rem;
 }
 
-.text {
+.infoBox input[type="text"] {
+  border: none;
+  background-color: inherit;
+  padding: 3px;
+  color: black;
   font-size: var(--font-size-medium);
+  pointer-events: none;
+  width: 75%;
+}
+
+.infoBox input[type="text"]:hover {
+  cursor: default;
+}
+
+.infoBox input[type="text"]::placeholder {
+  color: black;
+  opacity: 1;
+  font-size: var(--font-size-medium);
+}
+
+.infoBox input[type="text"]:focus {
+  outline: 2px solid var(--alumni-primary-dark-azure);
+  color: black;
+  font-size: var(--font-size-medium);
+  cursor: text;
+  pointer-events: inherit;
+}
+
+.statusContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 2%;
+}
+
+.editStatus {
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.editBioAndFunFact {
+  cursor: pointer;
+  font-size: 1.2rem;
+  position: relative;
+  bottom: 45%;
+  left: 94%;
 }
 
 .textBox {
   background-color: var(--alumni-light-beige);
   height: 70px;
   width: 100%;
+  padding: 0.5rem;
 }
 
-@media screen and (max-height: 710px) {
+.hidden {
+  display: none;
+}
+
+@media screen and (max-height: 650px) {
   .funFactBox {
     display: none;
   }
 }
 
-@media screen and (max-height: 610px) {
+@media screen and (max-height: 550px) {
   .shortBioBox {
     display: none;
   }
