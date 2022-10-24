@@ -4,9 +4,11 @@ import React, { useEffect } from "react";
 import styles from "./ProfileView.module.css";
 import { useApi } from "../../api/useApi";
 import { IUserResponse } from "../../interfaces/IUserResponse";
-import { getCurrentUser } from "../../api/userApi";
+import { apiClient } from "../../api/apiClient";
 
 const ProfileView = () => {
+	const getCurrentUser = (config: {}) =>
+		apiClient.get<IUserResponse>("/user/current", config);
 	const getUserApi = useApi<IUserResponse>(
 		getCurrentUser,
 		{} as IUserResponse

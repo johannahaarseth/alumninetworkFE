@@ -56,6 +56,12 @@ function App() {
 						{isAuthenticated && (
 							<Route path="/topic/:id" element={<PostView />} />
 						)}
+						{isAuthenticated && (
+							<Route
+								path="/user/:userId"
+								element={<ProfileView />}
+							/>
+						)}
 
 						{/* change afterwards to => path="/event/:id/" */}
 						{isAuthenticated && (
