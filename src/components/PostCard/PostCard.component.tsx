@@ -12,14 +12,14 @@ const PostCard = ({ post }: PostCardProps) => {
 		<Card cardHoverEffect={false}>
 			<div className={styles.toFrom}>
 				<Link
-					to={"user/" + post.createdBy?.userId}
+					to={"/user/" + post.createdBy?.userId}
 					className={styles.postedInfo}
 				>
 					{post.createdBy?.name}
 				</Link>
 				<p> to </p>
 				<Link
-					to={post.target?.targetType + post.target?.id}
+					to={"/" + post.target?.targetType + "/" + post.target?.id}
 					className={styles.postedInfo}
 				>
 					{post.target?.name}
