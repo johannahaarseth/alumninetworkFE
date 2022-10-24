@@ -17,6 +17,7 @@ import {
   useTheme,
   Theme,
   Grid,
+  makeStyles,
 } from "@mui/material";
 import { getPosts } from "../../api/postsApi";
 import { useApi } from "../../api/useApi";
@@ -25,7 +26,6 @@ import { apiClient } from "../../api/apiClient";
 import { IPostGroup } from "../../interfaces/IPostGroup";
 import { IGroupSummary } from "../../interfaces/IGroupSummary";
 import { ITopicSummary } from "../../interfaces/ITopicSummary";
-
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -58,6 +58,7 @@ const MenuProps = {
 //         : theme.typography.fontWeightMedium,
 //   };
 // }
+const color = "blue";
 
 const CreateNewPost = () => {
   const [open, setOpen] = useState(false);
@@ -147,17 +148,36 @@ const CreateNewPost = () => {
                   >
                     <Grid item xs={5}>
                       <FormControl sx={{ m: 1, width: 180 }}>
-                        <InputLabel id="demo-multiple-name-label">
+                        <InputLabel
+                          id="demo-multiple-name-label"
+                          sx={{
+                            color: "#000",
+                            "&.Mui-focused": {
+                              color: "#000",
+                            },
+                          }}
+                        >
                           Groups
                         </InputLabel>
                         <Select
-                          labelId="demo-multiple-name-label"
                           id="demo-multiple-name"
                           multiple
                           value={groupsTitle}
                           //onChange={handleChangeGroups}
                           input={<OutlinedInput label="Groups" />}
                           MenuProps={MenuProps}
+                          sx={{
+                            "& fieldset": {
+                              borderColor: "#16697a",
+                            },
+                            "&:hover .MuiOutlinedInput-notchedOutline": {
+                              borderColor: "#16697a",
+                              background: "#ede7e3",
+                            },
+                            "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                              borderColor: "#16697a",
+                            },
+                          }}
                         >
                           <MenuItem
                             key={groups.id}
@@ -196,7 +216,6 @@ const CreateNewPost = () => {
                       </FormControl> */}
                     </Grid>
                   </Grid>
-
                   <div>
                     <TextField placeholderText={"Add post content"} />
                   </div>
