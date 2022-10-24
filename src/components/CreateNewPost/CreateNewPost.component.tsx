@@ -23,7 +23,8 @@ import { useApi } from "../../api/useApi";
 import { IPostResponse } from "../../interfaces/IPostResponse";
 import { apiClient } from "../../api/apiClient";
 import { IPostGroup } from "../../interfaces/IPostGroup";
-import { IPostTopic } from "../../interfaces/IPostTopic";
+import { IGroupSummary } from "../../interfaces/IGroupSummary";
+import { ITopicSummary } from "../../interfaces/ITopicSummary";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -66,35 +67,40 @@ const CreateNewPost = () => {
   const theme = useTheme();
   const [groupsTitle, setGroupsTitle] = useState<string[]>([]);
 
-  const [groups, setGroups] = useState<IPostGroup>({
+  const [groups, setGroups] = useState<IGroupSummary>({
     id: 0,
-    title: "",
-  } as IPostGroup);
-  const [topics, setTopics] = useState<IPostTopic>({
+    name: "",
+    member: false,
+  } as IGroupSummary);
+
+  const [topics, setTopics] = useState<ITopicSummary>({
     id: 0,
-    title: "",
-  } as IPostTopic);
+    name: "",
+    subscriber: false,
+  } as ITopicSummary);
 
   const getGroups = (config: {}) =>
-    apiClient.get<IPostGroup>("/post?offset=0&limit=20", config);
-  const getGroupsApi = useApi<IPostGroup>(getGroups, {} as IPostGroup);
+    apiClient.get<IGroupSummary>("/post?offset=0&limit=20", config);
+  const getGroupsApi = useApi<IGroupSummary>(getGroups, {} as IGroupSummary);
 
   const getTopics = (config: {}) =>
-    apiClient.get<IPostTopic>("/post?offset=0&limit=20", config);
-  const getTopicsApi = useApi<IPostTopic>(getTopics, {} as IPostTopic);
+    apiClient.get<ITopicSummary>("/post?offset=0&limit=20", config);
+  const getTopicsApi = useApi<ITopicSummary>(getTopics, {} as ITopicSummary);
 
   useEffect(() => {
     setGroups({
       id: getGroupsApi.data.id ?? 0,
-      title: getGroupsApi.data.title ?? "",
-    } as IPostGroup);
+      name: getGroupsApi.data.name ?? "",
+      member: getGroupsApi.data.member ?? false,
+    } as IGroupSummary);
   }, [getGroupsApi.data]);
 
   useEffect(() => {
     setTopics({
       id: getTopicsApi.data.id ?? 0,
-      title: getTopicsApi.data.title ?? "",
-    } as IPostTopic);
+      name: getTopicsApi.data.name ?? "",
+      subscriber: getTopicsApi.data.subscriber ?? false,
+    } as ITopicSummary);
   }, [getTopicsApi.data]);
 
   useEffect(() => {
@@ -155,10 +161,10 @@ const CreateNewPost = () => {
                         >
                           <MenuItem
                             key={groups.id}
-                            value={groups.title}
+                            value={groups.name}
                             //  style={getStyles({groups.title}, personName, theme)}
                           >
-                            {groups.title}
+                            {groups.name}
                           </MenuItem>
                         </Select>
                       </FormControl>
