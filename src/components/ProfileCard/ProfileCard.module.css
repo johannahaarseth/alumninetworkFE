@@ -55,13 +55,13 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
   margin-right: 2%;
 }
 
 .editStatus {
   cursor: pointer;
   font-size: 1.2rem;
+  margin-left: 0.5rem;
 }
 
 .editBioAndFunFact {
@@ -92,5 +92,11 @@
 @media screen and (max-height: 550px) {
   .shortBioBox {
     display: none;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .editStatus {
+    margin-left: 30px;
   }
 }
