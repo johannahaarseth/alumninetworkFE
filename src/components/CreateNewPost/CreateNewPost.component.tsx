@@ -15,15 +15,10 @@ import {
   MenuItem,
   SelectChangeEvent,
   useTheme,
-  Theme,
   Grid,
-  makeStyles,
 } from "@mui/material";
-import { getPosts } from "../../api/postsApi";
 import { useApi } from "../../api/useApi";
-import { IPostResponse } from "../../interfaces/IPostResponse";
 import { apiClient } from "../../api/apiClient";
-import { IPostGroup } from "../../interfaces/IPostGroup";
 import { IGroupSummary } from "../../interfaces/IGroupSummary";
 import { ITopicSummary } from "../../interfaces/ITopicSummary";
 const ITEM_HEIGHT = 48;
@@ -37,35 +32,11 @@ const MenuProps = {
   },
 };
 
-// const names = [
-//   "Oliver Hansen",
-//   "Van Henry",
-//   "April Tucker",
-//   "Ralph Hubbard",
-//   "Omar Alexander",
-//   "Carlos Abbott",
-//   "Miriam Wagner",
-//   "Bradley Wilkerson",
-//   "Virginia Andrews",
-//   "Kelly Snyder",
-// ];
-
-// function getStyles(name: string, personName: string[], theme: Theme) {
-//   return {
-//     fontWeight:
-//       personName.indexOf(name) === -1
-//         ? theme.typography.fontWeightRegular
-//         : theme.typography.fontWeightMedium,
-//   };
-// }
-const color = "blue";
-
 const CreateNewPost = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const navigate = useNavigate();
-  const theme = useTheme();
   const [groupsTitle, setGroupsTitle] = useState<string[]>([]);
 
   const [groups, setGroups] = useState<IGroupSummary>({
@@ -81,11 +52,11 @@ const CreateNewPost = () => {
   } as ITopicSummary);
 
   const getGroups = (config: {}) =>
-    apiClient.get<IGroupSummary>("/post?offset=0&limit=20", config);
+    apiClient.get<IGroupSummary>("/group?offset=0&limit=3", config);
   const getGroupsApi = useApi<IGroupSummary>(getGroups, {} as IGroupSummary);
 
   const getTopics = (config: {}) =>
-    apiClient.get<ITopicSummary>("/post?offset=0&limit=20", config);
+    apiClient.get<ITopicSummary>("/topic?offset=0&limit=3", config);
   const getTopicsApi = useApi<ITopicSummary>(getTopics, {} as ITopicSummary);
 
   useEffect(() => {
@@ -161,7 +132,6 @@ const CreateNewPost = () => {
                         </InputLabel>
                         <Select
                           id="demo-multiple-name"
-                          multiple
                           value={groupsTitle}
                           //onChange={handleChangeGroups}
                           input={<OutlinedInput label="Groups" />}
