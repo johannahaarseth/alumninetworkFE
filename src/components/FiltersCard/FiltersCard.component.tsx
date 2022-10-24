@@ -6,10 +6,10 @@ const FiltersCard = () => {
     <Card cardHoverEffect={false}>
       <p>Filter the timeline content to show only:</p>
       <form>
-        <RadioButton valueProp={"Groups"} />
-        <RadioButton valueProp={"Topics"} />
-        <RadioButton valueProp={"Events"} />
-        <RadioButton valueProp={"Your activity"} />
+        {/* <RadioButton valueProp={"Groups"} onClick={undefined} />
+        <RadioButton valueProp={"Topics"} onClick={undefined} />
+        <RadioButton valueProp={"Events"} onClick={undefined} />
+        <RadioButton valueProp={"Your activity"} onClick={undefined} /> */}
       </form>
     </Card>
   );
