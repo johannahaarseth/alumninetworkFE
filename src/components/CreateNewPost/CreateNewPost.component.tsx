@@ -1,19 +1,99 @@
 import styles from "./CreateNewPost.module.css";
 import Card from "../Card/Card.component";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "@mui/material/Modal";
 import Input from "../Input/Input.component";
 import RadioButton from "../RadioButton/RadioButton.component";
 import TextField from "../TextField/TextField.component";
 import Button from "../Button/Button.component";
 import { useNavigate } from "react-router-dom";
+import {
+  FormControl,
+  InputLabel,
+  Select,
+  OutlinedInput,
+  MenuItem,
+  SelectChangeEvent,
+  useTheme,
+  Theme,
+  Grid,
+} from "@mui/material";
+import { getPosts } from "../../api/postsApi";
+import { useApi } from "../../api/useApi";
+import { IPostResponse } from "../../interfaces/IPostResponse";
+import { apiClient } from "../../api/apiClient";
+import { IPostGroup } from "../../interfaces/IPostGroup";
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
+
+// const names = [
+//   "Oliver Hansen",
+//   "Van Henry",
+//   "April Tucker",
+//   "Ralph Hubbard",
+//   "Omar Alexander",
+//   "Carlos Abbott",
+//   "Miriam Wagner",
+//   "Bradley Wilkerson",
+//   "Virginia Andrews",
+//   "Kelly Snyder",
+// ];
+
+// function getStyles(name: string, personName: string[], theme: Theme) {
+//   return {
+//     fontWeight:
+//       personName.indexOf(name) === -1
+//         ? theme.typography.fontWeightRegular
+//         : theme.typography.fontWeightMedium,
+//   };
+// }
 
 const CreateNewPost = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const navigate = useNavigate();
+  const theme = useTheme();
+  const [personName, setPersonName] = useState<string[]>([]);
 
+  const [groups, setGroups] = useState<IPostGroup>({
+    id: 0,
+    title: "",
+  } as IPostGroup);
+
+  const getGroups = (config: {}) =>
+    apiClient.get<IPostGroup>("/post?offset=0&limit=20", config);
+
+  const getGroupsApi = useApi<IPostGroup>(getGroups, {} as IPostGroup);
+
+  const handleChange = (event: SelectChangeEvent<typeof personName>) => {
+    const {
+      target: { value },
+    } = event;
+    setPersonName(
+      // On autofill we get a stringified value.
+      typeof value === "string" ? value.split(",") : value
+    );
+  };
+
+  useEffect(() => {
+    setGroups({
+      id: getGroupsApi.data.id ?? 0,
+      title: getGroupsApi.data.title ?? "",
+    } as IPostGroup);
+  }, [getGroupsApi.data]);
+  useEffect(() => {
+    getGroupsApi.request();
+  }, []);
   return (
     <>
       <Card cardHoverEffect={true}>
@@ -36,9 +116,63 @@ const CreateNewPost = () => {
                     <RadioButton valueProp={"Event"} />
                     <RadioButton valueProp={"Person"} />
                   </div>
-                  <Input
-                    placeholderText={"Search for group / event / person"}
-                  />
+                  <Grid
+                    container
+                    rowSpacing={1}
+                    columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+                  >
+                    <Grid item xs={5}>
+                      <FormControl sx={{ m: 1, width: 180 }}>
+                        <InputLabel id="demo-multiple-name-label">
+                          Groups
+                        </InputLabel>
+                        <Select
+                          labelId="demo-multiple-name-label"
+                          id="demo-multiple-name"
+                          multiple
+                          value={personName}
+                          onChange={handleChange}
+                          input={<OutlinedInput label="Groups" />}
+                          MenuProps={MenuProps}
+                        >
+                          <MenuItem
+                            key={groups.id}
+                            value={groups.title}
+                            //  style={getStyles({groups.title}, personName, theme)}
+                          >
+                            {groups.title}
+                          </MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Grid>
+                    <Grid item>
+                      {/* <FormControl sx={{ m: 1, width: 180 }}>
+                        <InputLabel id="demo-multiple-name-label">
+                          Topics
+                        </InputLabel>
+                        <Select
+                          labelId="demo-multiple-name-label"
+                          id="demo-multiple-name"
+                          multiple
+                          value={personName}
+                          onChange={handleChange}
+                          input={<OutlinedInput label="Topics" />}
+                          MenuProps={MenuProps}
+                        >
+                          {names.map((name) => (
+                            <MenuItem
+                              key={name}
+                              value={name}
+                              style={getStyles(name, personName, theme)}
+                            >
+                              {name}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl> */}
+                    </Grid>
+                  </Grid>
+
                   <div>
                     <TextField placeholderText={"Add post content"} />
                   </div>
