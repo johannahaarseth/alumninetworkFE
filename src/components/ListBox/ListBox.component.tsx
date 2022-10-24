@@ -1,7 +1,7 @@
 import styles from "./ListBox.module.css";
 import Button from "../Button/Button.component";
 import Card from "../Card/Card.component";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import Modal from "@mui/material/Modal";
 import TextArea from "../TextArea/TextArea.component";
 import RadioButton from "../RadioButton/RadioButton.component";
@@ -72,9 +72,10 @@ const ListBox = ({ title, children, visibleSeeMoreBtn }: ListBoxProps) => {
 
   const postEventApi = useApi<IPostEvent>(postEvent, {} as IPostEvent);
 
-  const saveEvent = (postEvent: IPostEvent) => {
+  const saveEvent = (e: FormEvent<HTMLButtonElement>) => {
+    e.preventDefault(); // remove when this works
     postEventApi
-      .request({ data: postEvent })
+      .request({ data: postEventData })
       .then(() => navigate("/group/" + postEventApi.data.id));
   };
 
@@ -156,8 +157,7 @@ const ListBox = ({ title, children, visibleSeeMoreBtn }: ListBoxProps) => {
                   </div>
                   <div className={styles.buttonContainer}>
                     {title.toString() === "Events" && (
-                      <Button>
-                        {/*<Button onClick={saveEvent(postEventData)}>*/}
+                      <Button onClick={saveEvent}>
                         <p>Create {titleToLowerAndMinusPlural} &gt;</p>
                       </Button>
                     )}
