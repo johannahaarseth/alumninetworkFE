@@ -1,6 +1,6 @@
 import { IUserSummary } from "./IUserSummary";
 
-export interface IRsvp {
+export interface IRSVP {
 	rsvpId: number;
 	guestCount: number;
 	responded: boolean;

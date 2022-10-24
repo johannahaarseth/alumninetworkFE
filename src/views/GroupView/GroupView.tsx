@@ -4,16 +4,21 @@ import React, { useEffect } from "react";
 import styles from "./GroupView.module.css";
 import { useApi } from "../../api/useApi";
 import { IUserResponse } from "../../interfaces/IUserResponse";
-import { getCurrentUser } from "../../api/userApi";
+import { IGroup } from "../../interfaces/IGroup";
+import { useParams } from "react-router-dom";
+import { apiClient } from "../../api/apiClient";
+import GroupCard from "../../components/GroupCard/GroupCard.component";
 
 const GroupView = () => {
-	const getUserApi = useApi<IUserResponse>(
-		getCurrentUser,
-		{} as IUserResponse
-	);
+	const { groupId } = useParams();
+
+	const getGroup = (config: {}) =>
+		apiClient.get<IGroup>("/group/" + groupId, config);
+
+	const getGroupApi = useApi<IGroup>(getGroup, {} as IGroup);
 
 	useEffect(() => {
-		getUserApi.request();
+		getGroupApi.request();
 		// eslint-disable-next-line
 	}, []);
 
@@ -25,11 +30,7 @@ const GroupView = () => {
 					<div className={styles.emptyColumn}></div>
 					<div className={styles.postsColumn}></div>
 					<div className={styles.postAndFilterColumn}>
-						<ProfileCard
-							status={getUserApi.data.status}
-							bio={getUserApi.data.bio}
-							funfact={getUserApi.data.funfact}
-						/>
+						<GroupCard group={getGroupApi.data} />
 					</div>
 				</div>
 			</div>

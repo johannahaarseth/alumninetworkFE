@@ -1,12 +1,12 @@
-import { IRsvp } from "./IRSVP";
+import { IRSVP } from "./IRSVP";
 import { IUserSummary } from "./IUserSummary";
 
-export interface IGroup {
+export interface IEvent {
 	eventId: number;
 	name: string;
 	description: string;
 	createdBy: IUserSummary;
-	rsvp: IRsvp;
+	rsvp: IRSVP;
 	invitedCount: number;
 	attendeesCount: number;
 	Count: number;

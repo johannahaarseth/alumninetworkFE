@@ -4,16 +4,21 @@ import React, { useEffect } from "react";
 import styles from "./EventView.module.css";
 import { useApi } from "../../api/useApi";
 import { IUserResponse } from "../../interfaces/IUserResponse";
-import { getCurrentUser } from "../../api/userApi";
+import { useParams } from "react-router-dom";
+import { IEvent } from "../../interfaces/IEvent";
+import { apiClient } from "../../api/apiClient";
+import EventCard from "../../components/EventCard/EventCard.component";
 
 const EventView = () => {
-	const getUserApi = useApi<IUserResponse>(
-		getCurrentUser,
-		{} as IUserResponse
-	);
+	const { eventId } = useParams();
+
+	const getEvent = (config: {}) =>
+		apiClient.get<IEvent>("/group/" + eventId, config);
+
+	const getEventApi = useApi<IEvent>(getEvent, {} as IEvent);
 
 	useEffect(() => {
-		getUserApi.request();
+		getEventApi.request();
 		// eslint-disable-next-line
 	}, []);
 
@@ -25,11 +30,7 @@ const EventView = () => {
 					<div className={styles.emptyColumn}></div>
 					<div className={styles.postsColumn}></div>
 					<div className={styles.postAndFilterColumn}>
-						<ProfileCard
-							status={getUserApi.data.status}
-							bio={getUserApi.data.bio}
-							funfact={getUserApi.data.funfact}
-						/>
+						<EventCard event={getEventApi.data} />
 					</div>
 				</div>
 			</div>

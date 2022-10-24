@@ -1,19 +1,22 @@
 import NavBar from "../../components/NavBar/NavBar.component";
-import ProfileCard from "../../components/ProfileCard/ProfileCard.component";
 import React, { useEffect } from "react";
 import styles from "./TopicView.module.css";
 import { useApi } from "../../api/useApi";
-import { IUserResponse } from "../../interfaces/IUserResponse";
-import { getCurrentUser } from "../../api/userApi";
+import { ITopic } from "../../interfaces/ITopic";
+import { apiClient } from "../../api/apiClient";
+import { useParams } from "react-router-dom";
+import TopicCard from "../../components/TopicCard/TopicCard.component";
 
 const TopicView = () => {
-	const getUserApi = useApi<IUserResponse>(
-		getCurrentUser,
-		{} as IUserResponse
-	);
+	const { topicId } = useParams();
+
+	const getTopic = (config: {}) =>
+		apiClient.get<ITopic>("/group/" + topicId, config);
+
+	const getTopicApi = useApi<ITopic>(getTopic, {} as ITopic);
 
 	useEffect(() => {
-		getUserApi.request();
+		getTopicApi.request();
 		// eslint-disable-next-line
 	}, []);
 
@@ -25,11 +28,7 @@ const TopicView = () => {
 					<div className={styles.emptyColumn}></div>
 					<div className={styles.postsColumn}></div>
 					<div className={styles.postAndFilterColumn}>
-						<ProfileCard
-							status={getUserApi.data.status}
-							bio={getUserApi.data.bio}
-							funfact={getUserApi.data.funfact}
-						/>
+						<TopicCard topic={getTopicApi.data} />
 					</div>
 				</div>
 			</div>
