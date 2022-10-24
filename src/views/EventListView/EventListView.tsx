@@ -2,25 +2,24 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Navigate } from "react-router-dom";
 import NavBar from "../../components/NavBar/NavBar.component";
 import ListBox from "../../components/ListBox/ListBox.component";
-import styles from "./ListView.module.css";
+import styles from "./EventListView.module.css";
+import { apiClient } from "../../api/apiClient";
+import { IEventResponse } from "../../interfaces/IEventResponse";
+import { useEffect } from "react";
+import { useApi } from "../../api/useApi";
 
-type ListViewProps = {
-	title: string;
-};
-
-const ListView = ({ title }: ListViewProps) => {
+const EventListView = () => {
 	const { isAuthenticated, user } = useAuth0();
 
-	// Html/tsx example for later (delete when dynamic data is implemented)
-	// const listViewDataRendered = data.results.map(
-	//   (e: GroupResults | TopicResults | EventResults, i: number) => {
-	//     return (
-	//       <div className={styles.itemBox} key={i}>
-	//         <p>{e.name}</p>
-	//       </div>
-	//     );
-	//   }
-	// );
+	const getEventApi = useApi<IEventResponse>(
+		(config: {}) => apiClient.get<IEventResponse>("/event", config),
+		{} as IEventResponse
+	);
+
+	useEffect(() => {
+		getEventApi.request();
+		// eslint-disable-next-line
+	}, []);
 
 	if (!user) {
 		return <Navigate to="/" replace />;
@@ -35,11 +34,13 @@ const ListView = ({ title }: ListViewProps) => {
 								<div className={styles.leftColumn}></div>
 								<div className={styles.middleColumn}>
 									<ListBox
-										title={title}
+										title="Your Events"
 										visibleSeeMoreBtn={false}
-									>
-										{/*{listViewDataRendered}*/}
-									</ListBox>
+										grouptopicevent={
+											getEventApi.data?.results
+										}
+										linkItems={"/event"}
+									/>
 								</div>
 								<div className={styles.rightColumn}></div>
 							</div>
@@ -51,4 +52,4 @@ const ListView = ({ title }: ListViewProps) => {
 	}
 };
 
-export default ListView;
+export default EventListView;

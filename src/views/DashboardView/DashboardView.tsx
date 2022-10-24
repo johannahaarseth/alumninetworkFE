@@ -11,6 +11,9 @@ import { useAuth0 } from "@auth0/auth0-react";
 import NavBar from "../../components/NavBar/NavBar.component";
 import { IUserResponse } from "../../interfaces/IUserResponse";
 import { apiClient } from "../../api/apiClient";
+import { IGroupResponse } from "../../interfaces/IGroupResponse";
+import { ITopicResponse } from "../../interfaces/ITopicResponse";
+import { IEventResponse } from "../../interfaces/IEventResponse";
 
 const DashboardView = () => {
 	const { isAuthenticated } = useAuth0();
@@ -27,8 +30,30 @@ const DashboardView = () => {
 	//         </div>
 	//       );
 	//     }
-	//   );
-	// };
+	//   );	// };
+
+	const getGroupApi = useApi<IGroupResponse>(
+		(config: {}) =>
+			apiClient.get<IGroupResponse>("/group?offset=0&limit=3", config),
+		{} as IGroupResponse
+	);
+	const getTopicApi = useApi<ITopicResponse>(
+		(config: {}) =>
+			apiClient.get<ITopicResponse>("/topic?offset=0&limit=3", config),
+		{} as ITopicResponse
+	);
+	const getEventApi = useApi<IEventResponse>(
+		(config: {}) =>
+			apiClient.get<IEventResponse>("/event?offset=0&limit=3", config),
+		{} as IEventResponse
+	);
+
+	useEffect(() => {
+		getGroupApi.request();
+		getTopicApi.request();
+		getEventApi.request();
+		// eslint-disable-next-line
+	}, []);
 
 	const [posts, setPosts] = useState<IPostResponse>({
 		count: 0,
@@ -92,41 +117,46 @@ const DashboardView = () => {
 		<>
 			<NavBar />
 			<div className={styles.container}>
-				{isAuthenticated && (
-					<div className={styles.dashboard}>
-						<div className={styles.groupsTopicsEventsListsColumn}>
-							<ListBox title="Groups" visibleSeeMoreBtn={true}>
-								{/*{firstFewGroupsJsx!}*/}
-							</ListBox>
-							<ListBox title="Topics" visibleSeeMoreBtn={true}>
-								{/*{firstFewTopicsJsx!}*/}
-							</ListBox>
-							<ListBox title="Events" visibleSeeMoreBtn={true}>
-								{/*{firstFewEventsJsx!}*/}
-							</ListBox>
-						</div>
-						<div className={styles.timelineColumn}>
-							<CreateNewPost />
-							<TimelineComponent
-								posts={posts.results}
-								count={posts.count}
-								handleGetNext={handleGetNext}
-								handleGet={handleGet}
-								hasMore={
-									posts.next !== "" || getPostsApi.loading
-								}
-							/>
-						</div>
-						<div className={styles.profileAndFilterColumn}>
-							<ProfileCard
-								status={getUserApi.data.status}
-								bio={getUserApi.data.bio}
-								funfact={getUserApi.data.funfact}
-							/>
-							<FiltersCard />
-						</div>
+				<div className={styles.dashboard}>
+					<div className={styles.groupsTopicsEventsListsColumn}>
+						<ListBox
+							title="Groups"
+							visibleSeeMoreBtn={true}
+							grouptopicevent={getGroupApi.data?.results}
+							linkItems={"/group"}
+						/>
+						<ListBox
+							title="Topics"
+							visibleSeeMoreBtn={true}
+							grouptopicevent={getTopicApi.data?.results}
+							linkItems={"/topic"}
+						/>
+						<ListBox
+							title="Events"
+							visibleSeeMoreBtn={true}
+							grouptopicevent={getEventApi.data?.results}
+							linkItems={"/event"}
+						/>
 					</div>
-				)}
+					<div className={styles.timelineColumn}>
+						<CreateNewPost />
+						<TimelineComponent
+							posts={posts.results}
+							count={posts.count}
+							handleGetNext={handleGetNext}
+							handleGet={handleGet}
+							hasMore={posts.next !== "" || getPostsApi.loading}
+						/>
+					</div>
+					<div className={styles.profileAndFilterColumn}>
+						<ProfileCard
+							status={getUserApi.data.status}
+							bio={getUserApi.data.bio}
+							funfact={getUserApi.data.funfact}
+						/>
+						<FiltersCard />
+					</div>
+				</div>
 			</div>
 		</>
 	);
