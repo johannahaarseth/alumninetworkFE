@@ -92,8 +92,16 @@ const ListBox = ({
                   </div>
                   {title.toString() === "Groups" && (
                     <div className={styles.radioButtons}>
-                      {/* <RadioButton valueProp={"Public"} onClick={undefined} />
-                      <RadioButton valueProp={"Private"} onClick={undefined} /> */}
+                      <RadioButton
+                        valueProp={"Public"}
+                        isChecked={undefined}
+                        onChange={undefined}
+                      />
+                      <RadioButton
+                        valueProp={"Private"}
+                        isChecked={undefined}
+                        onChange={undefined}
+                      />
                     </div>
                   )}
                   {title.toString() === "Events" && (
