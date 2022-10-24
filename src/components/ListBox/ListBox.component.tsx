@@ -1,9 +1,9 @@
 import styles from "./ListBox.module.css";
 import Button from "../Button/Button.component";
 import Card from "../Card/Card.component";
-import { useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import Modal from "@mui/material/Modal";
-import TextField1 from "../TextField/TextField.component";
+import TextArea from "../TextArea/TextArea.component";
 import RadioButton from "../RadioButton/RadioButton.component";
 import Input from "../Input/Input.component";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
@@ -17,171 +17,169 @@ import { IPostEvent } from "../../interfaces/IPostEvent";
 import { useApi } from "../../api/useApi";
 
 type ListBoxProps = {
-	title: string;
-	children: JSX.Element | JSX.Element[];
-	visibleSeeMoreBtn: boolean;
+  title: string;
+  children: JSX.Element | JSX.Element[];
+  visibleSeeMoreBtn: boolean;
 };
 
 const ListBox = ({ title, children, visibleSeeMoreBtn }: ListBoxProps) => {
-	const [open, setOpen] = useState(false);
-	const handleOpen = () => setOpen(true);
-	const handleClose = () => setOpen(false);
-	const navigate = useNavigate();
-	const [value, setValue] = useState<Dayjs | null>(dayjs());
-	const [valuePlus, setValuePlus] = useState<Dayjs | null>(dayjs());
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const navigate = useNavigate();
+  const [startDate, setStartDate] = useState<Dayjs | null>(dayjs());
+  const [endDate, setEndDate] = useState<Dayjs | null>(dayjs());
+  const [postEventData, setPostEventData] = useState<IPostEvent | null>(null);
 
-	const titleToLowerAndMinusPlural = title?.toLowerCase().slice(0, -1);
-	const path = "/" + title.charAt(0).toLowerCase() + title.slice(1);
+  const titleToLowerAndMinusPlural = title?.toLowerCase().slice(0, -1);
+  const path = "/" + title.charAt(0).toLowerCase() + title.slice(1);
 
-	const handleChange = (newValue: Dayjs | null) => {
-		setValue(newValue);
-		if (value?.isAfter(valuePlus)) {
-			setValuePlus(value);
-		}
-	};
-	const handleChangePlus = (newValue: Dayjs | null) => {
-		setValuePlus(newValue);
-		if (valuePlus?.isBefore(value)) {
-			setValue(valuePlus);
-		}
-	};
+  const handleTitleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setPostEventData({ ...postEventData!, title: event.target.value });
+  };
 
-	const postEvent = (config: {}) =>
-		apiClient.post<IPostEvent>("/event", config);
-	const postEventApi = useApi<IPostEvent>(postEvent, {} as IPostEvent);
+  const handleStartDateChange = (newValue: Dayjs | null) => {
+    if (startDate?.isAfter(endDate)) {
+      setEndDate(startDate);
+    }
+    setStartDate(newValue);
+    setPostEventData({
+      ...postEventData!,
+      startDate: newValue?.toJSON()!,
+    });
+  };
 
-	const saveEvent = (postEvent: IPostEvent) => {
-		postEventApi
-			.request({ data: postEvent })
-			.then(() => navigate("/group/" + postEventApi.data.id));
-	};
+  const handleEndDateChange = (newValue: Dayjs | null) => {
+    if (endDate?.isBefore(startDate)) {
+      setStartDate(endDate);
+    }
+    setEndDate(newValue);
+    setPostEventData({ ...postEventData!, endDate: newValue?.toJSON()! });
+  };
 
-	return (
-		<>
-			<Card cardHoverEffect={false}>
-				<div className={styles.titleAndAddBtn}>
-					<p>{title}</p>
-					<Button onClick={handleOpen}>
-						<p>+ Add new</p>
-					</Button>
-				</div>
-				<div className={styles.contentList}>{children}</div>
-				<div className={styles.seeMoreBtn}>
-					<span
-						className={
-							!visibleSeeMoreBtn ? styles.invisibleSeeMoreBtn : ""
-						}
-					>
-						<Button onClick={() => navigate(path)}>
-							<p>See more &gt;</p>
-						</Button>
-					</span>
-				</div>
-			</Card>
+  const handleDescriptionTextAreaChange = (
+    event: ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    setPostEventData({ ...postEventData!, description: event.target.value });
+  };
 
-			{open && (
-				<Modal open={open} onClose={handleClose}>
-					<div className={styles.centered}>
-						<div className={styles.modal}>
-							<Card cardHoverEffect={false}>
-								<p className={styles.modalHeader}>
-									Create new {titleToLowerAndMinusPlural}
-								</p>
-								<form className={styles.form}>
-									<div>
-										<Input
-											placeholderText={`Add ${titleToLowerAndMinusPlural} title`}
-										/>
-									</div>
-									{title.toString() === "Groups" && (
-										<div className={styles.radioButtons}>
-											<RadioButton valueProp={"Public"} />
-											<RadioButton
-												valueProp={"Private"}
-											/>
-										</div>
-									)}
-									{title.toString() === "Events" && (
-										<LocalizationProvider
-											dateAdapter={AdapterDayjs}
-											adapterLocale={"nb"}
-										>
-											<DateTimePicker
-												label="Start date"
-												value={value}
-												onChange={handleChange}
-												disablePast
-												inputFormat="DD-MM-YYYY hh:mm"
-												renderInput={(params) => (
-													<TextField {...params} />
-												)}
-											/>
-											<DateTimePicker
-												label="End date"
-												value={valuePlus?.add(
-													1,
-													"hours"
-												)}
-												onChange={handleChangePlus}
-												disablePast
-												inputFormat="DD-MM-YYYY hh:mm"
-												renderInput={(params) => (
-													<TextField {...params} />
-												)}
-											/>
-										</LocalizationProvider>
-									)}
+  useEffect(() => {
+    console.log(postEventData);
+  }, [postEventData]);
 
-									<div>
-										<TextField1
-											placeholderText={`Add ${titleToLowerAndMinusPlural} description`}
-										/>
-									</div>
-									<div className={styles.buttonContainer}>
-										{title.toString() === "Events" && (
-											<Button onClick={saveEvent()}>
-												<p>
-													Create{" "}
-													{titleToLowerAndMinusPlural}{" "}
-													&gt;
-												</p>
-											</Button>
-										)}
-										{title.toString() === "Groups" && (
-											<Button
-												onClick={() =>
-													navigate("/group")
-												}
-											>
-												<p>
-													Create{" "}
-													{titleToLowerAndMinusPlural}{" "}
-													&gt;
-												</p>
-											</Button>
-										)}
-										{title.toString() === "Topics" && (
-											<Button
-												onClick={() =>
-													navigate("/topic")
-												}
-											>
-												<p>
-													Create{" "}
-													{titleToLowerAndMinusPlural}{" "}
-													&gt;
-												</p>
-											</Button>
-										)}
-									</div>
-								</form>
-							</Card>
-						</div>
-					</div>
-				</Modal>
-			)}
-		</>
-	);
+  const postEvent = (config: {}) =>
+    apiClient.post<IPostEvent>("/event", config);
+
+  const postEventApi = useApi<IPostEvent>(postEvent, {} as IPostEvent);
+
+  const saveEvent = (postEvent: IPostEvent) => {
+    postEventApi
+      .request({ data: postEvent })
+      .then(() => navigate("/group/" + postEventApi.data.id));
+  };
+
+  return (
+    <>
+      <Card cardHoverEffect={false}>
+        <div className={styles.titleAndAddBtn}>
+          <p>{title}</p>
+          <Button onClick={handleOpen}>
+            <p>+ Add new</p>
+          </Button>
+        </div>
+        <div className={styles.contentList}>{children}</div>
+        <div className={styles.seeMoreBtn}>
+          <span
+            className={!visibleSeeMoreBtn ? styles.invisibleSeeMoreBtn : ""}
+          >
+            <Button onClick={() => navigate(path)}>
+              <p>See more &gt;</p>
+            </Button>
+          </span>
+        </div>
+      </Card>
+
+      {open && (
+        <Modal open={open} onClose={handleClose}>
+          <div className={styles.centered}>
+            <div className={styles.modal}>
+              <Card cardHoverEffect={false}>
+                <p className={styles.modalHeader}>
+                  Create new {titleToLowerAndMinusPlural}
+                </p>
+                <form className={styles.form}>
+                  <div>
+                    <Input
+                      placeholderText={`Add ${titleToLowerAndMinusPlural} title`}
+                      onChange={handleTitleChange}
+                    />
+                  </div>
+                  {title.toString() === "Groups" && (
+                    <div className={styles.radioButtons}>
+                      <RadioButton valueProp={"Public"} />
+                      <RadioButton valueProp={"Private"} />
+                    </div>
+                  )}
+                  {title.toString() === "Events" && (
+                    <LocalizationProvider
+                      dateAdapter={AdapterDayjs}
+                      adapterLocale={"nb"}
+                    >
+                      <DateTimePicker
+                        label="Start date"
+                        value={startDate}
+                        onChange={handleStartDateChange}
+                        disablePast
+                        inputFormat="DD-MM-YYYY hh:mm"
+                        renderInput={(params) => (
+                          <TextField {...params} type="datetime-local" />
+                        )}
+                      />
+                      <DateTimePicker
+                        label="End date"
+                        value={endDate?.add(1, "hours")}
+                        onChange={handleEndDateChange}
+                        disablePast
+                        inputFormat="DD-MM-YYYY hh:mm"
+                        renderInput={(params) => (
+                          <TextField {...params} type="datetime-local" />
+                        )}
+                      />
+                    </LocalizationProvider>
+                  )}
+
+                  <div>
+                    <TextArea
+                      placeholderText={`Add ${titleToLowerAndMinusPlural} description`}
+                      onChange={handleDescriptionTextAreaChange}
+                    />
+                  </div>
+                  <div className={styles.buttonContainer}>
+                    {title.toString() === "Events" && (
+                      <Button>
+                        {/*<Button onClick={saveEvent(postEventData)}>*/}
+                        <p>Create {titleToLowerAndMinusPlural} &gt;</p>
+                      </Button>
+                    )}
+                    {title.toString() === "Groups" && (
+                      <Button onClick={() => navigate("/group")}>
+                        <p>Create {titleToLowerAndMinusPlural} &gt;</p>
+                      </Button>
+                    )}
+                    {title.toString() === "Topics" && (
+                      <Button onClick={() => navigate("/topic")}>
+                        <p>Create {titleToLowerAndMinusPlural} &gt;</p>
+                      </Button>
+                    )}
+                  </div>
+                </form>
+              </Card>
+            </div>
+          </div>
+        </Modal>
+      )}
+    </>
+  );
 };
 
 export default ListBox;
