@@ -15,20 +15,6 @@ import { ITopicResponse } from "../../interfaces/ITopicResponse";
 import { IEventResponse } from "../../interfaces/IEventResponse";
 
 const DashboardView = () => {
-	// Html/tsx example for later (delete when dynamic data is implemented)
-	// const listBoxContent = (
-	//   contentArray: GroupResults[] | TopicResults[] | EventResults[]
-	// ): JSX.Element | JSX.Element[] => {
-	//   return contentArray.map(
-	//     (e: GroupResults | TopicResults | EventResults, i: number) => {
-	//       return (
-	//         <div className={styles.itemBox} key={i}>
-	//           <p>{e.name}</p>
-	//         </div>
-	//       );
-	//     }
-	//   );	// };
-
 	const getGroupApi = useApi<IGroupResponse>(
 		(config: {}) =>
 			apiClient.get<IGroupResponse>("/group?offset=0&limit=3", config),
@@ -46,9 +32,9 @@ const DashboardView = () => {
 	);
 
 	useEffect(() => {
-		getGroupApi.request();
-		getTopicApi.request();
-		getEventApi.request();
+		getGroupApi.request().then();
+		getTopicApi.request().then();
+		getEventApi.request().then();
 		// eslint-disable-next-line
 	}, []);
 
@@ -81,11 +67,11 @@ const DashboardView = () => {
 	);
 
 	const handleGetNext = () => {
-		getPostsNextApi.request();
+		getPostsNextApi.request().then();
 	};
 
 	const handleGet = () => {
-		getPostsApi.request();
+		getPostsApi.request().then();
 	};
 
 	useEffect(() => {
@@ -94,7 +80,22 @@ const DashboardView = () => {
 			next: getPostsNextApi.data.next ?? "",
 			results: [...posts.results, ...getPostsNextApi.data?.results],
 		} as IPostResponse);
+		// eslint-disable-next-line
 	}, [getPostsNextApi.data]);
+
+	useEffect(() => {
+		setPosts({
+			count: getPostsApi.data.count ?? 0,
+			next: getPostsApi.data.next ?? "",
+			results: getPostsApi.data?.results ?? [],
+		} as IPostResponse);
+	}, [getPostsApi.data]);
+
+	useEffect(() => {
+		getPostsApi.request().then();
+		getUserApi.request().then();
+		// eslint-disable-next-line
+	}, []);
 
 	useEffect(() => {
 		setPosts({
