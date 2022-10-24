@@ -80,19 +80,19 @@ const DashboardView = () => {
 				<div className={styles.dashboard}>
 					<div className={styles.groupsTopicsEventsListsColumn}>
 						<ListBox
-							title="All groups"
+							title="Groups"
 							visibleSeeMoreBtn={true}
 							grouptopicevent={getGroupApi.data?.results}
 							linkItems={"/group"}
 						/>
 						<ListBox
-							title="All topics"
+							title="Topics"
 							visibleSeeMoreBtn={true}
 							grouptopicevent={getTopicApi.data?.results}
 							linkItems={"/topic"}
 						/>
 						<ListBox
-							title="Your Events"
+							title="Events"
 							visibleSeeMoreBtn={true}
 							grouptopicevent={getEventApi.data?.results}
 							linkItems={"/event"}
