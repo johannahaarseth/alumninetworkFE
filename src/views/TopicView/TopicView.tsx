@@ -11,7 +11,7 @@ const TopicView = () => {
 	const { topicId } = useParams();
 
 	const getTopic = (config: {}) =>
-		apiClient.get<ITopic>("/group/" + topicId, config);
+		apiClient.get<ITopic>("/topic/" + topicId, config);
 
 	const getTopicApi = useApi<ITopic>(getTopic, {} as ITopic);
 

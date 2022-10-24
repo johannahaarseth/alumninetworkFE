@@ -11,7 +11,7 @@ const EventView = () => {
 	const { eventId } = useParams();
 
 	const getEvent = (config: {}) =>
-		apiClient.get<IEvent>("/group/" + eventId, config);
+		apiClient.get<IEvent>("/event/" + eventId, config);
 
 	const getEventApi = useApi<IEvent>(getEvent, {} as IEvent);
 
