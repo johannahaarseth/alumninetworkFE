@@ -7,7 +7,6 @@ import CreateNewPost from "../../components/CreateNewPost/CreateNewPost.componen
 import { useApi } from "../../api/useApi";
 import { useEffect, useState } from "react";
 import { IPostResponse } from "../../interfaces/IPostResponse";
-import { useAuth0 } from "@auth0/auth0-react";
 import NavBar from "../../components/NavBar/NavBar.component";
 import { IUserResponse } from "../../interfaces/IUserResponse";
 import { apiClient } from "../../api/apiClient";
@@ -16,150 +15,132 @@ import { ITopicResponse } from "../../interfaces/ITopicResponse";
 import { IEventResponse } from "../../interfaces/IEventResponse";
 
 const DashboardView = () => {
-	const { isAuthenticated } = useAuth0();
+  const getGroupApi = useApi<IGroupResponse>(
+    (config: {}) =>
+      apiClient.get<IGroupResponse>("/group?offset=0&limit=3", config),
+    {} as IGroupResponse
+  );
+  const getTopicApi = useApi<ITopicResponse>(
+    (config: {}) =>
+      apiClient.get<ITopicResponse>("/topic?offset=0&limit=3", config),
+    {} as ITopicResponse
+  );
+  const getEventApi = useApi<IEventResponse>(
+    (config: {}) =>
+      apiClient.get<IEventResponse>("/event?offset=0&limit=3", config),
+    {} as IEventResponse
+  );
 
-	// Html/tsx example for later (delete when dynamic data is implemented)
-	// const listBoxContent = (
-	//   contentArray: GroupResults[] | TopicResults[] | EventResults[]
-	// ): JSX.Element | JSX.Element[] => {
-	//   return contentArray.map(
-	//     (e: GroupResults | TopicResults | EventResults, i: number) => {
-	//       return (
-	//         <div className={styles.itemBox} key={i}>
-	//           <p>{e.name}</p>
-	//         </div>
-	//       );
-	//     }
-	//   );	// };
+  useEffect(() => {
+    getGroupApi.request().then();
+    getTopicApi.request().then();
+    getEventApi.request().then();
+    // eslint-disable-next-line
+  }, []);
 
-	const getGroupApi = useApi<IGroupResponse>(
-		(config: {}) =>
-			apiClient.get<IGroupResponse>("/group?offset=0&limit=3", config),
-		{} as IGroupResponse
-	);
-	const getTopicApi = useApi<ITopicResponse>(
-		(config: {}) =>
-			apiClient.get<ITopicResponse>("/topic?offset=0&limit=3", config),
-		{} as ITopicResponse
-	);
-	const getEventApi = useApi<IEventResponse>(
-		(config: {}) =>
-			apiClient.get<IEventResponse>("/event?offset=0&limit=3", config),
-		{} as IEventResponse
-	);
+  const [posts, setPosts] = useState<IPostResponse>({
+    count: 0,
+    next: "",
+    results: [],
+  } as IPostResponse);
 
-	useEffect(() => {
-		getGroupApi.request();
-		getTopicApi.request();
-		getEventApi.request();
-		// eslint-disable-next-line
-	}, []);
+  const getPosts = (config: {}) =>
+    apiClient.get<IPostResponse>("/post?offset=0&limit=20", config);
 
-	const [posts, setPosts] = useState<IPostResponse>({
-		count: 0,
-		next: "",
-		results: [],
-	} as IPostResponse);
+  const getPostsApi = useApi<IPostResponse>(getPosts, {} as IPostResponse);
 
-	const getPosts = (config: {}) =>
-		apiClient.get<IPostResponse>("/post?offset=0&limit=20", config);
+  const getPostsNext = (config: {}) =>
+    apiClient.get<IPostResponse>(posts.next, config);
 
-	const getPostsApi = useApi<IPostResponse>(getPosts, {} as IPostResponse);
+  const getPostsNextApi = useApi<IPostResponse>(getPostsNext, {
+    count: 0,
+    next: "",
+    results: [],
+  } as IPostResponse);
 
-	const getPostsNext = (config: {}) =>
-		apiClient.get<IPostResponse>(posts.next, config);
+  const getCurrentUser = (config: {}) =>
+    apiClient.get<IUserResponse>("/user/current", config);
 
-	const getPostsNextApi = useApi<IPostResponse>(getPostsNext, {
-		count: 0,
-		next: "",
-		results: [],
-	} as IPostResponse);
+  const getUserApi = useApi<IUserResponse>(getCurrentUser, {} as IUserResponse);
 
-	const getCurrentUser = (config: {}) =>
-		apiClient.get<IUserResponse>("/user/current", config);
+  const handleGetNext = () => {
+    getPostsNextApi.request().then();
+  };
 
-	const getUserApi = useApi<IUserResponse>(
-		getCurrentUser,
-		{} as IUserResponse
-	);
+  const handleGet = () => {
+    getPostsApi.request().then();
+  };
 
-	const handleGetNext = () => {
-		getPostsNextApi.request();
-	};
+  useEffect(() => {
+    setPosts({
+      count: getPostsNextApi.data.count ?? 0,
+      next: getPostsNextApi.data.next ?? "",
+      results: [...posts.results, ...getPostsNextApi.data?.results],
+    } as IPostResponse);
+    // eslint-disable-next-line
+  }, [getPostsNextApi.data]);
 
-	const handleGet = () => {
-		getPostsApi.request();
-	};
+  useEffect(() => {
+    setPosts({
+      count: getPostsApi.data.count ?? 0,
+      next: getPostsApi.data.next ?? "",
+      results: getPostsApi.data?.results ?? [],
+    } as IPostResponse);
+  }, [getPostsApi.data]);
 
-	useEffect(() => {
-		setPosts({
-			count: getPostsNextApi.data.count ?? 0,
-			next: getPostsNextApi.data.next ?? "",
-			results: [...posts.results, ...getPostsNextApi.data?.results],
-		} as IPostResponse);
-	}, [getPostsNextApi.data]);
+  useEffect(() => {
+    getPostsApi.request().then();
+    getUserApi.request().then();
+    // eslint-disable-next-line
+  }, []);
 
-	useEffect(() => {
-		setPosts({
-			count: getPostsApi.data.count ?? 0,
-			next: getPostsApi.data.next ?? "",
-			results: getPostsApi.data?.results ?? [],
-		} as IPostResponse);
-	}, [getPostsApi.data]);
-
-	useEffect(() => {
-		getPostsApi.request();
-		getUserApi.request();
-		// eslint-disable-next-line
-	}, []);
-
-	return (
-		<>
-			<NavBar />
-			<div className={styles.container}>
-				<div className={styles.dashboard}>
-					<div className={styles.groupsTopicsEventsListsColumn}>
-						<ListBox
-							title="Groups"
-							visibleSeeMoreBtn={true}
-							grouptopicevent={getGroupApi.data?.results}
-							linkItems={"/group"}
-						/>
-						<ListBox
-							title="Topics"
-							visibleSeeMoreBtn={true}
-							grouptopicevent={getTopicApi.data?.results}
-							linkItems={"/topic"}
-						/>
-						<ListBox
-							title="Events"
-							visibleSeeMoreBtn={true}
-							grouptopicevent={getEventApi.data?.results}
-							linkItems={"/event"}
-						/>
-					</div>
-					<div className={styles.timelineColumn}>
-						<CreateNewPost />
-						<TimelineComponent
-							posts={posts.results}
-							count={posts.count}
-							handleGetNext={handleGetNext}
-							handleGet={handleGet}
-							hasMore={posts.next !== "" || getPostsApi.loading}
-						/>
-					</div>
-					<div className={styles.profileAndFilterColumn}>
-						<ProfileCard
-							status={getUserApi.data.status}
-							bio={getUserApi.data.bio}
-							funfact={getUserApi.data.funfact}
-						/>
-						<FiltersCard />
-					</div>
-				</div>
-			</div>
-		</>
-	);
+  return (
+    <>
+      <NavBar />
+      <div className={styles.container}>
+        <div className={styles.dashboard}>
+          <div className={styles.groupsTopicsEventsListsColumn}>
+            <ListBox
+              title="Groups"
+              visibleSeeMoreBtn={true}
+              grouptopicevent={getGroupApi.data?.results}
+              linkItems={"/group"}
+            />
+            <ListBox
+              title="Topics"
+              visibleSeeMoreBtn={true}
+              grouptopicevent={getTopicApi.data?.results}
+              linkItems={"/topic"}
+            />
+            <ListBox
+              title="Events"
+              visibleSeeMoreBtn={true}
+              grouptopicevent={getEventApi.data?.results}
+              linkItems={"/event"}
+            />
+          </div>
+          <div className={styles.timelineColumn}>
+            <CreateNewPost />
+            <TimelineComponent
+              posts={posts.results}
+              count={posts.count}
+              handleGetNext={handleGetNext}
+              handleGet={handleGet}
+              hasMore={posts.next !== "" || getPostsApi.loading}
+            />
+          </div>
+          <div className={styles.profileAndFilterColumn}>
+            <ProfileCard
+              status={getUserApi.data.status}
+              bio={getUserApi.data.bio}
+              funfact={getUserApi.data.funfact}
+            />
+            <FiltersCard />
+          </div>
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default DashboardView;
