@@ -6,27 +6,23 @@ import { ITopicSummary } from "../../interfaces/ITopicResponse";
 import styles from "./GroupTopicEventSummaryItem.module.css";
 
 type GroupTopicEventSummaryItemProps = {
-	grouptopicevent: IGroupSummary | IEventSummary | ITopicSummary;
-	linkItems: string;
+  grouptopicevent: IGroupSummary | IEventSummary | ITopicSummary;
+  linkItems: string;
 };
 
 export const GroupTopicEventSummaryItem = (
-	props: GroupTopicEventSummaryItemProps
+  props: GroupTopicEventSummaryItemProps
 ) => {
-	return (
-		<div key={props.grouptopicevent.id}>
-			<Link
-				to={props.linkItems + "/" + props.grouptopicevent.id}
-				className={styles.postedInfo}
-			>
-				{props.grouptopicevent.name}
-			</Link>
-			{"startTime" in props.grouptopicevent && (
-				<p>
-					{props.grouptopicevent.startTime} to{" "}
-					{props.grouptopicevent.endTime}
-				</p>
-			)}
-		</div>
-	);
+  return (
+    <div key={props.grouptopicevent.id} className={styles.itemContainer}>
+      <Link to={props.linkItems + "/" + props.grouptopicevent.id}>
+        {props.grouptopicevent.name}
+      </Link>
+      {"startTime" in props.grouptopicevent && (
+        <p>
+          {props.grouptopicevent.startTime} to {props.grouptopicevent.endTime}
+        </p>
+      )}
+    </div>
+  );
 };
