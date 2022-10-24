@@ -9,8 +9,9 @@ export const useApi = <T>(apiFunc: Function, currentState: T) => {
 	const { getAccessTokenSilently } = useAuth0();
 
 	type AxiosInput = {
-		headers: {};
-		params: {};
+		headers?: {};
+		params?: {};
+		data?: {};
 	};
 
 	const request = async (configInput?: AxiosInput) => {
@@ -25,6 +26,7 @@ export const useApi = <T>(apiFunc: Function, currentState: T) => {
 				...configInput?.headers,
 			},
 			...configInput?.params,
+			...configInput?.data,
 		};
 		setLoading(true);
 		try {
