@@ -11,46 +11,52 @@ import ButtonCustom from "../../components/ButtonCustom/ButtonCustom";
 import Card from "../../components/Card/Card.component";
 
 const PostView = () => {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+	const [open, setOpen] = useState(false);
+	const handleOpen = () => setOpen(true);
+	const handleClose = () => setOpen(false);
 
-  return (
-    <>
-      <NavBar />
+	return (
+		<>
+			<NavBar />
 
-      <div className={styles.container}>
-        <div className={styles.postView}>
-          <div className={styles.emptyColumn}></div>
-          <div className={styles.postColumn}>
-            <CreateNewPost />
-            <TimelineComponent posts={[]} />
-          </div>
-          <div className={styles.infoColumn}>
-            {window.location.pathname === "/event" ? (
-              <EventCard />
-            ) : (
-              <GroupCard />
-            )}
-            <div className={styles.btnContainer}>
-              <ButtonCustom onClick={handleOpen} />
-            </div>
-          </div>
-        </div>
-      </div>
-      {window.location.pathname !== "/topic" && open && (
-        <Modal open={open} onClose={handleClose}>
-          <div className={styles.centered}>
-            <div className={styles.modal}>
-              <Card cardHoverEffect={false}>
-                <InviteModal setOpen={setOpen} />
-              </Card>
-            </div>
-          </div>
-        </Modal>
-      )}
-    </>
-  );
+			<div className={styles.container}>
+				<div className={styles.postView}>
+					<div className={styles.emptyColumn}></div>
+					<div className={styles.postColumn}>
+						<CreateNewPost />
+						<TimelineComponent
+							posts={[]}
+							count={0}
+							handleGetNext={() => {}}
+							hasMore={false}
+							handleGet={() => {}}
+						/>
+					</div>
+					<div className={styles.infoColumn}>
+						{window.location.pathname === "/event" ? (
+							<EventCard />
+						) : (
+							<GroupCard />
+						)}
+						<div className={styles.btnContainer}>
+							<ButtonCustom onClick={handleOpen} />
+						</div>
+					</div>
+				</div>
+			</div>
+			{window.location.pathname !== "/topic" && open && (
+				<Modal open={open} onClose={handleClose}>
+					<div className={styles.centered}>
+						<div className={styles.modal}>
+							<Card cardHoverEffect={false}>
+								<InviteModal setOpen={setOpen} />
+							</Card>
+						</div>
+					</div>
+				</Modal>
+			)}
+		</>
+	);
 };
 
 export default PostView;

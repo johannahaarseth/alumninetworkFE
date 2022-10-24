@@ -5,13 +5,12 @@ import FiltersCard from "../../components/FiltersCard/FiltersCard.component";
 import styles from "./DashboardView.module.css";
 import CreateNewPost from "../../components/CreateNewPost/CreateNewPost.component";
 import { useApi } from "../../api/useApi";
-import { getPosts } from "../../api/postsApi";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { IPostResponse } from "../../interfaces/IPostResponse";
 import { useAuth0 } from "@auth0/auth0-react";
 import NavBar from "../../components/NavBar/NavBar.component";
 import { IUserResponse } from "../../interfaces/IUserResponse";
-import { getCurrentUser } from "../../api/userApi";
+import { apiClient } from "../../api/apiClient";
 
 const DashboardView = () => {
 	const { isAuthenticated } = useAuth0();
@@ -31,18 +30,60 @@ const DashboardView = () => {
 	//   );
 	// };
 
+	const [posts, setPosts] = useState<IPostResponse>({
+		count: 0,
+		next: "",
+		results: [],
+	} as IPostResponse);
+
+	const getPosts = (config: {}) =>
+		apiClient.get<IPostResponse>("/post?offset=0&limit=20", config);
+
 	const getPostsApi = useApi<IPostResponse>(getPosts, {} as IPostResponse);
+
+	const getPostsNext = (config: {}) =>
+		apiClient.get<IPostResponse>(posts.next, config);
+
+	const getPostsNextApi = useApi<IPostResponse>(getPostsNext, {
+		count: 0,
+		next: "",
+		results: [],
+	} as IPostResponse);
+
+	const getCurrentUser = (config: {}) =>
+		apiClient.get<IUserResponse>("/user/current", config);
+
 	const getUserApi = useApi<IUserResponse>(
 		getCurrentUser,
 		{} as IUserResponse
 	);
 
-	useEffect(() => {
+	const handleGetNext = () => {
+		getPostsNextApi.request();
+	};
+
+	const handleGet = () => {
 		getPostsApi.request();
-		// eslint-disable-next-line
-	}, []);
+	};
 
 	useEffect(() => {
+		setPosts({
+			count: getPostsNextApi.data.count ?? 0,
+			next: getPostsNextApi.data.next ?? "",
+			results: [...posts.results, ...getPostsNextApi.data?.results],
+		} as IPostResponse);
+	}, [getPostsNextApi.data]);
+
+	useEffect(() => {
+		setPosts({
+			count: getPostsApi.data.count ?? 0,
+			next: getPostsApi.data.next ?? "",
+			results: getPostsApi.data?.results ?? [],
+		} as IPostResponse);
+	}, [getPostsApi.data]);
+
+	useEffect(() => {
+		getPostsApi.request();
 		getUserApi.request();
 		// eslint-disable-next-line
 	}, []);
@@ -67,7 +108,13 @@ const DashboardView = () => {
 						<div className={styles.timelineColumn}>
 							<CreateNewPost />
 							<TimelineComponent
-								posts={getPostsApi.data?.results}
+								posts={posts.results}
+								count={posts.count}
+								handleGetNext={handleGetNext}
+								handleGet={handleGet}
+								hasMore={
+									posts.next !== "" || getPostsApi.loading
+								}
 							/>
 						</div>
 						<div className={styles.profileAndFilterColumn}>
