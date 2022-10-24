@@ -38,6 +38,7 @@ const CreateNewPost = () => {
   const handleClose = () => setOpen(false);
   const navigate = useNavigate();
   const [groupsTitle, setGroupsTitle] = useState<string[]>([]);
+  const [showSelect, setShowSelect] = useState(false);
 
   const [groups, setGroups] = useState<IGroupSummary>({
     id: 0,
