@@ -11,20 +11,30 @@ import TextField from "@mui/material/TextField";
 import dayjs, { Dayjs } from "dayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { useNavigate } from "react-router-dom";
-import { apiClient } from "../../api/apiClient";
+import { Link, useNavigate } from "react-router-dom";
+import { IGroupSummary } from "../../interfaces/IGroupResponse";
+import { IEventSummary } from "../../interfaces/IEventResponse";
+import { ITopicSummary } from "../../interfaces/ITopicResponse";
 import { IPostEvent } from "../../interfaces/IPostEvent";
+import { apiClient } from "../../api/apiClient";
 import { useApi } from "../../api/useApi";
 import { IPostGroup } from "../../interfaces/IPostGroup";
 import { IPostTopic } from "../../interfaces/IPostTopic";
+import { GroupTopicEventSummaryList } from "../GroupTopicEventSummaryList/GroupTopicEventSummaryList.component";
 
 type ListBoxProps = {
 	title: string;
-	children: JSX.Element | JSX.Element[];
 	visibleSeeMoreBtn: boolean;
+	grouptopicevent: IGroupSummary[] | IEventSummary[] | ITopicSummary[];
+	linkItems: string;
 };
 
-const ListBox = ({ title, children, visibleSeeMoreBtn }: ListBoxProps) => {
+const ListBox = ({
+	title,
+	visibleSeeMoreBtn,
+	grouptopicevent,
+	linkItems,
+}: ListBoxProps) => {
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
@@ -113,15 +123,18 @@ const ListBox = ({ title, children, visibleSeeMoreBtn }: ListBoxProps) => {
 						<p>+ Add new</p>
 					</Button>
 				</div>
-				<div className={styles.contentList}>{children}</div>
+				<GroupTopicEventSummaryList
+					grouptopicevent={grouptopicevent}
+					linkItems={linkItems}
+				/>
 				<div className={styles.seeMoreBtn}>
 					<span
 						className={
 							!visibleSeeMoreBtn ? styles.invisibleSeeMoreBtn : ""
 						}
 					>
-						<Button onClick={() => navigate(path)}>
-							<p>See more &gt;</p>
+						<Button>
+							<Link to={linkItems}>See more &gt;</Link>
 						</Button>
 					</span>
 				</div>

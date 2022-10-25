@@ -97,19 +97,19 @@ const NavBar = () => {
                   >
                     <Stack spacing={{ xs: 2, sm: 2 }}>
                       <Button
-                        onClick={() => navigate("/groups")}
+                        onClick={() => navigate("/group")}
                         color="inherit"
                       >
                         <Typography textAlign="center">Groups</Typography>
                       </Button>
                       <Button
-                        onClick={() => navigate("/topics")}
+                        onClick={() => navigate("/topic")}
                         color="inherit"
                       >
                         <Typography textAlign="center">Topics</Typography>
                       </Button>
                       <Button
-                        onClick={() => navigate("/events")}
+                        onClick={() => navigate("/event")}
                         color="inherit"
                       >
                         <Typography textAlign="center">Events</Typography>

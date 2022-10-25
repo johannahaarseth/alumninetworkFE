@@ -7,11 +7,6 @@
   align-items: center;
 }
 
-.contentList {
-  display: flex;
-  flex-direction: column;
-}
-
 .seeMoreBtn {
   display: flex;
   justify-content: center;
