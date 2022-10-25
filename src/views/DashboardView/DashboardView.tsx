@@ -156,6 +156,11 @@ const DashboardView = () => {
           </div>
           <div className={styles.timelineColumn}>
             <CreateNewPost />
+            {isFilterHidden && (
+              <div className={styles.filter2}>
+                <FiltersCard />
+              </div>
+            )}
             <TimelineComponent
               posts={posts.results}
               count={posts.count}
@@ -188,11 +193,6 @@ const DashboardView = () => {
                   <FilterAltIcon sx={{ fontSize: 30 }} />
                 </Fab>
               </ThemeProvider>
-              {isFilterHidden && (
-                <div className={styles.filter2}>
-                  <FiltersCard />
-                </div>
-              )}
             </div>
           </div>
         </div>

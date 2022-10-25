@@ -61,4 +61,7 @@
   .profileAndFilterColumn {
     flex: 1px;
   }
+  .filter2 {
+    margin-bottom: -3%;
+  }
 }
