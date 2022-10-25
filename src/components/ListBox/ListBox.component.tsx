@@ -142,9 +142,7 @@ const ListBox = ({
 				/>
 				<div className={styles.seeMoreBtn}>
 					<span
-						className={
-							!visibleSeeMoreBtn ? styles.invisibleSeeMoreBtn : ""
-						}
+						className={!visibleSeeMoreBtn ? styles.invisibleSeeMoreBtn : ""}
 					>
 						<Button>
 							<Link to={linkItems}>See more &gt;</Link>
@@ -165,14 +163,19 @@ const ListBox = ({
 									<div>
 										<Input
 											placeholderText={`Add ${titleToLowerAndMinusPlural} title`}
-											onChange={handleTitleChange}
 										/>
 									</div>
 									{title.toString() === "Groups" && (
 										<div className={styles.radioButtons}>
-											<RadioButton valueProp={"Public"} />
+											<RadioButton
+												valueProp={"Public"}
+												isChecked={undefined}
+												onChange={undefined}
+											/>
 											<RadioButton
 												valueProp={"Private"}
+												isChecked={undefined}
+												onChange={undefined}
 											/>
 										</div>
 									)}
@@ -187,12 +190,7 @@ const ListBox = ({
 												onChange={handleStartDateChange}
 												disablePast
 												inputFormat="DD-MM-YYYY hh:mm"
-												renderInput={(params) => (
-													<TextField
-														{...params}
-														type="datetime-local"
-													/>
-												)}
+												renderInput={(params) => <TextField {...params} />}
 											/>
 											<DateTimePicker
 												label="End date"
@@ -200,12 +198,7 @@ const ListBox = ({
 												onChange={handleEndDateChange}
 												disablePast
 												inputFormat="DD-MM-YYYY hh:mm"
-												renderInput={(params) => (
-													<TextField
-														{...params}
-														type="datetime-local"
-													/>
-												)}
+												renderInput={(params) => <TextField {...params} />}
 											/>
 										</LocalizationProvider>
 									)}
@@ -213,20 +206,17 @@ const ListBox = ({
 									<div>
 										<TextArea
 											placeholderText={`Add ${titleToLowerAndMinusPlural} description`}
-											onChange={
-												handleDescriptionTextAreaChange
-											}
 										/>
 									</div>
 									<div className={styles.buttonContainer}>
-										{linkItems === "/event" && (
-											<Button onClick={saveEvent}>
-												<p>Create Event &gt;</p>
-											</Button>
-										)}
 										{linkItems === "/group" && (
 											<Button onClick={saveGroup}>
 												<p>Create Group &gt;</p>
+											</Button>
+										)}
+										{linkItems === "/event" && (
+											<Button onClick={saveEvent}>
+												<p>Create Event &gt;</p>
 											</Button>
 										)}
 										{linkItems === "/topic" && (

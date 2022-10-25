@@ -1,0 +1,55 @@
+.container {
+	display: flex;
+	justify-content: center;
+}
+
+.view {
+	display: flex;
+	flex-direction: row;
+	width: 80%;
+	gap: 1.2rem;
+	margin-top: 1rem;
+}
+
+.leftColumn {
+	flex: 30%;
+}
+
+.middleColumn {
+	flex: 40%;
+}
+
+.rightColumn {
+	flex: 30%;
+}
+
+.btnContainer {
+	display: flex;
+	justify-content: center;
+}
+
+.centered {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.modal {
+	position: relative;
+	border-radius: 10px;
+}
+
+.hidden {
+	display: none;
+}
+
+@media screen and (max-width: 750px) {
+	.view {
+		width: 100%;
+	}
+
+	.rightColumn {
+		flex: 0;
+	}
+}

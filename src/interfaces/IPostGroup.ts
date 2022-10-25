@@ -3,4 +3,5 @@ export interface IPostGroup {
 	name: string;
 	isPrivate: boolean;
 	description: string;
+	id: number;
 }

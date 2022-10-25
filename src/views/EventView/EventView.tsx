@@ -1,11 +1,10 @@
-import NavBar from "../../components/NavBar/NavBar.component";
-import React, { useEffect } from "react";
-import styles from "./EventView.module.css";
+import { useEffect } from "react";
 import { useApi } from "../../api/useApi";
 import { useParams } from "react-router-dom";
 import { IEvent } from "../../interfaces/IEvent";
 import { apiClient } from "../../api/apiClient";
 import EventCard from "../../components/EventCard/EventCard.component";
+import InfoView from "../../components/InfoViewWrapper/InfoView.component";
 
 const EventView = () => {
 	const { eventId } = useParams();
@@ -16,24 +15,11 @@ const EventView = () => {
 	const getEventApi = useApi<IEvent>(getEvent, {} as IEvent);
 
 	useEffect(() => {
-		getEventApi.request();
+		getEventApi.request().then();
 		// eslint-disable-next-line
 	}, []);
 
-	return (
-		<>
-			<NavBar />
-			<div className={styles.container}>
-				<div className={styles.profileView}>
-					<div className={styles.emptyColumn}></div>
-					<div className={styles.postsColumn}></div>
-					<div className={styles.postAndFilterColumn}>
-						<EventCard event={getEventApi.data} />
-					</div>
-				</div>
-			</div>
-		</>
-	);
+	return <InfoView rightContentCol={<EventCard event={getEventApi.data} />} />;
 };
 
 export default EventView;

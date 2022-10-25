@@ -1,7 +1,7 @@
 export interface IGroupResponse {
-	count: number;
-	next: string;
-	results: IGroupSummary[];
+  count: number;
+  next: string;
+  results: IGroupSummary[];
 }
 
 export interface IGroupSummary {
