@@ -31,13 +31,6 @@ const DashboardView = () => {
 		{} as IEventResponse
 	);
 
-	useEffect(() => {
-		getGroupApi.request().then();
-		getTopicApi.request().then();
-		getEventApi.request().then();
-		// eslint-disable-next-line
-	}, []);
-
 	const [posts, setPosts] = useState<IPostResponse>({
 		count: 0,
 		next: "",
@@ -61,10 +54,7 @@ const DashboardView = () => {
 	const getCurrentUser = (config: {}) =>
 		apiClient.get<IUserResponse>("/user/current", config);
 
-	const getUserApi = useApi<IUserResponse>(
-		getCurrentUser,
-		{} as IUserResponse
-	);
+	const getUserApi = useApi<IUserResponse>(getCurrentUser, {} as IUserResponse);
 
 	const handleGetNext = () => {
 		getPostsNextApi.request().then();
@@ -92,26 +82,17 @@ const DashboardView = () => {
 	}, [getPostsApi.data]);
 
 	useEffect(() => {
+		getGroupApi.request().then();
+		getTopicApi.request().then();
+		getEventApi.request().then();
+		// eslint-disable-next-line
+	}, []);
+
+	useEffect(() => {
 		getPostsApi.request().then();
 		getUserApi.request().then();
 		// eslint-disable-next-line
 	}, []);
-
-	useEffect(() => {
-		setPosts({
-			count: getPostsApi.data.count ?? 0,
-			next: getPostsApi.data.next ?? "",
-			results: getPostsApi.data?.results ?? [],
-		} as IPostResponse);
-	}, [getPostsApi.data]);
-
-	useEffect(() => {
-		getPostsApi.request();
-		getUserApi.request();
-		// eslint-disable-next-line
-	}, []);
-
-	useEffect(() => {}, []);
 
 	return (
 		<>

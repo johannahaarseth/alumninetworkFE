@@ -1,44 +1,25 @@
-import NavBar from "../../components/NavBar/NavBar.component";
-import React, { useEffect } from "react";
-import styles from "./GroupView.module.css";
+import { useEffect } from "react";
 import { useApi } from "../../api/useApi";
 import { IGroup } from "../../interfaces/IGroup";
 import { useParams } from "react-router-dom";
 import { apiClient } from "../../api/apiClient";
 import GroupCard from "../../components/GroupCard/GroupCard.component";
-import CreateNewPost from "../../components/CreateNewPost/CreateNewPost.component";
+import InfoView from "../../components/InfoViewWrapper/InfoView.component";
 
 const GroupView = () => {
-  const { groupId } = useParams();
+	const { groupId } = useParams();
 
-  const getGroup = (config: {}) =>
-    apiClient.get<IGroup>("/group/" + groupId, config);
+	const getGroup = (config: {}) =>
+		apiClient.get<IGroup>("/group/" + groupId, config);
 
-  const getGroupApi = useApi<IGroup>(getGroup, {} as IGroup);
+	const getGroupApi = useApi<IGroup>(getGroup, {} as IGroup);
 
-  useEffect(() => {
-    getGroupApi.request();
-    // eslint-disable-next-line
-  }, []);
+	useEffect(() => {
+		getGroupApi.request().then();
+		// eslint-disable-next-line
+	}, []);
 
-  return (
-    <>
-      <NavBar />
-      <div className={styles.container}>
-        <div className={styles.profileView}>
-          <div className={styles.emptyColumn}></div>
-
-          <div className={styles.postsColumn}>
-            <CreateNewPost />
-          </div>
-
-          <div className={styles.postAndFilterColumn}>
-            <GroupCard group={getGroupApi.data} />
-          </div>
-        </div>
-      </div>
-    </>
-  );
+	return <InfoView rightContentCol={<GroupCard group={getGroupApi.data} />} />;
 };
 
 export default GroupView;
