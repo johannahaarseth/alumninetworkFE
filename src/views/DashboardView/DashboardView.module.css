@@ -47,11 +47,28 @@
   }
 
   .filter {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .dashboard {
+    width: 95%;
+  }
+  .groupsTopicsEventsListsColumn {
+    display: none;
+  }
+
+  .profile {
+    display: none;
+  }
+
+  .filter {
     display: none;
   }
 
   .filterIcon {
-    left: 40%;
+    left: 10%;
   }
   .filterIconFilter {
     display: block;
