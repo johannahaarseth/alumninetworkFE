@@ -1,6 +1,6 @@
 export interface IPostGroup {
   topicId: number | null;
-  groupId: number;
+  groupId: 3;
   postTitle: string;
   postBody: string;
 }

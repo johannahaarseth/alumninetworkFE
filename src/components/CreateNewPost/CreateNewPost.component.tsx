@@ -66,10 +66,9 @@ const CreateNewPost = () => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(postData);
-
     postToGroupApi
       .request({ data: postData })
-      .then(() => navigate("/group/" + postToGroupApi.data.groupId));
+      .then(() => navigate("/group/" + 3));
   };
 
   return (
