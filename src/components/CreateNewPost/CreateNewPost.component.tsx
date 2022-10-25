@@ -29,27 +29,6 @@ const CreateNewPost = () => {
   const navigate = useNavigate();
   const [postData, setPostData] = useState<IPostGroup | null>(null);
 
-  // create new post kall til backend
-  const postGroup = (config: {}, data: {}) =>
-    apiClient.post<IPostGroup>("/group", data, config);
-
-  const postToGroupApi = useApi<IPostGroup>(postGroup, {} as IPostGroup);
-
-  const handleTitleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setPostData({ ...postData!, postTitle: event.target.value });
-  };
-  const handleBodyChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setPostData({ ...postData!, postBody: event.target.value });
-  };
-
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    console.log(postData);
-    postToGroupApi
-      .request({ data: postData })
-      .then(() => navigate("/group/" + postToGroupApi.data.groupId));
-  };
-
   const getGroupApi = useApi<IGroupResponse>(
     (config: {}) =>
       apiClient.get<IGroupResponse>("/group?offset=0&limit=3", config),
@@ -71,6 +50,27 @@ const CreateNewPost = () => {
     getEventApi.request().then();
     // eslint-disable-next-line
   }, []);
+
+  const postGroup = (config: {}, data: {}) =>
+    apiClient.post<IPostGroup>("/group", data, config);
+
+  const postToGroupApi = useApi<IPostGroup>(postGroup, {} as IPostGroup);
+
+  const handleTitleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setPostData({ ...postData!, postTitle: event.target.value });
+  };
+  const handleBodyChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setPostData({ ...postData!, postBody: event.target.value });
+  };
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log(postData);
+
+    postToGroupApi
+      .request({ data: postData })
+      .then(() => navigate("/group/" + postToGroupApi.data.groupId));
+  };
 
   return (
     <>
