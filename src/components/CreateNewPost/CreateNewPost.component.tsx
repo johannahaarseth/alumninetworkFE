@@ -56,7 +56,7 @@ const CreateNewPost = () => {
   useEffect(() => {
     getGroupsApi.request();
     getTopicsApi.request();
-  });
+  }, []);
 
   const handleChangeGroups = (event: { target: { value: string } }) => {
     setGroupsTitle(event.target.value);
