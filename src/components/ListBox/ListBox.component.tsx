@@ -41,13 +41,15 @@ const ListBox = ({
 	const navigate = useNavigate();
 	const [startDate, setStartDate] = useState<Dayjs | null>(dayjs());
 	const [endDate, setEndDate] = useState<Dayjs | null>(dayjs());
-	const [postEventData, setPostEventData] = useState<IPostEvent | null>(null);
+	const [postData, setPostData] = useState<
+		IPostEvent | IPostGroup | IPostTopic | null
+	>(null);
 
 	const titleToLowerAndMinusPlural = title?.toLowerCase().slice(0, -1);
 	const path = "/" + title.charAt(0).toLowerCase() + title.slice(1);
 
 	const handleTitleChange = (event: ChangeEvent<HTMLInputElement>) => {
-		setPostEventData({ ...postEventData!, name: event.target.value });
+		setPostData({ ...postData!, name: event.target.value });
 	};
 
 	const handleStartDateChange = (newValue: Dayjs | null) => {
@@ -55,8 +57,8 @@ const ListBox = ({
 			setEndDate(startDate);
 		}
 		setStartDate(newValue);
-		setPostEventData({
-			...postEventData!,
+		setPostData({
+			...postData!,
 			startDate: newValue?.toJSON()!,
 		});
 	};
@@ -66,51 +68,52 @@ const ListBox = ({
 			setStartDate(endDate);
 		}
 		setEndDate(newValue);
-		setPostEventData({ ...postEventData!, endDate: newValue?.toJSON()! });
+		setPostData({ ...postData!, endDate: newValue?.toJSON()! });
 	};
 
 	const handleDescriptionTextAreaChange = (
 		event: ChangeEvent<HTMLTextAreaElement>
 	) => {
-		setPostEventData({
-			...postEventData!,
+		setPostData({
+			...postData!,
 			description: event.target.value,
 		});
 	};
 
 	const postEvent = (config: {}, data: {}) =>
-		apiClient.post<IPostEvent>("/event", config, data);
+		apiClient.post<IPostEvent>("/event", data, config);
 
 	const postEventApi = useApi<IPostEvent>(postEvent, {} as IPostEvent);
 
 	const saveEvent = (e: FormEvent<HTMLButtonElement>) => {
 		e.preventDefault(); // remove when this works
 		postEventApi
-			.request({ data: postEventData })
+			.request({ data: postData })
 			.then(() => navigate("/group/" + postEventApi.data.id));
 	};
 
 	const postGroup = (config: {}, data: {}) =>
-		apiClient.post<IPostGroup>("/event", config, data);
+		apiClient.post<IPostGroup>("/event", data, config);
 
 	const postGroupApi = useApi<IPostGroup>(postGroup, {} as IPostGroup);
 
 	const saveGroup = (e: FormEvent<HTMLButtonElement>) => {
 		e.preventDefault(); // remove when this works
 		postGroupApi
-			.request({ data: postEventData })
+			.request({ data: postData })
 			.then(() => navigate("/group/" + postGroupApi.data.id));
 	};
 
-	const postTopic = (config: {}) =>
-		apiClient.post<IPostTopic>("/topic", config);
+	const postTopic = (config: {}, data: {}) =>
+		apiClient.post<IPostTopic>("/topic", data, config);
 
 	const postTopicApi = useApi<IPostTopic>(postTopic, {} as IPostTopic);
 
 	const saveTopic = (e: FormEvent<HTMLButtonElement>) => {
 		e.preventDefault(); // remove when this works
+		console.log(postData);
 		postTopicApi
-			.request({ data: postEventData })
+			.request({ data: postData })
 			.then(() => navigate("/group/" + postTopicApi.data.id));
 	};
 
@@ -206,31 +209,19 @@ const ListBox = ({
 										/>
 									</div>
 									<div className={styles.buttonContainer}>
-										{title.toString() === "Events" && (
+										{linkItems === "/event" && (
 											<Button onClick={saveEvent}>
-												<p>
-													Create{" "}
-													{titleToLowerAndMinusPlural}{" "}
-													&gt;
-												</p>
+												<p>Create Event &gt;</p>
 											</Button>
 										)}
-										{title.toString() === "Groups" && (
+										{linkItems === "/group" && (
 											<Button onClick={saveGroup}>
-												<p>
-													Create{" "}
-													{titleToLowerAndMinusPlural}{" "}
-													&gt;
-												</p>
+												<p>Create Group &gt;</p>
 											</Button>
 										)}
-										{title.toString() === "Topics" && (
+										{linkItems === "/topic" && (
 											<Button onClick={saveTopic}>
-												<p>
-													Create{" "}
-													{titleToLowerAndMinusPlural}{" "}
-													&gt;
-												</p>
+												<p>Create Topic &gt;</p>
 											</Button>
 										)}
 									</div>

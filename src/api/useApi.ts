@@ -26,12 +26,11 @@ export const useApi = <T>(apiFunc: Function, currentState: T) => {
 				...configInput?.headers,
 			},
 			params: { ...configInput?.params },
-			data: { ...configInput?.data },
 		};
-		console.log(config);
+		console.log(config, configInput?.data);
 		setLoading(true);
 		try {
-			const result = await apiFunc(config);
+			const result = await apiFunc(config, configInput?.data);
 			setData(result.data);
 		} catch (err: any) {
 			setError(err.message || "Unexpected Error!");
