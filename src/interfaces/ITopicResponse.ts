@@ -5,7 +5,7 @@ export interface ITopicResponse {
 }
 
 export interface ITopicSummary {
-  id: number;
+  topicId: number;
   name: string;
   subscriber: boolean;
 }

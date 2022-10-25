@@ -153,7 +153,7 @@ const CreateNewPost = () => {
                             >
                               {getGroupsApi.data.results.map((data) => (
                                 <MenuItem
-                                  key={data.id + data.name}
+                                  key={data.groupId + data.name}
                                   value={data.name ? data.name : " "}
                                 >
                                   {data.name}
@@ -199,7 +199,7 @@ const CreateNewPost = () => {
                             >
                               {getTopicsApi.data.results.map((data) => (
                                 <MenuItem
-                                  key={data.id + data.name}
+                                  key={data.topicId + data.name}
                                   value={data.name ? data.name : " "}
                                 >
                                   {data.name}
