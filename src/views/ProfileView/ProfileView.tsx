@@ -21,9 +21,9 @@ const ProfileView = () => {
       <NavBar />
       <div className={styles.container}>
         <div className={styles.profileView}>
-          <div className={styles.emptyColumn}></div>
-          <div className={styles.postsColumn}></div>
-          <div className={styles.postAndFilterColumn}>
+          <div className={styles.leftColumn}></div>
+          <div className={styles.middleColumn}></div>
+          <div className={styles.rightColumn}>
             <ProfileCard
               status={getUserApi.data.status}
               bio={getUserApi.data.bio}
