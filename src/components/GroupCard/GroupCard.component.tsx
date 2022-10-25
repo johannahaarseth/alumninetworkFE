@@ -1,22 +1,25 @@
 import React from "react";
 import styles from "./GroupCard.module.css";
 import Card from "../Card/Card.component";
+import { IGroup } from "../../interfaces/IGroup";
 
-const GroupCard = () => {
-  return (
-    <Card cardHoverEffect={true}>
-      <div className={styles.headerBox}></div>
-      <div className={styles.infoBox}>
-        {window.location.pathname.match(/group/) ? (
-          <p className={styles.text}>Group info</p>
-        ) : (
-          <p className={styles.text}>Topic info</p>
-        )}
+type GroupCardProps = {
+	group: IGroup;
+};
 
-        <div className={`${styles.textBox}`}></div>
-      </div>
-    </Card>
-  );
+const GroupCard = (props: GroupCardProps) => {
+	return (
+		<Card cardHoverEffect={true}>
+			<div className={styles.headerBox}></div>
+			<div className={styles.infoBox}>
+				<p>{props.group.name}</p>
+				<p>{props.group.isPrivate ? "Private" : "Public"}</p>
+				<div className={`${styles.textBox}`}>
+					{props.group.description}
+				</div>
+			</div>
+		</Card>
+	);
 };
 
 export default GroupCard;

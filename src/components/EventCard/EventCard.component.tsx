@@ -2,46 +2,57 @@ import React, { useState } from "react";
 import styles from "./EventCard.module.css";
 import Card from "../Card/Card.component";
 import Button from "../Button/Button.component";
+import { IEvent } from "../../interfaces/IEvent";
 
-const EventCard = () => {
-  const [isAccept, setIsAccept] = useState(false);
-  const [isDeclined, setIsDeclined] = useState(false);
+type EventCardProps = {
+	event: IEvent;
+};
 
-  const onClickAcceptBtn = () => {
-    setIsAccept(true);
-    setIsDeclined(false);
-  };
+const EventCard = (props: EventCardProps) => {
+	const [isAccept, setIsAccept] = useState(false);
+	const [isDeclined, setIsDeclined] = useState(false);
 
-  const onClickDeclineBtn = () => {
-    setIsDeclined(true);
-    setIsAccept(false);
-  };
+	const onClickAcceptBtn = () => {
+		setIsAccept(true);
+		setIsDeclined(false);
+	};
 
-  return (
-    <Card cardHoverEffect={false}>
-      <div className={styles.headerBox}></div>
-      <div className={styles.infoBox}>
-        <p className={styles.text}>Event info</p>
-        <div className={styles.textBox}></div>
-      </div>
-      <div className={styles.btnContainer}>
-        <Button
-          className={styles.button}
-          onClick={onClickAcceptBtn}
-          disabled={isAccept}
-        >
-          <p>Accept</p>
-        </Button>
-        <Button
-          className={styles.button2}
-          onClick={onClickDeclineBtn}
-          disabled={isDeclined}
-        >
-          <p>Decline</p>
-        </Button>
-      </div>
-    </Card>
-  );
+	const onClickDeclineBtn = () => {
+		setIsDeclined(true);
+		setIsAccept(false);
+	};
+
+	return (
+		<Card cardHoverEffect={false}>
+			<div className={styles.headerBox}></div>
+			<div className={styles.infoBox}>
+				<p className={styles.text}>{props.event.name}</p>
+				<p className={styles.text}>
+					{props.event.startTime + " to " + props.event.endTime}
+				</p>
+				<p>Attending: {props.event.attendeesCount}</p>
+				<p>Invited: {props.event.invitedCount}</p>
+				<p>Guest allowes: </p>
+				<div className={styles.textBox}>{props.event.description}</div>
+			</div>
+			<div className={styles.btnContainer}>
+				<Button
+					className={styles.button}
+					onClick={onClickAcceptBtn}
+					disabled={isDeclined}
+				>
+					<p>Accept</p>
+				</Button>
+				<Button
+					className={styles.button2}
+					onClick={onClickDeclineBtn}
+					disabled={isDeclined}
+				>
+					<p>Decline</p>
+				</Button>
+			</div>
+		</Card>
+	);
 };
 
 export default EventCard;
