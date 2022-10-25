@@ -1,7 +1,7 @@
 import { ITarget } from "./ITarget";
 
 export interface IPostGroup {
-  targetGroup: ITarget;
+  //targetGroup: ITarget;
   topicId: number;
   groupId: number;
   postTitle: string;

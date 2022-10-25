@@ -1,6 +1,14 @@
 import styles from "./CreateNewPost.module.css";
 import Card from "../Card/Card.component";
-import { useEffect, useState } from "react";
+import {
+  ChangeEvent,
+  ChangeEventHandler,
+  DetailedHTMLProps,
+  FormEvent,
+  FormHTMLAttributes,
+  useEffect,
+  useState,
+} from "react";
 import Modal from "@mui/material/Modal";
 import Input from "../Input/Input.component";
 import RadioButton from "../RadioButton/RadioButton.component";
@@ -9,17 +17,38 @@ import Button from "../Button/Button.component";
 import { useNavigate } from "react-router-dom";
 import { apiClient } from "../../api/apiClient";
 import { useApi } from "../../api/useApi";
-import { IEventResponse } from "../../interfaces/IEventResponse";
+import { IPostGroup } from "../../interfaces/IPostGroup";
 import { IGroupResponse } from "../../interfaces/IGroupResponse";
+import { IEventResponse } from "../../interfaces/IEventResponse";
 import { ITopicResponse } from "../../interfaces/ITopicResponse";
-import { IPostResponse } from "../../interfaces/IPostResponse";
 
 const CreateNewPost = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const navigate = useNavigate();
+  const [postData, setPostData] = useState<IPostGroup | null>(null);
 
+  // create new post kall til backend
+  const postGroup = (config: {}, data: {}) =>
+    apiClient.post<IPostGroup>("/group", data, config);
+
+  const postToGroupApi = useApi<IPostGroup>(postGroup, {} as IPostGroup);
+
+  const handleTitleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setPostData({ ...postData!, postTitle: event.target.value });
+  };
+  const handleBodyChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setPostData({ ...postData!, postBody: event.target.value });
+  };
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log(postData);
+    postToGroupApi
+      .request({ data: postData })
+      .then(() => navigate("/group/" + postToGroupApi.data.groupId));
+  };
   const getGroupApi = useApi<IGroupResponse>(
     (config: {}) =>
       apiClient.get<IGroupResponse>("/group?offset=0&limit=3", config),
@@ -42,12 +71,6 @@ const CreateNewPost = () => {
     // eslint-disable-next-line
   }, []);
 
-  const [posts, setPosts] = useState<IPostResponse>({
-    count: 0,
-    next: "",
-    results: [],
-  } as IPostResponse);
-
   return (
     <>
       <Card cardHoverEffect={true}>
@@ -62,22 +85,33 @@ const CreateNewPost = () => {
             <div className={styles.modal}>
               <Card cardHoverEffect={false}>
                 <p className={styles.modalHeader}>Create new post</p>
-                <form className={styles.form}>
-                  <Input placeholderText={"Add post title"} />
+                <form className={styles.form} onSubmit={handleSubmit}>
+                  <Input
+                    placeholderText={"Add post title"}
+                    // value={inputText}
+                    onChange={handleTitleChange}
+                  />
                   <p>Post to:</p>
                   <div className={styles.radioButtons}>
                     <RadioButton valueProp={"Group"} />
                     <RadioButton valueProp={"Event"} />
                     <RadioButton valueProp={"Person"} />
                   </div>
-                  <Input
+                  {/* <Input
                     placeholderText={"Search for group / event / person"}
-                  />
+                  /> */}
                   <div>
-                    <TextField placeholderText={"Add post content"} />
+                    <TextField
+                      placeholderText={"Add post content"}
+                      onChange={handleBodyChange}
+                    />
+                    {/* <Input
+                      placeholderText={"Add post content"}
+                      onChange={handleBodyChange}
+                    /> */}
                   </div>
                   <div className={styles.buttonContainer}>
-                    <Button onClick={() => navigate("/group")}>
+                    <Button>
                       <p>Create post &gt;</p>
                     </Button>
                   </div>
