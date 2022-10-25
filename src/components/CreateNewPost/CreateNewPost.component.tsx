@@ -52,7 +52,7 @@ const CreateNewPost = () => {
   }, []);
 
   const postGroup = (config: {}, data: {}) =>
-    apiClient.post<IPostGroup>("/group", data, config);
+    apiClient.post<IPostGroup>("/post", data, config);
 
   const postToGroupApi = useApi<IPostGroup>(postGroup, {} as IPostGroup);
 
