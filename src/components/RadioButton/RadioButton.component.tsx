@@ -1,9 +1,4 @@
-import {
-  ChangeEventHandler,
-  MouseEventHandler,
-  ReactEventHandler,
-  SetStateAction,
-} from "react";
+import { ChangeEventHandler } from "react";
 import styles from "./RadioButton.module.css";
 
 type RadioButtonProps = {

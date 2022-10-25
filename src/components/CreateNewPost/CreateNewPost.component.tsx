@@ -1,6 +1,6 @@
 import styles from "./CreateNewPost.module.css";
 import Card from "../Card/Card.component";
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "@mui/material/Modal";
 import Input from "../Input/Input.component";
 import RadioButton from "../RadioButton/RadioButton.component";
@@ -13,7 +13,6 @@ import {
   Select,
   OutlinedInput,
   MenuItem,
-  SelectChangeEvent,
   Grid,
 } from "@mui/material";
 import { useApi } from "../../api/useApi";
@@ -57,20 +56,11 @@ const CreateNewPost = () => {
   useEffect(() => {
     getGroupsApi.request();
     getTopicsApi.request();
-  }, []);
+  });
 
-  const handleChangeGroups = (event: SelectChangeEvent<typeof groupsTitle>) => {
-    const {
-      target: { value },
-    } = event;
-    setGroupsTitle(value);
+  const handleChangeGroups = (event: { target: { value: string } }) => {
+    setGroupsTitle(event.target.value);
   };
-  // const handleChangeTopics = (event: SelectChangeEvent<typeof groupsTitle>) => {
-  //   const {
-  //     target: { value },
-  //   } = event;
-  //   setTopicsTitle(value);
-  // };
   const handleChangeTopics = (event: { target: { value: string } }) => {
     setTopicsTitle(event.target.value);
   };
