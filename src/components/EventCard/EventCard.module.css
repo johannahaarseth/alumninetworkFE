@@ -1,108 +1,81 @@
 @import "../../css-constants.css";
 
-.headerBox {
-  background-color: var(--alumni-orange);
-  height: 75px;
-  width: 130%;
-  margin-left: -25px;
-  margin-top: -20px;
-  margin-bottom: 0.5rem;
-}
-
-.infoBox {
-  display: flex;
-  gap: 1rem;
-  flex-direction: column;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.text {
-  font-size: var(--font-size-medium);
-}
-
-.textBox {
-  background-color: var(--alumni-light-beige);
-  height: 250px;
-  width: 100%;
-}
-
 .btnContainer {
-  display: flex;
-  flex-direction: row;
-  margin-top: 4%;
-  margin-bottom: 5%;
+	display: flex;
+	flex-direction: row;
+	margin-top: 4%;
+	margin-bottom: 5%;
 }
 
-.button {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.8rem;
-  border: none;
-  background-color: var(--alumni-orange);
-  width: 5rem;
-  border-radius: 10px;
-  font-family: inherit;
-  color: rgb(255, 255, 255);
-  box-shadow: 0 7px 8px -5px rgba(0, 0, 0, 0.4);
-  margin-right: 10px;
-  margin-left: 25%;
+.acceptBtn {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0.8rem;
+	border: none;
+	background-color: var(--alumni-orange);
+	width: 5rem;
+	border-radius: 10px;
+	font-family: inherit;
+	color: rgb(255, 255, 255);
+	box-shadow: 0 7px 8px -5px rgba(0, 0, 0, 0.4);
+	margin-right: 10px;
+	margin-left: 25%;
 }
 
-.button:hover {
-  background-color: #dd8912;
-  opacity: 90%;
-  cursor: pointer;
+.acceptBtn:hover {
+	background-color: #dd8912;
+	opacity: 90%;
+	cursor: pointer;
 }
 
-.button:active {
-  background-color: #dd8912;
-  cursor: pointer;
+.acceptBtn:active {
+	background-color: #dd8912;
+	cursor: pointer;
 }
 
-.button:disabled {
-  background-color: #dd8912;
-  color: rgb(196, 196, 196);
-  cursor: no-drop;
+.acceptBtn:disabled {
+	background-color: #dd8912;
+	color: rgb(196, 196, 196);
+	cursor: no-drop;
 }
 
-.button2 {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.8rem;
-  border: none;
-  background-color: var(--alumni-primary-dark-azure);
-  width: 5rem;
-  border-radius: 10px;
-  font-family: inherit;
-  color: rgb(255, 255, 255);
-  box-shadow: 0 7px 8px -5px rgba(0, 0, 0, 0.4);
-  margin-left: 10px;
+.declineBtn {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0.8rem;
+	border: none;
+	background-color: var(--alumni-primary-dark-azure);
+	width: 5rem;
+	border-radius: 10px;
+	font-family: inherit;
+	color: rgb(255, 255, 255);
+	box-shadow: 0 7px 8px -5px rgba(0, 0, 0, 0.4);
+	margin-left: 10px;
 }
 
-.button2:hover {
-  background-color: #104955;
-  cursor: pointer;
+.declineBtn:hover {
+	background-color: #104955;
+	cursor: pointer;
 }
 
-.button2:active {
-  background-color: #104955;
-  cursor: pointer;
+.declineBtn:active {
+	background-color: #104955;
+	cursor: pointer;
 }
 
-.button2:disabled {
-  background-color: #104955;
-  font-family: inherit;
-  color: rgb(165, 165, 165);
-  cursor: no-drop;
+.declineBtn:disabled {
+	background-color: #104955;
+	font-family: inherit;
+	color: rgb(165, 165, 165);
+	cursor: no-drop;
 }
 
 @media screen and (max-width: 1100px) {
-  .button {
-    margin-left: 2px;
-  }
+	.acceptBtn {
+		margin-left: 2px;
+	}
 }
