@@ -1,7 +1,5 @@
-import React from "react";
-import styles from "./GroupCard.module.css";
-import Card from "../Card/Card.component";
 import { IGroup } from "../../interfaces/IGroup";
+import InfoCard from "../InfoCardWrapper/InfoCard";
 
 type GroupCardProps = {
 	group: IGroup;
@@ -9,16 +7,10 @@ type GroupCardProps = {
 
 const GroupCard = (props: GroupCardProps) => {
 	return (
-		<Card cardHoverEffect={true}>
-			<div className={styles.headerBox}></div>
-			<div className={styles.infoBox}>
-				<p>{props.group.name}</p>
-				<p>{props.group.isPrivate ? "Private" : "Public"}</p>
-				<div className={`${styles.textBox}`}>
-					{props.group.description}
-				</div>
-			</div>
-		</Card>
+		<InfoCard description={props.group.description}>
+			<p>{props.group.name}</p>
+			<p>{props.group.isPrivate ? "Private" : "Public"}</p>
+		</InfoCard>
 	);
 };
 
