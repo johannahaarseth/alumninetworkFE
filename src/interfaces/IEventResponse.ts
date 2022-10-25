@@ -5,7 +5,7 @@ export interface IEventResponse {
 }
 
 export interface IEventSummary {
-	id: number;
+	eventId: number;
 	name: string;
 	startTime?: string;
 	endTime?: string;
