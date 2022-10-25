@@ -163,6 +163,7 @@ const ListBox = ({
 									<div>
 										<Input
 											placeholderText={`Add ${titleToLowerAndMinusPlural} title`}
+											onChange={handleTitleChange}
 										/>
 									</div>
 									{title.toString() === "Groups" && (
@@ -190,7 +191,9 @@ const ListBox = ({
 												onChange={handleStartDateChange}
 												disablePast
 												inputFormat="DD-MM-YYYY hh:mm"
-												renderInput={(params) => <TextField {...params} />}
+												renderInput={(params) => (
+													<TextField {...params} type="datetime-local" />
+												)}
 											/>
 											<DateTimePicker
 												label="End date"
@@ -198,7 +201,9 @@ const ListBox = ({
 												onChange={handleEndDateChange}
 												disablePast
 												inputFormat="DD-MM-YYYY hh:mm"
-												renderInput={(params) => <TextField {...params} />}
+												renderInput={(params) => (
+													<TextField {...params} type="datetime-local" />
+												)}
 											/>
 										</LocalizationProvider>
 									)}
@@ -206,6 +211,7 @@ const ListBox = ({
 									<div>
 										<TextArea
 											placeholderText={`Add ${titleToLowerAndMinusPlural} description`}
+											onChange={handleDescriptionTextAreaChange}
 										/>
 									</div>
 									<div className={styles.buttonContainer}>
