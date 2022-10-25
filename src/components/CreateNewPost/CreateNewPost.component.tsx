@@ -49,6 +49,7 @@ const CreateNewPost = () => {
       .request({ data: postData })
       .then(() => navigate("/group/" + postToGroupApi.data.groupId));
   };
+
   const getGroupApi = useApi<IGroupResponse>(
     (config: {}) =>
       apiClient.get<IGroupResponse>("/group?offset=0&limit=3", config),
