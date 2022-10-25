@@ -8,7 +8,7 @@ import ListViewComponent from "../../components/ListViewComponent/ListView.compo
 const GroupListView = () => {
 	const getGroupApi = useApi<IGroupResponse>(
 		(config: {}) =>
-			apiClient.get<IGroupResponse>("/group?offset=0&limit=3", config),
+			apiClient.get<IGroupResponse>("/group?offset=0&limit=1000", config),
 		{} as IGroupResponse
 	);
 

@@ -1,5 +1,5 @@
 export interface IPostTopic {
-	id: number;
+	topicId: number;
 	name: string;
 	description: string;
 }

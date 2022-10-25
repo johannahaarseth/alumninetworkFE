@@ -1,7 +1,7 @@
 export interface IPostEvent {
-	id: number;
+	eventId: number;
 	name: string;
-	startDate: string;
-	endDate: string;
+	startTime: string;
+	endTime: string;
 	description: string;
 }

@@ -59,7 +59,7 @@ const ListBox = ({
 		setStartDate(newValue);
 		setPostData({
 			...postData!,
-			startDate: newValue?.toJSON()!,
+			startTime: newValue?.toJSON()!,
 		});
 	};
 
@@ -68,7 +68,7 @@ const ListBox = ({
 			setStartDate(endDate);
 		}
 		setEndDate(newValue);
-		setPostData({ ...postData!, endDate: newValue?.toJSON()! });
+		setPostData({ ...postData!, endTime: newValue?.toJSON()! });
 	};
 
 	const handleDescriptionTextAreaChange = (
@@ -87,10 +87,13 @@ const ListBox = ({
 
 	const saveEvent = (e: FormEvent<HTMLButtonElement>) => {
 		e.preventDefault(); // remove when this works
-		postEventApi
-			.request({ data: postData })
-			.then(() => navigate("/group/" + postEventApi.data.id));
+		postEventApi.request({ data: postData });
 	};
+	useEffect(() => {
+		if (postEventApi.data.eventId) {
+			navigate("/event/" + postEventApi.data.eventId);
+		}
+	}, [postEventApi.data]);
 
 	const postGroup = (config: {}, data: {}) =>
 		apiClient.post<IPostGroup>("/event", data, config);
@@ -99,10 +102,13 @@ const ListBox = ({
 
 	const saveGroup = (e: FormEvent<HTMLButtonElement>) => {
 		e.preventDefault(); // remove when this works
-		postGroupApi
-			.request({ data: postData })
-			.then(() => navigate("/group/" + postGroupApi.data.id));
+		postGroupApi.request({ data: postData });
 	};
+	useEffect(() => {
+		if (postGroupApi.data.groupId) {
+			navigate("/group/" + postGroupApi.data.groupId);
+		}
+	}, [postGroupApi.data]);
 
 	const postTopic = (config: {}, data: {}) =>
 		apiClient.post<IPostTopic>("/topic", data, config);
@@ -112,10 +118,14 @@ const ListBox = ({
 	const saveTopic = (e: FormEvent<HTMLButtonElement>) => {
 		e.preventDefault(); // remove when this works
 		console.log(postData);
-		postTopicApi
-			.request({ data: postData })
-			.then(() => navigate("/group/" + postTopicApi.data.id));
+		postTopicApi.request({ data: postData });
 	};
+
+	useEffect(() => {
+		if (postTopicApi.data.topicId) {
+			navigate("/topic/" + postTopicApi.data.topicId);
+		}
+	}, [postTopicApi.data]);
 
 	return (
 		<>

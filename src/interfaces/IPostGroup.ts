@@ -1,5 +1,5 @@
 export interface IPostGroup {
-	id: number;
+	groupId: number;
 	name: string;
 	public: boolean;
 	description: string;
