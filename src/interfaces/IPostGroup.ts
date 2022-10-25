@@ -1,6 +1,6 @@
 export interface IPostGroup {
 	groupId: number;
 	name: string;
-	public: boolean;
+	isPrivate: boolean;
 	description: string;
 }
