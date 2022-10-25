@@ -19,7 +19,8 @@ import { useApi } from "../../api/useApi";
 import { apiClient } from "../../api/apiClient";
 import { IGroupResponse } from "../../interfaces/IGroupResponse";
 import { ITopicResponse } from "../../interfaces/ITopicResponse";
-
+import { IEventResponse } from "../../interfaces/IEventResponse";
+import { IUserSummary } from "../../interfaces/IUserSummary";
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -38,6 +39,8 @@ const CreateNewPost = () => {
   const navigate = useNavigate();
   const [groupsTitle, setGroupsTitle] = useState("");
   const [topicsTitle, setTopicsTitle] = useState("");
+  const [eventsTitle, setEventsTitle] = useState("");
+  const [usersTitle, setUsersTitle] = useState("");
 
   const [status, setStatus] = useState(0); // 0: no show, 1: show yes, 2: show no.
 
@@ -53,17 +56,35 @@ const CreateNewPost = () => {
     apiClient.get<ITopicResponse>("/topic?offset=0&limit=3", config);
   const getTopicsApi = useApi<ITopicResponse>(getTopics, {} as ITopicResponse);
 
+  const getEvents = (config: {}) =>
+    apiClient.get<IEventResponse>("/event?offset=0&limit=3", config);
+  const getEventsAPI = useApi<IEventResponse>(getEvents, {} as IEventResponse);
+
+  const getUsers = (config: {}) =>
+    apiClient.get<IUserSummary>("/user?offset=0&limit=3", config);
+  const getUsersAPI = useApi<IUserSummary>(getUsers, {} as IUserSummary);
+
   useEffect(() => {
     getGroupsApi.request();
     getTopicsApi.request();
+    getEventsAPI.request();
+    getUsersAPI.request();
   }, []);
 
   const handleChangeGroups = (event: { target: { value: string } }) => {
     setGroupsTitle(event.target.value);
   };
+
   const handleChangeTopics = (event: { target: { value: string } }) => {
     setTopicsTitle(event.target.value);
   };
+  const handleChangeEvents = (event: { target: { value: string } }) => {
+    setEventsTitle(event.target.value);
+  };
+  const handleChangeUsers = (event: { target: { value: string } }) => {
+    setUsersTitle(event.target.value);
+  };
+
   return (
     <>
       <Card cardHoverEffect={true}>
@@ -84,18 +105,18 @@ const CreateNewPost = () => {
                   <div className={styles.radioButtons}>
                     <RadioButton
                       valueProp={"Group"}
+                      isChecked={status === 0}
+                      onChange={(e) => radioHandler(0)}
+                    />
+                    <RadioButton
+                      valueProp={"Event"}
                       isChecked={status === 1}
                       onChange={(e) => radioHandler(1)}
                     />
                     <RadioButton
-                      valueProp={"Event"}
-                      isChecked={status === 0}
-                      onChange={(e) => radioHandler(0)}
-                    />
-                    <RadioButton
                       valueProp={"Person"}
-                      isChecked={status === 0}
-                      onChange={(e) => radioHandler(0)}
+                      isChecked={status === 2}
+                      onChange={(e) => radioHandler(2)}
                     />
                   </div>
 
@@ -104,102 +125,201 @@ const CreateNewPost = () => {
                     rowSpacing={1}
                     columnSpacing={{ xs: 1, sm: 2, md: 3 }}
                   >
-                    {status === 1 && (
-                      <>
-                        <Grid item xs={5}>
-                          <FormControl sx={{ m: 1, width: 180 }}>
-                            <InputLabel
-                              id="demo-multiple-name-label"
-                              defaultValue={""}
-                              sx={{
+                    {status === 0 && (
+                      <Grid item xs={5}>
+                        <FormControl sx={{ m: 1, width: 180 }}>
+                          <InputLabel
+                            id="demo-multiple-name-label"
+                            defaultValue={""}
+                            sx={{
+                              color: "#000",
+                              "&.Mui-focused": {
                                 color: "#000",
-                                "&.Mui-focused": {
-                                  color: "#000",
-                                },
-                              }}
-                            >
-                              Groups
-                            </InputLabel>
-                            <Select
-                              id="demo-multiple-name"
-                              value={groupsTitle}
-                              onChange={handleChangeGroups}
-                              defaultValue={""}
-                              input={<OutlinedInput label="Groups" />}
-                              MenuProps={MenuProps}
-                              sx={{
-                                "& fieldset": {
+                              },
+                            }}
+                          >
+                            Groups
+                          </InputLabel>
+                          <Select
+                            id="demo-multiple-name"
+                            value={groupsTitle}
+                            onChange={handleChangeGroups}
+                            defaultValue={""}
+                            input={<OutlinedInput label="Groups" />}
+                            MenuProps={MenuProps}
+                            sx={{
+                              "& fieldset": {
+                                borderColor: "#16697a",
+                              },
+                              "&:hover .MuiOutlinedInput-notchedOutline": {
+                                borderColor: "#16697a",
+                                background: "#ede7e3",
+                              },
+                              "&.Mui-focused .MuiOutlinedInput-notchedOutline":
+                                {
                                   borderColor: "#16697a",
                                 },
-                                "&:hover .MuiOutlinedInput-notchedOutline": {
-                                  borderColor: "#16697a",
-                                  background: "#ede7e3",
-                                },
-                                "&.Mui-focused .MuiOutlinedInput-notchedOutline":
-                                  {
-                                    borderColor: "#16697a",
-                                  },
-                              }}
-                            >
-                              {getGroupsApi.data.results.map((data) => (
-                                <MenuItem
-                                  key={data.groupId + data.name}
-                                  value={data.name ? data.name : " "}
-                                >
-                                  {data.name}
-                                </MenuItem>
-                              ))}
-                            </Select>
-                          </FormControl>
-                        </Grid>
-                        <Grid item>
-                          <FormControl sx={{ m: 1, width: 180 }}>
-                            <InputLabel
-                              id="demo-multiple-name-label"
-                              defaultValue={" "}
-                              sx={{
-                                color: "#000",
-                                "&.Mui-focused": {
-                                  color: "#000",
-                                },
-                              }}
-                            >
-                              Topics
-                            </InputLabel>
-                            <Select
-                              id="demo-multiple-name"
-                              value={topicsTitle}
-                              onChange={handleChangeTopics}
-                              defaultValue={" "}
-                              input={<OutlinedInput label="Topics" />}
-                              MenuProps={MenuProps}
-                              sx={{
-                                "& fieldset": {
-                                  borderColor: "#16697a",
-                                },
-                                "&:hover .MuiOutlinedInput-notchedOutline": {
-                                  borderColor: "#16697a",
-                                  background: "#ede7e3",
-                                },
-                                "&.Mui-focused .MuiOutlinedInput-notchedOutline":
-                                  {
-                                    borderColor: "#16697a",
-                                  },
-                              }}
-                            >
-                              {getTopicsApi.data.results.map((data) => (
-                                <MenuItem
-                                  key={data.topicId + data.name}
-                                  value={data.name ? data.name : " "}
-                                >
-                                  {data.name}
-                                </MenuItem>
-                              ))}
-                            </Select>
-                          </FormControl>
-                        </Grid>
-                      </>
+                            }}
+                          >
+                            {getGroupsApi.data.results.map((data) => (
+                              <MenuItem
+                                key={data.groupId + data.name}
+                                value={data.name ? data.name : " "}
+                              >
+                                {data.name}
+                              </MenuItem>
+                            ))}
+                          </Select>
+                        </FormControl>
+                      </Grid>
                     )}
+
+                    {status === 1 && (
+                      <Grid item xs={5}>
+                        <FormControl sx={{ m: 1, width: 180 }}>
+                          <InputLabel
+                            id="demo-multiple-name-label"
+                            defaultValue={""}
+                            sx={{
+                              color: "#000",
+                              "&.Mui-focused": {
+                                color: "#000",
+                              },
+                            }}
+                          >
+                            Events
+                          </InputLabel>
+                          <Select
+                            id="demo-multiple-name"
+                            value={eventsTitle}
+                            onChange={handleChangeEvents}
+                            defaultValue={""}
+                            input={<OutlinedInput label="Events" />}
+                            MenuProps={MenuProps}
+                            sx={{
+                              "& fieldset": {
+                                borderColor: "#16697a",
+                              },
+                              "&:hover .MuiOutlinedInput-notchedOutline": {
+                                borderColor: "#16697a",
+                                background: "#ede7e3",
+                              },
+                              "&.Mui-focused .MuiOutlinedInput-notchedOutline":
+                                {
+                                  borderColor: "#16697a",
+                                },
+                            }}
+                          >
+                            {getEventsAPI.data.results.map((data) => (
+                              <MenuItem
+                                key={data.eventId + data.name}
+                                value={data.name ? data.name : " "}
+                              >
+                                {data.name}
+                              </MenuItem>
+                            ))}
+                          </Select>
+                        </FormControl>
+                      </Grid>
+                    )}
+                    {status === 2 && (
+                      <Grid item xs={5}>
+                        <FormControl sx={{ m: 1, width: 180 }}>
+                          <InputLabel
+                            id="demo-multiple-name-label"
+                            defaultValue={""}
+                            sx={{
+                              color: "#000",
+                              "&.Mui-focused": {
+                                color: "#000",
+                              },
+                            }}
+                          >
+                            Users
+                          </InputLabel>
+                          <Select
+                            id="demo-multiple-name"
+                            value={usersTitle}
+                            onChange={handleChangeUsers}
+                            defaultValue={""}
+                            input={<OutlinedInput label="Users" />}
+                            MenuProps={MenuProps}
+                            sx={{
+                              "& fieldset": {
+                                borderColor: "#16697a",
+                              },
+                              "&:hover .MuiOutlinedInput-notchedOutline": {
+                                borderColor: "#16697a",
+                                background: "#ede7e3",
+                              },
+                              "&.Mui-focused .MuiOutlinedInput-notchedOutline":
+                                {
+                                  borderColor: "#16697a",
+                                },
+                            }}
+                          >
+                            <MenuItem
+                              key={
+                                getUsersAPI.data.userId + getUsersAPI.data.name
+                              }
+                              value={
+                                getUsersAPI.data.name
+                                  ? getUsersAPI.data.name
+                                  : " "
+                              }
+                            >
+                              {getUsersAPI.data.name}
+                            </MenuItem>
+                          </Select>
+                        </FormControl>
+                      </Grid>
+                    )}
+
+                    <Grid item>
+                      <FormControl sx={{ m: 1, width: 180 }}>
+                        <InputLabel
+                          id="demo-multiple-name-label"
+                          defaultValue={" "}
+                          sx={{
+                            color: "#000",
+                            "&.Mui-focused": {
+                              color: "#000",
+                            },
+                          }}
+                        >
+                          Topics
+                        </InputLabel>
+                        <Select
+                          id="demo-multiple-name"
+                          value={topicsTitle}
+                          onChange={handleChangeTopics}
+                          defaultValue={" "}
+                          input={<OutlinedInput label="Topics" />}
+                          MenuProps={MenuProps}
+                          sx={{
+                            "& fieldset": {
+                              borderColor: "#16697a",
+                            },
+                            "&:hover .MuiOutlinedInput-notchedOutline": {
+                              borderColor: "#16697a",
+                              background: "#ede7e3",
+                            },
+                            "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                              borderColor: "#16697a",
+                            },
+                          }}
+                        >
+                          {getTopicsApi.data.results.map((data) => (
+                            <MenuItem
+                              key={data.topicId + data.name}
+                              value={data.name ? data.name : " "}
+                            >
+                              {data.name}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    </Grid>
                   </Grid>
                   <div>
                     <TextField placeholderText={"Add post content"} />
