@@ -1,6 +1,6 @@
 export interface IPostEvent {
 	id: number;
-	title: string;
+	name: string;
 	startDate: string;
 	endDate: string;
 	description: string;
