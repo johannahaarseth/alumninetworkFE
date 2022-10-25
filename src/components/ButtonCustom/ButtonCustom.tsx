@@ -9,32 +9,31 @@ type ButtonCustomProps = {
 const ButtonCustom = ({ onClick }: ButtonCustomProps) => {
   const [isJoined, setIsJoined] = useState(false);
 
-  return (
+  const inviteBtn = (
+    <Button className={styles.button} onClick={onClick}>
+      <p>Invite</p>
+      <p>+</p>
+    </Button>
+  );
+
+  const joinOrLeaveBtn = (
     <>
-      {window.location.pathname === "/topic/post" ||
-      window.location.pathname === "/topic" ? (
-        <Button
-          className={styles.button}
-          onClick={() => {
-            setIsJoined(true);
-          }}
-        >
-          {!isJoined ? (
-            <>
-              <p>Join</p>
-              <p>+</p>
-            </>
-          ) : (
-            <p>Joined</p>
-          )}
-        </Button>
-      ) : (
-        <Button className={styles.button} onClick={onClick}>
-          <p>Invite</p>
-          <p>+</p>
-        </Button>
-      )}
+      {isJoined && inviteBtn}
+      <Button className={styles.button} onClick={() => setIsJoined(!isJoined)}>
+        {!isJoined ? (
+          <>
+            <p>Join</p>
+            <p>+</p>
+          </>
+        ) : (
+          <p>Leave</p>
+        )}
+      </Button>
     </>
+  );
+
+  return (
+    <>{window.location.pathname.match(/event/) ? inviteBtn : joinOrLeaveBtn}</>
   );
 };
 

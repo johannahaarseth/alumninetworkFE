@@ -1,0 +1,28 @@
+.itemContainer {
+  padding-bottom: 0.3rem;
+  padding-top: 0.3rem;
+  padding-right: 1rem;
+  margin-right: -1rem;
+  margin-left: -1rem;
+}
+
+.itemContainer a {
+  display: list-item;
+  list-style-type: "\1F465";
+  margin-left: 2.5rem;
+}
+
+.itemContainer p {
+  margin-left: 2.5rem;
+}
+
+.itemContainer a::marker {
+  padding: 1rem;
+  letter-spacing: 0.5rem;
+}
+
+.itemContainer:hover {
+  background-color: var(--alumni-primary-azure);
+  color: white;
+  transition: 0.4s;
+}
