@@ -1,5 +1,4 @@
 @import "../../css-constants.css";
-
 .textarea {
 	padding: 0.5rem;
 	min-height: 7rem;
@@ -9,12 +8,10 @@
 	border-radius: 5px;
 	border: 2px solid var(--alumni-primary-dark-azure);
 }
-
 .textarea:hover {
 	background-color: var(--alumni-light-beige);
 	outline: 2px solid var(--alumni-primary-dark-azure);
 }
-
 .textarea:focus {
 	background-color: white;
 	outline: 2px solid var(--alumni-primary-dark-azure);

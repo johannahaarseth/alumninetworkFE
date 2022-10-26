@@ -3,11 +3,9 @@ import Button from "../Button/Button.component";
 import Card from "../Card/Card.component";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import Modal from "@mui/material/Modal";
-import TextArea from "../TextField/TextArea.component";
 import RadioButton from "../RadioButton/RadioButton.component";
 import Input from "../Input/Input.component";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
-import TextField from "@mui/material/TextField";
 import dayjs, { Dayjs } from "dayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -21,6 +19,8 @@ import { useApi } from "../../api/useApi";
 import { IPostGroup } from "../../interfaces/IPostGroup";
 import { IPostTopic } from "../../interfaces/IPostTopic";
 import { GroupTopicEventSummaryList } from "../GroupTopicEventSummaryList/GroupTopicEventSummaryList.component";
+import TextArea from "../TextArea/TextArea.component";
+import { TextField } from "@mui/material";
 
 type ListBoxProps = {
 	title: string;
