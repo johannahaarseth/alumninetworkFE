@@ -1,102 +1,133 @@
 @import "../../css-constants.css";
 
 .headerBox {
-  background-color: var(--alumni-orange);
-  height: 75px;
-  width: 130%;
-  margin-left: -25px;
-  margin-top: -20px;
-  margin-bottom: 0.5rem;
+	background-color: var(--alumni-orange);
+	height: 75px;
+	width: 130%;
+	margin-left: -25px;
+	margin-top: -20px;
+	margin-bottom: 0.5rem;
 }
 
 .profile {
-  margin-top: -4rem;
-  height: 5rem;
-  width: 5rem;
+	margin-top: -4rem;
+	height: 5rem;
+	width: 5rem;
 }
 
 .infoBox {
-  display: flex;
-  gap: 1rem;
-  flex-direction: column;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
+	display: flex;
+	gap: 1rem;
+	flex-direction: column;
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
 }
 
 .infoBox input[type="text"] {
-  border: none;
-  background-color: inherit;
-  padding: 3px;
-  color: black;
-  font-size: var(--font-size-medium);
-  pointer-events: none;
-  width: 75%;
+	border: none;
+	background-color: inherit;
+	padding: 3px;
+	color: black;
+	font-size: var(--font-size-medium);
+	pointer-events: none;
+	width: 75%;
 }
 
 .infoBox input[type="text"]:hover {
-  cursor: default;
+	cursor: default;
 }
 
 .infoBox input[type="text"]::placeholder {
-  color: black;
-  opacity: 1;
-  font-size: var(--font-size-medium);
+	color: black;
+	opacity: 1;
+	font-size: var(--font-size-medium);
 }
 
 .infoBox input[type="text"]:focus {
-  outline: 2px solid var(--alumni-primary-dark-azure);
-  color: black;
-  font-size: var(--font-size-medium);
-  cursor: text;
-  pointer-events: inherit;
+	outline: 2px solid var(--alumni-primary-dark-azure);
+	color: black;
+	font-size: var(--font-size-medium);
+	cursor: text;
+	pointer-events: inherit;
+}
+
+.infoBox textarea {
+	border: none;
+	background-color: inherit;
+	padding: 3px;
+	color: black;
+	font-size: var(--font-size-medium);
+	pointer-events: none;
+	width: 90%;
+	height: 100%;
+	font-family: inherit;
+	resize: none;
+}
+
+.infoBox textarea:hover {
+	cursor: default;
+}
+
+.infoBox textarea::placeholder {
+	color: black;
+	opacity: 1;
+	font-size: var(--font-size-medium);
+}
+
+.infoBox textarea:focus {
+	outline: 2px solid var(--alumni-primary-dark-azure);
+	color: black;
+	font-size: var(--font-size-medium);
+	cursor: text;
+	pointer-events: inherit;
 }
 
 .statusContainer {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-right: 2%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin-right: 2%;
 }
 
 .editStatus {
-  cursor: pointer;
-  font-size: 1.2rem;
-  margin-left: 0.5rem;
+	cursor: pointer;
+	font-size: 1.2rem;
+	margin-left: 0.5rem;
 }
 
 .editBioAndFunFact {
-  cursor: pointer;
-  font-size: 1.2rem;
-  position: relative;
-  bottom: 45%;
-  left: 94%;
+	cursor: pointer;
+	font-size: 1.2rem;
+	position: relative;
+	bottom: 45%;
+	left: 94%;
 }
 
 .textBox {
-  background-color: var(--alumni-light-beige);
-  height: 70px;
-  width: 100%;
-  padding: 0.5rem;
+	background-color: var(--alumni-light-beige);
+	height: auto;
+	width: 100%;
+	padding: 0.5rem;
 }
 
 .hidden {
-  display: none;
+	display: none;
 }
 
 @media screen and (max-height: 650px) {
-  .funFactBox {
-    display: none;
-  }
+	.funFactBox {
+		display: none;
+	}
 }
 
 @media screen and (max-height: 550px) {
-  .shortBioBox {
-    display: none;
-  }
+	.shortBioBox {
+		display: none;
+	}
 }
 
 @media screen and (max-width: 1200px) {
-  .editStatus {
-    margin-left: 30px;
-  }
+	.editStatus {
+		margin-left: 30px;
+	}
 }
