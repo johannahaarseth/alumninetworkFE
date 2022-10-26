@@ -3,7 +3,7 @@ import Button from "../Button/Button.component";
 import Card from "../Card/Card.component";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import Modal from "@mui/material/Modal";
-import TextArea from "../TextArea/TextArea.component";
+import TextArea from "../TextField/TextArea.component";
 import RadioButton from "../RadioButton/RadioButton.component";
 import Input from "../Input/Input.component";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
@@ -117,7 +117,6 @@ const ListBox = ({
 
 	const saveTopic = (e: FormEvent<HTMLButtonElement>) => {
 		e.preventDefault(); // remove when this works
-		console.log(postData);
 		postTopicApi.request({ data: postData });
 	};
 
