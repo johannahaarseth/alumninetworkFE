@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Modal from "@mui/material/Modal";
 import Input from "../Input/Input.component";
 import RadioButton from "../RadioButton/RadioButton.component";
-import TextArea from "../TextArea/TextArea.component";
 import Button from "../Button/Button.component";
 import { useNavigate } from "react-router-dom";
 import {
@@ -322,7 +321,7 @@ const CreateNewPost = () => {
 										</Grid>
 									</Grid>
 									<div>
-										<TextArea placeholderText={"Add post content"} />
+										<TextField placeholderText={"Add post content"} />
 									</div>
 									<div className={styles.buttonContainer}>
 										<Button onClick={() => navigate("/group")}>

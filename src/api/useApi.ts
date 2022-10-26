@@ -27,7 +27,6 @@ export const useApi = <T>(apiFunc: Function, currentState: T) => {
 			},
 			params: { ...configInput?.params },
 		};
-		console.log(config, configInput?.data);
 		setLoading(true);
 		try {
 			const result = await apiFunc(config, configInput?.data);
