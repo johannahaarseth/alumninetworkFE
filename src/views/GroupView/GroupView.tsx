@@ -30,7 +30,7 @@ const GroupView = () => {
 
 	const getPosts = (config: {}) =>
 		apiClient.get<IPostResponse>(
-			"group/" + groupId + "/posts?offset=0&limit=20",
+			"group/" + groupId + "/post?offset=0&limit=20",
 			config
 		);
 
@@ -52,6 +52,20 @@ const GroupView = () => {
 	const handleGet = () => {
 		getPostsApi.request().then();
 	};
+
+	const middleContentCol = (
+		<>
+			<div className={styles.timelineColumn}>
+				<TimelineComponent
+					posts={posts.results}
+					count={posts.count}
+					handleGetNext={handleGetNext}
+					handleGet={handleGet}
+					hasMore={posts.next !== "" || getPostsApi.loading}
+				/>
+			</div>
+		</>
+	);
 
 	useEffect(() => {
 		setPosts({
@@ -76,18 +90,10 @@ const GroupView = () => {
 	}, []);
 
 	return (
-		<>
-			<div className={styles.timelineColumn}>
-				<TimelineComponent
-					posts={posts.results}
-					count={posts.count}
-					handleGetNext={handleGetNext}
-					handleGet={handleGet}
-					hasMore={posts.next !== "" || getPostsApi.loading}
-				/>
-			</div>{" "}
-			<InfoView rightContentCol={<GroupCard group={getGroupApi.data} />} />;
-		</>
+		<InfoView
+			middleContentCol={middleContentCol}
+			rightContentCol={<GroupCard group={getGroupApi.data} />}
+		/>
 	);
 };
 
