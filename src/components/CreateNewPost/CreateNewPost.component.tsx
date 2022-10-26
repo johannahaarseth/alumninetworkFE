@@ -45,7 +45,7 @@ const CreateNewPost = () => {
 	const [eventsTitle, setEventsTitle] = useState("");
 	const [usersTitle, setUsersTitle] = useState("");
 
-	let [postData, setPostData] = useState<IPostGroup | null>(null);
+	const [postData, setPostData] = useState<IPostGroup | null>(null);
 	const [status, setStatus] = useState(0); // 0: no show, 1: show yes, 2: show no.
 
 	const radioHandler = (status: number) => {
