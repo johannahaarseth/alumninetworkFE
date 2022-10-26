@@ -4,7 +4,6 @@ import { IGroup } from "../../interfaces/IGroup";
 import { useParams } from "react-router-dom";
 import { apiClient } from "../../api/apiClient";
 import GroupCard from "../../components/GroupCard/GroupCard.component";
-import styles from "./GroupView.module.css";
 import InfoView from "../../components/InfoViewWrapper/InfoView.component";
 import TimelineComponent from "../../components/Timeline/Timeline.component";
 import { IPostResponse } from "../../interfaces/IPostResponse";
@@ -12,15 +11,10 @@ import { IPostResponse } from "../../interfaces/IPostResponse";
 const GroupView = () => {
 	const { groupId } = useParams();
 
-	const getGroup = (config: {}) =>
-		apiClient.get<IGroup>("/group/" + groupId, config);
-
-	const getGroupApi = useApi<IGroup>(getGroup, {} as IGroup);
-
-	useEffect(() => {
-		getGroupApi.request().then();
-		// eslint-disable-next-line
-	}, []);
+	const getGroupApi = useApi<IGroup>(
+		(config: {}) => apiClient.get<IGroup>("/group/" + groupId, config),
+		{} as IGroup
+	);
 
 	const [posts, setPosts] = useState<IPostResponse>({
 		count: 0,
@@ -53,20 +47,6 @@ const GroupView = () => {
 		getPostsApi.request().then();
 	};
 
-	const middleContentCol = (
-		<>
-			<div className={styles.timelineColumn}>
-				<TimelineComponent
-					posts={posts.results}
-					count={posts.count}
-					handleGetNext={handleGetNext}
-					handleGet={handleGet}
-					hasMore={posts.next !== "" || getPostsApi.loading}
-				/>
-			</div>
-		</>
-	);
-
 	useEffect(() => {
 		setPosts({
 			count: getPostsNextApi.data.count ?? 0,
@@ -85,13 +65,28 @@ const GroupView = () => {
 	}, [getPostsApi.data]);
 
 	useEffect(() => {
+		getGroupApi.request().then();
 		getPostsApi.request().then();
 		// eslint-disable-next-line
 	}, []);
 
+	const middleContentCol = (
+		<>
+			<TimelineComponent
+				posts={posts.results}
+				count={posts.count}
+				handleGetNext={handleGetNext}
+				handleGet={handleGet}
+				hasMore={posts.next !== "" || getPostsApi.loading}
+			/>
+		</>
+	);
+
 	return (
 		<InfoView
-			middleContentCol={middleContentCol}
+			middleContentCol={
+				getPostsApi.loading ? <p>Loading...</p> : middleContentCol
+			}
 			rightContentCol={<GroupCard group={getGroupApi.data} />}
 		/>
 	);
