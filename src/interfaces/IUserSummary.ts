@@ -1,5 +1,5 @@
 export interface IUserSummary {
-	userId: number;
+	id: number;
 	name: string;
 	bio: string;
 	funfact: string;

@@ -5,6 +5,6 @@ export interface IUserResponse {
 }
 
 export interface IUserSummary {
-	id: number;
+	userId: number;
 	name: string;
 }

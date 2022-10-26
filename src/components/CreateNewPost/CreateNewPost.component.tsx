@@ -6,7 +6,7 @@ import Input from "../Input/Input.component";
 import RadioButton from "../RadioButton/RadioButton.component";
 import TextField from "../TextField/TextField.component";
 import Button from "../Button/Button.component";
-import { Form, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
 	FormControl,
 	InputLabel,
@@ -22,6 +22,7 @@ import { ITopicResponse } from "../../interfaces/ITopicResponse";
 import { IEventResponse } from "../../interfaces/IEventResponse";
 import { IPostGroup } from "../../interfaces/IPostGroup";
 import { IUserResponse } from "../../interfaces/IUserResponse";
+
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -43,6 +44,7 @@ const CreateNewPost = () => {
 	const [eventsTitle, setEventsTitle] = useState("");
 	const [usersTitle, setUsersTitle] = useState("");
 
+	const [grouipId, setGroupId] = useState("");
 	const [postData, setPostData] = useState<IPostGroup | null>(null);
 	const [status, setStatus] = useState(0); // 0: no show, 1: show yes, 2: show no.
 
@@ -71,10 +73,12 @@ const CreateNewPost = () => {
 		getTopicsApi.request();
 		getEventsAPI.request();
 		getUsersAPI.request();
-	}, []);
 
+		console.log(getUsersAPI.data.results);
+	}, []);
 	const handleChangeGroups = (event: { target: { value: string } }) => {
 		setGroupsTitle(event.target.value);
+		setGroupId(event.target.value);
 	};
 
 	const handleChangeTopics = (event: { target: { value: string } }) => {
@@ -101,7 +105,8 @@ const CreateNewPost = () => {
 
 	const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		console.log(postData);
+		// console.log(postData);
+		// getGroupsApi.data.results.map((i) => (i.groupId = 3));
 		postToGroupApi
 			.request({ data: postData })
 			.then(() => navigate("/group/" + 3));
@@ -285,8 +290,8 @@ const CreateNewPost = () => {
 													>
 														{getUsersAPI.data.results.map((data) => (
 															<MenuItem
-																key={data.id + data.name}
-																value={data.name ? data.name : " "}
+																key={data.userId + data.name}
+																value={data.name ? data.name : ", "}
 															>
 																{data.name}
 															</MenuItem>
@@ -349,7 +354,7 @@ const CreateNewPost = () => {
 										/>
 									</div>
 									<div className={styles.buttonContainer}>
-										<Button onClick={() => navigate("/group")}>
+										<Button type="submit">
 											<p>Create post &gt;</p>
 										</Button>
 									</div>
