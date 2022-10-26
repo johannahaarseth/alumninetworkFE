@@ -1,5 +1,4 @@
 import styles from "./PostDetailView.module.css";
-import Button from "../../components/Button/Button.component";
 import PostEventCard from "../../components/PostEventCard/PostEventCard.component";
 import Card from "../../components/Card/Card.component";
 import InfoView from "../../components/InfoViewWrapper/InfoView.component";

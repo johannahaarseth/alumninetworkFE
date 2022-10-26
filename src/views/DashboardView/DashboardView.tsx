@@ -8,7 +8,6 @@ import { useApi } from "../../api/useApi";
 import { useEffect, useState } from "react";
 import { IPostResponse } from "../../interfaces/IPostResponse";
 import NavBar from "../../components/NavBar/NavBar.component";
-import { IUserResponse } from "../../interfaces/IUserResponse";
 import { apiClient } from "../../api/apiClient";
 import { IGroupResponse } from "../../interfaces/IGroupResponse";
 import { ITopicResponse } from "../../interfaces/ITopicResponse";
