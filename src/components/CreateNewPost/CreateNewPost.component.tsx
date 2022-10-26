@@ -22,6 +22,7 @@ import { ITopicResponse } from "../../interfaces/ITopicResponse";
 import { IEventResponse } from "../../interfaces/IEventResponse";
 import { IPostGroup } from "../../interfaces/IPostGroup";
 import { IUserResponse } from "../../interfaces/IUserResponse";
+import PostDetailView from "../../views/PostDetailView/PostDetailView";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -44,7 +45,11 @@ const CreateNewPost = () => {
 	const [eventsTitle, setEventsTitle] = useState("");
 	const [usersTitle, setUsersTitle] = useState("");
 
-	const [grouipId, setGroupId] = useState("");
+	const [grouipId, setGroupId] = useState(0);
+	const [topicId, setTopicId] = useState(0);
+	const [eventId, setEventId] = useState(0);
+	const [userId, setUserId] = useState(0);
+
 	const [postData, setPostData] = useState<IPostGroup | null>(null);
 	const [status, setStatus] = useState(0); // 0: no show, 1: show yes, 2: show no.
 
@@ -78,7 +83,6 @@ const CreateNewPost = () => {
 	}, []);
 	const handleChangeGroups = (event: { target: { value: string } }) => {
 		setGroupsTitle(event.target.value);
-		setGroupId(event.target.value);
 	};
 
 	const handleChangeTopics = (event: { target: { value: string } }) => {
@@ -106,10 +110,11 @@ const CreateNewPost = () => {
 	const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		// console.log(postData);
-		// getGroupsApi.data.results.map((i) => (i.groupId = 3));
+		//	getGroupsApi.data.results.map((i) => (i.groupId = grouipId));
+		console.log(grouipId);
 		postToGroupApi
 			.request({ data: postData })
-			.then(() => navigate("/group/" + 3));
+			.then(() => navigate("/group/" + grouipId));
 	};
 
 	return (
@@ -193,8 +198,9 @@ const CreateNewPost = () => {
 													>
 														{getGroupsApi.data.results.map((data) => (
 															<MenuItem
-																key={data.groupId + data.name}
+																key={data.groupId}
 																value={data.name ? data.name : " "}
+																onClick={() => setGroupId(data.groupId)}
 															>
 																{data.name}
 															</MenuItem>
@@ -244,6 +250,7 @@ const CreateNewPost = () => {
 															<MenuItem
 																key={data.eventId + data.name}
 																value={data.name ? data.name : " "}
+																onClick={() => setEventId(data.eventId)}
 															>
 																{data.name}
 															</MenuItem>
@@ -292,6 +299,7 @@ const CreateNewPost = () => {
 															<MenuItem
 																key={data.userId + data.name}
 																value={data.name ? data.name : ", "}
+																onClick={() => setUserId(data.userId)}
 															>
 																{data.name}
 															</MenuItem>
@@ -339,6 +347,7 @@ const CreateNewPost = () => {
 														<MenuItem
 															key={data.topicId + data.name}
 															value={data.name ? data.name : " "}
+															onClick={() => setTopicId(data.topicId)}
 														>
 															{data.name}
 														</MenuItem>
