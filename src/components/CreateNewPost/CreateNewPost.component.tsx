@@ -28,8 +28,8 @@ import { apiClient } from "../../api/apiClient";
 import { IGroupResponse } from "../../interfaces/IGroupResponse";
 import { ITopicResponse } from "../../interfaces/ITopicResponse";
 import { IEventResponse } from "../../interfaces/IEventResponse";
-import { IUserSummary } from "../../interfaces/IUserSummary";
 import { IPostGroup } from "../../interfaces/IPostGroup";
+import { IUserResponse } from "../../interfaces/IUserSummary";
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -71,8 +71,8 @@ const CreateNewPost = () => {
 	const getEventsAPI = useApi<IEventResponse>(getEvents, {} as IEventResponse);
 
 	const getUsers = (config: {}) =>
-		apiClient.get<IUserSummary>("/user?offset=0&limit=100", config);
-	const getUsersAPI = useApi<IUserSummary>(getUsers, {} as IUserSummary);
+		apiClient.get<IUserResponse>("/user?offset=0&limit=100", config);
+	const getUsersAPI = useApi<IUserResponse>(getUsers, {} as IUserResponse);
 
 	useEffect(() => {
 		getGroupsApi.request();
@@ -312,18 +312,14 @@ const CreateNewPost = () => {
 																},
 														}}
 													>
-														<MenuItem
-															key={
-																getUsersAPI.data.userId + getUsersAPI.data.name
-															}
-															value={
-																getUsersAPI.data.name
-																	? getUsersAPI.data.name
-																	: " "
-															}
-														>
-															{getUsersAPI.data.name}
-														</MenuItem>
+														{getUsersAPI.data.results.map((data) => (
+															<MenuItem
+																key={data.userId + data.name}
+																value={data.name ? data.name : " "}
+															>
+																{data.name}
+															</MenuItem>
+														))}
 													</Select>
 												</FormControl>
 											</Grid>
