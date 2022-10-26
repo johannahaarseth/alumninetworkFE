@@ -14,6 +14,7 @@ import {
 	OutlinedInput,
 	MenuItem,
 	Grid,
+	SelectChangeEvent,
 } from "@mui/material";
 import { useApi } from "../../api/useApi";
 import { apiClient } from "../../api/apiClient";
@@ -22,7 +23,6 @@ import { ITopicResponse } from "../../interfaces/ITopicResponse";
 import { IEventResponse } from "../../interfaces/IEventResponse";
 import { IPostGroup } from "../../interfaces/IPostGroup";
 import { IUserResponse } from "../../interfaces/IUserResponse";
-import PostDetailView from "../../views/PostDetailView/PostDetailView";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -45,12 +45,7 @@ const CreateNewPost = () => {
 	const [eventsTitle, setEventsTitle] = useState("");
 	const [usersTitle, setUsersTitle] = useState("");
 
-	const [grouipId, setGroupId] = useState(0);
-	const [topicId, setTopicId] = useState(0);
-	const [eventId, setEventId] = useState(0);
-	const [userId, setUserId] = useState(0);
-
-	const [postData, setPostData] = useState<IPostGroup | null>(null);
+	let [postData, setPostData] = useState<IPostGroup | null>(null);
 	const [status, setStatus] = useState(0); // 0: no show, 1: show yes, 2: show no.
 
 	const radioHandler = (status: number) => {
@@ -73,32 +68,30 @@ const CreateNewPost = () => {
 		apiClient.get<IUserResponse>("/user?offset=0&limit=100", config);
 	const getUsersAPI = useApi<IUserResponse>(getUsers, {} as IUserResponse);
 
-	useEffect(() => {
-		getGroupsApi.request();
-		getTopicsApi.request();
-		getEventsAPI.request();
-		getUsersAPI.request();
-
-		console.log(getUsersAPI.data.results);
-	}, []);
-	const handleChangeGroups = (event: { target: { value: string } }) => {
-		setGroupsTitle(event.target.value);
-	};
-
-	const handleChangeTopics = (event: { target: { value: string } }) => {
-		setTopicsTitle(event.target.value);
-	};
-	const handleChangeEvents = (event: { target: { value: string } }) => {
-		setEventsTitle(event.target.value);
-	};
-	const handleChangeUsers = (event: { target: { value: string } }) => {
-		setUsersTitle(event.target.value);
-	};
-
 	const postGroup = (config: {}, data: {}) =>
 		apiClient.post<IPostGroup>("/post", data, config);
-
 	const postToGroupApi = useApi<IPostGroup>(postGroup, {} as IPostGroup);
+
+	const handleChangeGroups = (event: SelectChangeEvent) => {
+		setGroupsTitle(event.target.value);
+		setPostData({
+			...postData!,
+			targetGroupId: parseInt(event.target.value),
+		});
+	};
+
+	const handleChangeTopics = (event: SelectChangeEvent) => {
+		setTopicsTitle(event.target.value);
+		setPostData({ ...postData!, targetTopicId: parseInt(event.target.value) });
+	};
+	const handleChangeEvents = (event: SelectChangeEvent) => {
+		setEventsTitle(event.target.value);
+		setPostData({ ...postData!, targetEventId: parseInt(event.target.value) });
+	};
+	const handleChangeUsers = (event: SelectChangeEvent) => {
+		setUsersTitle(event.target.value);
+		setPostData({ ...postData!, targetUserId: parseInt(event.target.value) });
+	};
 
 	const handleTitleChange = (event: ChangeEvent<HTMLInputElement>) => {
 		setPostData({ ...postData!, postTitle: event.target.value });
@@ -109,13 +102,21 @@ const CreateNewPost = () => {
 
 	const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		// console.log(postData);
-		//	getGroupsApi.data.results.map((i) => (i.groupId = grouipId));
-		console.log(grouipId);
-		postToGroupApi
-			.request({ data: postData })
-			.then(() => navigate("/group/" + grouipId));
+		postToGroupApi.request({ data: postData });
 	};
+
+	useEffect(() => {
+		getGroupsApi.request();
+		getTopicsApi.request();
+		getEventsAPI.request();
+		getUsersAPI.request();
+	}, []);
+
+	useEffect(() => {
+		if (postToGroupApi.data.postId) {
+			navigate("/post/" + postToGroupApi.data.postId);
+		}
+	}, [postToGroupApi.data, navigate]);
 
 	return (
 		<>
@@ -197,11 +198,7 @@ const CreateNewPost = () => {
 														}}
 													>
 														{getGroupsApi.data.results.map((data) => (
-															<MenuItem
-																key={data.groupId}
-																value={data.name ? data.name : " "}
-																onClick={() => setGroupId(data.groupId)}
-															>
+															<MenuItem key={data.groupId} value={data.groupId}>
 																{data.name}
 															</MenuItem>
 														))}
@@ -247,11 +244,7 @@ const CreateNewPost = () => {
 														}}
 													>
 														{getEventsAPI.data.results.map((data) => (
-															<MenuItem
-																key={data.eventId + data.name}
-																value={data.name ? data.name : " "}
-																onClick={() => setEventId(data.eventId)}
-															>
+															<MenuItem key={data.eventId} value={data.eventId}>
 																{data.name}
 															</MenuItem>
 														))}
@@ -296,11 +289,7 @@ const CreateNewPost = () => {
 														}}
 													>
 														{getUsersAPI.data.results.map((data) => (
-															<MenuItem
-																key={data.userId + data.name}
-																value={data.name ? data.name : ", "}
-																onClick={() => setUserId(data.userId)}
-															>
+															<MenuItem key={data.userId} value={data.userId}>
 																{data.name}
 															</MenuItem>
 														))}
@@ -327,7 +316,7 @@ const CreateNewPost = () => {
 													id="demo-multiple-name"
 													value={topicsTitle}
 													onChange={handleChangeTopics}
-													defaultValue={" "}
+													defaultValue={""}
 													input={<OutlinedInput label="Topics" />}
 													MenuProps={MenuProps}
 													sx={{
@@ -344,11 +333,7 @@ const CreateNewPost = () => {
 													}}
 												>
 													{getTopicsApi.data.results.map((data) => (
-														<MenuItem
-															key={data.topicId + data.name}
-															value={data.name ? data.name : " "}
-															onClick={() => setTopicId(data.topicId)}
-														>
+														<MenuItem key={data.topicId} value={data.topicId}>
 															{data.name}
 														</MenuItem>
 													))}

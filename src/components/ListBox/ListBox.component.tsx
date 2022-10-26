@@ -50,6 +50,7 @@ const ListBox = ({
 		if (valuePlus?.isBefore(value)) {
 			setValue(valuePlus);
 		}
+		console.log(value);
 	};
 
 	return (
@@ -115,6 +116,7 @@ const ListBox = ({
 												value={value}
 												onChange={handleChange}
 												disablePast
+												ampm={false}
 												inputFormat="DD-MM-YYYY hh:mm"
 												renderInput={(params) => <TextField {...params} />}
 											/>
@@ -123,6 +125,7 @@ const ListBox = ({
 												value={valuePlus?.add(1, "hours")}
 												onChange={handleChangePlus}
 												disablePast
+												ampm={false}
 												inputFormat="DD-MM-YYYY hh:mm"
 												renderInput={(params) => <TextField {...params} />}
 											/>

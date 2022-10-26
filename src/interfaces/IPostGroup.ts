@@ -1,8 +1,9 @@
 export interface IPostGroup {
-	groupId: number;
-	topicId: number | null;
-	eventId: number | null;
-	userId: number | null;
+	postId: number;
+	targetGroupId: number;
+	targetTopicId: number | null;
+	targetEventId: number;
+	targetUserId: number;
 	postTitle: string;
 	postBody: string;
 }
