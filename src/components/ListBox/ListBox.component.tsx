@@ -96,7 +96,7 @@ const ListBox = ({
 	}, [postEventApi.data]);
 
 	const postGroup = (config: {}, data: {}) =>
-		apiClient.post<IPostGroup>("/event", data, config);
+		apiClient.post<IPostGroup>("/group", data, config);
 
 	const postGroupApi = useApi<IPostGroup>(postGroup, {} as IPostGroup);
 
