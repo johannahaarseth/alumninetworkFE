@@ -4,11 +4,12 @@ import { useApi } from "../../api/useApi";
 import { IUserResponse } from "../../interfaces/IUserResponse";
 import { apiClient } from "../../api/apiClient";
 import InfoView from "../../components/InfoViewWrapper/InfoView.component";
+import { IUserSummary } from "../../interfaces/IUserSummary";
 
 const ProfileView = () => {
 	const getCurrentUser = (config: {}) =>
-		apiClient.get<IUserResponse>("/user/current", config);
-	const getUserApi = useApi<IUserResponse>(getCurrentUser, {} as IUserResponse);
+		apiClient.get<IUserSummary>("/user/current", config);
+	const getUserApi = useApi<IUserSummary>(getCurrentUser, {} as IUserSummary);
 
 	useEffect(() => {
 		getUserApi.request().then();

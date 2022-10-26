@@ -13,6 +13,7 @@ import { apiClient } from "../../api/apiClient";
 import { IGroupResponse } from "../../interfaces/IGroupResponse";
 import { ITopicResponse } from "../../interfaces/ITopicResponse";
 import { IEventResponse } from "../../interfaces/IEventResponse";
+import { IUserSummary } from "../../interfaces/IUserSummary";
 
 const DashboardView = () => {
 	const getGroupApi = useApi<IGroupResponse>(
@@ -52,9 +53,9 @@ const DashboardView = () => {
 	} as IPostResponse);
 
 	const getCurrentUser = (config: {}) =>
-		apiClient.get<IUserResponse>("/user/current", config);
+		apiClient.get<IUserSummary>("/user/current", config);
 
-	const getUserApi = useApi<IUserResponse>(getCurrentUser, {} as IUserResponse);
+	const getUserApi = useApi<IUserSummary>(getCurrentUser, {} as IUserSummary);
 
 	const handleGetNext = () => {
 		getPostsNextApi.request().then();

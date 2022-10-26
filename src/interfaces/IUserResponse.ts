@@ -1,5 +1,10 @@
 export interface IUserResponse {
-	bio: string;
-	funfact: string;
-	status: string;
+	count: number;
+	next: string;
+	results: IUserSummary[];
+}
+
+export interface IUserSummary {
+	id: number;
+	name: string;
 }

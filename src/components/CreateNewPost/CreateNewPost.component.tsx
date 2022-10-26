@@ -1,20 +1,12 @@
 import styles from "./CreateNewPost.module.css";
 import Card from "../Card/Card.component";
-import {
-	ChangeEvent,
-	ChangeEventHandler,
-	DetailedHTMLProps,
-	FormEvent,
-	FormHTMLAttributes,
-	useEffect,
-	useState,
-} from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import Modal from "@mui/material/Modal";
 import Input from "../Input/Input.component";
 import RadioButton from "../RadioButton/RadioButton.component";
 import TextField from "../TextField/TextField.component";
 import Button from "../Button/Button.component";
-import { useNavigate } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
 import {
 	FormControl,
 	InputLabel,
@@ -29,7 +21,7 @@ import { IGroupResponse } from "../../interfaces/IGroupResponse";
 import { ITopicResponse } from "../../interfaces/ITopicResponse";
 import { IEventResponse } from "../../interfaces/IEventResponse";
 import { IPostGroup } from "../../interfaces/IPostGroup";
-import { IUserResponse } from "../../interfaces/IUserSummary";
+import { IUserResponse } from "../../interfaces/IUserResponse";
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -94,27 +86,6 @@ const CreateNewPost = () => {
 	const handleChangeUsers = (event: { target: { value: string } }) => {
 		setUsersTitle(event.target.value);
 	};
-	const getGroupApi = useApi<IGroupResponse>(
-		(config: {}) =>
-			apiClient.get<IGroupResponse>("/group?offset=0&limit=3", config),
-		{} as IGroupResponse
-	);
-	const getTopicApi = useApi<ITopicResponse>(
-		(config: {}) =>
-			apiClient.get<ITopicResponse>("/topic?offset=0&limit=3", config),
-		{} as ITopicResponse
-	);
-	const getEventApi = useApi<IEventResponse>(
-		(config: {}) =>
-			apiClient.get<IEventResponse>("/event?offset=0&limit=3", config),
-		{} as IEventResponse
-	);
-	useEffect(() => {
-		getGroupApi.request().then();
-		getTopicApi.request().then();
-		getEventApi.request().then();
-		// eslint-disable-next-line
-	}, []);
 
 	const postGroup = (config: {}, data: {}) =>
 		apiClient.post<IPostGroup>("/post", data, config);
@@ -314,7 +285,7 @@ const CreateNewPost = () => {
 													>
 														{getUsersAPI.data.results.map((data) => (
 															<MenuItem
-																key={data.userId + data.name}
+																key={data.id + data.name}
 																value={data.name ? data.name : " "}
 															>
 																{data.name}
