@@ -1,30 +1,29 @@
 @import "../../css-constants.css";
 
 .postedInfo {
-  font-size: var(--font-size-medium);
+	font-size: var(--font-size-medium);
 }
 
 .title {
-  font-size: var(--font-size-big);
+	font-size: var(--font-size-big);
 }
 
 .postBody {
-  min-height: 100px;
-  max-height: 500px;
-  width: 100%;
+	min-height: 100px;
+	width: 100%;
 }
 
 .comments {
-  font-size: var(--font-size-medium);
+	font-size: var(--font-size-medium);
 }
 
 .toFrom {
-  display: flex;
-  flex-direction: row;
-  gap: 0.33rem;
+	display: flex;
+	flex-direction: row;
+	gap: 0.33rem;
 }
 
 .comments:hover,
 .postedInfo:hover {
-  color: var(--alumni-primary-azure);
+	color: var(--alumni-primary-azure);
 }
