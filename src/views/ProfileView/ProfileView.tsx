@@ -1,7 +1,6 @@
 import ProfileCard from "../../components/ProfileCard/ProfileCard.component";
 import { useEffect } from "react";
 import { useApi } from "../../api/useApi";
-import { IUserResponse } from "../../interfaces/IUserResponse";
 import { apiClient } from "../../api/apiClient";
 import InfoView from "../../components/InfoViewWrapper/InfoView.component";
 import { IUserSummary } from "../../interfaces/IUserSummary";
