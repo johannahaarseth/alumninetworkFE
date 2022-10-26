@@ -58,7 +58,6 @@ function App() {
 						{isAuthenticated && (
 							<Route path="/event" element={<EventListView />} />
 						)}
-						{/* change afterwards to => path="/group/:id/post/:id or something like that" */}
 						{isAuthenticated && (
 							<Route path="/post/:postId" element={<PostDetailView />} />
 						)}
