@@ -1,6 +1,5 @@
 import { ChangeEventHandler } from "react";
 import styles from "./Input.module.css";
-import { ChangeEventHandler } from "react";
 
 type InputProps = {
 	placeholderText: string;
