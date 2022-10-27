@@ -1,6 +1,6 @@
 import styles from "./CreateNewPost.module.css";
 import Card from "../Card/Card.component";
-import { useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import Modal from "@mui/material/Modal";
 import Input from "../Input/Input.component";
 import RadioButton from "../RadioButton/RadioButton.component";
@@ -14,13 +14,16 @@ import {
 	OutlinedInput,
 	MenuItem,
 	Grid,
+	SelectChangeEvent,
 } from "@mui/material";
 import { useApi } from "../../api/useApi";
 import { apiClient } from "../../api/apiClient";
 import { IGroupResponse } from "../../interfaces/IGroupResponse";
 import { ITopicResponse } from "../../interfaces/ITopicResponse";
 import { IEventResponse } from "../../interfaces/IEventResponse";
-import { IUserSummary } from "../../interfaces/IUserSummary";
+import { IPostGroup } from "../../interfaces/IPostGroup";
+import { IUserResponse } from "../../interfaces/IUserResponse";
+
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -42,6 +45,7 @@ const CreateNewPost = () => {
 	const [eventsTitle, setEventsTitle] = useState("");
 	const [usersTitle, setUsersTitle] = useState("");
 
+	const [postData, setPostData] = useState<IPostGroup | null>(null);
 	const [status, setStatus] = useState(0); // 0: no show, 1: show yes, 2: show no.
 
 	const radioHandler = (status: number) => {
@@ -61,8 +65,46 @@ const CreateNewPost = () => {
 	const getEventsAPI = useApi<IEventResponse>(getEvents, {} as IEventResponse);
 
 	const getUsers = (config: {}) =>
-		apiClient.get<IUserSummary>("/user?offset=0&limit=100", config);
-	const getUsersAPI = useApi<IUserSummary>(getUsers, {} as IUserSummary);
+		apiClient.get<IUserResponse>("/user?offset=0&limit=100", config);
+	const getUsersAPI = useApi<IUserResponse>(getUsers, {} as IUserResponse);
+
+	const postGroup = (config: {}, data: {}) =>
+		apiClient.post<IPostGroup>("/post", data, config);
+	const postToGroupApi = useApi<IPostGroup>(postGroup, {} as IPostGroup);
+
+	const handleChangeGroups = (event: SelectChangeEvent) => {
+		setGroupsTitle(event.target.value);
+		setPostData({
+			...postData!,
+			targetGroupId: parseInt(event.target.value),
+		});
+	};
+
+	const handleChangeTopics = (event: SelectChangeEvent) => {
+		setTopicsTitle(event.target.value);
+		setPostData({ ...postData!, targetTopicId: parseInt(event.target.value) });
+	};
+	const handleChangeEvents = (event: SelectChangeEvent) => {
+		setEventsTitle(event.target.value);
+		setPostData({ ...postData!, targetEventId: parseInt(event.target.value) });
+	};
+	const handleChangeUsers = (event: SelectChangeEvent) => {
+		setUsersTitle(event.target.value);
+		setPostData({ ...postData!, targetUserId: parseInt(event.target.value) });
+	};
+
+	const handleTitleChange = (event: ChangeEvent<HTMLInputElement>) => {
+		setPostData({ ...postData!, postTitle: event.target.value });
+	};
+	const handleBodyChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+		setPostData({ ...postData!, postBody: event.target.value });
+	};
+
+	const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		postToGroupApi.request({ data: postData });
+		handleClose();
+	};
 
 	useEffect(() => {
 		getGroupsApi.request();
@@ -70,20 +112,6 @@ const CreateNewPost = () => {
 		getEventsAPI.request();
 		getUsersAPI.request();
 	}, []);
-
-	const handleChangeGroups = (event: { target: { value: string } }) => {
-		setGroupsTitle(event.target.value);
-	};
-
-	const handleChangeTopics = (event: { target: { value: string } }) => {
-		setTopicsTitle(event.target.value);
-	};
-	const handleChangeEvents = (event: { target: { value: string } }) => {
-		setEventsTitle(event.target.value);
-	};
-	const handleChangeUsers = (event: { target: { value: string } }) => {
-		setUsersTitle(event.target.value);
-	};
 
 	return (
 		<>
@@ -99,8 +127,11 @@ const CreateNewPost = () => {
 						<div className={styles.modal}>
 							<Card cardHoverEffect={false}>
 								<p className={styles.modalHeader}>Create new post</p>
-								<form className={styles.form}>
-									<Input placeholderText={"Add post title"} />
+								<form className={styles.form} onSubmit={handleSubmit}>
+									<Input
+										placeholderText={"Add post title"}
+										onChange={handleTitleChange}
+									/>
 									<p>Post to:</p>
 									<div className={styles.radioButtons}>
 										<RadioButton
@@ -162,10 +193,7 @@ const CreateNewPost = () => {
 														}}
 													>
 														{getGroupsApi.data.results.map((data) => (
-															<MenuItem
-																key={data.groupId + data.name}
-																value={data.name ? data.name : " "}
-															>
+															<MenuItem key={data.groupId} value={data.groupId}>
 																{data.name}
 															</MenuItem>
 														))}
@@ -211,10 +239,7 @@ const CreateNewPost = () => {
 														}}
 													>
 														{getEventsAPI.data.results.map((data) => (
-															<MenuItem
-																key={data.eventId + data.name}
-																value={data.name ? data.name : " "}
-															>
+															<MenuItem key={data.eventId} value={data.eventId}>
 																{data.name}
 															</MenuItem>
 														))}
@@ -258,18 +283,11 @@ const CreateNewPost = () => {
 																},
 														}}
 													>
-														<MenuItem
-															key={
-																getUsersAPI.data.userId + getUsersAPI.data.name
-															}
-															value={
-																getUsersAPI.data.name
-																	? getUsersAPI.data.name
-																	: " "
-															}
-														>
-															{getUsersAPI.data.name}
-														</MenuItem>
+														{getUsersAPI.data.results.map((data) => (
+															<MenuItem key={data.userId} value={data.userId}>
+																{data.name}
+															</MenuItem>
+														))}
 													</Select>
 												</FormControl>
 											</Grid>
@@ -293,7 +311,7 @@ const CreateNewPost = () => {
 													id="demo-multiple-name"
 													value={topicsTitle}
 													onChange={handleChangeTopics}
-													defaultValue={" "}
+													defaultValue={""}
 													input={<OutlinedInput label="Topics" />}
 													MenuProps={MenuProps}
 													sx={{
@@ -310,10 +328,7 @@ const CreateNewPost = () => {
 													}}
 												>
 													{getTopicsApi.data.results.map((data) => (
-														<MenuItem
-															key={data.topicId + data.name}
-															value={data.name ? data.name : " "}
-														>
+														<MenuItem key={data.topicId} value={data.topicId}>
 															{data.name}
 														</MenuItem>
 													))}
@@ -322,10 +337,13 @@ const CreateNewPost = () => {
 										</Grid>
 									</Grid>
 									<div>
-										<TextField placeholderText={"Add post content"} />
+										<TextField
+											placeholderText={"Add post content"}
+											onChange={handleBodyChange}
+										/>
 									</div>
 									<div className={styles.buttonContainer}>
-										<Button onClick={() => navigate("/group")}>
+										<Button type="submit">
 											<p>Create post &gt;</p>
 										</Button>
 									</div>

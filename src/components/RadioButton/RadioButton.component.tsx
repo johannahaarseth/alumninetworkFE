@@ -3,8 +3,8 @@ import styles from "./RadioButton.module.css";
 
 type RadioButtonProps = {
 	valueProp: string;
-	isChecked: boolean | undefined;
-	onChange: ChangeEventHandler<HTMLInputElement> | undefined | undefined;
+	isChecked?: boolean;
+	onChange?: ChangeEventHandler<HTMLInputElement>;
 };
 
 const RadioButton = ({ valueProp, isChecked, onChange }: RadioButtonProps) => {
