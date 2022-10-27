@@ -103,6 +103,7 @@ const CreateNewPost = () => {
 	const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		postToGroupApi.request({ data: postData });
+		handleClose();
 	};
 
 	useEffect(() => {
@@ -111,12 +112,6 @@ const CreateNewPost = () => {
 		getEventsAPI.request();
 		getUsersAPI.request();
 	}, []);
-
-	useEffect(() => {
-		if (postToGroupApi.data.postId) {
-			navigate("/post/" + postToGroupApi.data.postId);
-		}
-	}, [postToGroupApi.data, navigate]);
 
 	return (
 		<>
