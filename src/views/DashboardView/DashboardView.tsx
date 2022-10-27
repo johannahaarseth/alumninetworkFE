@@ -9,47 +9,31 @@ import { useEffect, useState } from "react";
 import { IPostResponse } from "../../interfaces/IPostResponse";
 import NavBar from "../../components/NavBar/NavBar.component";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
-import { Fab, ThemeProvider } from "@mui/material";
-import { createTheme } from "@mui/material/styles";
+import { Fab } from "@mui/material";
 import { apiClient } from "../../api/apiClient";
 import { IGroupResponse } from "../../interfaces/IGroupResponse";
 import { ITopicResponse } from "../../interfaces/ITopicResponse";
 import { IEventResponse } from "../../interfaces/IEventResponse";
 import { IUserSummary } from "../../interfaces/IUserSummary";
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#FFFFFF",
-    },
-  },
-});
-
 const DashboardView = () => {
-  const [isFilterHidden, setIsFilterHidden] = useState(false);
+	const [isFilterHidden, setIsFilterHidden] = useState(false);
 
-  const filterHidden = () => {
-    setIsFilterHidden(true);
-    if (isFilterHidden) {
-      setIsFilterHidden(false);
-    }
-  };
-
-  const getGroupApi = useApi<IGroupResponse>(
-    (config: {}) =>
-      apiClient.get<IGroupResponse>("/group?offset=0&limit=3", config),
-    {} as IGroupResponse
-  );
-  const getTopicApi = useApi<ITopicResponse>(
-    (config: {}) =>
-      apiClient.get<ITopicResponse>("/topic?offset=0&limit=3", config),
-    {} as ITopicResponse
-  );
-  const getEventApi = useApi<IEventResponse>(
-    (config: {}) =>
-      apiClient.get<IEventResponse>("/event?offset=0&limit=3", config),
-    {} as IEventResponse
-  );
+	const getGroupApi = useApi<IGroupResponse>(
+		(config: {}) =>
+			apiClient.get<IGroupResponse>("/group?offset=0&limit=3", config),
+		{} as IGroupResponse
+	);
+	const getTopicApi = useApi<ITopicResponse>(
+		(config: {}) =>
+			apiClient.get<ITopicResponse>("/topic?offset=0&limit=3", config),
+		{} as ITopicResponse
+	);
+	const getEventApi = useApi<IEventResponse>(
+		(config: {}) =>
+			apiClient.get<IEventResponse>("/event?offset=0&limit=3", config),
+		{} as IEventResponse
+	);
 
 	const [posts, setPosts] = useState<IPostResponse>({
 		count: 0,
@@ -105,10 +89,6 @@ const DashboardView = () => {
 		getGroupApi.request().then();
 		getTopicApi.request().then();
 		getEventApi.request().then();
-		// eslint-disable-next-line
-	}, []);
-
-	useEffect(() => {
 		getPostsApi.request().then();
 		getUserApi.request().then();
 		// eslint-disable-next-line
@@ -140,12 +120,18 @@ const DashboardView = () => {
 						/>
 					</div>
 					<div className={styles.timelineColumn}>
-						<CreateNewPost />
-						{isFilterHidden && (
-							<div className={styles.filter2}>
-								<FiltersCard />
-							</div>
-						)}
+						<div className={styles.topBar}>
+							<CreateNewPost className={styles.createNewPost} />
+							<Fab
+								onClick={() => {
+									setIsFilterHidden(!isFilterHidden);
+								}}
+								className={styles.filterIcon}
+							>
+								<FilterAltIcon className={styles.filterAltIcon} />
+							</Fab>
+						</div>
+						{isFilterHidden && <FiltersCard />}
 						<TimelineComponent
 							posts={posts.results}
 							count={posts.count}
@@ -155,29 +141,12 @@ const DashboardView = () => {
 						/>
 					</div>
 					<div className={styles.profileAndFilterColumn}>
-						<div className={styles.profile}>
-							<ProfileCard
-								status={getUserApi.data.status}
-								bio={getUserApi.data.bio}
-								funfact={getUserApi.data.funfact}
-							/>
-						</div>
-						<div className={styles.filter}>
-							<FiltersCard />
-						</div>
-						<div className={styles.filterIconFilter}>
-							<ThemeProvider theme={theme}>
-								<Fab
-									variant="extended"
-									color="primary"
-									onClick={filterHidden}
-									className={styles.filterIcon}
-									style={{ borderRadius: 15, boxShadow: "0 0 0 0" }}
-								>
-									<FilterAltIcon sx={{ fontSize: 30 }} />
-								</Fab>
-							</ThemeProvider>
-						</div>
+						<ProfileCard
+							status={getUserApi.data.status}
+							bio={getUserApi.data.bio}
+							funfact={getUserApi.data.funfact}
+						/>
+						<FiltersCard />
 					</div>
 				</div>
 			</div>
