@@ -50,7 +50,6 @@ const ListBox = ({
 		if (valuePlus?.isBefore(value)) {
 			setValue(valuePlus);
 		}
-		console.log(value);
 	};
 
 	return (

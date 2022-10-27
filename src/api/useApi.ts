@@ -19,7 +19,6 @@ export const useApi = <T>(apiFunc: Function, currentState: T) => {
 			audience: "https://bealumninetwork.azurewebsites.net/",
 			scope: "read:users",
 		});
-		console.log(configInput?.data);
 
 		const config = {
 			headers: {
