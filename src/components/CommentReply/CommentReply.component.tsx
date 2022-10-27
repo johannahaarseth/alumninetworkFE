@@ -7,7 +7,7 @@ const CommentReply = () => {
 		<>
 			<hr />
 			<div className={styles.postCommentContainer}>
-				<Input placeholderText="Type a comment..." onChange={undefined} />
+				<Input placeholderText="Type a comment..." />
 				<Button className={styles.replyBtn}>Reply</Button>
 			</div>
 		</>

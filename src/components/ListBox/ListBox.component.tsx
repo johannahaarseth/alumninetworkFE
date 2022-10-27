@@ -88,21 +88,12 @@ const ListBox = ({
 									<div>
 										<Input
 											placeholderText={`Add ${titleToLowerAndMinusPlural} title`}
-											onChange={undefined}
 										/>
 									</div>
 									{title.toString() === "Groups" && (
 										<div className={styles.radioButtons}>
-											<RadioButton
-												valueProp={"Public"}
-												isChecked={undefined}
-												onChange={undefined}
-											/>
-											<RadioButton
-												valueProp={"Private"}
-												isChecked={undefined}
-												onChange={undefined}
-											/>
+											<RadioButton valueProp={"Public"} />
+											<RadioButton valueProp={"Private"} />
 										</div>
 									)}
 									{title.toString() === "Events" && (
@@ -134,7 +125,6 @@ const ListBox = ({
 									<div>
 										<TextField1
 											placeholderText={`Add ${titleToLowerAndMinusPlural} description`}
-											onChange={undefined}
 										/>
 									</div>
 									<div className={styles.buttonContainer}>
