@@ -4,7 +4,7 @@ import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import Modal from "@mui/material/Modal";
 import Input from "../Input/Input.component";
 import RadioButton from "../RadioButton/RadioButton.component";
-import TextField from "../TextField/TextField.component";
+import TextField from "../TextArea/TextArea.component";
 import Button from "../Button/Button.component";
 import {
 	FormControl,
@@ -20,8 +20,8 @@ import { apiClient } from "../../api/apiClient";
 import { IGroupResponse } from "../../interfaces/IGroupResponse";
 import { ITopicResponse } from "../../interfaces/ITopicResponse";
 import { IEventResponse } from "../../interfaces/IEventResponse";
-import { IPostGroup } from "../../interfaces/IPostGroup";
 import { IUserResponse } from "../../interfaces/IUserResponse";
+import { IPostPost } from "../../interfaces/IPostPost";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -47,7 +47,7 @@ const CreateNewPost = ({ className }: Props) => {
 	const [eventsTitle, setEventsTitle] = useState("");
 	const [usersTitle, setUsersTitle] = useState("");
 
-	const [postData, setPostData] = useState<IPostGroup | null>(null);
+	const [postData, setPostData] = useState<IPostPost | null>(null);
 	const [status, setStatus] = useState(0); // 0: no show, 1: show yes, 2: show no.
 
 	const radioHandler = (status: number) => {
@@ -70,9 +70,9 @@ const CreateNewPost = ({ className }: Props) => {
 		apiClient.get<IUserResponse>("/user?offset=0&limit=100", config);
 	const getUsersAPI = useApi<IUserResponse>(getUsers, {} as IUserResponse);
 
-	const postGroup = (config: {}, data: {}) =>
-		apiClient.post<IPostGroup>("/post", data, config);
-	const postToGroupApi = useApi<IPostGroup>(postGroup, {} as IPostGroup);
+	const postPost = (config: {}, data: {}) =>
+		apiClient.post<IPostPost>("/post", data, config);
+	const postPostApi = useApi<IPostPost>(postPost, {} as IPostPost);
 
 	const handleChangeGroups = (event: SelectChangeEvent) => {
 		setGroupsTitle(event.target.value);
@@ -104,7 +104,7 @@ const CreateNewPost = ({ className }: Props) => {
 
 	const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		postToGroupApi.request({ data: postData });
+		postPostApi.request({ data: postData });
 		handleClose();
 	};
 

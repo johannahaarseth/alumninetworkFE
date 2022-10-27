@@ -1,21 +1,26 @@
 import styles from "./ListBox.module.css";
 import Button from "../Button/Button.component";
 import Card from "../Card/Card.component";
-import { useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import Modal from "@mui/material/Modal";
-import TextField1 from "../TextField/TextField.component";
 import RadioButton from "../RadioButton/RadioButton.component";
 import Input from "../Input/Input.component";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
-import TextField from "@mui/material/TextField";
 import dayjs, { Dayjs } from "dayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Link, useNavigate } from "react-router-dom";
-import { GroupTopicEventSummaryList } from "../GroupTopicEventSummaryList/GroupTopicEventSummaryList.component";
+import { IGroupSummary } from "../../interfaces/IGroupResponse";
 import { IEventSummary } from "../../interfaces/IEventResponse";
 import { ITopicSummary } from "../../interfaces/ITopicResponse";
-import { IGroupSummary } from "../../interfaces/IGroupResponse";
+import { IPostEvent } from "../../interfaces/IPostEvent";
+import { apiClient } from "../../api/apiClient";
+import { useApi } from "../../api/useApi";
+import { IPostGroup } from "../../interfaces/IPostGroup";
+import { IPostTopic } from "../../interfaces/IPostTopic";
+import { GroupTopicEventSummaryList } from "../GroupTopicEventSummaryList/GroupTopicEventSummaryList.component";
+import TextArea from "../TextArea/TextArea.component";
+import { TextField } from "@mui/material";
 
 type ListBoxProps = {
 	title: string;
@@ -34,23 +39,89 @@ const ListBox = ({
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 	const navigate = useNavigate();
-	const [value, setValue] = useState<Dayjs | null>(dayjs());
-	const [valuePlus, setValuePlus] = useState<Dayjs | null>(dayjs());
+	const [startDate, setStartDate] = useState<Dayjs | null>(dayjs());
+	const [endDate, setEndDate] = useState<Dayjs | null>(dayjs());
+	const [postData, setPostData] = useState<
+		IPostEvent | IPostGroup | IPostTopic | null
+	>(null);
 
 	const titleToLowerAndMinusPlural = title?.toLowerCase().slice(0, -1);
+	const path = "/" + title.charAt(0).toLowerCase() + title.slice(1);
 
-	const handleChange = (newValue: Dayjs | null) => {
-		setValue(newValue);
-		if (value?.isAfter(valuePlus)) {
-			setValuePlus(value);
-		}
+	const handleTitleChange = (event: ChangeEvent<HTMLInputElement>) => {
+		setPostData({ ...postData!, name: event.target.value });
 	};
-	const handleChangePlus = (newValue: Dayjs | null) => {
-		setValuePlus(newValue);
-		if (valuePlus?.isBefore(value)) {
-			setValue(valuePlus);
+
+	const handleStartDateChange = (newValue: Dayjs | null) => {
+		if (startDate?.isAfter(endDate)) {
+			setEndDate(startDate);
 		}
+		setStartDate(newValue);
+		setPostData({
+			...postData!,
+			startTime: newValue?.toJSON()!,
+		});
 	};
+
+	const handleEndDateChange = (newValue: Dayjs | null) => {
+		if (endDate?.isBefore(startDate)) {
+			setStartDate(endDate);
+		}
+		setEndDate(newValue);
+		setPostData({ ...postData!, endTime: newValue?.toJSON()! });
+	};
+
+	const handleDescriptionTextAreaChange = (
+		event: ChangeEvent<HTMLTextAreaElement>
+	) => {
+		setPostData({
+			...postData!,
+			description: event.target.value,
+		});
+	};
+
+	const postEvent = (config: {}, data: {}) =>
+		apiClient.post<IPostEvent>("/event", data, config);
+
+	const postEventApi = useApi<IPostEvent>(postEvent, {} as IPostEvent);
+
+	const saveEvent = (e: FormEvent<HTMLButtonElement>) => {
+		postEventApi.request({ data: postData });
+	};
+	useEffect(() => {
+		if (postEventApi.data.eventId) {
+			navigate("/event/" + postEventApi.data.eventId);
+		}
+	}, [postEventApi.data]);
+
+	const postGroup = (config: {}, data: {}) =>
+		apiClient.post<IPostGroup>("/group", data, config);
+
+	const postGroupApi = useApi<IPostGroup>(postGroup, {} as IPostGroup);
+
+	const saveGroup = (e: FormEvent<HTMLButtonElement>) => {
+		postGroupApi.request({ data: postData });
+	};
+	useEffect(() => {
+		if (postGroupApi.data.groupId) {
+			navigate("/group/" + postGroupApi.data.groupId);
+		}
+	}, [postGroupApi.data]);
+
+	const postTopic = (config: {}, data: {}) =>
+		apiClient.post<IPostTopic>("/topic", data, config);
+
+	const postTopicApi = useApi<IPostTopic>(postTopic, {} as IPostTopic);
+
+	const saveTopic = (e: FormEvent<HTMLButtonElement>) => {
+		postTopicApi.request({ data: postData });
+	};
+
+	useEffect(() => {
+		if (postTopicApi.data.topicId) {
+			navigate("/topic/" + postTopicApi.data.topicId);
+		}
+	}, [postTopicApi.data]);
 
 	return (
 		<>
@@ -88,12 +159,21 @@ const ListBox = ({
 									<div>
 										<Input
 											placeholderText={`Add ${titleToLowerAndMinusPlural} title`}
+											onChange={handleTitleChange}
 										/>
 									</div>
 									{title.toString() === "Groups" && (
 										<div className={styles.radioButtons}>
-											<RadioButton valueProp={"Public"} />
-											<RadioButton valueProp={"Private"} />
+											<RadioButton
+												valueProp={"Public"}
+												isChecked={undefined}
+												onChange={undefined}
+											/>
+											<RadioButton
+												valueProp={"Private"}
+												isChecked={undefined}
+												onChange={undefined}
+											/>
 										</div>
 									)}
 									{title.toString() === "Events" && (
@@ -103,44 +183,47 @@ const ListBox = ({
 										>
 											<DateTimePicker
 												label="Start date"
-												value={value}
-												onChange={handleChange}
+												value={startDate}
+												onChange={handleStartDateChange}
 												disablePast
-												ampm={false}
 												inputFormat="DD-MM-YYYY hh:mm"
-												renderInput={(params) => <TextField {...params} />}
+												renderInput={(params) => (
+													<TextField {...params} type="datetime-local" />
+												)}
 											/>
 											<DateTimePicker
 												label="End date"
-												value={valuePlus?.add(1, "hours")}
-												onChange={handleChangePlus}
+												value={endDate?.add(1, "hours")}
+												onChange={handleEndDateChange}
 												disablePast
-												ampm={false}
 												inputFormat="DD-MM-YYYY hh:mm"
-												renderInput={(params) => <TextField {...params} />}
+												renderInput={(params) => (
+													<TextField {...params} type="datetime-local" />
+												)}
 											/>
 										</LocalizationProvider>
 									)}
 
 									<div>
-										<TextField1
+										<TextArea
 											placeholderText={`Add ${titleToLowerAndMinusPlural} description`}
+											onChange={handleDescriptionTextAreaChange}
 										/>
 									</div>
 									<div className={styles.buttonContainer}>
-										{title.toString() === "Events" && (
-											<Button onClick={() => navigate("/event")}>
-												<p>Create {titleToLowerAndMinusPlural} &gt;</p>
+										{linkItems === "/group" && (
+											<Button onClick={saveGroup}>
+												<p>Create Group &gt;</p>
 											</Button>
 										)}
-										{title.toString() === "Groups" && (
-											<Button onClick={() => navigate("/group")}>
-												<p>Create {titleToLowerAndMinusPlural} &gt;</p>
+										{linkItems === "/event" && (
+											<Button onClick={saveEvent}>
+												<p>Create Event &gt;</p>
 											</Button>
 										)}
-										{title.toString() === "Topics" && (
-											<Button onClick={() => navigate("/topic")}>
-												<p>Create {titleToLowerAndMinusPlural} &gt;</p>
+										{linkItems === "/topic" && (
+											<Button onClick={saveTopic}>
+												<p>Create Topic &gt;</p>
 											</Button>
 										)}
 									</div>
