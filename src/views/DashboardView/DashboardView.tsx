@@ -8,6 +8,8 @@ import { useApi } from "../../api/useApi";
 import { useEffect, useState } from "react";
 import { IPostResponse } from "../../interfaces/IPostResponse";
 import NavBar from "../../components/NavBar/NavBar.component";
+import FilterAltIcon from "@mui/icons-material/FilterAlt";
+import { Fab } from "@mui/material";
 import { apiClient } from "../../api/apiClient";
 import { IGroupResponse } from "../../interfaces/IGroupResponse";
 import { ITopicResponse } from "../../interfaces/ITopicResponse";
@@ -15,6 +17,8 @@ import { IEventResponse } from "../../interfaces/IEventResponse";
 import { IUserSummary } from "../../interfaces/IUserSummary";
 
 const DashboardView = () => {
+	const [isFilterHidden, setIsFilterHidden] = useState(false);
+
 	const getGroupApi = useApi<IGroupResponse>(
 		(config: {}) =>
 			apiClient.get<IGroupResponse>("/group?offset=0&limit=3", config),
@@ -85,10 +89,6 @@ const DashboardView = () => {
 		getGroupApi.request().then();
 		getTopicApi.request().then();
 		getEventApi.request().then();
-		// eslint-disable-next-line
-	}, []);
-
-	useEffect(() => {
 		getPostsApi.request().then();
 		getUserApi.request().then();
 		// eslint-disable-next-line
@@ -120,7 +120,18 @@ const DashboardView = () => {
 						/>
 					</div>
 					<div className={styles.timelineColumn}>
-						<CreateNewPost />
+						<div className={styles.topBar}>
+							<CreateNewPost className={styles.createNewPost} />
+							<Fab
+								onClick={() => {
+									setIsFilterHidden(!isFilterHidden);
+								}}
+								className={styles.filterIcon}
+							>
+								<FilterAltIcon className={styles.filterAltIcon} />
+							</Fab>
+						</div>
+						{isFilterHidden && <FiltersCard />}
 						<TimelineComponent
 							posts={posts.results}
 							count={posts.count}

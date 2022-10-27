@@ -6,7 +6,6 @@ import Input from "../Input/Input.component";
 import RadioButton from "../RadioButton/RadioButton.component";
 import TextField from "../TextField/TextField.component";
 import Button from "../Button/Button.component";
-import { useNavigate } from "react-router-dom";
 import {
 	FormControl,
 	InputLabel,
@@ -35,11 +34,14 @@ const MenuProps = {
 	},
 };
 
-const CreateNewPost = () => {
+type Props = {
+	className?: string | undefined;
+};
+
+const CreateNewPost = ({ className }: Props) => {
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
-	const navigate = useNavigate();
 	const [groupsTitle, setGroupsTitle] = useState("");
 	const [topicsTitle, setTopicsTitle] = useState("");
 	const [eventsTitle, setEventsTitle] = useState("");
@@ -111,16 +113,20 @@ const CreateNewPost = () => {
 		getTopicsApi.request();
 		getEventsAPI.request();
 		getUsersAPI.request();
+		// eslint-disable-next-line
 	}, []);
 
 	return (
 		<>
-			<Card cardHoverEffect={true}>
-				<button className={styles.createNewPostButton} onClick={handleOpen}>
-					<p className={styles.newPost}>Create new post</p>
-					<p className={styles.newPostPlus}>+</p>
-				</button>
-			</Card>
+			<div className={className}>
+				<Card cardHoverEffect={true}>
+					<button className={styles.createNewPostButton} onClick={handleOpen}>
+						<p className={styles.newPost}>Create new post</p>
+						<p className={styles.newPostPlus}>+</p>
+					</button>
+				</Card>
+			</div>
+
 			{open && (
 				<Modal open={open} onClose={handleClose}>
 					<div className={styles.centered}>
@@ -137,17 +143,17 @@ const CreateNewPost = () => {
 										<RadioButton
 											valueProp={"Group"}
 											isChecked={status === 0}
-											onChange={(e) => radioHandler(0)}
+											onChange={() => radioHandler(0)}
 										/>
 										<RadioButton
 											valueProp={"Event"}
 											isChecked={status === 1}
-											onChange={(e) => radioHandler(1)}
+											onChange={() => radioHandler(1)}
 										/>
 										<RadioButton
 											valueProp={"Person"}
 											isChecked={status === 2}
-											onChange={(e) => radioHandler(2)}
+											onChange={() => radioHandler(2)}
 										/>
 									</div>
 

@@ -1,43 +1,69 @@
 .container {
-  display: flex;
-  justify-content: center;
+	display: flex;
+	justify-content: center;
 }
 
 .dashboard {
-  display: flex;
-  flex-direction: row;
-  width: 80%;
-  gap: 1.2rem;
-  margin-top: 1rem;
+	display: flex;
+	flex-direction: row;
+	width: 80%;
+	gap: 1.2rem;
+	margin-top: 1rem;
 }
 
 .groupsTopicsEventsListsColumn {
-  flex: 30%;
+	flex: 30%;
 }
 
 .timelineColumn {
-  flex: 40%;
+	flex: 40%;
 }
 
 .profileAndFilterColumn {
-  flex: 30%;
-  position: sticky;
-  top: 70px;
-  align-self: flex-start;
+	flex: 30%;
+	position: sticky;
+	top: 70px;
+	align-self: flex-start;
+}
+
+.topBar {
+	display: flex;
+	align-items: center;
+}
+
+.filterIcon {
+	display: none;
+	border-radius: 10px;
+	box-shadow: 0 0 0 0;
+	background-color: white;
+	margin-right: 1rem;
+	flex: 10%;
+}
+
+.createNewPost {
+	flex: 90%;
+}
+
+.filterAltIcon {
+	font-size: 30px;
 }
 
 @media screen and (max-width: 1500px) {
-  .dashboard {
-    width: 100%;
-  }
+	.dashboard {
+		width: 100%;
+	}
 }
 
-@media screen and (max-width: 1000px) {
-  .groupsTopicsEventsListsColumn {
-    display: none;
-  }
+@media screen and (max-width: 1200px) {
+	.groupsTopicsEventsListsColumn {
+		display: none;
+	}
 
-  .profileAndFilterColumn {
-    display: none;
-  }
+	.profileAndFilterColumn {
+		display: none;
+	}
+
+	.filterIcon {
+		display: block;
+	}
 }
