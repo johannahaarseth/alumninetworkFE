@@ -86,7 +86,6 @@ const ListBox = ({
 	const postEventApi = useApi<IPostEvent>(postEvent, {} as IPostEvent);
 
 	const saveEvent = (e: FormEvent<HTMLButtonElement>) => {
-		e.preventDefault(); // remove when this works
 		postEventApi.request({ data: postData });
 	};
 	useEffect(() => {
@@ -101,7 +100,6 @@ const ListBox = ({
 	const postGroupApi = useApi<IPostGroup>(postGroup, {} as IPostGroup);
 
 	const saveGroup = (e: FormEvent<HTMLButtonElement>) => {
-		e.preventDefault(); // remove when this works
 		postGroupApi.request({ data: postData });
 	};
 	useEffect(() => {
@@ -116,7 +114,6 @@ const ListBox = ({
 	const postTopicApi = useApi<IPostTopic>(postTopic, {} as IPostTopic);
 
 	const saveTopic = (e: FormEvent<HTMLButtonElement>) => {
-		e.preventDefault(); // remove when this works
 		postTopicApi.request({ data: postData });
 	};
 
