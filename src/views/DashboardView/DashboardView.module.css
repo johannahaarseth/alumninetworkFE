@@ -37,11 +37,11 @@
 	box-shadow: 0 0 0 0;
 	background-color: white;
 	margin-right: 1rem;
-	flex: 5%;
+	flex: 10%;
 }
 
 .createNewPost {
-	flex: 95%;
+	flex: 90%;
 }
 
 .filterAltIcon {
