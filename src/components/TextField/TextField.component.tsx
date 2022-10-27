@@ -1,16 +1,19 @@
+import { ChangeEventHandler } from "react";
 import styles from "./TextField.module.css";
 
 type TextFieldProps = {
-  placeholderText: string;
+	placeholderText: string;
+	onChange?: ChangeEventHandler<HTMLTextAreaElement>;
 };
 
-const TextField = ({ placeholderText }: TextFieldProps) => {
-  return (
-    <textarea
-      className={styles.textarea}
-      placeholder={placeholderText}
-    ></textarea>
-  );
+const TextField = ({ placeholderText, onChange }: TextFieldProps) => {
+	return (
+		<textarea
+			className={styles.textarea}
+			placeholder={placeholderText}
+			onChange={onChange}
+		></textarea>
+	);
 };
 
 export default TextField;

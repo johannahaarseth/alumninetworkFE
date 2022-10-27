@@ -1,0 +1,26 @@
+hr {
+	margin-top: 2.5rem;
+	border: 1px solid var(--alumni-primary-dark-azure);
+}
+
+.postCommentContainer {
+	display: flex;
+	flex-direction: row;
+	gap: 1rem;
+	align-items: center;
+	margin: 1rem;
+	justify-content: flex-end;
+}
+
+.replyBtn {
+	background-color: white;
+	cursor: pointer;
+	padding: 0.8rem;
+	border-radius: 10px;
+	border: none;
+}
+
+.replyBtn:hover {
+	background-color: var(--alumni-primary-light-azure);
+	cursor: pointer;
+}

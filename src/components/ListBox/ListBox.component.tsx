@@ -67,9 +67,7 @@ const ListBox = ({
 				/>
 				<div className={styles.seeMoreBtn}>
 					<span
-						className={
-							!visibleSeeMoreBtn ? styles.invisibleSeeMoreBtn : ""
-						}
+						className={!visibleSeeMoreBtn ? styles.invisibleSeeMoreBtn : ""}
 					>
 						<Button>
 							<Link to={linkItems}>See more &gt;</Link>
@@ -95,9 +93,7 @@ const ListBox = ({
 									{title.toString() === "Groups" && (
 										<div className={styles.radioButtons}>
 											<RadioButton valueProp={"Public"} />
-											<RadioButton
-												valueProp={"Private"}
-											/>
+											<RadioButton valueProp={"Private"} />
 										</div>
 									)}
 									{title.toString() === "Events" && (
@@ -110,23 +106,18 @@ const ListBox = ({
 												value={value}
 												onChange={handleChange}
 												disablePast
+												ampm={false}
 												inputFormat="DD-MM-YYYY hh:mm"
-												renderInput={(params) => (
-													<TextField {...params} />
-												)}
+												renderInput={(params) => <TextField {...params} />}
 											/>
 											<DateTimePicker
 												label="End date"
-												value={valuePlus?.add(
-													1,
-													"hours"
-												)}
+												value={valuePlus?.add(1, "hours")}
 												onChange={handleChangePlus}
 												disablePast
+												ampm={false}
 												inputFormat="DD-MM-YYYY hh:mm"
-												renderInput={(params) => (
-													<TextField {...params} />
-												)}
+												renderInput={(params) => <TextField {...params} />}
 											/>
 										</LocalizationProvider>
 									)}
@@ -138,42 +129,18 @@ const ListBox = ({
 									</div>
 									<div className={styles.buttonContainer}>
 										{title.toString() === "Events" && (
-											<Button
-												onClick={() =>
-													navigate("/event")
-												}
-											>
-												<p>
-													Create{" "}
-													{titleToLowerAndMinusPlural}{" "}
-													&gt;
-												</p>
+											<Button onClick={() => navigate("/event")}>
+												<p>Create {titleToLowerAndMinusPlural} &gt;</p>
 											</Button>
 										)}
 										{title.toString() === "Groups" && (
-											<Button
-												onClick={() =>
-													navigate("/group")
-												}
-											>
-												<p>
-													Create{" "}
-													{titleToLowerAndMinusPlural}{" "}
-													&gt;
-												</p>
+											<Button onClick={() => navigate("/group")}>
+												<p>Create {titleToLowerAndMinusPlural} &gt;</p>
 											</Button>
 										)}
 										{title.toString() === "Topics" && (
-											<Button
-												onClick={() =>
-													navigate("/topic")
-												}
-											>
-												<p>
-													Create{" "}
-													{titleToLowerAndMinusPlural}{" "}
-													&gt;
-												</p>
+											<Button onClick={() => navigate("/topic")}>
+												<p>Create {titleToLowerAndMinusPlural} &gt;</p>
 											</Button>
 										)}
 									</div>

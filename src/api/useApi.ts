@@ -11,6 +11,7 @@ export const useApi = <T>(apiFunc: Function, currentState: T) => {
 	type AxiosInput = {
 		headers?: {};
 		params?: {};
+		data?: {} | null;
 	};
 
 	const request = async (configInput?: AxiosInput) => {
@@ -24,12 +25,11 @@ export const useApi = <T>(apiFunc: Function, currentState: T) => {
 				Authorization: `Bearer ${token}`,
 				...configInput?.headers,
 			},
-			...configInput?.params,
+			params: { ...configInput?.params },
 		};
-
 		setLoading(true);
 		try {
-			const result = await apiFunc(config);
+			const result = await apiFunc(config, configInput?.data);
 			setData(result.data);
 		} catch (err: any) {
 			setError(err.message || "Unexpected Error!");

@@ -1,39 +1,32 @@
-import NavBar from "../../components/NavBar/NavBar.component";
 import ProfileCard from "../../components/ProfileCard/ProfileCard.component";
-import React, { useEffect } from "react";
-import styles from "./ProfileView.module.css";
+import { useEffect } from "react";
 import { useApi } from "../../api/useApi";
-import { IUserResponse } from "../../interfaces/IUserResponse";
 import { apiClient } from "../../api/apiClient";
+import InfoView from "../../components/InfoViewWrapper/InfoView.component";
+import { IUserSummary } from "../../interfaces/IUserSummary";
 
 const ProfileView = () => {
-  const getCurrentUser = (config: {}) =>
-    apiClient.get<IUserResponse>("/user/current", config);
-  const getUserApi = useApi<IUserResponse>(getCurrentUser, {} as IUserResponse);
+	const getCurrentUser = (config: {}) =>
+		apiClient.get<IUserSummary>("/user/current", config);
+	const getUserApi = useApi<IUserSummary>(getCurrentUser, {} as IUserSummary);
 
-  useEffect(() => {
-    getUserApi.request().then();
-    // eslint-disable-next-line
-  }, []);
+	useEffect(() => {
+		getUserApi.request().then();
+		// eslint-disable-next-line
+	}, []);
 
-  return (
-    <>
-      <NavBar />
-      <div className={styles.container}>
-        <div className={styles.profileView}>
-          <div className={styles.leftColumn}></div>
-          <div className={styles.middleColumn}></div>
-          <div className={styles.rightColumn}>
-            <ProfileCard
-              status={getUserApi.data.status}
-              bio={getUserApi.data.bio}
-              funfact={getUserApi.data.funfact}
-            />
-          </div>
-        </div>
-      </div>
-    </>
-  );
+	return (
+		<InfoView
+			rightContentCol={
+				<ProfileCard
+					status={getUserApi.data.status}
+					bio={getUserApi.data.bio}
+					funfact={getUserApi.data.funfact}
+				/>
+			}
+			btnGroupHidden={true}
+		/>
+	);
 };
 
 export default ProfileView;

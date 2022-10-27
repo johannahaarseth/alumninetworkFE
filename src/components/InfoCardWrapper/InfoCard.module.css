@@ -1,0 +1,29 @@
+@import "../../css-constants.css";
+
+.headerBox {
+	background-color: var(--alumni-orange);
+	height: 75px;
+	width: 130%;
+	margin-left: -25px;
+	margin-top: -20px;
+	margin-bottom: 0.5rem;
+}
+
+.infoBox {
+	display: flex;
+	gap: 1rem;
+	flex-direction: column;
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
+}
+
+.text {
+	font-size: var(--font-size-medium);
+}
+
+.textBox {
+	background-color: var(--alumni-light-beige);
+	height: 250px;
+	width: 100%;
+	padding: 0.5rem;
+}
