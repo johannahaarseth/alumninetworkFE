@@ -1,7 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import Button from "../Button/Button.component";
 import styles from "./InviteModalContent.module.css";
-import Input from "../Input/Input.component";
 import InviteModalContent from "./InviteModalContent.component";
 
 type InviteModalProps = {
@@ -20,9 +19,9 @@ const InviteModal = ({ setOpen }: InviteModalProps) => {
 				</div>
 			</div>
 
-			<div className={styles.searchContainer}>
+			{/* <div className={styles.searchContainer}>
 				<Input placeholderText="Search" />
-			</div>
+			</div> */}
 
 			<div className={styles.list}>
 				<InviteModalContent />
